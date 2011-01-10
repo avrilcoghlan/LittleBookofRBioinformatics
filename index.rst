@@ -15,7 +15,7 @@ There is a pdf version of this booklet available at
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    src/installr.rst
 
