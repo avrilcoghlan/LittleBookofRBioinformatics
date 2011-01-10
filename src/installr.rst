@@ -4,7 +4,7 @@ How to install R
 Introduction to R
 -----------------
 
-This little booklet has some information on how to use R for biomedical statistics.
+This little booklet has some information on how to use R for bioinformatics. 
 
 R (`www.r-project.org <http://www.r-project.org/>`_) is a commonly used
 free Statistics software. R allows you to carry out statistical
@@ -103,7 +103,7 @@ How to install an R package
 
 R comes with some standard packages that are installed when you install R. However, in this 
 booklet I will also tell you how to use some additional R packages that are useful, for example,
-the "rmeta" package. These additional packages do not come with the standard installation of R,
+the "seqinr" package. These additional packages do not come with the standard installation of R,
 so you need to install them yourself.
 
 Once you have installed R on a Windows computer (following the steps above), you can install 
@@ -116,21 +116,21 @@ an additional package by following the steps below:
    choose "All programs", and start R by selecting "R"  (or R X.X.X, where 
    X.X.X gives the version of R, eg. R 2.10.0) from the menu of programs. 
 4. The R console (a rectangle) should pop up.
-5. Once you have started R, you can now install an R package (eg. the "rmeta" package) by 
+5. Once you have started R, you can now install an R package (eg. the "seqinr" package) by 
    choosing "Install package(s)" from the "Packages" menu at the top of the R console.
    This will ask you what website you want to download the package from, you should choose 
    "Ireland" (or another country, if you prefer). It will also bring up a list of available
    packages that you can install, and you should choose the package that you want to install
-   from that list (eg. "rmeta").
-6. This will install the "rmeta" package.
-7. The "rmeta" package is now installed. Whenever you want to use the "rmeta" package after this, 
+   from that list (eg. "seqinr").
+6. This will install the "seqinr" package.
+7. The "seqinr" package is now installed. Whenever you want to use the "seqinr" package after this, 
    after starting R, you first have to load the package by typing into the R console:
 
 .. highlight:: r
 
 ::
 
-    > library("rmeta")
+    > library("seqinr")
 
 Note that there are some additional R packages for bioinformatics that are part of a special 
 set of R packages called Bioconductor (`www.bioconductor.org <http://www.bioconductor.org/>`_) 
@@ -560,10 +560,6 @@ Thank you to Noel O'Boyle for helping in using Sphinx, `http://sphinx.pocoo.org 
 this document, and github, `https://github.com/ <https://github.com/>`_, to store different versions of the document
 as I was writing it, and readthedocs, `http://readthedocs.org/ <http://readthedocs.org/>`_, to build and distribute
 this document.
-
-For very helpful comments and suggestions for improvements, thank you very much to:
-Tony Burton, Richard A. Friedman, Duleep Samuel, R.Heberto Ghezzo, David Levine, Lavinia Gordon, 
-Friedrich Leisch, and Phil Spector.
 
 Contact
 -------
