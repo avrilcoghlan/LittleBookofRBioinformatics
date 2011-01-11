@@ -9,18 +9,18 @@ This is a simple introduction to bioinformatics, with a focus
 on genome analysis, using the R statistics software.
 
 There is a pdf version of this booklet available at
-`http://www.ucc.ie/microbio/avrilcoghlan/ALittleBookOfBioinformatics.pdf 
-<http://www.ucc.ie/microbio/avrilcoghlan/ALittleBookOfBioinformatics.pdf>`_. 
+`http://media.readthedocs.org/pdf/a-little-book-of-r-for-biomedical-statistics/latest/a-little-book-of-r-for-biomedical-statistics.pdf <http://media.readthedocs.org/pdf/a-little-book-of-r-for-biomedical-statistics/latest/a-little-book-of-r-for-biomedical-statistics.pdf>`_. 
 
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 5
 
    src/installr.rst
    src/chapter0.rst
    src/chapter1.rst
    src/chapter1_answers.rst
+   src/chapter2.rst
 
 Acknowledgements
 ----------------

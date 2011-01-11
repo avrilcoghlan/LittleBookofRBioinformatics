@@ -181,12 +181,12 @@ should now be displayed in WordPad:
 Reading genome sequence data into SeqinR
 ----------------------------------------
 
-Using the SeqinR library in R, you can easily read a DNA sequence
+Using the SeqinR package in R, you can easily read a DNA sequence
 from a FASTA file into R. For example, we described above how to
 retrieve the DEN-1 Dengue virus genome sequence from the NCBI
 database and save it in a FASTA format file (eg. "den1.fasta").
 You can read this FASTA format file into R using the read.fasta()
-function from the SeqinR R library:
+function from the SeqinR R package:
 
 ::
 
@@ -305,7 +305,7 @@ using the command:
     [1] 46.66977 
 
 Alternatively, if you are feeling lazy, you can use the GC()
-function in the SeqinR library, which gives the fraction of bases
+function in the SeqinR package, which gives the fraction of bases
 in the sequence that are Gs or Cs.
 
 ::
@@ -332,7 +332,7 @@ nucleotides long (eg. "AAA", "AAT", "ACG", etc.), 4 nucleotides
 long, etc.
 
 To find the number of occurrences of DNA words of a particular
-length, we can use the count() function from the R SeqinR library. For example, to find
+length, we can use the count() function from the R SeqinR package. For example, to find
 the number of occurrences of DNA words that are 1 nucleotide long
 in the sequence *dengueseq*, we type:
 
@@ -394,7 +394,7 @@ functions:
 These functions belong to the standard installation of R.
 
 You have also learnt the following R functions that belong to the
-SeqinR library:
+SeqinR package:
 
 #. GC() for calculating the GC content for a DNA sequence
 #. count() for calculating the number of occurrences of DNA words
@@ -412,7 +412,7 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 For more in-depth information and more examples on using the SeqinR
-library for sequence analysis, look at the SeqinR documentation,
+package for sequence analysis, look at the SeqinR documentation,
 `http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
 
 There is also a very nice chapter on "Analyzing Sequences", which
@@ -449,7 +449,7 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 Thank you to Jean Lobry and Simon Penel for helpful advice on using
-the SeqinR library.
+the SeqinR package.
 
 Contact
 -------

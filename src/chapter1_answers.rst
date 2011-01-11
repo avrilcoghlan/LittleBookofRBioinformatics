@@ -3,7 +3,7 @@ Answers to the exercises on DNA Sequence Statistics
 
 Q1. *What are the last twenty nucleotides of the DEN-1 Dengue virus genome sequence?*
 
-To answer this, you first need to install the "SeqinR" R library, and download
+To answer this, you first need to install the "SeqinR" R package, and download
 the DEN-1 Dengue genome sequence from the NCBI database and save it as
 a file "den1.fasta" in the "My Documents" folder. 
 
@@ -97,7 +97,7 @@ First you need to search for a function to calculate reverse complement, eg. by 
 
     > help.search("complement")
 
-You will find that there is a function seqinr::comp that complements a nucleic acid sequence. This means it is a function in the SeqinR library.
+You will find that there is a function seqinr::comp that complements a nucleic acid sequence. This means it is a function in the SeqinR package.
 
 Find out how to use this function by typing:
 
