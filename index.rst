@@ -5,8 +5,9 @@ By `Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_,
 University College Cork, Cork, Ireland. 
 Email: a.coghlan@ucc.ie
 
-This is a simple introduction to bioinformatics, with a focus
-on genome analysis, using the R statistics software.
+This is a simple introduction to bioinformatics, with a focus on genome analysis, using the R statistics software.
+To encourage research into neglected tropical diseases such as leprosy, Chagas disease, etc., 
+most of the examples are for analysis of the genomes that cause these diseases.
 
 There is a pdf version of this booklet available at
 `http://media.readthedocs.org/pdf/a-little-book-of-r-for-bioinformatics/latest/a-little-book-of-r-for-bioinformatics.pdf <http://media.readthedocs.org/pdf/a-little-book-of-r-for-bioinformatics/latest/a-little-book-of-r-for-bioinformatics.pdf>`_. 
