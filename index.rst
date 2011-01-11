@@ -7,7 +7,7 @@ Email: a.coghlan@ucc.ie
 
 This is a simple introduction to bioinformatics, with a focus on genome analysis, using the R statistics software.
 
-To encourage research into neglected tropical diseases such as leprosy, Chagas disease, schistosomiasis etc., 
+To encourage research into neglected tropical diseases such as leprosy, Chagas disease, trachoma, schistosomiasis etc., 
 most of the examples in this booklet are for analysis of the genomes of the organisms that cause these diseases.
 
 There is a pdf version of this booklet available at
