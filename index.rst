@@ -15,10 +15,11 @@ There is a pdf version of this booklet available at
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    src/installr.rst
    src/chapter1.rst
+   src/chapter1_answers.rst
 
 Acknowledgements
 ----------------
