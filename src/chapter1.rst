@@ -1,5 +1,5 @@
-Chapter 1: DNA Sequence Statistics
-==================================
+DNA Sequence Statistics
+=======================
 
 Using R for Bioinformatics 
 --------------------------
@@ -15,36 +15,6 @@ analysis, and to explain how to carry out these analyses using R.
 To use R, you first need to start the R program on your computer.
 You should have already installed R on your computer (if not, for instructions on how to
 install R, see `How to install R <./installr.html>`_).
-
-Neglected tropical diseases
----------------------------
-
-Neglected tropical diseases are serious diseases that affect many people in
-tropical countries and which have been relatively little studied. The World
-Health Organisation lists the following as neglected tropical diseases:
-trachoma, leprosy, schistosomiasis, soil transmitted helminths, lymphatic
-filariasis, onchocerciasis, Buruli ulcer, yaws, Chagas disease, African trypanosomiasis,
-leishmaniasis, Dengue fever, rabies, Dracunculiasis (guinea-worm disease),
-and Fascioliasis (see `http://www.who.int/neglected_diseases/diseases/en/ <http://www.who.int/neglected_diseases/diseases/en/>`_).
-
-The genomes of many of the organisms that cause neglected tropical diseases have
-been fully sequenced, or are currently being sequenced, including:
-
-* the bacterium `Chlamydia trachomatis <http://www.ncbi.nlm.nih.gov/genomeprj?Db=genomeprj&cmd=ShowDetailView&TermToSearch=13886>`_, which causes trachoma
-* the bacterium `Mycobacterium leprae <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid1769[orgn]>`_, which causes leprosy
-* the bacterium `Mycobacterium ulcerans <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid1809[orgn]>`_, which causes Buruli ulcer
-* the bacterium `Treponema pallidum subsp. pertenue <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid160[orgn]>`_, which causes yaws
-* the protist `Trypanosoma cruzi <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid5693[orgn]>`_, which causes Chagas disease
-* the protist `Trypanosoma brucei <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid5691[orgn]>`_, which causes African trypanosomiasis
-* the protist `Leishmania major <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid5664[orgn]>`_, and related *Leishmania* species, which cause leishmaniasis
-* the schistosome worm `Schistosoma mansoni <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6183[orgn]>`_, which causes schistosomiasis
-* the nematode worms `Brugia malayi <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6279[orgn]>`_ and `Wuchereria bancrofti <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6293[orgn]>`_, which cause lymphatic filariasis
-* the nematode worm `Onchocerca volvulus <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6282[orgn]>`_, which causes onchocerciasis
-* the nematode worm `Necator americanus <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid51031[orgn]>`_, which causes soil-transmitted helminthiasis
-* the Dengue virus, which causes Dengue fever
-* the Rabies virus, which causes Rabies
-
-To encourage research into these organisms, many of the examples in this booklet are based on analysing these genomes.
 
 R packages for bioinformatics: Bioconductor and SeqinR
 ------------------------------------------------------
@@ -501,7 +471,7 @@ question, please record your answer, and what you typed into R to
 get this answer.
 
 Model answers to the exercises are given in the chapter entitled
-`Answers to the exercises in chapter 1 <chapter1_answers.html>`_.
+`Answers to the exercises on DNA Sequence Statistics <./chapter1_answers.html>`_.
 
 Q1. What are the last twenty nucleotides of the Dengue virus genome sequence?
 

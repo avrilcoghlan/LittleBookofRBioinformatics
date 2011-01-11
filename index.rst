@@ -18,6 +18,7 @@ Contents:
    :maxdepth: 3
 
    src/installr.rst
+   src/chapter0.rst
    src/chapter1.rst
    src/chapter1_answers.rst
 
