@@ -1,7 +1,5 @@
-Practical 3 for 2009/2010 - Sequence Databases
-==============================================
-
-
+Sequence Databases
+==================
 
 The NCBI Sequence Database
 --------------------------
@@ -20,7 +18,7 @@ databases collect all publicly available DNA, RNA and protein
 sequence data and make it available for free. They exchange data
 nightly, so contain essentially the same data.
 
-In this practical we will discuss the NCBI database. Note however
+In this chapter we will discuss the NCBI database. Note however
 that it contains essentially the same data as in the EMBL/DDBJ
 databases. The NCBI database contains several sub-databases,
 including the NCBI Nucleotide database and the NCBI Protein
@@ -31,7 +29,7 @@ PubMed, which contains data on scientific publications.
 Sequences in the NCBI Sequence Database (or EMBL/DDBJ) are
 identified by an accession number. This is a unique number that is
 only associated with one sequence. For example, the accession
-number L42023 is for the *Haemophilus influenzae* Rd KW20 genome
+number NC\_001477 is for the DEN-1 Dengue virus genome
 sequence. The accession number is what identifies the sequence. It
 is reported in scientific papers describing that sequence.
 
@@ -46,11 +44,10 @@ human curator working for NCBI.
 Searching for an accession number in the NCBI database
 ------------------------------------------------------
 
-In Practical 1
-(`www.ucc.ie/microbio/MB6301/practical1\_words\_v2.html <http://www.ucc.ie/microbio/MB6301/practical1_words_v2.html>`_),
+In the `DNA Sequence Statistics chapter <chapter1.html>`_, 
 you learnt how to obtain a FASTA file containing the DNA sequence
 corresponding to a particular accession number, eg. accession
-number NC\_000907 (*Haemophilus influenzae*).
+number NC\_001477 (the DEN-1 Dengue virus genome sequence).
 
 Briefly, if you want to obtain a FASTA file containing the DNA or
 protein sequence corresponding to a particular NCBI accession,
@@ -59,9 +56,9 @@ follow these steps:
 
 #. Go to the NCBI website
    (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_)
-#. Type the accession number in the search box on the top right of
+#. Type the accession number in the search box on the top of
    the NCBI homepage, after 'Search All Databases for', and press
-   'Go'. This searches the NCBI sequence databases (nucleotide and
+   'Search'. This searches the NCBI sequence databases (nucleotide and
    protein sequence databases) for the accession number of interest.
 #. The results from your search will appear in a page saying how
    many hits you found in each NCBI database. The number of hits to a
@@ -74,17 +71,19 @@ follow these steps:
    hit to a protein sequence record, and you should click on the word
    'Protein' to go to that record.
 #. Once you are looking for the NCBI record for the sequence, to
-   download the sequence, click on the 'Download' link at the top
-   right of the page, and select 'FASTA' as the format that you want
-   to save in. Choose a sensible name for the file, for example
-   'haemophilus.fasta' for the *Haemophilus influenzae* genome
+   download the sequence, click on the 'Send' link at the top
+   right of the page, and select 'File' under 'Choose Destination' in the
+   box that pops up, and then choose 'FASTA' as the format that you want
+   from the drop-down menu that appears. Then click 'Create File'.
+   Choose a sensible name for the file, for example
+   'den1.fasta' for the DEN-1 Dengue virus genome
    sequence, and save the file in an easy-to-find place so that you
    will be able to find it again later (for example, make a folder in
    the 'My Documents' folder with your name (eg. folder 'JoeBloggs')
    and save it there).
 
-As explained in Practical 1, the FASTA format is a file format
-commonly used to store sequence information. The first line starts
+As explained in the `DNA Sequence Statistics chapter <chapter1.html>`_, 
+the FASTA format is a file format commonly used to store sequence information. The first line starts
 with the character '>' followed by a name and/or description for
 the sequence. Subsequent lines contain the sequence itself.
 
