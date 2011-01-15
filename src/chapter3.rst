@@ -118,8 +118,8 @@ entry for a sequence can be viewed by searching the NCBI database
 for the accession number for that sequence. The NCBI entries for
 sequences are stored in a particular format, known as NCBI format.
 
-To view the NCBI entry for *Haemophilus influenzae* (which has
-accession NC\_000907), follow these steps:
+To view the NCBI entry for the DEN-1 Dengue virus (which has
+accession NC\_001477), follow these steps:
 
 
 #. Go to the NCBI website
@@ -143,7 +143,7 @@ species that the sequence came from. The 'REFERENCE' field contains
 scientific publications describing the sequence. The 'FEATURES'
 field contains information about the location of features of
 interest inside the sequence, such as regulatory sequences or genes
-that lie inside the sequence. The 'SEQUENCE' field gives the
+that lie inside the sequence. The 'ORIGIN' field gives the
 sequence itself.
 
 RefSeq
@@ -170,18 +170,19 @@ the gene, and submitted their sequences to the NCBI database), some
 of which may be low quality. As a result, NCBI has made a special
 database called RefSeq (reference sequence database), which is a
 subset of the NCBI database. The data in RefSeq is manually
-curated, is high quality sequence data, and is non-redundant (each
-gene (or splice-form of a gene, in the case of eukaryotes),
-protein, or genome sequence is only represented once). The data in
-RefSeq is of much higher quality than the rest of the NCBI Sequence
+curated, is high quality sequence data, and is non-redundant (this means
+that each gene (or splice-form of a gene, in the case of eukaryotes),
+protein, or genome sequence is only represented once). 
+
+The data in RefSeq is of much higher quality than the rest of the NCBI Sequence
 Database. However, unfortunately, because of the high level of
 manual curation required, RefSeq does not cover all species, and is
 not comprehensive for the species that are covered so far.
 
 You can easily tell that a sequence comes from RefSeq because its
 accession number starts with particular sequence of letters. That
-is, RefSeq sequences corresponding to protein records start with
-'NP\_', and RefSeq curated complete genome sequences start with
+is, RefSeq sequences corresponding to protein records usually start with
+'NP\_', and RefSeq curated complete genome sequences usually start with
 'NC\_'.
 
 Querying the NCBI Database
@@ -198,7 +199,7 @@ criteria, such as:
 -  Sequences submitted by Peter Arctander
 -  Flagellin or fibrinogen sequences
 -  The glutamine synthetase gene from *Haemophilus influenzae*
--  The upstream control region of *Bacillus subtilis spo0A*
+-  The upstream control region of the *Bacillus subtilis spo0A* gene
 -  The sequence of the *Bacillus subtilis* Spo0A protein
 -  The genome sequence of *Bacillus subtilis*
 
@@ -207,18 +208,17 @@ nucleotide sequences associated with colon cancer. Firstly, to find
 all nucleotide sequences associated with colon cancer, follow these
 steps:
 
-
 #. Go to the NCBI website
    (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_).
 #. As you want to search for nucleotide sequences, select
-   'Nucleotide' from the drop-down list beside the search box at the
-   top right of the NCBI homepage.
+   'Nucleotide' from the drop-down list above the search box at the
+   top of the NCBI homepage.
 #. Type **"colon cancer"** in the search box. Note that you need to
    include the inverted commas, ie. type **"colon cancer"** and not
    **colon cancer**. This is because if you type just
    **colon cancer**, the search will be for records that contain the
    words 'colon' or 'cancer' (not necessarily both words), while you
-   want records that contain the phrase 'colon cancer'. Press 'Go'.
+   want records that contain the phrase 'colon cancer'. Press 'Search'.
 #. The search results will include all nucleotide sequences for
    which the phrase 'colon cancer' appears somewhere in their NCBI
    records. The phrase may appear in the 'DEFINITION' field of the
@@ -241,48 +241,50 @@ such as RefSeq. To use NCBI search tags to restrict your search to
 nucleotide sequences from RefSeq that are associated with colon
 cancer, follow these steps:
 
-
 #. Go to the NCBI website, and select 'Nucleotide' from the
-   drop-down list beside the search box.
+   drop-down list above the search box.
 #. In the search box, type
-   **"colon cancer" AND srcdb\_refseq[PROP]**, and press 'Go'.
+   **"colon cancer" AND srcdb\_refseq[PROP]**, and press 'Search'.
 
-This should give you all RefSeq sequences associated with colon
-cancer.
+This should give you all RefSeq nucleotide sequences for which the phrase
+'colon cancer' appears somehwere in the NCBI record.
 
 Note that you should find fewer sequences than when you just
 searched for **"colon cancer"**, but these should be higher quality
-sequences, and their NCBI entries will contain manually curated
+sequences (since they are RefSeq sequences), 
+and their NCBI entries will contain manually curated
 information about the sequences (eg. details of publications about
 the sequences and features in them).
 
 The search above should have identified RefSeq sequences from
 several species (eg. human, mouse, etc.) that are associated with
-colon cancer. What if you are only interested in human sequences
+colon cancer (or more precisely, where the phrase 'colon cancer'
+appears somewhere in the NCBI records). 
+What if you are only interested in human sequences
 associated with colon cancer?
 
 One way to solve this problem is to use NCBI search tags to
 restrict your search to human sequences. The "[ORGN]" search tag
 allows you to restrict your search to sequences from a particular
-species (eg. Haemophilus influenzae or set of species (eg.
+species (eg. *Mycobacteriuma leprae* or set of species (eg.
 Bacteria). To use NCBI search tags to retrieve human RefSeq
 sequences associated with colon cancer, follow these steps:
 
-
 #. Go to the NCBI website, and select 'Nucleotide' from the
-   drop-down list beside the search box.
+   drop-down list above the search box.
 #. In the search box, type
    **"colon cancer" AND srcdb\_refseq[PROP] AND "Homo sapiens"[ORGN]**,
-   and press 'Go'.
+   and press 'Search'.
 
 This will give you a list of all human nucleotide sequences from
-RefSeq that are associated with colon cancer.
+RefSeq that are associated with colon cancer (or more precisely, all
+the human nucleotide sequences from Refseq for which the phrase 'colon
+cancer' appears somewhere in the NCBI record).
 
 In the searches above you used the "[PROP]" and "[ORGN]" NCBI
 sequence tags to retrict your search to a specific subset of the
 NCBI Sequence Database, or to sequences from a particular taxon,
 respectively. Other useful NCBI sequence tags are:
-
 
 -  "[JOUR]": to restrict your search to sequences described in a
    paper published in a particular journal
@@ -295,7 +297,7 @@ respectively. Other useful NCBI sequence tags are:
    paper by a particular person. The person's name should be in the
    form: surname first-initial (eg. Bloggs J[AU])
 -  "[ORGN]": to restrict your search to sequences from a particular
-   species or taxon (eg. Bacillus subtilis or Bacillus or Bacteria or
+   species or taxon (eg. *Mycobacterium leprae* or *Mycobacterium* or Bacteria or
    Archaea)
 -  "[PROP]": to restrict your search to a particular subset of the
    NCBI database (eg. "srcdb\_refseq[PROP]" restricts your search to
