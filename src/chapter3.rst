@@ -370,7 +370,6 @@ were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):
 
 |image1| 
 
-xxx
 Another useful website that lists genome sequencing projects is the
 Genomes OnLine Database (GOLD), which lists genomes that have been
 completely sequenced, or are currently being sequenced. To find the
@@ -381,19 +380,19 @@ these steps:
    (`http://genomesonline.org/ <http://genomesonline.org/>`_).
 #. Click on the yellow 'Enter GOLD' button in the centre of the
    webpage. On the subsequent page, it will give the number of ongoing
-   bacterial, archaeal and eukaryotic genomes if you click on the
-   buttons for 'Bacterial Ongoing Genomes', 'Archaeal Ongoing Genomes'
-   or 'Eukaryotic Ongoing Genomes', respectively.
+   bacterial, archaeal and eukaryotic genome sequencing projects.
 #. Click on the 'Bacterial Ongoing Genomes' link to see the list of
-   ongoing bacterial genome sequencing projects. In one of the columns
+   ongoing bacterial genome sequencing projects. By default, just the
+   first 100 projects, and the rest are listed on subsequent pages.
+   In one of the columns
    of the page, this gives the university or institute that the genome
    was sequenced in. Other columns give the taxonomic information for
    the organism, and links to the sequence data.
 #. Find the number of published genome sequencing projects. Go back
-   one page, to the page with the 'Bacterial Ongoing Genomes' link. To
-   find the number of completed bacterial, archaeal and eukaryotic
-   genomes, click on 'Published Complete Genomes' the top left of the
-   page. This will bring up a page that gives the number of published
+   one page, to the page with the 'Bacterial Ongoing Genomes' link. 
+   You will see that this page also lists the number of complete published
+   genomes. To see a list of these genomes, click on 'Complete Published
+   Genomes'. This will bring up a page that gives the number of published
    genomes at the top of the page. In one column of the page, this
    gives the university or institute that the genome was sequenced
    in.
@@ -405,14 +404,14 @@ lists some ongoing projects that are not yet present in the NCBI
 Genome Database, because the sequence data has not yet been
 submitted to the NCBI Database. If you are interested in finding
 out how many genomes have been sequenced or are currently being
-sequenced for a particular species (eg. *Helicobacter pylori*), it
+sequenced for a particular species (eg. *Mycobacterium leprae*), it
 is a good idea to look at both the NCBI Genome database and at
 GOLD.
 
 Summary
 -------
 
-In this practical, you have learnt how to retrieve sequences from
+In this chapter, you have learnt how to retrieve sequences from
 the NCBI Sequence database, as well as to find out how many genomes
 have been sequenced or are currently being sequenced for a
 particular species.
@@ -420,17 +419,13 @@ particular species.
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to retrieve sequence data from the
-NCBI database for your project or assignments.
-
 There is detailed information on how to search the NCBI database on
 the NCBI Help website at
 `http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp <http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez%26part=EntrezHelp>`_.
 
 There is more information about the GOLD database in the paper
 describing GOLD by Lolios *et al*, which is available at
-`http://nar.oxfordjournals.org/cgi/content/full/36/suppl\_1/D475 <http://nar.oxfordjournals.org/cgi/content/full/36/suppl_1/D475>`_.
+`http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed <http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed>`_.
 
 Acknowledgements
 ----------------
