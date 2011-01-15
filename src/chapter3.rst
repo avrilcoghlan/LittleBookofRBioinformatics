@@ -266,8 +266,8 @@ associated with colon cancer?
 One way to solve this problem is to use NCBI search tags to
 restrict your search to human sequences. The "[ORGN]" search tag
 allows you to restrict your search to sequences from a particular
-species (eg. *Mycobacteriuma leprae* or set of species (eg.
-Bacteria). To use NCBI search tags to retrieve human RefSeq
+species (eg. *Mycobacteriuma leprae*, the bacterium that causes
+leprosy, or set of species (eg. Bacteria). To use NCBI search tags to retrieve human RefSeq
 sequences associated with colon cancer, follow these steps:
 
 #. Go to the NCBI website, and select 'Nucleotide' from the
@@ -314,30 +314,30 @@ are considerably less expensive to sequence, many microbial genome
 sequencing projects have been completed.
 
 If you don't know the accession number for a genome sequence (eg.
-for *Haemophilus influenzae*), how can you find it out? One way to
+for *Mycobacterium leprae*, the bacterium that causes leprosy), how can you find it out? One way to
 do this is to look at the NCBI Genome website, which lists all
 fully sequenced genomes and gives the accession numbers for the
 corresponding DNA sequences.
 
 If you didn't know the accession number for the
-*Haemophilus influenzae* genome, you could find it on the NCBI
+*Mycobacterium leprae* genome, you could find it on the NCBI
 Genome website by following these steps:
-
 
 #. Go to the NCBI Genome website
    (`http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome <http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome>`_)
-#. In the first paragraph on the NCBI Genome website, it describes
-   the subdivisions of the Genome database, which include Archaea,
-   Bacteria, Eukaryotae and Viruses. Click on 'Bacteria', since
-   *Haemophilus influenzae* is a bacterium. This will bring up a list
+#. On the homepage of the NCBI Genome website, it gives links to the
+   major subdivisions of the Genome database, which include
+   Eukaryota, Prokaryota (Bacteria and Archaea), and Viruses.
+   Click on 'Prokaryota', since
+   *Mycobacterium leprae* is a bacterium. This will bring up a list
    of all fully sequenced bacterial genomes, with the corresponding
    accession numbers. Note that more than one genome (from various
    strains) may have been sequenced for a particular species.
 #. Use 'Find' in the 'Edit' menu of your web browser to search for
-   'Haemophilus influenzae' on the webpage. You should find that the
-   genomes of several different *H. influenzae* strains have been
-   sequenced. One of these is *H. influenzae* KW20, which has
-   accession number NC\_000907.
+   'Mycobacterium leprae' on the webpage. You should find that the
+   genomes of several different *M. leprae* strains have been
+   sequenced. One of these is *M. leprae* TN, which has
+   accession number NC\_002677.
 
 The list of sequenced genomes on the NCBI Genomes website is not a
 definitive list; that is, some sequenced genomes may be missing
@@ -345,14 +345,13 @@ from this list. If you want to find out whether a particular genome
 has been sequenced, but you don't find it NCBI Genomes website's
 list, you should search for it by following these steps:
 
-
 #. Go to the NCBI website
    (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_).
-#. Select 'Genome' from the drop-down list beside the search box.
+#. Select 'Genome' from the drop-down list above the search box.
 #. Type the name of the species you are interested in in the search
-   box (eg. **"Haemophilus influenzae"[ORGN]**). Press 'Go'.
+   box (eg. **"Mycobacterium leprae"[ORGN]**). Press 'Search'.
 
-Note that you could also have found the *Haemophilus influenzae*
+Note that you could also have found the *Mycobacterium leprae*
 genome sequence by searching the NCBI Nucleotide database, as the
 NCBI Genome database is just a subset of the NCBI Nucleotide
 database.
@@ -362,16 +361,21 @@ How many genomes have been sequenced, or are being sequenced now?
 
 On the NCBI Genome website
 (`http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome <http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome>`_),
-the front page shows a summary of the number of fully sequenced
-genomes from the major organism groups: Archaea, Bacteria,
-Eukaryotae and Viruses.
+the front page gives a link to a list of all sequenced genomes in the
+groups Eukaryota, Prokaryota (Bacteria and Archaea) and Viruses.
+If you click on one of these links (eg. Prokaryota), at the top of the
+page it will give the number of sequenced genomes in that group (eg. number of sequenced
+prokaryotic genomes). For example, in this screenshot (from January 2011), we see that there
+were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):
 
+|image1| 
+
+xxx
 Another useful website that lists genome sequencing projects is the
 Genomes OnLine Database (GOLD), which lists genomes that have been
 completely sequenced, or are currently being sequenced. To find the
 number of complete or ongoing bacterial sequencing projects, follow
 these steps:
-
 
 #. Go to the GOLD website
    (`http://genomesonline.org/ <http://genomesonline.org/>`_).
@@ -428,6 +432,26 @@ There is more information about the GOLD database in the paper
 describing GOLD by Lolios *et al*, which is available at
 `http://nar.oxfordjournals.org/cgi/content/full/36/suppl\_1/D475 <http://nar.oxfordjournals.org/cgi/content/full/36/suppl_1/D475>`_.
 
+Acknowledgements
+----------------
+
+Thank you to Noel O'Boyle for helping in using Sphinx, `http://sphinx.pocoo.org <http://sphinx.pocoo.org>`_, to create
+this document, and github, `https://github.com/ <https://github.com/>`_, to store different versions of the document
+as I was writing it, and readthedocs, `http://readthedocs.org/ <http://readthedocs.org/>`_, to build and distribute
+this document.
+
+Contact
+-------
+
+I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
+my email address a.coghlan@ucc.ie 
+
+License
+-------
+
+The content in this book is licensed under a `Creative Commons Attribution 3.0 License
+<http://creativecommons.org/licenses/by/3.0/>`_.
+
 Exercises
 ---------
 
@@ -467,6 +491,6 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
     Does GOLD or NCBI Genomes have more sequencing projects for this
     species? If not, can you suggest an explanation why?
 
-
+.. |image1| image:: ../_static/P3_image1.png
 
 
