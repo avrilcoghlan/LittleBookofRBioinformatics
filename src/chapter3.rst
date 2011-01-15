@@ -487,5 +487,6 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
     species? If not, can you suggest an explanation why?
 
 .. |image1| image:: ../_static/P3_image1.png
+            :width: 900
 
 
