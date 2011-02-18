@@ -1,5 +1,5 @@
-Answers to the exercises on DNA Sequence Statistics
-===================================================   
+Answers to the exercises on DNA Sequence Statistics (2)
+=======================================================
 
 Q1. *Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, using a window size of 200 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
 
