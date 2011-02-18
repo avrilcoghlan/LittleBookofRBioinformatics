@@ -3,7 +3,7 @@ Answers to the exercises on DNA Sequence Statistics
 
 Q1. *Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, using a window size of 200 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
 
-To do this, you first need to download the DEN-1 Dengue virus sequence from the NCBI website http://www.ncbi.nlm.nih. 
+To do this, you first need to download the DEN-1 Dengue virus sequence from the NCBI website http://www.ncbi.nlm.nih.gov. 
 To do this follow the steps in the chapter `DNA Sequence Statistics <./chapter1.html>`_.
 
 Then read the sequence into R using the SeqinR library:
@@ -60,7 +60,7 @@ In this picture it is much more noticeable that the GC content is relatively hig
 
 Q2. *Draw a sliding window plot of GC content in the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677) using a window size of 20000 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
 
-To do this, you first need to download the *Mycobacterium leprae* sequence from the NCBI website http://www.ncbi.nlm.nih. 
+To do this, you first need to download the *Mycobacterium leprae* sequence from the NCBI website http://www.ncbi.nlm.nih.gov. 
 To do this follow the steps in the chapter `DNA Sequence Statistics <./chapter1.html>`_.
 
 Then read the sequence into R using the SeqinR library:
