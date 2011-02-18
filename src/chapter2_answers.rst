@@ -101,7 +101,7 @@ in GC content very easily:
  
 |image4|
 
-Q3. * Write a function to calculate the AT content of a DNA sequence (ie. the fraction of the nucleotides in the sequence that are As or Ts). What is the AT content of the Mycobacterium leprae TN genome? *
+Q3. *Write a function to calculate the AT content of a DNA sequence (ie. the fraction of the nucleotides in the sequence that are As or Ts). What is the AT content of the Mycobacterium leprae TN genome?*
 
 Here is a function to calculate the AT content of a genome sequence:
 
