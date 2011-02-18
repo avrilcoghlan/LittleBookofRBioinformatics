@@ -677,7 +677,7 @@ Q1. Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, u
     At what position (in base-pairs) in the genome is there the largest
     change in local GC content (approximate position is fine here)?
     Compare the sliding window plots of GC content created using window
-    sizes of 200 and 2000 nucleotides (see above). How does window
+    sizes of 200 and 2000 nucleotides. How does window
     size affect your ability to detect differences within 
     the Dengue virus genome?
 
