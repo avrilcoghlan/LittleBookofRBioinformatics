@@ -160,7 +160,7 @@ We can then use this function to make a sliding window plot with a window size o
 
 |image5|
 
-This is the mirror image of the plot of GC content (because AT = 1 ¿ GC):
+This is the mirror image of the plot of GC content (because AT = 1 \¿ GC):
  
 ::
 
