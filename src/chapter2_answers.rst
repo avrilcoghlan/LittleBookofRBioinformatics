@@ -264,7 +264,6 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 
 .. |image0| image:: ../_static/A2_image0.png
 .. |image1| image:: ../_static/A2_image1.png
-            :width: 900
 .. |image2| image:: ../_static/A2_image2.png
 .. |image3| image:: ../_static/A2_image3.png
 .. |image4| image:: ../_static/A2_image4.png
