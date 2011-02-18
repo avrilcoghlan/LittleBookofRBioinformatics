@@ -124,7 +124,7 @@ We can then use the function to calculate the AT content of the *M. leprae* geno
     > AT(lepraeseq)
     [1] 0.4220325
    
-You should notice that the AT content is (1 ¿ GC content), ie. (AT content + GC content = 1):
+You should notice that the AT content is (1 minus GC content), ie. (AT content + GC content = 1):
 
 ::
    
@@ -160,7 +160,7 @@ We can then use this function to make a sliding window plot with a window size o
 
 |image5|
 
-This is the mirror image of the plot of GC content (because AT = 1 \¿ GC):
+This is the mirror image of the plot of GC content (because AT equals 1 minus GC):
  
 ::
 
