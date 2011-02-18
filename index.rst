@@ -23,6 +23,7 @@ Contents:
    src/chapter1.rst
    src/chapter1_answers.rst
    src/chapter2.rst
+   src/chapter2_answers.rst
    src/chapter3.rst
 
 Acknowledgements
