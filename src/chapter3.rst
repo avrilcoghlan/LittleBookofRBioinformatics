@@ -203,7 +203,7 @@ criteria, such as:
 -  The sequence of the *Mycobacterium leprae* DnaA protein
 -  The genome sequence of *Trypanosoma cruzi*
 
-Say for example that you want to find all high-quality human
+Say for example that you want to find all high-quality 
 nucleotide sequences associated with malaria. Firstly, to find
 all nucleotide sequences associated with malaria, follow these
 steps:
@@ -213,14 +213,15 @@ steps:
 #. As you want to search for nucleotide sequences, select
    'Nucleotide' from the drop-down list above the search box at the
    top of the NCBI homepage.
-#. Type **"colon cancer"** in the search box. Note that you need to
+#. Type **malaria** in the search box. (Note that if you are searching for
+   a phrase such as 'colon cancer', you would need to 
    include the inverted commas, ie. type **"colon cancer"** and not
    **colon cancer**. This is because if you type just
    **colon cancer**, the search will be for records that contain the
    words 'colon' or 'cancer' (not necessarily both words), while you
-   want records that contain the phrase 'colon cancer'. Press 'Search'.
+   want records that contain the phrase 'colon cancer'.) Press 'Search'.
 #. The search results will include all nucleotide sequences for
-   which the phrase 'colon cancer' appears somewhere in their NCBI
+   which the phrase 'malaria' appears somewhere in their NCBI
    records. The phrase may appear in the 'DEFINITION' field of the
    NCBI record (which gives a short description), in the title of a
    journal article on the nucleotide sequence, or elsewhere in the
@@ -238,48 +239,47 @@ attributes, such as molecule type (eg. mRNAs) or species.
 The NCBI search tag "[PROP]" allows you to restrict your search to
 sequences form a particular subset of the NCBI Sequence Database,
 such as RefSeq. To use NCBI search tags to restrict your search to
-nucleotide sequences from RefSeq that are associated with colon
-cancer, follow these steps:
+nucleotide sequences from RefSeq that are associated with malaria, follow these steps:
 
 #. Go to the NCBI website, and select 'Nucleotide' from the
    drop-down list above the search box.
 #. In the search box, type
-   **"colon cancer" AND srcdb\_refseq[PROP]**, and press 'Search'.
+   **malaria AND srcdb\_refseq[PROP]**, and press 'Search'.
 
 This should give you all RefSeq nucleotide sequences for which the phrase
-'colon cancer' appears somehwere in the NCBI record.
+malaria appears somehwere in the NCBI record.
 
 Note that you should find fewer sequences than when you just
-searched for **"colon cancer"**, but these should be higher quality
+searched for **malaria**, but these should be higher quality
 sequences (since they are RefSeq sequences), 
 and their NCBI entries will contain manually curated
 information about the sequences (eg. details of publications about
 the sequences and features in them).
 
 The search above should have identified RefSeq sequences from
-several species (eg. human, mouse, etc.) that are associated with
-colon cancer (or more precisely, where the phrase 'colon cancer'
+several species (eg. malaria itself, human, mouse, etc.) that are associated with
+malaria (or more precisely, where the word 'malaria'
 appears somewhere in the NCBI records). 
 What if you are only interested in human sequences
-associated with colon cancer?
+associated with malaria?
 
 One way to solve this problem is to use NCBI search tags to
 restrict your search to human sequences. The "[ORGN]" search tag
 allows you to restrict your search to sequences from a particular
 species (eg. *Mycobacteriuma leprae*, the bacterium that causes
 leprosy, or set of species (eg. Bacteria). To use NCBI search tags to retrieve human RefSeq
-sequences associated with colon cancer, follow these steps:
+sequences associated with malaria, follow these steps:
 
 #. Go to the NCBI website, and select 'Nucleotide' from the
    drop-down list above the search box.
 #. In the search box, type
-   **"colon cancer" AND srcdb\_refseq[PROP] AND "Homo sapiens"[ORGN]**,
+   **malaria AND srcdb\_refseq[PROP] AND "Homo sapiens"[ORGN]**,
    and press 'Search'.
 
 This will give you a list of all human nucleotide sequences from
-RefSeq that are associated with colon cancer (or more precisely, all
-the human nucleotide sequences from Refseq for which the phrase 'colon
-cancer' appears somewhere in the NCBI record).
+RefSeq that are associated with malaria (or more precisely, all
+the human nucleotide sequences from Refseq for which the word 'malaria'
+appears somewhere in the NCBI record).
 
 In the searches above you used the "[PROP]" and "[ORGN]" NCBI
 sequence tags to retrict your search to a specific subset of the
