@@ -468,10 +468,7 @@ Q3. How many nucleotide sequences are there from the bacterium *Chlamydia tracho
 Q4. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the *RefSeq* part of the 
     NCBI Sequence Database? 
 
-
-
-xxx
-Q5. How many nucleotide sequences were submitted to NCBI by Peter Arctander? 
+Q5. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
     Note that the name of the person who submitted a sequence is stored
     in the author field of the NCBI record, as is the name of people
     who published papers on the sequence. There may be more than one

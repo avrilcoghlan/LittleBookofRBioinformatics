@@ -98,6 +98,21 @@ probably not had time to add all high-quality sequences to RefSeq (this is a tim
 as the curators add additional information to the NCBI Sequence records in RefSeq, such as references to 
 papers that discuss a particular sequence). 
 
+Q5. *How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list, 
+as you want to search for nucleotide sequences.
+
+Then in the search box, type "Berriman M"[AU] and press 'Search'.
+
+Here [AU] specifies the name of the person who either submitted the sequence to the NCBI database, 
+or wrote a paper describing the sequence. 
+
+On the results page, it should say at the top: "Found 460052 nucleotide sequences.   Nucleotide (250328)   EST (121075)   GSS (88649)". This means that 460052 DNA/RNA sequences were either submitted to the NCBI database by someone called M. Berriman, or were described in a paper by someone called M. Berriman. Of these, 250328 were DNA/RNA sequences, 121075 were EST sequences (part of mRNAs), and 88649 were DNA sequences from genome sequencing projects (GSS or Genome Sequence Survey sequences).
+
+Note that unfortunately the NCBI website does not allow us to search for "Berriman Matthew"[AU] so we cannot be sure 
+that all of these sequences were submitted by Matthew Berriman. 
+
 Contact
 -------
 
