@@ -73,6 +73,31 @@ you will get 51046 hits to the Nucleotide database and 149 to the GSS database, 
 not be *Chlamydia trachomatis* sequences – they could just be sequences for which the NCBI sequence 
 record contains the phrase "Chlamydia trachomatis" somewhere.
 
+Q4. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the 
+    NCBI Sequence Database?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list 
+at the top of the webpage, as you want to search for nucleotide sequences.
+
+Then in the search box, type "Chlamydia trachomatis"[ORGN] AND srcdb_refseq[PROP] and press 'Search'.
+
+Here [ORGN] specifies the organism, and [PROP] specifies a property of the sequences (in this case that 
+they belong to the RefSeq subsection of the NCBI database).
+
+At the top of the results page, it should say "Results: 1 to 20 of 29 sequences" [as of 19-Feb-2011]. 
+As for Q3, if you try this again in a couple of months, the number will probably be higher, due to extra 
+sequences added to the database. 
+
+Note that the sequences in Q3 are all *Chlamydia trachomatis* DNA and RNA sequences in the NCBI database. 
+The sequences in Q4 gives the *Chlamydia trachomatis* DNA and RNA sequences in the RefSeq part of the NCBI 
+database, which is a subsection of the database for high-quality manually-curated data. 
+
+The number of sequences in RefSeq is much fewer than the total number of *C. trachomatis* sequences, 
+partly because low quality sequences are never added to RefSeq, but also because RefSeq curators have 
+probably not had time to add all high-quality sequences to RefSeq (this is a time-consuming process, 
+as the curators add additional information to the NCBI Sequence records in RefSeq, such as references to 
+papers that discuss a particular sequence). 
+
 Contact
 -------
 

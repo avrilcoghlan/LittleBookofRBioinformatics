@@ -462,20 +462,25 @@ Q1. What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_0
 Q2. What were the nucleotide sequences published in *Nature* volume 460, page 352?
     What are their accession numbers in the NCBI Sequence Database?
 
-xxx
-
 Q3. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the NCBI Sequence Database? 
-    Remember to type **"Chlamydia trachomatis"** including the inverted
-    commas.
+    Remember to type **"Chlamydia trachomatis"** including the inverted commas.
+
+Q4. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the *RefSeq* part of the 
+    NCBI Sequence Database? 
 
 
-Q4. How many nucleotide sequences are there from the fungus *Aspergillus nidulans* in the *RefSeq* part of the NCBI Sequence Database? Q5. How many nucleotide sequences were submitted to NCBI by Peter Arctander? 
+
+xxx
+Q5. How many nucleotide sequences were submitted to NCBI by Peter Arctander? 
     Note that the name of the person who submitted a sequence is stored
     in the author field of the NCBI record, as is the name of people
     who published papers on the sequence. There may be more than one
     author fields in the NCBI record for a sequence, corresponding to
     the person who submitted the sequence and/or people who published
     papers on the sequence.
+
+xxx
+
 Q6. How many nucleotide sequences from Gammaproteobacteria are there in the NCBI Database? Q7. How many nucleotide sequences for flagellin genes from Gammaproteobacteria are there in the NCBI Database? 
     Hint: look at the examples above for cancer-related genes.
 Q8. How many *mRNA sequences* for flagellin genes from Gammaproteobacteria are there in the NCBI Database? 
