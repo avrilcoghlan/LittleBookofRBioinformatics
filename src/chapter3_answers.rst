@@ -73,8 +73,7 @@ you will get 51046 hits to the Nucleotide database and 149 to the GSS database, 
 not be *Chlamydia trachomatis* sequences – they could just be sequences for which the NCBI sequence 
 record contains the phrase "Chlamydia trachomatis" somewhere.
 
-Q4. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the 
-    NCBI Sequence Database?*
+Q4. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list 
 at the top of the webpage, as you want to search for nucleotide sequences.
