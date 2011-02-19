@@ -26,6 +26,7 @@ been fully sequenced, or are currently being sequenced, including:
 * the nematode worm `Necator americanus <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid51031[orgn]>`_, which causes soil-transmitted helminthiasis
 * the Dengue virus, which causes Dengue fever
 * the Rabies virus, which causes Rabies
+* nematode
 
 To encourage research into these organisms, many of the examples in this booklet are based on analysing these genomes.
 
