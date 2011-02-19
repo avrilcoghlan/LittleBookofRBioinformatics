@@ -19,6 +19,34 @@ JOURNAL: J. Gen. Virol. 78 (PT 9), 2287-2291 (1997)
 
 There are also some other references, for papers published about the Dengue virus genome sequence. 
 
+Q2. *What were the nucleotide sequences published in Nature volume 460, page 352?*
+
+To do this, you need to go to the NCBI website at www.ncbi.nlm.nih.gov and type in the search 
+box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE]
+
+Here [JOUR] specifies the journal name, [VOL] the volume of the journal the paper is in, and [PAGE] the page number.
+
+This should bring up a results page with "50890" beside the word "Nucleotide", and "1" beside the word
+"Genome", and "25700" beside the word "Protein", indicating that there were 50890 hits to sequence records in the Nucleotide database, 
+which contains DNA and RNA sequences, and 1 hit to the Genome database, which contains genome sequences, and 25700
+hits to the Protein database, which contains protein sequences.
+
+If you click on the word "Nucleotide", it will bring up a webpage with a list of links to the NCBI sequence 
+records for those 50890 hits. The 50890 hits are all contigs from the schistosome worm *Schistosoma mansoni*.
+
+Likewise, if you click on the word "Protein", it will bring up a webpage with a list of links to the NCBI
+sequence records for the 25700 hits, and you will see that the hits are all predicted proteins for *Schistosoma
+mansoni*.
+
+If you click on the word "Genome", it will bring you to the NCBI record for the *Schistosoma mansoni* genome
+sequence, which has NCBI accession NS\_00200. Note that the accession starts with "NS\_", which indicates that
+it is a RefSeq accession. 
+
+Therefore, in *Nature* volume 460, page 352, the *Schistosoma mansoni* genome sequence was published, along
+with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins
+for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
+at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
+
 Contact
 -------
 

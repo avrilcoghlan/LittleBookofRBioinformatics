@@ -183,7 +183,7 @@ You can easily tell that a sequence comes from RefSeq because its
 accession number starts with particular sequence of letters. That
 is, RefSeq sequences corresponding to protein records usually start with
 'NP\_', and RefSeq curated complete genome sequences usually start with
-'NC\_'.
+'NC\_' or 'NS\_'.
 
 Querying the NCBI Database
 --------------------------
@@ -459,12 +459,11 @@ your answer, and what you did/typed to get this answer.
 Q1. What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_001477) can you obtain from its annotations in the NCBI Sequence Database? 
     What does it say in the DEFINITION and ORGANISM fields of its NCBI
     record?
-
-
-
-
-Q2. What were the nucleotide sequences published in *Proc Natl Acad Sci U S A* volume 103, page 6718? 
+Q2. What were the nucleotide sequences published in *Nature* volume 460, page 352?
     What are their accession numbers in the NCBI Sequence Database?
+
+xxx
+
 Q3. How many nucleotide sequences are there from the fungus *Aspergillus nidulans* in the NCBI Sequence Database? 
     Remember to type **"Aspergillus nidulans"** including the inverted
     commas.
