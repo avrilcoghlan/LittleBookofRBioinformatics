@@ -486,12 +486,12 @@ Q8. How many *mRNA sequences* for collagen genes from nematode worms are there i
 
 Q9. How many *protein sequences* for collagen proteins from nematode worms are there in the NCBI database? 
 
-xxx
+Q10. What is the accession number for the *Trypanosoma cruzi* genome in NCBI? 
+    Do you see genome sequences for more than one strain of *Trypanosoma cruzi*?
 
-Q10. What is the accession number for the *Buchnera aphidicola* chromosomal genome in NCBI? 
-    Remember to ignore plasmid genomes!
-    Do you see chromosomal genomes for more than one strain of
-    *Buchnera aphidicola*?
+
+xxxx
+
 Q11. How many fully sequenced Bacteria, Archaeal and Eukaryotic species are represented in the NCBI Genome database? Q12. How many ongoing genome sequencing projects are there for Bacteria, Archaea, and Eukarotes, respectively, in the GOLD database? Q13. Are there any genome sequencing projects ongoing at University College Cork, acccording to the GOLD database? 
     Hint: Use the 'Find' option in the 'Edit' menu of your web browser
     to search for 'Cork' in the GOLD database's webpage listing ongoing

@@ -175,6 +175,48 @@ Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search'.
 On the results page, you should see '1 to 20 of 1886'. This means that 1886 protein sequences from nematode
 worms were found that include the word collagen in the NCBI sequence entries [as of 19-Feb-2011].
 
+Q10. *What is the accession number for the Trypanosoma cruzi genome in NCBI?*
+
+There are two ways that you can answer this.
+
+The first method is to go to www.ncbi.nlm.nih.gov and select "Genome" from the drop-down list, 
+as you want to search for genome sequences.
+
+Then type in the search box: "Trypanosoma cruzi"[ORGN] and press 'Search'.
+
+The results page says 'All:1', and lists just one NCBI record, the genome sequence for *Trypanosoma cruzi*
+strain CL Brener, which has accession NZ\_AAHK00000000.
+
+The second method of answering the question is to go to the NCBI Genomes webpage
+http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome.
+
+Click on the 'Eukaryota' link at the middle the page, as *Trypanosoma cruzi* is a eukaryotic species.
+
+This will give you a complete list of all the eukaryotic genomes that have been sequenced.
+
+Go to the 'Edit' menu of your web browser, and choose 'Find', and search for 'Trypanosoma cruzi'.  
+
+You should find *Trypanosoma cruzi* strain CL Brener.
+You will also find that there are several ongoing genome sequencing projects listed for other strains of
+*Trypanosoma cruzi*: strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3.
+
+The link 'GB' (in green) at the far right of the webpage gives a link to the NCBI record for the sequence.
+In this case, the link for *Trypanosoma cruzi* strain CL Brener leads us to the NCBI record for accession
+AAHK01000000. This is actually an accession for the *T. cruzi* strain CL Brener sequencing project, rather than
+for the genome sequence itself. On the top right of the page, you will see a link "Genome", and if you click
+on it, it will bring you to the NCBI accession NZ\_AAHK00000000, the genome sequence for *Trypanosoma cruzi* strain CL Brener.
+
+Of the other *T. cruzi* strains listed, there is only a 'GB' link for one other strain, Sylvio X10/1.
+Presumably there are no links for the other *Trypanosoma cruzi* strains, because the sequencing
+projects are still in progress. If you click on the link for *Trypanosoma cruzi* strain Sylvio X10/1, it will bring you to the
+NCBI record for accession ADWP01000000, the accession for the *T. cruzi* strain Sylvio X10/1 sequencing
+project. At the top right of that page, there is no "Genome" link, which tells you that there is not yet
+a genome assembly available for this strain. 
+
+Note that the answer is slightly different for the answer from the first method above, which 
+did not find the information on the genome projects for strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3,
+because genome assemblies are not yet available for those strains.
+
 Contact
 -------
 
