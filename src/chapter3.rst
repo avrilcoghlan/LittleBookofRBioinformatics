@@ -170,9 +170,9 @@ the gene, and submitted their sequences to the NCBI database), some
 of which may be low quality. As a result, NCBI has made a special
 database called RefSeq (reference sequence database), which is a
 subset of the NCBI database. The data in RefSeq is manually
-curated, is high quality sequence data, and is non-redundant (this means
+curated, is high quality sequence data, and is non-redundant; this means
 that each gene (or splice-form of a gene, in the case of eukaryotes),
-protein, or genome sequence is only represented once). 
+protein, or genome sequence is only represented once. 
 
 The data in RefSeq is of much higher quality than the rest of the NCBI Sequence
 Database. However, unfortunately, because of the high level of
@@ -193,19 +193,19 @@ to find particular sequences or a set of sequences matching given
 criteria, such as:
 
 
--  All human nucleotide sequences associated with colon cancer
--  The sequence published in *Cell* **31**:375-382
--  All sequences from *Aspergillus nidulans*
--  Sequences submitted by Peter Arctander
+-  All human nucleotide sequences associated with malaria     
+-  The sequence published in *Nature* **460**:352-358
+-  All sequences from *Chlamydia trachomatis*
+-  Sequences submitted by Matthew Berriman
 -  Flagellin or fibrinogen sequences
--  The glutamine synthetase gene from *Haemophilus influenzae*
--  The upstream control region of the *Bacillus subtilis spo0A* gene
--  The sequence of the *Bacillus subtilis* Spo0A protein
--  The genome sequence of *Bacillus subtilis*
+-  The glutamine synthetase gene from *Mycobacteriuma leprase*
+-  The upstream control region of the *Mycobacterium leprae dnaA* gene
+-  The sequence of the *Mycobacterium leprae* DnaA protein
+-  The genome sequence of *Trypanosoma cruzi*
 
 Say for example that you want to find all high-quality human
-nucleotide sequences associated with colon cancer. Firstly, to find
-all nucleotide sequences associated with colon cancer, follow these
+nucleotide sequences associated with malaria. Firstly, to find
+all nucleotide sequences associated with malaria, follow these
 steps:
 
 #. Go to the NCBI website
