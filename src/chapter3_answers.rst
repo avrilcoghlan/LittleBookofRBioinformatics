@@ -236,6 +236,16 @@ genome sequences for nematode worms, including the species *Caenorhabditis elega
 species that have been fully sequenced (as of 19-Feb-2011). Because nematode worms are multi-chromosomal species, 
 there may be several chromosomal sequences for each species.
 
+Note that when you search the NCBI Genome database at http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome, you will
+find the NCBI records for completely sequenced genomes (completely sequenced nematode genomes in this case).
+
+If you are interested in partially sequenced genomes, that is sequences from genome sequencing projects that are
+still in progress, you can go to the NCBI Genome Projects website at http://www.ncbi.nlm.nih.gov/genomeprj. If you
+search the NCBI Genome Projects database for Nematoda[ORGN], you will find that genome
+sequencing projects for many other nematode species are ongoing, including for the species *Onchocerca volvulus*
+(which causes onchocerciasis), *Wuchereria bancrofti* (which causes lymphatic filariasis), and 
+*Necator americanus* (which causes soil-transmitted helminthiasis). 
+
 Contact
 -------
 
