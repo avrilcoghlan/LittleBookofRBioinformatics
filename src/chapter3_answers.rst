@@ -217,6 +217,25 @@ Note that the answer is slightly different for the answer from the first method 
 did not find the information on the genome projects for strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3,
 because genome assemblies are not yet available for those strains.
 
+Q11. *How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
+
+To answer this question, you need to go to the NCBI Genome webpage http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome. 
+
+In the search box at the top of the page, type Nematoda[ORGN] to search for genome sequences from nematode   
+worms, using the Latin name for the nematode worms. 
+
+On the results page, you will see 'Items 1 - 20 of 62', indicating that 62 genome sequences from nematode worms
+have been found. If you look down the page, you will see however that many of these are mitochondrial genome
+sequences, rather than chromosomal genome sequences.
+
+If you are just interested in chromosomal genome sequences, you can type 'Nematoda[ORGN] NOT mitochondrion' in the
+search box, to search for non-mitochondrial sequences. This should give you 16 sequences, which are all chromosomal
+genome sequences for nematode worms, including the species *Caenorhabditis elegans*, *Caenorhabditis remanei*,
+*Caenorhabditis briggsae*, *Loa loa* (which causes subcutaneous filariasis), and 
+*Brugia malayi* (which causes lymphatic filariasis). Thus, there are nematode genome sequences from five different
+species that have been fully sequenced (as of 19-Feb-2011). Because nematode worms are multi-chromosomal species, 
+there may be several chromosomal sequences for each species.
+
 Contact
 -------
 
