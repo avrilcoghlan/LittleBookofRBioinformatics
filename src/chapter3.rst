@@ -57,7 +57,7 @@ follow these steps:
 #. Go to the NCBI website
    (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_)
 #. Type the accession number in the search box on the top of
-   the NCBI homepage, after 'Search All Databases for', and press
+   the NCBI homepage, under 'Search All Databases for', and press
    'Search'. This searches the NCBI sequence databases (nucleotide and
    protein sequence databases) for the accession number of interest.
 #. The results from your search will appear in a page saying how
@@ -70,7 +70,7 @@ follow these steps:
    the accession corresponds to a protein sequence, you should get a
    hit to a protein sequence record, and you should click on the word
    'Protein' to go to that record.
-#. Once you are looking for the NCBI record for the sequence, to
+#. Once you are looking at the NCBI record for the sequence, to
    download the sequence, click on the 'Send' link at the top
    right of the page, and select 'File' under 'Choose Destination' in the
    box that pops up, and then choose 'FASTA' as the format that you want
