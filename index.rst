@@ -25,6 +25,7 @@ Contents:
    src/chapter2.rst
    src/chapter2_answers.rst
    src/chapter3.rst
+   src/chapter3_answers.rst
 
 Acknowledgements
 ----------------
