@@ -21,18 +21,16 @@ been fully sequenced, or are currently being sequenced, including:
 * the protist `Leishmania major <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid5664[orgn]>`_, and related *Leishmania* species, which cause leishmaniasis
 * the schistosome worm `Schistosoma mansoni <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6183[orgn]>`_, which causes schistosomiasis
 * the nematode worms `Brugia malayi <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6279[orgn]>`_ and `Wuchereria bancrofti <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6293[orgn]>`_, which cause lymphatic filariasis
-* the nematode worm `Loa loa <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid7209[orgn]>_`, which causes subcutaneous filariasis
-* the nematode worm `Loa loa <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid7209[orgn]>_`, which causes subcutaneous filariasis
+* the nematode worm `Loa loa <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid7209[orgn]>`_, which cuases ...
 * the nematode worm `Onchocerca volvulus <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid6282[orgn]>`_, which causes onchocerciasis
 * the nematode worm `Necator americanus <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid51031[orgn]>`_, which causes soil-transmitted helminthiasis
 * the Dengue virus, which causes Dengue fever
 * the Rabies virus, which causes Rabies
-* the nematode worm `Loa loa <http://www.ncbi.nlm.nih.gov/genomeprj?cmd=search&term=txid7209[orgn]>`_, which cuases ...
 
 To encourage research into these organisms, many of the examples in this booklet are based on analysing these genomes.
 
-Contact
--------
+.. rubric:: Contact
+-------------------
 
 I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
 my email address a.coghlan@ucc.ie 
