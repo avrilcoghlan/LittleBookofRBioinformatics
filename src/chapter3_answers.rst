@@ -49,7 +49,8 @@ at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http:/
 
 Q3. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list at the top 
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
+and select "Nucleotide" from the drop-down list at the top 
 of the webpage, as you want to search for nucleotide (DNA or RNA) sequences.
 
 Then in the search box, type "Chlamydia trachomatis"[ORGN] and press 'Search'.
