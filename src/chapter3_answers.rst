@@ -148,6 +148,33 @@ This means that 8341 DNA or RNA sequences for collagen genes from nematode worms
 NCBI records found may be for other genes but contain the word 'collagen' somewhere in the NCBI record (for example, in
 the title of a cited paper).
 
+Q8. *How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down sequences, as you want to search for nucleotide sequences (nucleotide sequences include DNA sequences and RNA sequences, such as mRNAs). 
+
+Then in the search box, type Nematoda[ORGN] AND collagen AND "biomol mRNA"[PROP].
+
+Here [ORGN] specifies the name of the group of species, collagen specifies that we want to find NCBI entries 
+that include the word collagen, and [PROP] specifies a property of those sequences (that they are mRNAs, in this case).
+
+The search page should say 'Found 7656 nucleotide sequences.   Nucleotide (861)   EST (6795)' [as of 19-Feb-2011].
+This means that 7656 mRNA sequences were found that contain the word 'collagen' in the NCBI record. Of the
+7656, 6795 are EST sequences (parts of mRNAs). 
+
+Note that in Q7 we found 8341 nucleotide (DNA or RNA) sequences from nematode worms. In this question, we found out that 
+only 7656 of those sequences are mRNA sequences. This means that the other (8341-7656=) 685 sequences must be DNA sequences, 
+or other types of RNA sequences (not mRNAs) such as tRNAs or rRNAs.
+
+Q9. *How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Protein" from the drop-down list, 
+as you want to search for protein sequences.
+
+Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search'.
+
+On the results page, you should see '1 to 20 of 1886'. This means that 1886 protein sequences from nematode
+worms were found that include the word collagen in the NCBI sequence entries [as of 19-Feb-2011].
+
 Contact
 -------
 

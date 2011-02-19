@@ -481,12 +481,14 @@ Q6. How many nucleotide sequences from nematode worms are there in the NCBI Data
 Q7. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
     Hint: look at the examples above for malaria-related genes.
 
-
-****
-
-Q8. How many *mRNA sequences* for flagellin genes from Gammaproteobacteria are there in the NCBI Database? 
+Q8. How many *mRNA sequences* for collagen genes from nematode worms are there in the NCBI Database? 
     Hint: look at the notes about the "[PROP]" search tag above.
-Q9. How many *protein sequences* for flagellin proteins from Gammaproteobacteria are there in the NCBI database? Q10. What is the accession number for the *Buchnera aphidicola* chromosomal genome in NCBI? 
+
+Q9. How many *protein sequences* for collagen proteins from nematode worms are there in the NCBI database? 
+
+xxx
+
+Q10. What is the accession number for the *Buchnera aphidicola* chromosomal genome in NCBI? 
     Remember to ignore plasmid genomes!
     Do you see chromosomal genomes for more than one strain of
     *Buchnera aphidicola*?
