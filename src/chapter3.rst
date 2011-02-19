@@ -381,18 +381,18 @@ these steps:
 #. Click on the yellow 'Enter GOLD' button in the centre of the
    webpage. On the subsequent page, it will give the number of ongoing
    bacterial, archaeal and eukaryotic genome sequencing projects.
-#. Click on the 'Bacterial Ongoing Genomes' link to see the list of
+#. Click on the 'Bacterial Ongoing' link to see the list of
    ongoing bacterial genome sequencing projects. By default, just the
-   first 100 projects, and the rest are listed on subsequent pages.
+   first 100 projects are listed, and the rest are listed on subsequent pages.
    In one of the columns
    of the page, this gives the university or institute that the genome
    was sequenced in. Other columns give the taxonomic information for
    the organism, and links to the sequence data.
 #. Find the number of published genome sequencing projects. Go back
-   one page, to the page with the 'Bacterial Ongoing Genomes' link. 
+   one page, to the page with the 'Bacterial Ongoing' link. 
    You will see that this page also lists the number of complete published
-   genomes. To see a list of these genomes, click on 'Complete Published
-   Genomes'. This will bring up a page that gives the number of published
+   genomes. To see a list of these genomes, click on 'Complete Published'.
+   This will bring up a page that gives the number of published
    genomes at the top of the page. In one column of the page, this
    gives the university or institute that the genome was sequenced
    in.
