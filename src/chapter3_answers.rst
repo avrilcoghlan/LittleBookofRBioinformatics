@@ -47,6 +47,22 @@ with all the DNA sequence contigs that were sequenced for the genome project, an
 for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
 at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
 
+Q3. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
+
+xxx
+To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list  at the top of the webpage, as you want to search for nucleotide (DNA or RNA) sequences.
+
+Then in the search box, type "Aspergillus nidulans"[ORGN] and press 'Search'.
+
+Here [ORGN] specifies the organism you are interested in, that is, the species name in Latin.
+The results page should give you a list of the hits to sequence records in the NCBI Nucleotide database. It will say “Found 29270 nucleotide sequences, Nucleotide (12422) EST(16848)”. Beside “Nucleotide”, it should say “12422”, which means that 29,270 sequences were found, of which 12422 are DNA sequences and 16848 are ESTs [as of 17-Jan-2011]. Note that there are new sequences being added to the database continuously, so if you check this again in a couple of months, you will probably find a higher number of sequences (eg. 30,000 sequences).
+
+[Note: if you just go to the www.ncbi.nlm.nih.gov database, and search for “Aspergillus nidulans”[ORGN] (without choosing “Nucleotide” from the drop-down list), you will see 12422 hits to the Nucleotide database and 16848 to the EST database.
+
+ Note if you search for “Aspergillus nidulans”, without using [ORGN] to specify the organism, you will get 13562 hits to the Nucleotide database and 17319 to the EST database, but some of these might not be Aspergillus nidulans sequences – they could just be sequences for which the NCBI sequence record contains the phrase “Aspergillus nidulans” somewhere.]
+
+
+
 Contact
 -------
 

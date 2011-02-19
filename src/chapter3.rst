@@ -464,9 +464,11 @@ Q2. What were the nucleotide sequences published in *Nature* volume 460, page 35
 
 xxx
 
-Q3. How many nucleotide sequences are there from the fungus *Aspergillus nidulans* in the NCBI Sequence Database? 
-    Remember to type **"Aspergillus nidulans"** including the inverted
+Q3. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the NCBI Sequence Database? 
+    Remember to type **"Chlamydia trachomatis"** including the inverted
     commas.
+
+
 Q4. How many nucleotide sequences are there from the fungus *Aspergillus nidulans* in the *RefSeq* part of the NCBI Sequence Database? Q5. How many nucleotide sequences were submitted to NCBI by Peter Arctander? 
     Note that the name of the person who submitted a sequence is stored
     in the author field of the NCBI record, as is the name of people
