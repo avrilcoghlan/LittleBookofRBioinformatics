@@ -476,10 +476,14 @@ Q5. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
     the person who submitted the sequence and/or people who published
     papers on the sequence.
 
-xxx
+Q6. How many nucleotide sequences from nematode worms are there in the NCBI Database? 
 
-Q6. How many nucleotide sequences from Gammaproteobacteria are there in the NCBI Database? Q7. How many nucleotide sequences for flagellin genes from Gammaproteobacteria are there in the NCBI Database? 
-    Hint: look at the examples above for cancer-related genes.
+Q7. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
+    Hint: look at the examples above for malaria-related genes.
+
+
+****
+
 Q8. How many *mRNA sequences* for flagellin genes from Gammaproteobacteria are there in the NCBI Database? 
     Hint: look at the notes about the "[PROP]" search tag above.
 Q9. How many *protein sequences* for flagellin proteins from Gammaproteobacteria are there in the NCBI database? Q10. What is the accession number for the *Buchnera aphidicola* chromosomal genome in NCBI? 

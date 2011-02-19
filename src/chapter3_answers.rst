@@ -113,6 +113,41 @@ On the results page, it should say at the top: "Found 460052 nucleotide sequence
 Note that unfortunately the NCBI website does not allow us to search for "Berriman Matthew"[AU] so we cannot be sure 
 that all of these sequences were submitted by Matthew Berriman. 
 
+Q6. *How many nucleotide sequences from nematode worms are there in the NCBI Database?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
+as you want to search for nucleotide sequences.
+
+Then in the search box, type Nematoda[ORGN] and press 'Search'.
+
+Here [ORGN] specifies the group of species that you want to search for sequences from. In Q4, [ORGN] was used to specify 
+the name of one organism (*Chlamydia trachomatis*). However, you can also use [ORGN] to specify the name of a group of 
+organisms, for example, Fungi[ORGN] would search for fungal sequences or Mammalia[ORGN] would search for mammalian 
+sequences. The name of the group of species that you want to search for must be given in Latin, so to search for sequences
+from nematode worms we use the Latin name Nematoda.
+
+The search page should say at the top 'Found 2202458 nucleotide sequences.   Nucleotide (378255)   EST (1140454)   GSS (683749)' [as of 19-Feb-2011]. This means that 2,202,458 DNA or RNA sequences were found from nematode worm species in the database, of
+which 378,255 are DNA/RNA sequences, 1,140,454 are ESTs, and 683,749 sequences are DNA sequences from genome sequencing
+projects. These sequences are probably from a wide range of nematode worm species, including the model nematode worm
+*Caenorhabditis elegans*.
+
+Q7. *How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
+
+To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
+as you want to search for nucleotide sequences.
+
+Then in the search box, type Nematoda[ORGN] AND collagen.
+
+Here [ORGN] specifies that we want sequences from nematode worms. The phrase "AND collagen" means that the word collagen 
+must appear somewhere in the NCBI entries for those sequences, for example, in the sequence name, or in a description 
+of the sequence, or in the title of a paper describing the sequence, etc.
+
+On the results page, you should see 'Found 8341 nucleotide sequences.   Nucleotide (1546)   EST (6795)' [as of 19-Feb-2011].
+This means that 8341 DNA or RNA sequences for collagen genes from nematode worms were found, of which 6795 are EST sequences
+(parts of mRNAs). Note that these 8341 nucleotide sequences may not all necessarily be for collagen genes, as some of the
+NCBI records found may be for other genes but contain the word 'collagen' somewhere in the NCBI record (for example, in
+the title of a cited paper).
+
 Contact
 -------
 
