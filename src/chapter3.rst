@@ -198,7 +198,7 @@ criteria, such as:
 -  All sequences from *Chlamydia trachomatis*
 -  Sequences submitted by Matthew Berriman
 -  Flagellin or fibrinogen sequences
--  The glutamine synthetase gene from *Mycobacteriuma leprase*
+-  The glutamine synthetase gene from *Mycobacteriuma leprae*
 -  The upstream control region of the *Mycobacterium leprae dnaA* gene
 -  The sequence of the *Mycobacterium leprae* DnaA protein
 -  The genome sequence of *Trypanosoma cruzi*
@@ -424,7 +424,7 @@ the NCBI Help website at
 `http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp <http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez%26part=EntrezHelp>`_.
 
 There is more information about the GOLD database in the paper
-describing GOLD by Lolios *et al*, which is available at
+describing GOLD by Liolios *et al*, which is available at
 `http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed <http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed>`_.
 
 Acknowledgements
@@ -456,9 +456,13 @@ Exercises
 Answer the following questions. For each question, please record
 your answer, and what you did/typed to get this answer.
 
-Q1. What information about the Bacteriophage lambda sequence (NCBI accession NC\_001416) can you obtain from its annotations in the NCBI Sequence Database? 
+Q1. What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_001477) can you obtain from its annotations in the NCBI Sequence Database? 
     What does it say in the DEFINITION and ORGANISM fields of its NCBI
     record?
+
+
+
+
 Q2. What were the nucleotide sequences published in *Proc Natl Acad Sci U S A* volume 103, page 6718? 
     What are their accession numbers in the NCBI Sequence Database?
 Q3. How many nucleotide sequences are there from the fungus *Aspergillus nidulans* in the NCBI Sequence Database? 
