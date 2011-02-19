@@ -13,7 +13,7 @@ data are three large databases: the NCBI database
 European Molecular Biology Laboratory (EMBL) database
 (`www.ebi.ac.uk/embl/ <http://www.ebi.ac.uk/embl/>`_, and the DNA
 Database of Japan (DDBJ) database
-(`www.ddbj.nig.ac.jp/ <http://www.ddbj.nig.ac.jp/>`_. These
+(`www.ddbj.nig.ac.jp/ <http://www.ddbj.nig.ac.jp/>`_). These
 databases collect all publicly available DNA, RNA and protein
 sequence data and make it available for free. They exchange data
 nightly, so contain essentially the same data.
@@ -434,6 +434,9 @@ Thank you to Noel O'Boyle for helping in using Sphinx, `http://sphinx.pocoo.org 
 this document, and github, `https://github.com/ <https://github.com/>`_, to store different versions of the document
 as I was writing it, and readthedocs, `http://readthedocs.org/ <http://readthedocs.org/>`_, to build and distribute
 this document.
+
+Thank you to Andrew Lloyd and David Lynn, who generously shared their practical on sequence databases 
+with me, which inspired many of the examples in this practical. 
 
 Contact
 -------
