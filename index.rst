@@ -16,13 +16,16 @@ There is a pdf version of this booklet available at
 Contents:
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 6
 
    src/installr.rst
    src/chapter0.rst
    src/chapter1.rst
    src/chapter1_answers.rst
    src/chapter2.rst
+   src/chapter2_answers.rst
+   src/chapter3.rst
+   src/chapter3_answers.rst
 
 Acknowledgements
 ----------------
