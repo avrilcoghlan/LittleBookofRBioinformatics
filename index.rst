@@ -10,8 +10,16 @@ This is a simple introduction to bioinformatics, with a focus on genome analysis
 To encourage research into neglected tropical diseases such as leprosy, Chagas disease, trachoma, schistosomiasis etc., 
 most of the examples in this booklet are for analysis of the genomes of the organisms that cause these diseases.
 
-There is a pdf version of this booklet available at
-`http://media.readthedocs.org/pdf/a-little-book-of-r-for-bioinformatics/latest/a-little-book-of-r-for-bioinformatics.pdf <http://media.readthedocs.org/pdf/a-little-book-of-r-for-bioinformatics/latest/a-little-book-of-r-for-bioinformatics.pdf>`_. 
+There is a pdf version of this booklet available at:
+`https://github.com/avrilcoghlan/LittleBookofRBioinformatics/raw/master/_build/latex/Bioinformatics.pdf <https://github.com/avrilcoghlan/LittleBookofRBioinformatics/raw/master/_build/latex/Bioinformatics.pdf>`_.
+
+If you like this booklet, you may also like to check out my booklet on using
+R for biomedical statistics, 
+`http://a-little-book-of-r-for-biomedical-statistics.readthedocs.org/
+<http://a-little-book-of-r-for-biomedical-statistics.readthedocs.org/>`_, and
+my booklet on using R for time series analysis,
+`http://a-little-book-of-r-for-time-series.readthedocs.org/
+<http://a-little-book-of-r-for-time-series.readthedocs.org/>`_.
 
 Contents:
 
