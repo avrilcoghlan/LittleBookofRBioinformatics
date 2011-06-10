@@ -24,7 +24,7 @@ my booklet on using R for time series analysis,
 Contents:
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 1 
 
    src/installr.rst
    src/chapter0.rst
