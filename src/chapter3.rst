@@ -262,13 +262,23 @@ classes of sequences (eg. draft genome sequence data from genome sequencing proj
 You can find more information about what each of these ACNUC databases contains by
 looking at the `ACNUC website <http://pbil.univ-lyon1.fr/search/releases.php>`_. 
 
+You can carry out complex queries using the "query()" function from
+the SeqinR library. If you look at the help page for the query() function (by
+typing "help(query)", you will see that it allows you to specify criteria that you
+require the sequences to fulfill. The "query()" function will then search for 
+sequences in the NCBI Sequence Database that match your criteria. 
+
 In the examples below, we will explain how to carry out searches of the NCBI database
 both by searching the ACNUC database via R, and by going directly to the NCBI website to carry out the search.
 
 Example: finding the sequences published in *Nature* **460**:352-358
 --------------------------------------------------------------------------------
 
-To do this, you need to go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_ and type in the search 
+.. rubric:: Method 1: searching via the NCBI website
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To find the sequences published in *Nature* **460**:352-358, one method is to 
+go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_ and type in the search 
 box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE]
 
 |image3|
@@ -302,8 +312,106 @@ Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing
 `schistosomiasis <http://apps.who.int/tdr/svc/diseases/schistosomiasis>`_, 
 which is classified by the WHO as a neglected tropical disease.
 
+.. rubric:: Method 2: searching via R
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To find the sequences published in *Nature* **460**:352-358, a second method is to use the SeqinR
+R package to search the ACNUC databases (which contain the NCBI sequence data) from R. 
+
+If you look at the help page the "query()" function, you see that you can query for sequences 
+published in a particular paper using R=refcode, specifying the reference as refcode 
+such as in jcode/volume/page (e.g., JMB/13/5432 or R=Nature/396/133). For the
+paper *Nature* **460**:352-358, we would need to use the refcode 'R=Nature/460/352'.
+
+As explained above, the ACNUC database contains the NCBI sequence data organised into several
+sub-databases, and you can view the list of those sub-databases by using the "choosebank()"
+function from the SeqinR package. When you want to use "query()" to carry out a particular 
+sub-database (eg. "genbank", which contains DNA and RNA sequences from the NCBI Sequence Database), you
+need to first specify the database that you want to search by using the "choosebank()" function,
+for example:
+
+::
+
+    > choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
+
+We can then search the 'genbank' database for sequences that match a specific set of criteria
+by using the "query()" function. For example, to search for sequences that were published in
+*Nature* **460**:352-358, we type:
+
+::
+
+    > query('naturepaper', 'R=Nature/460/352')
+
+The line above tells R that we want to store the results of the query in an R list variable called
+*naturepaper*. Remember that a list is an R object that is like a vector, but can contain elements
+that are numeric and/or contain characters. In this case, the list *naturepaper* contains information
+on the NCBI records that match the query (ie. information on the NCBI records that contain sequences
+published in Nature* **460**:352-358). 
+
+If you look at the help page for "query()", the details of the arguments are given under the heading "Arguments",
+and the details of the results (outputs) are given under the heading "Value". If you read this now, you
+will see that it tells us that the result of the "query()" function is a list with six different named
+elements, named "call", "name", "nelem", "typelist", "req", and "socket". The content of each of these
+six named elements is explained, for example, the "nelem" element contains the number of sequences
+that match the query, and the "req" element contains their accession numbers.
+
+In our example, the list object *naturepaper* is an output of the "query()" function, and
+so has each of these six named elements, as we can find out by using the "attributes()" function, 
+and looking at the named elements listed under the heading "$names":
+
+::
+
+    > attributes(naturepaper)
+      $names
+      [1] "call"     "name"     "nelem"    "typelist" "req"      "socket"  
+      $class
+      [1] "qaw"
+
+As explained in the `brief introduction to R <./installr.html#a-brief-introduction-to-r>`_, we can retrieve 
+the value for each of the named elements in the list *naturepaper* by using "$", followed by the element's name, 
+for example, to get the value of the element named "nelem" in the list *naturepaper*, we type:
+
+::
+
+    > naturepaper$nelem
+      [1] 19022
+
+This tells us that there were 19022 sequences in the 'genbank' ACNUC database that matched the query.
+The 'genbank' ACNUC database contains DNA or RNA sequences from the NCBI Nucleotide database. 
+Why don't we get the same number of sequences as found by carrying out the search on the NCBI website
+(where we found 50890 hits to the NCBI Nucleotide database)? The reason is that the ACNUC 'genbank'
+database does not contain all the sequences in the NCBI Nucleotide database, for example, it does
+not contain sequences that are in RefSeq or many short DNA sequences from sequencing projects.
+
+To obtain the accession numbers of the first five of the 19022 sequences, we can type:
+
+::
+
+    > accessions <- naturepaper$req
+    > accessions[1:5]
+      [[1]]
+           name     length      frame     ncbicg 
+      "FN357292"  "4179495"        "0"        "1" 
+      [[2]]
+           name     length      frame     ncbicg 
+      "FN357293"  "2211188"        "0"        "1" 
+      [[3]]
+           name     length      frame     ncbicg 
+      "FN357294"  "1818661"        "0"        "1" 
+      [[4]]
+           name     length      frame     ncbicg 
+      "FN357295"  "2218116"        "0"        "1" 
+      [[5]]
+           name     length      frame     ncbicg 
+      "FN357296"  "3831198"        "0"        "1" 
+
+This tells us that the NCBI accessions of the first five sequences (of the 19022
+DNA or RNA sequences found that were published in *Nature* **460**:352-358) are FN357292,
+FN357293, FN357294, FN357295, and FN357296. 
+
 Example: finding all human nucleotide sequences associated with malaria
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------------------------------
+
 Say for example that you want to find all high-quality 
 nucleotide sequences associated with malaria. Here were are not looking
 for sequences from the malaria organism itself, but sequences of human
@@ -384,13 +492,6 @@ This will give you a list of all human nucleotide sequences from
 RefSeq that are associated with malaria (or more precisely, all
 the human nucleotide sequences from Refseq for which the word 'malaria'
 appears somewhere in the NCBI record).
-
-Querying the NCBI Database via R
---------------------------------
-
-
-.. rubric:: Example: finding the sequences published in *Nature* **460**:352-358
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finding the genome sequence for a particular species
 ----------------------------------------------------
