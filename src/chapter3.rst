@@ -148,26 +148,24 @@ curated, is high quality sequence data, and is non-redundant; this means
 that each gene (or splice-form of a gene, in the case of eukaryotes),
 protein, or genome sequence is only represented once. 
 
-The data in RefSeq is of much higher quality than the rest of the NCBI Sequence
+The data in RefSeq is curated and is of much higher quality than the rest of the NCBI Sequence
 Database. However, unfortunately, because of the high level of
 manual curation required, RefSeq does not cover all species, and is
 not comprehensive for the species that are covered so far.
 
 You can easily tell that a sequence comes from RefSeq because its
 accession number starts with particular sequence of letters. That
-is, RefSeq sequences corresponding to protein records usually start with
-'NP\_', and RefSeq curated complete genome sequences usually start with
+is, accessions of RefSeq sequences corresponding to protein records usually start with
+'NP\_', and accessions of RefSeq curated complete genome sequences usually start with
 'NC\_' or 'NS\_'.
 
-Querying the NCBI Database
---------------------------
+Querying the NCBI Database via the NCBI Website
+-----------------------------------------------
 
-As a bioinformatician you may need to interrogate the NCBI Database
+You may need to interrogate the NCBI Database
 to find particular sequences or a set of sequences matching given
 criteria, such as:
-
-
--  All human nucleotide sequences associated with malaria     
+  
 -  The sequence published in *Nature* **460**:352-358
 -  All sequences from *Chlamydia trachomatis*
 -  Sequences submitted by Matthew Berriman
@@ -176,10 +174,80 @@ criteria, such as:
 -  The upstream control region of the *Mycobacterium leprae dnaA* gene
 -  The sequence of the *Mycobacterium leprae* DnaA protein
 -  The genome sequence of *Trypanosoma cruzi*
+-  All human nucleotide sequences associated with malaria
 
+To do this, you can carry out searches on the 
+`NCBI website <http://www.ncbi.nlm.nih.gov>`_. 
+
+In order to narrow down your searches to specific types of sequences
+or to specific organisms, it is useful to use "search tags" to search
+specific subsets of the NCBI Sequence Database.
+
+For example, the search tags "[PROP]" and "[ORGN]" 
+let you restrict your search to a specific subset of the
+NCBI Sequence Database, or to sequences from a particular taxon,
+respectively. We will explain how to use these search tags below.
+
+Other useful NCBI search tags are:
+
+-  "[JOUR]": to restrict your search to sequences described in a
+   paper published in a particular journal
+-  "[VOL]": to restrict your search to sequences described in a
+   paper published in a particular volume of a journal
+-  "[PAGE]": to restrict your search to sequences described in a
+   paper with a particular start-page in a journal
+-  "[AU]": to restrict your search to sequences submitted to the
+   NCBI Database by a particular person, or described in a journal
+   paper by a particular person. The person's name should be in the
+   form: surname first-initial (eg. Bloggs J[AU])
+-  "[ORGN]": to restrict your search to sequences from a particular
+   species or taxon (eg. *Mycobacterium leprae* or *Mycobacterium* or Bacteria or
+   Archaea)
+-  "[PROP]": to restrict your search to a particular subset of the
+   NCBI database (eg. "srcdb\_refseq[PROP]" restricts your search to
+   RefSeq) or to a particular type of molecule (eg. "biomol
+   mrna[PROP]" restrict your search to mRNA sequences).
+
+.. rubric:: Example: finding the sequence published in *Nature* **460**:352-358
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To do this, you need to go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_ and type in the search 
+box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE]
+
+|image3|
+
+Here [JOUR] specifies the journal name, [VOL] the volume of the journal the paper is in, and [PAGE] the page number.
+
+This should bring up a results page with "50890" beside the word "Nucleotide", and "1" beside the word
+"Genome", and "25701" beside the word "Protein", indicating that there were 50890 hits to sequence records in the Nucleotide database, 
+which contains DNA and RNA sequences, and 1 hit to the Genome database, which contains genome sequences, and 25701
+hits to the Protein database, which contains protein sequences:
+
+|image4|
+
+If you click on the word "Nucleotide", it will bring up a webpage with a list of links to the NCBI sequence 
+records for those 50890 hits. The 50890 hits are all contigs from the schistosome worm *Schistosoma mansoni*.
+
+Likewise, if you click on the word "Protein", it will bring up a webpage with a list of links to the NCBI
+sequence records for the 25701 hits, and you will see that the hits are all predicted proteins for *Schistosoma
+mansoni*.
+
+If you click on the word "Genome", it will bring you to the NCBI record for the *Schistosoma mansoni* genome
+sequence, which has NCBI accession NS\_00200. Note that the accession starts with "NS\_", which indicates that
+it is a RefSeq accession. 
+
+Therefore, in *Nature* volume 460, page 352, the *Schistosoma mansoni* genome sequence was published, along
+with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins
+for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
+at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
+
+Example: finding all human nucleotide sequences associated with malaria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Say for example that you want to find all high-quality 
-nucleotide sequences associated with malaria. Firstly, to find
-all nucleotide sequences associated with malaria, follow these
+nucleotide sequences associated with malaria. Here were are not looking
+for sequences from the malaria organism itself, but sequences of human
+genes and human proteins that somehow interact with or respond to the malaria organism.
+
+To find all nucleotide sequences associated with malaria, follow these
 steps:
 
 #. Go to the NCBI website
@@ -254,29 +322,6 @@ This will give you a list of all human nucleotide sequences from
 RefSeq that are associated with malaria (or more precisely, all
 the human nucleotide sequences from Refseq for which the word 'malaria'
 appears somewhere in the NCBI record).
-
-In the searches above you used the "[PROP]" and "[ORGN]" NCBI
-sequence tags to retrict your search to a specific subset of the
-NCBI Sequence Database, or to sequences from a particular taxon,
-respectively. Other useful NCBI sequence tags are:
-
--  "[JOUR]": to restrict your search to sequences described in a
-   paper published in a particular journal
--  "[VOL]": to restrict your search to sequences described in a
-   paper published in a particular volume of a journal
--  "[PAGE]": to restrict your search to sequences described in a
-   paper with a particular start-page in a journal
--  "[AU]": to restrict your search to sequences submitted to the
-   NCBI Database by a particular person, or described in a journal
-   paper by a particular person. The person's name should be in the
-   form: surname first-initial (eg. Bloggs J[AU])
--  "[ORGN]": to restrict your search to sequences from a particular
-   species or taxon (eg. *Mycobacterium leprae* or *Mycobacterium* or Bacteria or
-   Archaea)
--  "[PROP]": to restrict your search to a particular subset of the
-   NCBI database (eg. "srcdb\_refseq[PROP]" restricts your search to
-   RefSeq) or to a particular type of molecule (eg. "biomol
-   mrna[PROP]" restrict your search to mRNA sequences).
 
 Finding the genome sequence for a particular species
 ----------------------------------------------------
@@ -484,5 +529,5 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
-
-
+.. |image3| image:: ../_static/P3_image3.png
+.. |image4| image:: ../_static/P3_image4.png
