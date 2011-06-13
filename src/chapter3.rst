@@ -708,8 +708,8 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
-            :width: 600
+            :width: 550
 .. |image3| image:: ../_static/P3_image3.png
-            :width: 600
+            :width: 650
 .. |image4| image:: ../_static/P3_image4.png
-            :width: 900
+            :width: 650
