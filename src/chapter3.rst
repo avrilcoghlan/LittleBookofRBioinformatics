@@ -183,12 +183,12 @@ sets of sequences. The first possibility is to carry out searches on the
 `NCBI website <http://www.ncbi.nlm.nih.gov>`_.
 The second possiblity is to carry out searches from R. 
 
-In the examples below, we will show how to use both methods to carry out
+Below, we will explain how to use both methods to carry out
 queries on the NCBI database. In general, the two methods should give the
 same result, but in some cases they do not, for various reasons, as shall be explained below.
 
-Querying via the NCBI Website
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Querying the NCBI Database via the NCBI Website
+-----------------------------------------------
 
 If you are carrying out searches on the `NCBI website <http://www.ncbi.nlm.nih.gov>`_, 
 to narrow down your searches to specific types of sequences or to specific organisms, 
@@ -197,30 +197,123 @@ you will need to use "search tags".
 For example, the search tags "[PROP]" and "[ORGN]" 
 let you restrict your search to a specific subset of the
 NCBI Sequence Database, or to sequences from a particular taxon,
-respectively. We will explain how to use these search tags below.
+respectively. Here is a list of useful search tags, which we will explain how to use
+below:
 
-Other useful NCBI search tags, which shall be illustrated in examples below, are:
++------------+---------------------+------------------------------------------------------------------------+
+| Search tag | Example             | Restricts your search to sequences:                                    |  
++============+=====================+========================================================================+
+| "[AC]"     | "NC_001374[AC]"     | With a particular accession number                                     |
++------------+---------------------+------------------------------------------------------------------------+
+| "[ORGN]"   | "Fungi[ORGN]"       | From a particular organism or taxon                                    |
++------------+---------------------+------------------------------------------------------------------------+
+| "[PROP]"   | "biomol_mRNA[PROP]" | Of a specific type (eg. mRNA) or from a specific database (eg. RefSeq) |   
++------------+---------------------+------------------------------------------------------------------------+
+| "[JOUR]"   | "Nature[JOUR]"      | Described in a paper published in a particular journal                 |
++------------+---------------------+------------------------------------------------------------------------+
+| "[VOL]"    | "531[VOL]"          | Described in a paper published in a particular journal volume          |
++------------+---------------------+------------------------------------------------------------------------+
+| "[PAGE]"   | "27[PAGE]"          | Described in a paper with a particular start-page in a journal         | 
++------------+---------------------+------------------------------------------------------------------------+
+| "[AU]"     | "Smith J[AU]"       | Described in a paper, or submitted to NCBI, by a particular author     |
++------------+---------------------+------------------------------------------------------------------------+
 
--  "[JOUR]": to restrict your search to sequences described in a
-   paper published in a particular journal
--  "[VOL]": to restrict your search to sequences described in a
-   paper published in a particular volume of a journal
--  "[PAGE]": to restrict your search to sequences described in a
-   paper with a particular start-page in a journal
--  "[AU]": to restrict your search to sequences submitted to the
-   NCBI Database by a particular person, or described in a journal
-   paper by a particular person. The person's name should be in the
-   form: surname first-initial (eg. Bloggs J[AU])
--  "[ORGN]": to restrict your search to sequences from a particular
-   species or taxon (eg. *Mycobacterium leprae* or *Mycobacterium* or Bacteria or
-   Archaea)
+To carry out searches of the NCBI database, you first need to go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_,
+and type your search query into the search box at the top. For example, to search for all sequences
+from Fungi, you would type "Fungi[ORGN]" into the search box on the NCBI website. 
+
+You can combine the search terms above by using "AND", to make more complex searches. For example, to
+find all mRNA sequences from Fungi, you could type "Fungi[ORGN] AND biomol_mRNA[PROP]" in the search
+box on the NCBI website. 
+
+explain "OR" xxx
+
+Here are some examples of searches, some of them made by combining search terms using "AND":
+
+xxx need to put in number of sequences found, also which database was searched
+
++-------------------------------------------+------------------------------------------------------------------------+
+| Typed in the search box                   | Searches for sequences:                                                |  
++===========================================+========================================================================+
+| "NC_001374[AC]"                           | With accession number NC_001374                                        |
++-------------------------------------------+------------------------------------------------------------------------+
+| "Nature[JOUR] AND 460[VOL] AND 352[PAGE]" | Published in *Nature* **460**:352-358                                  |
++-------------------------------------------+------------------------------------------------------------------------+
+| "Chlamydia trachomatis[ORGN]"             | From the bacterium *Chlamydia trachomatis*                             |
++-------------------------------------------+------------------------------------------------------------------------+
+| "Berriman M"[AU]                          | Published in a paper, or submitted to NCBI, by M. Berriman             |
++-------------------------------------------+------------------------------------------------------------------------+
+| "Flagellin OR fibrinogen"                 | Which contain the word 'flagellin' or 'fibriogen' in their NCBI record |
++------------+------------------------------+------------------------------------------------------------------------+
+| "[PAGE]"   | "27[PAGE]"          | Described in a paper with a particular start-page in a journal         | 
++------------+---------------------+------------------------------------------------------------------------+
+| "[AU]"     | "Smith J[AU]"       | Described in a paper, or submitted to NCBI, by a particular author     |
++------------+---------------------+------------------------------------------------------------------------+
+
+xxx did I use the word record or entry for NCBI records?
+
+rec
+-  Flagellin or fibrinogen sequences
+-  The glutamine synthetase gene from *Mycobacteriuma leprae*
+-  The upstream control region of the *Mycobacterium leprae dnaA* gene
+-  The sequence of the *Mycobacterium leprae* DnaA protein
+-  The genome sequence of *Trypanosoma cruzi*
+-  All human nucleotide sequences associated with malaria
+
+Example: finding the sequences published in *Nature* **460**:352-358
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^             
+
+For example, if you want to find sequences
+published in *Nature* **460**:352-358, you can use the "[JOUR]", "[VOL]" and "[PAGE]" search terms. That is, you would
+go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_ and type in the search 
+box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE], where [JOUR] specifies the journal name, 
+[VOL] the volume of the journal the paper is in, and [PAGE] the page number.
+
+|image3|
+
+This should bring up a results page with "50890" beside the word "Nucleotide", and "1" beside the word
+"Genome", and "25701" beside the word "Protein", indicating that there were 50890 hits to sequence records in the Nucleotide database, 
+which contains DNA and RNA sequences, and 1 hit to the Genome database, which contains genome sequences, and 25701
+hits to the Protein database, which contains protein sequences:
+
+|image4|
+
+If you click on the word "Nucleotide", it will bring up a webpage with a list of links to the NCBI sequence 
+records for those 50890 hits. The 50890 hits are all contigs from the schistosome worm *Schistosoma mansoni*.
+
+Likewise, if you click on the word "Protein", it will bring up a webpage with a list of links to the NCBI
+sequence records for the 25701 hits, and you will see that the hits are all predicted proteins for *Schistosoma
+mansoni*.
+
+If you click on the word "Genome", it will bring you to the NCBI record for the *Schistosoma mansoni* genome
+sequence, which has NCBI accession NS\_00200. Note that the accession starts with "NS\_", which indicates that
+it is a RefSeq accession. 
+
+Therefore, in *Nature* volume 460, page 352, the *Schistosoma mansoni* genome sequence was published, along
+with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins
+for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
+at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
+
+Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing 
+`schistosomiasis <http://apps.who.int/tdr/svc/diseases/schistosomiasis>`_, 
+which is classified by the WHO as a neglected tropical disease.
+
+
+
+
+
+
+
+
+
+
 -  "[PROP]": to restrict your search to a particular subset of the
    NCBI database (eg. "srcdb\_refseq[PROP]" restricts your search to
    RefSeq) or to a particular type of molecule (eg. "biomol
    mrna[PROP]" restrict your search to mRNA sequences).
 
-Querying via R
-^^^^^^^^^^^^^^
+Querying the NCBI Database via R
+--------------------------------
 
 Instead of carrying out searches of the NCBI database on the NCBI website, you can
 carry out searches directly from R by using the SeqinR R package.
