@@ -125,24 +125,25 @@ RefSeq
 
 When carrying out searches of the NCBI database, it is important to
 bear in mind that the database may contain redundant sequences for
-the same gene that were sequenced by different laboratories. Some
-of these sequences may be better quality than others.
+the same gene that were sequenced by different laboratories (because many different labs have sequenced
+the gene, and submitted their sequences to the NCBI database).
 
 There are also many different types of nucleotide sequences and
 protein sequences in the NCBI database. With respect to nucleotide
 sequences, some many be entire genomic DNA sequences, some may be
 mRNAs, and some may be lower quality sequences such as expressed
 sequence tags (ESTs, which are derived from parts of mRNAs), or DNA
-sequences of contigs from genome projects. Furthermore, some
-sequences may be manually curated so that the associated entries
+sequences of contigs from genome projects. 
+
+Furthermore, some sequences may be manually curated so that the associated entries
 contain extra information, but the majority of sequences are
 uncurated.
 
 As mentioned above, the NCBI database often contains redundant
-information for a gene (because many different labs have sequenced
-the gene, and submitted their sequences to the NCBI database), some
-of which may be low quality. As a result, NCBI has made a special
-database called RefSeq (reference sequence database), which is a
+information for a gene, contains sequences of varying quality, and contains
+both uncurated and curated data. 
+
+As a result, NCBI has made a special database called RefSeq (reference sequence database), which is a
 subset of the NCBI database. The data in RefSeq is manually
 curated, is high quality sequence data, and is non-redundant; this means
 that each gene (or splice-form of a gene, in the case of eukaryotes),
