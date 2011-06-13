@@ -167,6 +167,7 @@ You may need to interrogate the NCBI Database
 to find particular sequences or a set of sequences matching given
 criteria, such as:
   
+-  The sequence with accession NC\_001477
 -  The sequences published in *Nature* **460**:352-358
 -  All sequences from *Chlamydia trachomatis*
 -  Sequences submitted by Matthew Berriman
@@ -255,11 +256,11 @@ can use the "choosebank()" function from SeqinR:
 
 Two of the most important sub-databases in ACNUC which can be searched from R are:
 
-- "genbank": this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
-  classes of sequences (eg. draft genome sequence data from genome sequencing projects)
-- "refseq": this contains DNA and RNA sequences from `Refseq <./chapter3.html#refseq>`_, 
-  the curated part of the NCBI Sequence Database
-- "refseqViruses": this contains DNA, RNA and proteins sequences from viruses from RefSeq 
+-  "genbank": this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
+   classes of sequences (eg. draft genome sequence data from genome sequencing projects)
+-  "refseq": this contains DNA and RNA sequences from `Refseq <./chapter3.html#refseq>`_, 
+   the curated part of the NCBI Sequence Database
+-  "refseqViruses": this contains DNA, RNA and proteins sequences from viruses from RefSeq 
 
 You can find more information about what each of these ACNUC databases contains by
 looking at the `ACNUC website <http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html>`_. 
