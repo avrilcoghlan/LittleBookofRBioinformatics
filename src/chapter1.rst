@@ -1,5 +1,5 @@
-DNA Sequence Statistics
-=======================
+DNA Sequence Statistics (1)
+===========================
 
 Using R for Bioinformatics 
 --------------------------
@@ -105,8 +105,8 @@ sequence will be present in all three databases, but it will
 have different accessions in each database, as they each use their
 own numbering systems for referring to their own sequence records.
 
-Retrieving genome sequence data from NCBI
------------------------------------------
+Retrieving genome sequence data via the NCBI website
+----------------------------------------------------
 
 You can easily retrieve DNA or protein sequence data from the NCBI
 Sequence Database via its website
@@ -154,10 +154,7 @@ right of the NC\_001477 sequence record webpage, and then choose
 "File" in the pop-up menu that appears, and then choose FASTA
 from the "Format" menu that appears, and click on "Create file".
 
-click on the "Download"
-link at the top right of the NC\_001477 sequence record webpage,
-and choose "FASTA" from the list that appears. A box will pop up
-asking you what to name the file. You should give it a sensible
+A box will pop up asking you what to name the file, and where to save it. You should give it a sensible
 name (eg. "den1.fasta") and save it in a place where you will
 remember (eg. in the "My Documents" folder is a good idea):
 
@@ -178,8 +175,97 @@ should now be displayed in WordPad:
 
 |image5|
 
-Reading genome sequence data into SeqinR
-----------------------------------------
+Retrieving genome sequence data using SeqinR
+--------------------------------------------
+
+Instead of going to the NCBI website to retrieve sequence data from the NCBI database, you
+can retrieve sequence data from NCBI directly from R, by using the SeqinR R package.
+
+For example, you learnt above how to retrieve the DEN-1 Dengue virus genome sequence,
+which has NCBI accession NC\_001477, from the NCBI website. To retrieve a sequence with
+a particular NCBI accession, you can use R function "getncbiseq()" below, which you will
+first need to copy and paste into R:
+
+::
+
+    > getncbiseq <- function(accession)
+      {
+         library("seqinr") # load the SeqinR R package
+         # first find which ACNUC database the accession is stored in:
+         dbs <- c("genbank","refseq","refseqViruses")
+         numdbs <- length(dbs)
+         for (i in 1:numdbs)
+         {
+            db <- dbs[i]
+            choosebank(db)
+            # check if the sequence is in ACNUC database 'db':
+            resquery <- try(query(".tmpquery", paste("AC=", accession)), silent = TRUE)
+            if (!(inherits(resquery, "try-error")))
+            {
+               queryname <- "query2"
+               thequery <- paste("AC=",accession,sep="")
+               query(`queryname`,`thequery`)
+               # see if a sequence was retrieved:
+               seq <- getSequence(query2$req[[1]])
+               closebank()
+               return(seq)
+            }
+         }
+         print(paste("ERROR: accession",accession,"was not found"))
+      }
+
+Once you have copied and pasted the function getncbiseq() into R, you can use it to retrieve
+a sequence from the NCBI Nucleotide database, such as the sequence for the DEN-1 Dengue virus
+(accession NC\_001477):
+
+::
+
+    > dengueseq <- getncbiseq("NC_001477")
+
+The variable *dengueseq* is a vector containing the nucleotide
+sequence. Each element of the vector contains one nucleotide of the
+sequence. Therefore, to print out a certain subsequence of the
+sequence, we just need to type the name of the vector *dengueseq*
+followed by the square brackets containing the indices for those
+nucleotides. For example, the following command prints out the
+first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
+
+::
+
+    > dengueseq[1:50]
+    [1] "a" "g" "t" "t" "g" "t" "t" "a" "g" "t" "c" "t" "a" "c" "g" "t" "g" "g" "a"
+    [20] "c" "c" "g" "a" "c" "a" "a" "g" "a" "a" "c" "a" "g" "t" "t" "t" "c" "g" "a"
+    [39] "a" "t" "c" "g" "g" "a" "a" "g" "c" "t" "t" "g"
+     
+Note that *dengueseq[1:50]* refers to the elements of the vector
+*dengueseq* with indices from 1-50. These elements contain the
+first 50 nucleotides of the DEN-1 Dengue virus sequence.
+
+Writing sequence data out as a FASTA file
+-----------------------------------------
+
+If you have retrieved a sequence from the NCBI database using the 
+"getncbiseq()" function, you may want to save the sequence to a FASTA-format
+file on your computer, in case you need the sequence for further analyses (either
+in R or in other software).
+
+You can write out a sequence to a FASTA-format file in R by using the "write.fasta()"
+function from the SeqinR R package. The write.fasta() function requires that you tell
+it the name of the output file using the "file.out" argument (input). You also need
+to specify the R variable that contains the sequence using the "sequences" argument,
+and the name that you want to give to the sequence using the "names" argument.
+
+For example, if you have stored the DEN-1 Dengue virus sequence in a vector *dengueseq*,
+to write out the sequence to a FASTA-format file called "den1.fasta" that contains
+the sequence labelled as "DEN-1", you can type:
+
+::
+
+    > write.fasta(names="DEN-1", sequences=dengueseq, file.out="den1.fasta")
+
+
+Reading sequence data into R
+----------------------------
 
 Using the SeqinR package in R, you can easily read a DNA sequence
 from a FASTA file into R. For example, we described above how to
@@ -215,24 +301,8 @@ variable *dengueseq* by typing:
 
     > dengueseq <- dengue[[1]]
 
-The variable *dengueseq* is a vector containing the nucleotide
-sequence. Each element of the vector contains one nucleotide of the
-sequence. Therefore, to print out a certain subsequence of the
-sequence, we just need to type the name of the vector *dengueseq*
-followed by the square brackets containing the indices for those
-nucleotides. For example, the following command prints out the
-first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
-
-::
-
-    > dengueseq[1:50]
-    [1] "a" "g" "t" "t" "g" "t" "t" "a" "g" "t" "c" "t" "a" "c" "g" "t" "g" "g" "a"
-    [20] "c" "c" "g" "a" "c" "a" "a" "g" "a" "a" "c" "a" "g" "t" "t" "t" "c" "g" "a"
-    [39] "a" "t" "c" "g" "g" "a" "a" "g" "c" "t" "t" "g"
-     
-Note that *dengueseq[1:50]* refers to the elements of the vector
-*dengueseq* with indices from 1-50. These elements contain the
-first 50 nucleotides of the DEN-1 Dengue virus sequence.
+Now the variable *dengueseq* is a vector containing the nucleotide
+sequence.
 
 Length of a DNA sequence
 ------------------------
