@@ -159,14 +159,14 @@ is, accessions of RefSeq sequences corresponding to protein records usually star
 'NP\_', and accessions of RefSeq curated complete genome sequences usually start with
 'NC\_' or 'NS\_'.
 
-Querying the NCBI Database via the NCBI Website
------------------------------------------------
+Querying the NCBI Database
+--------------------------
 
 You may need to interrogate the NCBI Database
 to find particular sequences or a set of sequences matching given
 criteria, such as:
   
--  The sequence published in *Nature* **460**:352-358
+-  The sequences published in *Nature* **460**:352-358
 -  All sequences from *Chlamydia trachomatis*
 -  Sequences submitted by Matthew Berriman
 -  Flagellin or fibrinogen sequences
@@ -176,19 +176,28 @@ criteria, such as:
 -  The genome sequence of *Trypanosoma cruzi*
 -  All human nucleotide sequences associated with malaria
 
-To do this, you can carry out searches on the 
-`NCBI website <http://www.ncbi.nlm.nih.gov>`_. 
+There are two main ways that you can query the NCBI database to find these
+sets of sequences. The first possibility is to carry out searches on the 
+`NCBI website <http://www.ncbi.nlm.nih.gov>`_.
+The second possiblity is to carry out searches from R. 
 
-In order to narrow down your searches to specific types of sequences
-or to specific organisms, it is useful to use "search tags" to search
-specific subsets of the NCBI Sequence Database.
+In the examples below, we will show how to use both methods to carry out
+queries on the NCBI database. In general, the two methods should give the
+same result, but in some cases they do not, for various reasons, as shall be explained below.
+
+Querying the NCBI Database via the NCBI Website
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you are carrying out searches on the `NCBI website <http://www.ncbi.nlm.nih.gov>`_, 
+to narrow down your searches to specific types of sequences or to specific organisms, 
+you will need to use "search tags".
 
 For example, the search tags "[PROP]" and "[ORGN]" 
 let you restrict your search to a specific subset of the
 NCBI Sequence Database, or to sequences from a particular taxon,
 respectively. We will explain how to use these search tags below.
 
-Other useful NCBI search tags are:
+Other useful NCBI search tags, which shall be illustrated in examples below, are:
 
 -  "[JOUR]": to restrict your search to sequences described in a
    paper published in a particular journal
@@ -208,8 +217,57 @@ Other useful NCBI search tags are:
    RefSeq) or to a particular type of molecule (eg. "biomol
    mrna[PROP]" restrict your search to mRNA sequences).
 
-.. rubric:: Example: finding the sequence published in *Nature* **460**:352-358
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ Querying the NCBI Database via R
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Instead of carrying out searches of the NCBI database on the NCBI website, you can
+carry out searches directly from R by using the SeqinR R package.
+
+It is possible to use the SeqinR R library to retrieve sequences from these databases.
+The SeqinR library was written by the group that created the ACNUC database in Lyon, France
+(http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html).
+The ACNUC database is a database that contains most of the data from the NCBI Sequence Database,
+as well as data from other sequence databases such as UniProt and Ensembl. 
+
+An advantage of the ACNUC database is that it brings together data from various different sources, and makes
+it easy to search, for example, by using the SeqinR R library.
+
+As will be explained below, the ACNUC database is organised into various different ACNUC (sub)-databases,
+which contain different parts of the NCBI database, and when you want to search the NCBI database
+via R, you will need to specify which ACNUC sub-database the NCBI data that you want to query is stored in.
+
+To obtain a full list of the ACNUC sub-databases that you can access using SeqinR, you
+can use the "choosebank()" function from SeqinR:
+
+::
+
+    > library("seqinr") # Load the SeqinR R package
+    > choosebank()      # List all the sub-databases in ACNUC
+      [1] "genbank"       "embl"          "emblwgs"       "swissprot"    
+      [5] "ensembl"       "hogenom"       "hogenomdna"    "hovergendna"  
+      [9] "hovergen"      "hogenom4"      "hogenom4dna"   "homolens"     
+      [13] "homolensdna"   "hobacnucl"     "hobacprot"     "phever2"      
+      [17] "phever2dna"    "refseq"        "nrsub"         "greviews"     
+      [21] "bacterial"     "protozoan"     "ensbacteria"   "ensprotists"  
+      [25] "ensfungi"      "ensmetazoa"    "ensplants"     "mito"         
+      [29] "polymorphix"   "emglib"        "taxobacgen"    "refseqViruses"
+
+Two of the most important sub-databases in ACNUC which can be searched from R are:
+
+- genbank: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
+classes of sequences (eg. draft genome sequence data from genome sequencing projects)
+- refseq: this contains DNA and RNA sequences from `Refseq <./chapter3.html#refseq>`_, the curated part of the NCBI Sequence Database
+- refseqViruses: this contains DNA, RNA and proteins sequences from viruses from RefSeq 
+
+You can find more information about what each of these ACNUC databases contains by
+looking at the `ACNUC website <http://pbil.univ-lyon1.fr/search/releases.php>`_. 
+
+In the examples below, we will explain how to carry out searches of the NCBI database
+both by searching the ACNUC database via R, and by going directly to the NCBI website to carry out the search.
+
+Example: finding the sequences published in *Nature* **460**:352-358
+--------------------------------------------------------------------------------
+
 To do this, you need to go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_ and type in the search 
 box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE]
 
@@ -239,6 +297,10 @@ Therefore, in *Nature* volume 460, page 352, the *Schistosoma mansoni* genome se
 with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins
 for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
 at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
+
+Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing 
+`schistosomiasis <http://apps.who.int/tdr/svc/diseases/schistosomiasis>`_, 
+which is classified by the WHO as a neglected tropical disease.
 
 Example: finding all human nucleotide sequences associated with malaria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -322,6 +384,13 @@ This will give you a list of all human nucleotide sequences from
 RefSeq that are associated with malaria (or more precisely, all
 the human nucleotide sequences from Refseq for which the word 'malaria'
 appears somewhere in the NCBI record).
+
+Querying the NCBI Database via R
+--------------------------------
+
+
+.. rubric:: Example: finding the sequences published in *Nature* **460**:352-358
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finding the genome sequence for a particular species
 ----------------------------------------------------
@@ -529,5 +598,8 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
+            :width: 500
 .. |image3| image:: ../_static/P3_image3.png
+            :width: 500
 .. |image4| image:: ../_static/P3_image4.png
+            :width: 500
