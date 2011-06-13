@@ -270,7 +270,9 @@ Reading sequence data into R
 Using the SeqinR package in R, you can easily read a DNA sequence
 from a FASTA file into R. For example, we described above how to
 retrieve the DEN-1 Dengue virus genome sequence from the NCBI
-database and save it in a FASTA format file (eg. "den1.fasta").
+database, or from R using the getncbiseq() function, and save it in a 
+FASTA format file (eg. "den1.fasta").
+
 You can read this FASTA format file into R using the read.fasta()
 function from the SeqinR R package:
 
@@ -289,8 +291,8 @@ den1.fasta into an R object called *dengue*. The variable
 *dengue* is an R list object. As explained above, a list is an R
 object that is like a vector, but can contain elements that are
 numeric and/or contain characters. In this case, the list *dengue*
-contains information from the FASTA file that you have read in (ie.
-the NCBI accession for the dengue sequence, and the DNA sequence
+contains information from the FASTA file that you have read in (ie.  
+the name given to the dengue sequence in the FASTA file, and the DNA sequence
 itself). In fact, the first element of the list object *dengue*
 contains the the DNA sequence. As described above, we can access
 the elements of an R list object using double square brackets.
@@ -311,7 +313,7 @@ Once you have retrieved a DNA sequence, we can obtain some simple
 statistics to describe that sequence, such as the sequence's total
 length in nucleotides. In the above example, we retrieved the
 DEN-1 Dengue virus genome sequence, and stored it in the vector
-variable *dengueseq* To subsequently obtain the length of the
+variable *dengueseq*. To subsequently obtain the length of the
 genome sequence, we would use the length() function, typing:
 
 ::
@@ -541,7 +543,7 @@ question, please record your answer, and what you typed into R to
 get this answer.
 
 Model answers to the exercises are given in the chapter entitled
-`Answers to the exercises on DNA Sequence Statistics <./chapter1_answers.html>`_.
+`Answers to the exercises on DNA Sequence Statistics (1) <./chapter1_answers.html>`_.
 
 Q1. What are the last twenty nucleotides of the Dengue virus genome sequence?
 
