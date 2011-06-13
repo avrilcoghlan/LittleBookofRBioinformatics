@@ -56,8 +56,6 @@ the sequence (accession NC_\002677) by typing in R:
 Now we have the *Mycobacterium leprae* TN genome sequence stored in the vector *lepraseq* in R.
 We can get the length of the sequence by getting the length of the vector: 
 
-xxxyyyzzz
-
 ::
 
     > length(lepraeseq)

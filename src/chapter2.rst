@@ -209,8 +209,12 @@ Reading sequence data with SeqinR
 In the
 `previous chapter <./chapter1.html>`_ 
 you learnt how to use to search for and download the sequence data
-for a given NCBI accession from the NCBI Sequence Database. For
-example, you could have downloaded the sequence data for a the
+for a given NCBI accession from the NCBI Sequence Database, 
+either
+`via the NCBI website <./chapter1.html#retrieving-genome-sequence-data-via-the-ncbi-website>`_
+or `using the getncbiseq() function in R <./chapter1.html#retrieving-genome-sequence-data-using-seqinr>`_.
+
+For example, you could have downloaded the sequence data for a the
 DEN-1 Dengue virus sequence (NCBI accession NC\_001477),
 and stored it on a file on your computer (eg. "den1.fasta").
 
@@ -247,7 +251,7 @@ DEN-1 Dengue virus genome, we can type:
 Local variation in GC content
 -----------------------------
 
-In the `previous chapter <./chapter1.html>`_, 
+In the `previous chapter <./chapter1.html#gc-content-of-dna>`_, 
 you learnt that to find out the GC
 content of a genome sequence (percentage of nucleotides in a genome
 sequence that are Gs or Cs), you can use the GC() function in the
@@ -481,7 +485,7 @@ nucleotides, respectively:
 Over-represented and under-represented DNA words
 ------------------------------------------------
 
-In the previous chapter, you learnt that the count() function in
+In the `previous chapter <./chapter1.html#dna-words>`_, you learnt that the count() function in
 the SeqinR R package can calculate the frequency of all DNA words
 of a certain length in a DNA sequence. For example, if you want to
 know the frequency of all DNA words that are 2 nucleotides long in
