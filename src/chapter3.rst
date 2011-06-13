@@ -185,8 +185,8 @@ In the examples below, we will show how to use both methods to carry out
 queries on the NCBI database. In general, the two methods should give the
 same result, but in some cases they do not, for various reasons, as shall be explained below.
 
-Querying the NCBI Database via the NCBI Website
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Querying via the NCBI Website
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you are carrying out searches on the `NCBI website <http://www.ncbi.nlm.nih.gov>`_, 
 to narrow down your searches to specific types of sequences or to specific organisms, 
@@ -217,8 +217,8 @@ Other useful NCBI search tags, which shall be illustrated in examples below, are
    RefSeq) or to a particular type of molecule (eg. "biomol
    mrna[PROP]" restrict your search to mRNA sequences).
 
- Querying the NCBI Database via R
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Querying via R
+^^^^^^^^^^^^^^
 
 Instead of carrying out searches of the NCBI database on the NCBI website, you can
 carry out searches directly from R by using the SeqinR R package.
@@ -265,7 +265,10 @@ looking at the `ACNUC website <http://pbil.univ-lyon1.fr/search/releases.php>`_.
 You can carry out complex queries using the "query()" function from
 the SeqinR library. If you look at the help page for the query() function (by
 typing "help(query)", you will see that it allows you to specify criteria that you
-require the sequences to fulfill. The "query()" function will then search for 
+require the sequences to fulfill. 
+
+For example, to search for a sequence with a particular NCBI accession, you can use the "AC=" argument in "query()".
+The "query()" function will then search for 
 sequences in the NCBI Sequence Database that match your criteria. 
 
 In the examples below, we will explain how to carry out searches of the NCBI database
