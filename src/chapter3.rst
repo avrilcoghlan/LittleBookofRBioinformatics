@@ -254,13 +254,14 @@ can use the "choosebank()" function from SeqinR:
 
 Two of the most important sub-databases in ACNUC which can be searched from R are:
 
-- genbank: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
-classes of sequences (eg. draft genome sequence data from genome sequencing projects)
-- refseq: this contains DNA and RNA sequences from `Refseq <./chapter3.html#refseq>`_, the curated part of the NCBI Sequence Database
-- refseqViruses: this contains DNA, RNA and proteins sequences from viruses from RefSeq 
+- "genbank": this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
+  classes of sequences (eg. draft genome sequence data from genome sequencing projects)
+- "refseq": this contains DNA and RNA sequences from `Refseq <./chapter3.html#refseq>`_, 
+  the curated part of the NCBI Sequence Database
+- "refseqViruses": this contains DNA, RNA and proteins sequences from viruses from RefSeq 
 
 You can find more information about what each of these ACNUC databases contains by
-looking at the `ACNUC website <http://pbil.univ-lyon1.fr/search/releases.php>`_. 
+looking at the `ACNUC website <http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html>`_. 
 
 You can carry out complex queries using the "query()" function from
 the SeqinR library. If you look at the help page for the query() function (by
@@ -268,8 +269,13 @@ typing "help(query)", you will see that it allows you to specify criteria that y
 require the sequences to fulfill. 
 
 For example, to search for a sequence with a particular NCBI accession, you can use the "AC=" argument in "query()".
-The "query()" function will then search for 
-sequences in the NCBI Sequence Database that match your criteria. 
+The "query()" function will then search for sequences in the NCBI Sequence Database that match your criteria. 
+
+Just as you can use "AC=" to specify an accession in a search, you can specify that you want to find 
+sequences whose NCBI records contain a certain keywords by using "K=" as an argument (input) to the 
+"query()" function. Likewise you can limit a search to either DNA or mRNA sequences by using the "M="
+argument for the "query()" function. The full list of possible arguments for the "query()" funtion
+are given on its help page.
 
 In the examples below, we will explain how to carry out searches of the NCBI database
 both by searching the ACNUC database via R, and by going directly to the NCBI website to carry out the search.
@@ -702,8 +708,8 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
-            :width: 500
+            :width: 600
 .. |image3| image:: ../_static/P3_image3.png
-            :width: 500
+            :width: 600
 .. |image4| image:: ../_static/P3_image4.png
-            :width: 500
+            :width: 900
