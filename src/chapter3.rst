@@ -44,45 +44,14 @@ human curator working for NCBI.
 Searching for an accession number in the NCBI database
 ------------------------------------------------------
 
-In the `DNA Sequence Statistics chapter <chapter1.html>`_, 
+In the `DNA Sequence Statistics chapter (1) <chapter1.html>`_, 
 you learnt how to obtain a FASTA file containing the DNA sequence
 corresponding to a particular accession number, eg. accession
-number NC\_001477 (the DEN-1 Dengue virus genome sequence).
+number NC\_001477 (the DEN-1 Dengue virus genome sequence), either
+`via the NCBI website <./chapter1.html#retrieving-genome-sequence-data-via-the-ncbi-website>`_
+or `using the getncbiseq() function in R <./chapter1.html#retrieving-genome-sequence-data-using-seqinr>`_.
 
-Briefly, if you want to obtain a FASTA file containing the DNA or
-protein sequence corresponding to a particular NCBI accession,
-follow these steps:
-
-
-#. Go to the NCBI website
-   (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_)
-#. Type the accession number in the search box on the top of
-   the NCBI homepage, under 'Search All Databases for', and press
-   'Search'. This searches the NCBI sequence databases (nucleotide and
-   protein sequence databases) for the accession number of interest.
-#. The results from your search will appear in a page saying how
-   many hits you found in each NCBI database. The number of hits to a
-   particular database (eg. the NCBI Nucleotide database or the NCBI
-   Protein database) appears to the left of the database name in a
-   square box. If the accession that you searched for corresponds to a
-   DNA sequence, you should get a hit to a nucleotide sequence record.
-   Click on the word 'Nucleotide' to go to that record. Similarly, if
-   the accession corresponds to a protein sequence, you should get a
-   hit to a protein sequence record, and you should click on the word
-   'Protein' to go to that record.
-#. Once you are looking at the NCBI record for the sequence, to
-   download the sequence, click on the 'Send' link at the top
-   right of the page, and select 'File' under 'Choose Destination' in the
-   box that pops up, and then choose 'FASTA' as the format that you want
-   from the drop-down menu that appears. Then click 'Create File'.
-   Choose a sensible name for the file, for example
-   'den1.fasta' for the DEN-1 Dengue virus genome
-   sequence, and save the file in an easy-to-find place so that you
-   will be able to find it again later (for example, make a folder in
-   the 'My Documents' folder with your name (eg. folder 'JoeBloggs')
-   and save it there).
-
-As explained in the `DNA Sequence Statistics chapter <chapter1.html>`_, 
+As explained in the `DNA Sequence Statistics (1) chapter <chapter1.html#fasta-format>`_, 
 the FASTA format is a file format commonly used to store sequence information. The first line starts
 with the character '>' followed by a name and/or description for
 the sequence. Subsequent lines contain the sequence itself.
@@ -134,6 +103,11 @@ accession NC\_001477), follow these steps:
    view the NCBI entry for the hit.
 #. After you click on 'Nucleotide' or 'Protein' in the previous
    step, the NCBI entry for the accession will appear.
+
+For example, the NCBI entry for the DEN-1 Dengue virus genome sequence
+(NCBI accession NC\_001477) looks like this:
+
+|image2|
 
 The NCBI entry for an accession contains a lot of information about
 the sequence, such as papers describing it, features in the
@@ -456,6 +430,9 @@ Exercises
 Answer the following questions. For each question, please record
 your answer, and what you did/typed to get this answer.
 
+Model answers to the exercises are given in the chapter entitled
+`Answers to the exercises on Sequence Databases <./chapter3_answers.html>`_.
+
 Q1. What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_001477) can you obtain from its annotations in the NCBI Sequence Database? 
     What does it say in the DEFINITION and ORGANISM fields of its NCBI
     record?
@@ -506,5 +483,6 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
+.. |image2| image:: ../_static/P3_image2.png
 
 
