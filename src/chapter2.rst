@@ -4,7 +4,8 @@ DNA Sequence Statistics (2)
 A little more introduction to R
 -------------------------------
 
-In the previous chapters, you learnt about variables in R, such as
+In the chapter on `How to install R <./installr.html>`_,
+you learnt about variables in R, such as
 scalars, vectors, and lists. You also learnt how to use functions
 to carry out operations on variables, for example, using the
 log10() function to calculate the log to the base 10 of a scalar
@@ -160,7 +161,7 @@ We have been using built-in R functions such as mean(),
 length(), print(), plot(), etc. We can also create our own
 functions in R to do calculations that you want to carry out very
 often on different input data sets. For example, we can create a
-function to calculate the value of 20 plus square of some input
+function to calculate the value of 20 plus the square of some input
 number:
 
 ::
@@ -246,7 +247,8 @@ DEN-1 Dengue virus genome, we can type:
 Local variation in GC content
 -----------------------------
 
-In the previous chapter, you learnt that to find out the GC
+In the `previous chapter <./chapter1.html>`_, 
+you learnt that to find out the GC
 content of a genome sequence (percentage of nucleotides in a genome
 sequence that are Gs or Cs), you can use the GC() function in the
 SeqinR package. For example, to find the GC content of the
@@ -344,14 +346,14 @@ each 2000-nucleotide chunk. Below we will explain the following
     [1] 0.479
     [1] 0.4545
 
-The command starts <- seq(1, length(dengueseq)-2000, by = 2000)
+The command "starts <- seq(1, length(dengueseq)-2000, by = 2000)"
 stores the result of the seq() command in the vector *starts*,
 which contains the values 1, 2001, 4001, 6001, and 8001.
 
 We set the variable *n* to be equal to the number of elements in
 the vector *starts*, so it will be 5 here, since the vector
 *starts* contains the five elements 1, 2001, 4001, 6001 and 8001. The
-line for (i in 1:n) means that the counter *i* will take values of
+line "for (i in 1:n)" means that the counter *i* will take values of
 1-5 in subsequent cycles of the *for loop*. The *for loop* above is
 spread over several lines. However, R will not execute the commands
 within the *for loop* until you have typed the final "}" at the end
@@ -392,7 +394,7 @@ simplified version of the method usually carried out by
 bioinformaticians. In this simplified version, we have calculated
 the GC content in non-overlapping windows along a DNA sequence.
 However, it is more usual to calculate GC content in overlapping
-windows along a sequence, althought that makes the code slightly
+windows along a sequence, although that makes the code slightly
 more complicated.
 
 A sliding window plot of GC content
@@ -420,7 +422,7 @@ content by typing:
 
 |image2| 
 
-In the code above, the line chunkGCs <- numeric(n) makes a
+In the code above, the line "chunkGCs <- numeric(n)" makes a
 new vector *chunkGCs* which has the same number of elements as the
 vector *starts* (5 elements here). This vector *chunkGCs* is then
 used within the *for loop* for storing the GC content of each chunk
@@ -573,8 +575,8 @@ sequence:
     > 0.04658096/(0.2580345*0.2086633) # Get rho(GC)
     [1] 0.8651364
 
-We calculate a value of |rgr|\ (GC) of approximately 0.82. This means
-that the DNA word "GC" is about 0.82 times as common in the
+We calculate a value of |rgr|\ (GC) of approximately 0.865. This means
+that the DNA word "GC" is about 0.865 times as common in the
 DEN-1 Dengue virus sequence than expected. That is, it seems to be slightly under-represented.
 
 Note that if the ratio of the observed to expected frequency of a
@@ -671,6 +673,9 @@ Exercises
 Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
+
+Model answers to the exercises are given in the chapter entitled
+`Answers to the exercises on DNA Sequence Statistics (2) <./chapter2_answers.html>`_.
 
 Q1. Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, using a window size of 200 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)? 
     Make a sketch of each plot that you draw.
