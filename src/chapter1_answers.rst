@@ -31,12 +31,35 @@ extract the sequence of these nucleotides by typing:
     
 Q2. *What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC\_002677)?*
 
-To get the *Mycobacterium leprae* TN genome, and find out its length, it’s necessary to first go to the NCBI website (www.ncbi.nlm.nih.gov) and search for NC\_002677 and download it as a fasta format file (eg. "leprae.fasta") and save it in the "My Documents" folder. Then in R type:
+To answer this question, you first need to retrieve the *Mycobacterium leprae* TN genome
+sequence from the NCBI database. You can use this by going to the NCBI website and searching
+for it via the NCBI website, or alternatively by using the getncbiseq() function in R.
+
+To get the *Mycobacterium leprae* TN genome via the NCBI website, it’s necessary to first go to the NCBI website (www.ncbi.nlm.nih.gov) and search for NC\_002677 and download it as a fasta format file (eg. "leprae.fasta") and save it in the "My Documents" folder. You can then read the sequence into
+R from the file by typing:
+
+Then in R type:
 
 ::
 
     > leprae <- read.fasta(file="leprae.fasta")
     > lepraeseq <- leprae[[1]]
+
+Alternatively, to get the *Mycobacterium leprae* TN genome using the getncbiseq() function in R,
+you first need to copy the getncbiseq() function and paste it into R, and then you can retrieve
+the sequence (accession NC_\002677) by typing in R:
+
+::
+
+    > lepraeseq <-  getncbiseq("NC_002677")
+
+Now we have the *Mycobacterium leprae* TN genome sequence stored in the vector *lepraseq* in R.
+We can get the length of the sequence by getting the length of the vector: 
+
+xxxyyyzzz
+
+::
+
     > length(lepraeseq)
     [1] 3268203
 
@@ -87,7 +110,7 @@ To take non-A/C/T/G nucleotides into account when calculating GC, type:
 
 We get the same answer as when we ignored non-A/C/G/T nucleotides. This is actually because the *M. leprae* TN sequence does not have any non-A/C/G/T nucleotides. 
 
-However, many other genome sequences do contain non-A/C/G/T nucleotides. Note that under ‘Details’ in the box that appears when you type ‘help(‘GC’)’, it says : "When exact is set to TRUE the G+C content is estimated with ambiguous bases taken into account. Note that this is time expensive. A first pass is made on non-ambiguous bases to estimate the probabilities of the four bases in the sequence. They are then used to weight the contributions of ambiguous bases to the G+C content."
+However, many other genome sequences do contain non-A/C/G/T nucleotides. Note that under 'Details' in the box that appears when you type 'help('GC')', it says : "When exact is set to TRUE the G+C content is estimated with ambiguous bases taken into account. Note that this is time expensive. A first pass is made on non-ambiguous bases to estimate the probabilities of the four bases in the sequence. They are then used to weight the contributions of ambiguous bases to the G+C content."
 
 Q5. *How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?*
 

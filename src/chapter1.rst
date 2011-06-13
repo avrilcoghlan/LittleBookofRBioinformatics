@@ -93,7 +93,7 @@ Each sequence in the NCBI Sequence Database is stored in a separate
 *record*, and is assigned a unique identifier that can be used to
 refer to that sequence record. The identifier is known as an
 *accession*, and consists of a mixture of numbers and letters. For
-example, Dengue virus causes `Dengue fever <http://www.who.int/denguecontrol/en/>`_, 
+example, Dengue virus causes `Dengue fever <http://apps.who.int/tdr/svc/diseases/dengue>`_, 
 which is classified as a neglected tropical disease by the WHO. 
 by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.
 The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4
@@ -192,7 +192,7 @@ first need to copy and paste into R:
       {
          library("seqinr") # load the SeqinR R package
          # first find which ACNUC database the accession is stored in:
-         dbs <- c("genbank","refseq","refseqViruses")
+         dbs <- c("genbank","refseq","refseqViruses","bacterial")
          numdbs <- length(dbs)
          for (i in 1:numdbs)
          {
@@ -548,9 +548,11 @@ Model answers to the exercises are given in the chapter entitled
 Q1. What are the last twenty nucleotides of the Dengue virus genome sequence?
 
 Q2. What is the length in nucleotides of the genome sequence for the bacterium *Mycobacterium leprae* strain TN (accession NC\_002677)?
-    Note: *Mycobacterium leprae* is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease.
-    As the genome sequence is a DNA sequence, you need to look for it in the
-    NCBI Nucleotide database.
+    Note: *Mycobacterium leprae* is a bacterium that is responsible for causing 
+    `leprosy <http://apps.who.int/tdr/svc/diseases/leprosy>`_, 
+    which is classified by the WHO as a neglected tropical disease.
+    As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website,
+    you will need to look for it in the NCBI Nucleotide database.
 
 Q3. How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the *Mycobacterium leprae* TN genome sequence?
     Note: other symbols apart from the four nucleotides A/C/T/G may
