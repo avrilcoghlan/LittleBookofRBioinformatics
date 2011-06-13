@@ -280,6 +280,54 @@ are given on its help page.
 In the examples below, we will explain how to carry out searches of the NCBI database
 both by searching the ACNUC database via R, and by going directly to the NCBI website to carry out the search.
 
+Example: finding the sequence for accession NC\_001477
+------------------------------------------------------
+
+The NCBI accession NC\_001477 corresponds to the genome sequence of the DEN-1 Dengue virus.
+
+.. rubric:: Method 1: searching via the NCBI website
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To search for the sequence for NCBI accession NC\_001477 via the NCBI website, we simply need
+to go to the `NCBI website <http://www.ncbi.nlm.nih.gov>`_, and type in the search box
+at the top "NC_001477". Then as explained in the 
+`previous chapter <./chapter1.html#retrieving-genome-sequence-data-via-the-ncbi-website>`_, we
+can download the sequence to a local FASTA-format file.
+
+.. rubric:: Method 2: searching via R
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To search for the sequence for NCBI accession NC\_001477 via R, we can use the SeqinR
+R package to search the ACNUC databases (which contain the NCBI sequence data). 
+
+If you look at the help page for the "query()", you will see that it is possible to search
+for an accession by using "AC=" as an argument for the query() function. So, for example,
+to search for accession NC\_001477, we can use "AC=NC_001477" as an argument to query().
+
+However, first we must specify the ACNUC database that we want to search. As
+explained above, the ACNUC database contains the NCBI sequence data organised into several
+sub-databases, and you can view the list of those sub-databases by using the "choosebank()"
+function from the SeqinR package. 
+
+When you want to use "query()" to carry out a particular 
+sub-database (eg. "genbank", which contains DNA and RNA sequences from the NCBI Sequence Database), you
+need to first specify the database that you want to search by using the "choosebank()" function,
+for example:
+
+::
+
+    > choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
+
+We can then search the 'genbank' database for sequences that match a specific set of criteria
+by using the "query()" function. For example, to search for the sequence with accession
+NC\_001477, we type:
+
+::
+
+    > query('dengue', 'AC=001477')
+
+
+
 Example: finding the sequences published in *Nature* **460**:352-358
 --------------------------------------------------------------------------------
 
@@ -712,4 +760,4 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image3| image:: ../_static/P3_image3.png
             :width: 650
 .. |image4| image:: ../_static/P3_image4.png
-            :width: 650
+            :width: 750
