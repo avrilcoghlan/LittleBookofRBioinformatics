@@ -34,6 +34,7 @@ Contents:
    src/chapter2_answers.rst
    src/chapter3.rst
    src/chapter3_answers.rst
+   src/revisionexercises1.rst
 
 Acknowledgements
 ----------------

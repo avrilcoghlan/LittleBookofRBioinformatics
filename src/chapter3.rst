@@ -550,8 +550,9 @@ are considerably less expensive to sequence, many microbial genome
 sequencing projects have been completed.
 
 If you don't know the accession number for a genome sequence (eg.
-for *Mycobacterium leprae*, the bacterium that causes leprosy), how can you find it out? One way to
-do this is to look at the NCBI Genome website, which lists all
+for *Mycobacterium leprae*, the bacterium that causes leprosy), how can you find it out? 
+
+The easiest way to do this is to look at the NCBI Genome website, which lists all
 fully sequenced genomes and gives the accession numbers for the
 corresponding DNA sequences.
 
