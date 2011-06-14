@@ -8,20 +8,20 @@ Q2. *What is the length of the Brugia malayi mitochondrial genome (NCBI accessio
 and how many As, Cs, Gs and Ts does it contain?* 
 
 Q3. *What is the probability of the Brugia malayi mitochondrial genome sequence (NCBI accession NC\_004298), 
-   according to a multinomial model in which the probabilities of As, Cs, Gs and Ts (pA, pC, pG, and pT) 
-    are set equal to the fraction of As, Cs, Gs and Ts in the Schistosoma mansoni mitochondrial genome?*
+according to a multinomial model in which the probabilities of As, Cs, Gs and Ts (pA, pC, pG, and pT) 
+are set equal to the fraction of As, Cs, Gs and Ts in the Schistosoma mansoni mitochondrial genome?*
 
 Q4. *What are the top three most frequent 4-bp words (4-mers) in the genome of the
-    bacterium Chlamydia trachomatis strain D/UW-3/CX (NCBI accession NC\_000117), and
-    how many times do they occur in its sequence?*
+bacterium Chlamydia trachomatis strain D/UW-3/CX (NCBI accession NC\_000117), and
+how many times do they occur in its sequence?*
 
 Q5. *Write an R function to generate a random DNA sequence that is n letters long (that is, 
-    n bases long) using a multinomial model in which the probabilities pA, pC, pG, 
-    and pT are set equal to the fraction of As, Cs, Gs and Ts in the Schistosoma mansoni
-    mitochondrial genome.*
+n bases long) using a multinomial model in which the probabilities pA, pC, pG, 
+and pT are set equal to the fraction of As, Cs, Gs and Ts in the Schistosoma mansoni
+mitochondrial genome.*
 
 Q6. *Give an example of using your function from Q5 to calculate a random sequence that is 20 letters 
-    long, using a multinomial model with pA =0.28, pC =0.21, pG =0.22, and pT =0.29.*
+long, using a multinomial model with pA =0.28, pC =0.21, pG =0.22, and pT =0.29.*
 
 Q7. *How many protein sequences from rabies virus are there in the NCBI Protein database?*
 
