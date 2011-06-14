@@ -20,11 +20,7 @@ nightly, so contain essentially the same data.
 
 In this chapter we will discuss the NCBI database. Note however
 that it contains essentially the same data as in the EMBL/DDBJ
-databases. The NCBI database contains several sub-databases,
-including the NCBI Nucleotide database and the NCBI Protein
-database. These are both sequence databases. The NCBI database also
-contains sub-databases that contain non-sequence data, such as
-PubMed, which contains data on scientific publications.
+databases.
 
 Sequences in the NCBI Sequence Database (or EMBL/DDBJ) are
 identified by an accession number. This is a unique number that is
@@ -40,6 +36,14 @@ publications describing that sequence, etc. Some of this annotation
 data was added by the person who sequenced a sequence and submitted
 it to the NCBI database, while some may have been added later by a
 human curator working for NCBI.
+
+The NCBI database contains several sub-databases, the most important of which are:
+
+-  the NCBI Nucleotide database: contains DNA and RNA sequences 
+-  the NCBI Protein database: contains protein sequences
+-  EST: contains ESTs (expressed sequence tags), which are short sequences derived from mRNAs
+-  the NCBI Genome database: contains DNA sequences for whole genomes
+-  PubMed: contains data on scientific publications  
 
 Searching for an accession number in the NCBI database
 ------------------------------------------------------
@@ -354,7 +358,10 @@ can use the "choosebank()" function from SeqinR:
       [25] "ensfungi"      "ensmetazoa"    "ensplants"     "mito"         
       [29] "polymorphix"   "emglib"        "taxobacgen"    "refseqViruses"
 
-Two of the most important sub-databases in ACNUC which can be searched from R are:
+Alas, the ACNUC sub-databases do not have a one-to-one correspondence with the NCBI sub-databases (the
+NCBI Protein database, NCBI EST database, NCBI Genome database, etc.)!
+
+Three of the most important sub-databases in ACNUC which can be searched from R are:
 
 -  "genbank": this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain
    classes of sequences (eg. draft genome sequence data from genome sequencing projects)
@@ -532,90 +539,6 @@ To obtain the accession numbers of the first five of the 19022 sequences, we can
 This tells us that the NCBI accessions of the first five sequences (of the 19022
 DNA or RNA sequences found that were published in *Nature* **460**:352-358) are FN357292,
 FN357293, FN357294, FN357295, and FN357296. 
-
-Example: finding all human nucleotide sequences associated with malaria
------------------------------------------------------------------------
-
-Say for example that you want to find all high-quality 
-nucleotide sequences associated with malaria. Here were are not looking
-for sequences from the malaria organism itself, but sequences of human
-genes and human proteins that somehow interact with or respond to the malaria organism.
-
-To find all nucleotide sequences associated with malaria, follow these
-steps:
-
-#. Go to the NCBI website
-   (`www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_).
-#. As you want to search for nucleotide sequences, select
-   'Nucleotide' from the drop-down list above the search box at the
-   top of the NCBI homepage.
-#. Type **malaria** in the search box. (Note that if you are searching for
-   a phrase such as 'colon cancer', you would need to 
-   include the inverted commas, ie. type **"colon cancer"** and not
-   **colon cancer**. This is because if you type just
-   **colon cancer**, the search will be for records that contain the
-   words 'colon' or 'cancer' (not necessarily both words), while you
-   want records that contain the phrase 'colon cancer'.) Press 'Search'.
-#. The search results will include all nucleotide sequences for
-   which the phrase 'malaria' appears somewhere in their NCBI
-   records. The phrase may appear in the 'DEFINITION' field of the
-   NCBI record (which gives a short description), in the title of a
-   journal article on the nucleotide sequence, or elsewhere in the
-   NCBI record.
-
-The search above should have identified thousands of sequences from
-many different species. Some of these may be of low quality. To
-limit your search to high quality sequences, you may decide to
-restrict your search to RefSeq sequences. You can do this using
-NCBI search tags. NCBI search tags allow you to limit your restrict
-your search to a specific data set, such as the RefSeq data set. It
-also allows us to limit searches to retrieve records with certain
-attributes, such as molecule type (eg. mRNAs) or species.
-
-The NCBI search tag "[PROP]" allows you to restrict your search to
-sequences form a particular subset of the NCBI Sequence Database,
-such as RefSeq. To use NCBI search tags to restrict your search to
-nucleotide sequences from RefSeq that are associated with malaria, follow these steps:
-
-#. Go to the NCBI website, and select 'Nucleotide' from the
-   drop-down list above the search box.
-#. In the search box, type
-   **malaria AND srcdb\_refseq[PROP]**, and press 'Search'.
-
-This should give you all RefSeq nucleotide sequences for which the phrase
-malaria appears somehwere in the NCBI record.
-
-Note that you should find fewer sequences than when you just
-searched for **malaria**, but these should be higher quality
-sequences (since they are RefSeq sequences), 
-and their NCBI entries will contain manually curated
-information about the sequences (eg. details of publications about
-the sequences and features in them).
-
-The search above should have identified RefSeq sequences from
-several species (eg. malaria itself, human, mouse, etc.) that are associated with
-malaria (or more precisely, where the word 'malaria'
-appears somewhere in the NCBI records). 
-What if you are only interested in human sequences
-associated with malaria?
-
-One way to solve this problem is to use NCBI search tags to
-restrict your search to human sequences. The "[ORGN]" search tag
-allows you to restrict your search to sequences from a particular
-species (eg. *Mycobacteriuma leprae*, the bacterium that causes
-leprosy, or set of species (eg. Bacteria). To use NCBI search tags to retrieve human RefSeq
-sequences associated with malaria, follow these steps:
-
-#. Go to the NCBI website, and select 'Nucleotide' from the
-   drop-down list above the search box.
-#. In the search box, type
-   **malaria AND srcdb\_refseq[PROP] AND "Homo sapiens"[ORGN]**,
-   and press 'Search'.
-
-This will give you a list of all human nucleotide sequences from
-RefSeq that are associated with malaria (or more precisely, all
-the human nucleotide sequences from Refseq for which the word 'malaria'
-appears somewhere in the NCBI record).
 
 Finding the genome sequence for a particular species
 ----------------------------------------------------
@@ -823,12 +746,12 @@ Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus 
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
-            :width: 550
+            :width: 600
 .. |image3| image:: ../_static/P3_image3.png
             :width: 650
 .. |image4| image:: ../_static/P3_image4.png
-            :width: 750
+            :width: 800
 .. |image5| image:: ../_static/P3_image5.png
-            :width: 750
+            :width: 800
 .. |image6| image:: ../_static/P3_image6.png
-            :width: 550
+            :width: 650
