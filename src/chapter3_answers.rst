@@ -1,7 +1,9 @@
 Answers to the exercises on Sequence Databases
 ==============================================   
 
-Q1. *What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database?*
+Q1. 
+---
+*What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database?*
 
 To do this, you need to go to the `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ website 
 and type the rabies virus genome sequence accession (NC\_001542) in the search box, and press 'Search'. 
@@ -59,7 +61,9 @@ genome sequence (accession NC\_001542):
       [20] "  TITLE     Walking along the rabies genome: is the large G-L intergenic region"
     > closebank()
 
-Q2. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
+Q2. 
+---
+*How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
 
 To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
 and select "Nucleotide" from the drop-down list at the top 
@@ -113,7 +117,9 @@ whole genome sequencing projects from the NCBI Nucleotide database, and in addit
 are updated very regularly, but may be missing a few sequences that were added to the NCBI database
 in the last day or two.
 
-Q3. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
+Q3. 
+---
+*How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list 
 at the top of the webpage, as you want to search for nucleotide sequences.
@@ -159,7 +165,9 @@ of sequences as we got when we searched via the NCBI website (29 sequences). Thi
 from bacteria are stored in the ACNUC "bacterial" sub-database, and so are not in the ACNUC "refseq" 
 sub-database.
 
-Q4. *How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
+Q4. 
+---
+*How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -204,7 +212,9 @@ Note that the "AU=Berriman" query will find sequences submitted or published by 
 We are not able to specify the initial of the first name of this person using the "query()" command, so
 we cannot specify that the person is called "M. Berriman". 
 
-Q5. *How many nucleotide sequences from nematode worms are there in the NCBI Database?*
+Q5. 
+---
+*How many nucleotide sequences from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -222,7 +232,9 @@ which 378,255 are DNA/RNA sequences, 1,140,454 are ESTs, and 683,749 sequences a
 projects. These sequences are probably from a wide range of nematode worm species, including the model nematode worm
 *Caenorhabditis elegans*.
 
-Q6. *How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
+Q6. 
+---
+*How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -239,7 +251,9 @@ This means that 8341 DNA or RNA sequences for collagen genes from nematode worms
 NCBI records found may be for other genes but contain the word 'collagen' somewhere in the NCBI record (for example, in
 the title of a cited paper).
 
-Q7. *How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
+Q7. 
+---
+*How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down sequences, as you want to search for nucleotide sequences (nucleotide sequences include DNA sequences and RNA sequences, such as mRNAs). 
 
@@ -256,7 +270,9 @@ Note that in Q7 we found 8341 nucleotide (DNA or RNA) sequences from nematode wo
 only 7656 of those sequences are mRNA sequences. This means that the other (8341-7656=) 685 sequences must be DNA sequences, 
 or other types of RNA sequences (not mRNAs) such as tRNAs or rRNAs.
 
-Q8. *How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
+Q8. 
+---
+*How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Protein" from the drop-down list, 
 as you want to search for protein sequences.
@@ -266,7 +282,9 @@ Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search'.
 On the results page, you should see '1 to 20 of 1886'. This means that 1886 protein sequences from nematode
 worms were found that include the word collagen in the NCBI sequence entries [as of 19-Feb-2011].
 
-Q9. *What is the accession number for the Trypanosoma cruzi genome in NCBI?*
+Q9. 
+---
+*What is the accession number for the Trypanosoma cruzi genome in NCBI?*
 
 There are two ways that you can answer this.
 
@@ -308,7 +326,9 @@ Note that the answer is slightly different for the answer from the first method 
 did not find the information on the genome projects for strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3,
 because genome assemblies are not yet available for those strains.
 
-Q10. *How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
+Q10. 
+----
+*How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
 
 To answer this question, you need to go to the NCBI Genome webpage http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome. 
 
