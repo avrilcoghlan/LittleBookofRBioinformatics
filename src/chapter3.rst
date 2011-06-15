@@ -748,7 +748,7 @@ Saving sequence data in a FASTA-format file
 Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR,
 it is conveninent to save the sequences in a file in FASTA format.
 This can be done using the "write.fasta()" function in the SeqinR library, which was
-introduced in `Chapter 1 <https://github.com/./chapter1.html#writing-sequence-data-out-as-a-fasta-file>`_
+introduced in `Chapter 1 <https://github.com/./chapter1.html#writing-sequence-data-out-as-a-fasta-file>`_.
 
 If you look at the help page for the "write.fasta()" function, you will see
 that as input it takes a list of vectors, where each vector contains one DNA, RNA or
@@ -942,9 +942,10 @@ your answer, and what you did/typed to get this answer.
 Model answers to the exercises are given in the chapter entitled
 `Answers to the exercises on Sequence Databases <./chapter3_answers.html>`_.
 
-Q1. What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_001477) can you obtain from its annotations in the NCBI Sequence Database? 
-    What does it say in the DEFINITION and ORGANISM fields of its NCBI
-    record?
+Q1. What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database? 
+    What does it say in the DEFINITION and ORGANISM fields of its NCBI record?
+
+xxx
 Q2. What were the nucleotide sequences published in *Nature* volume 460, page 352?
     What are their accession numbers in the NCBI Sequence Database?
 

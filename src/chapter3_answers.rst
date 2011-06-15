@@ -1,23 +1,58 @@
 Answers to the exercises on Sequence Databases
 ==============================================   
 
-Q1. *What information about the DEN-1 Dengue virus sequence (NCBI accession NC\_001477) can you obtain from its annotations in the NCBI Sequence Database?*
+Q1. *What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database?*
 
 To do this, you need to go to the `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ website 
-and type the DEN-1 Dengue virus genome sequence accession (NC\_001477) in the search box, and press 'Search'. 
+and type the rabies virus genome sequence accession (NC\_001542) in the search box, and press 'Search'. 
 
-On the search results page, you should see '1' beside the word 'Nucleotide', meaning that there was one hit to a sequence record in the NCBI Nucleotide database, which contains DNA and RNA sequences. If you click on the word 'Nucleotide', it will bring you to the sequence record, which should be the NCBI sequence record for the DEN-1 Dengue virus' genome (ie. for accession NC\_001477). 
-	
-On the webpage for the NCBI sequence record for the DEN-1 Dengue virus' genome (webpage http://www.ncbi.nlm.nih.gov/nuccore/NC_001477) , you will see in the DEFINITION, ORGANISM and REFERENCE fields of its NCBI record: 
+On the search results page, you should see '1' beside the word 'Nucleotide', meaning that there was one hit to a sequence record in the NCBI Nucleotide database, which contains DNA and RNA sequences. If you click on the word 'Nucleotide', it will bring you to the sequence record, which should be the NCBI sequence record for the rabies virus' genome (ie. for accession NC\_001542):
 
-DEFINITION: Dengue virus type 1, complete genome.
-ORGANISM: Dengue virus 1
+|image7|
+
+On the webpage (above), you can see the DEFINITION, ORGANISM and REFERENCE fields of the NCBI record:
+
+DEFINITION: Rabies virus, complete genome.
+ORGANISM: Rabies virus 
 REFERENCE: There are several papers (the first is):
-AUTHORS: Puri,B., Nelson,W.M., Henchal,E.A., Hoke,C.H., Eckels,K.H., Dubois,D.R., Porter,K.R. and Hayes,C.G.
-TITLE: Molecular analysis of dengue virus attenuation after serial passage in primary dog kidney cells
-JOURNAL: J. Gen. Virol. 78 (PT 9), 2287-2291 (1997)
+AUTHORS: Tordo,N., Poch,O., Ermine,A., Keith,G. and Rougeon,F.
+TITLE: Completion of the rabies virus genome sequence determination: highly conserved domains among the L (polymerase) proteins of unsegmented negative-strand RNA viruses
+JOURNAL: Virology 165 (2), 565-576 (1988)
 
-There are also some other references, for papers published about the Dengue virus genome sequence. 
+There are also some other references, for papers published about the rabies virus genome sequence. 
+
+An alternative way of retrieving the annotations for the rabies virus sequence is to use the SeqinR R library.
+As the rabies virus is a virus, its genome sequence should be in the "refseqViruses" ACNUC sub-database.
+Therefore, we can perform the following query to retrieve the annotations for the rabies virus
+genome sequence (accession NC\_001542):
+
+::
+
+    > choosebank("refseqViruses")                       # select the ACNUC sub-database to be searched
+    > query("rabies", "AC=NC_001542")                   # specify the query
+    > annots <- getAnnot(rabies$req[[1]])               # retrieve the annotations
+    > annots[1:20]                                      # print out the first 20 lines of the annotations
+      [1] "LOCUS       NC_001542              11932 bp ss-RNA     linear   VRL 08-DEC-2008"
+      [2] "DEFINITION  Rabies virus, complete genome."                                     
+      [3] "ACCESSION   NC_001542"                                                          
+      [4] "VERSION     NC_001542.1  GI:9627197"                                            
+      [5] "DBLINK      Project: 15144"                                                     
+      [6] "KEYWORDS    ."                                                                  
+      [7] "SOURCE      Rabies virus"                                                       
+      [8] "  ORGANISM  Rabies virus"                                                       
+      [9] "            Viruses; ssRNA negative-strand viruses; Mononegavirales;"           
+      [10] "            Rhabdoviridae; Lyssavirus."                                         
+      [11] "REFERENCE   1  (bases 5388 to 11932)"                                           
+      [12] "  AUTHORS   Tordo,N., Poch,O., Ermine,A., Keith,G. and Rougeon,F."              
+      [13] "  TITLE     Completion of the rabies virus genome sequence determination:"      
+      [14] "            highly conserved domains among the L (polymerase) proteins of"      
+      [15] "            unsegmented negative-strand RNA viruses"                            
+      [16] "  JOURNAL   Virology 165 (2), 565-576 (1988)"                                   
+      [17] "   PUBMED   3407152"                                                            
+      [18] "REFERENCE   2  (bases 1 to 5500)"                                               
+      [19] "  AUTHORS   Tordo,N., Poch,O., Ermine,A., Keith,G. and Rougeon,F."              
+      [20] "  TITLE     Walking along the rabies genome: is the large G-L intergenic region"
+    > closebank()
 
 Q2. *What were the nucleotide sequences published in Nature volume 460, page 352?*
 
@@ -265,4 +300,5 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image4| image:: ../_static/A2_image4.png
 .. |image5| image:: ../_static/A2_image5.png
 .. |image6| image:: ../_static/A2_image6.png
+.. |image7| image:: ../_static/P3_image7.png
 
