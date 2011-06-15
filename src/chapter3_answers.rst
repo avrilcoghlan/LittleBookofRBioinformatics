@@ -360,10 +360,10 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image8| image:: ../_static/P3_image8.png
             :width: 600
 .. |image9| image:: ../_static/P3_image9.png
-            :width: 800
+            :width: 700
 .. |image10| image:: ../_static/P3_image10.png
-            :width: 800
+            :width: 700
 .. |image11| image:: ../_static/P3_image11.png
             :width: 600
 .. |image12| image:: ../_static/P3_image12.png
-            :width: 800
+            :width: 700
