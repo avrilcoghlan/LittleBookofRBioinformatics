@@ -13,21 +13,26 @@ On the search results page, you should see '1' beside the word 'Nucleotide', mea
 On the webpage (above), you can see the DEFINITION, ORGANISM and REFERENCE fields of the NCBI record:
 
 DEFINITION: Rabies virus, complete genome.
+
 ORGANISM: Rabies virus 
+
 REFERENCE: There are several papers (the first is):
 AUTHORS: Tordo,N., Poch,O., Ermine,A., Keith,G. and Rougeon,F.
+
 TITLE: Completion of the rabies virus genome sequence determination: highly conserved domains among the L (polymerase) proteins of unsegmented negative-strand RNA viruses
+
 JOURNAL: Virology 165 (2), 565-576 (1988)
 
 There are also some other references, for papers published about the rabies virus genome sequence. 
 
-An alternative way of retrieving the annotations for the rabies virus sequence is to use the SeqinR R library.
+An alternative way of retrieving the annotations for the rabies virus sequence is to use the SeqinR R package.
 As the rabies virus is a virus, its genome sequence should be in the "refseqViruses" ACNUC sub-database.
 Therefore, we can perform the following query to retrieve the annotations for the rabies virus
 genome sequence (accession NC\_001542):
 
 ::
 
+    > library("seqinr")                                 # load the SeqinR R library
     > choosebank("refseqViruses")                       # select the ACNUC sub-database to be searched
     > query("rabies", "AC=NC_001542")                   # specify the query
     > annots <- getAnnot(rabies$req[[1]])               # retrieve the annotations
@@ -54,77 +59,79 @@ genome sequence (accession NC\_001542):
       [20] "  TITLE     Walking along the rabies genome: is the large G-L intergenic region"
     > closebank()
 
-Q2. *What were the nucleotide sequences published in Nature volume 460, page 352?*
-
-To do this, you need to go to the NCBI website at www.ncbi.nlm.nih.gov and type in the search 
-box on the top: "Nature"[JOUR] AND 460[VOL] AND 352[PAGE]
-
-Here [JOUR] specifies the journal name, [VOL] the volume of the journal the paper is in, and [PAGE] the page number.
-
-This should bring up a results page with "50890" beside the word "Nucleotide", and "1" beside the word
-"Genome", and "25700" beside the word "Protein", indicating that there were 50890 hits to sequence records in the Nucleotide database, 
-which contains DNA and RNA sequences, and 1 hit to the Genome database, which contains genome sequences, and 25700
-hits to the Protein database, which contains protein sequences.
-
-If you click on the word "Nucleotide", it will bring up a webpage with a list of links to the NCBI sequence 
-records for those 50890 hits. The 50890 hits are all contigs from the schistosome worm *Schistosoma mansoni*.
-
-Likewise, if you click on the word "Protein", it will bring up a webpage with a list of links to the NCBI
-sequence records for the 25700 hits, and you will see that the hits are all predicted proteins for *Schistosoma
-mansoni*.
-
-If you click on the word "Genome", it will bring you to the NCBI record for the *Schistosoma mansoni* genome
-sequence, which has NCBI accession NS\_00200. Note that the accession starts with "NS\_", which indicates that
-it is a RefSeq accession. 
-
-Therefore, in *Nature* volume 460, page 352, the *Schistosoma mansoni* genome sequence was published, along
-with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins
-for the gene predictions made in the genome sequence. You can view the original paper on the *Nature* website
-at `http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html <http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html>`_.
-
-Q3. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
+Q2. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
 
 To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
 and select "Nucleotide" from the drop-down list at the top 
 of the webpage, as you want to search for nucleotide (DNA or RNA) sequences.
 
-Then in the search box, type "Chlamydia trachomatis"[ORGN] and press 'Search'.
+Then in the search box, type "Chlamydia trachomatis"[ORGN] and press 'Search':
+
+|image8|
 
 Here [ORGN] specifies the organism you are interested in, that is, the species name in Latin.
 
-The results page should give you a list of the hits to sequence records in the NCBI Nucleotide database. 
-It will say "Found 35385 nucleotide sequences.   Nucleotide (35237)   GSS (148)". 
-This means that 35,385 sequences were found, of which 35237 are DNA or RNA sequences, and 
+The results page should give you a list of the hits to sequence records in the NCBI Nucleotide database: 
+
+|image9|
+
+It will say "Found 35577 nucleotide sequences.   Nucleotide (35429)   GSS (148)". 
+This means that 35,577 sequences were found, of which 35429 are DNA or RNA sequences, and 
 148 are DNA sequences from the Genome Sequence Surveys (GSS), that is, from 
-genome sequencing projects [as of 19-Feb-2011]. Note that there are new sequences 
+genome sequencing projects [as of 15-Jun-2011]. Note that there are new sequences 
 being added to the database continuously, so if you check this again in a couple of months, you will 
 probably find a higher number of sequences (eg. 36,000 sequences).
 
 Note: if you just go to the www.ncbi.nlm.nih.gov database, and search for "Chlamydia trachomatis"[ORGN] 
-(without choosing "Nucleotide" from the drop-down list), you will see 35237 hits to the Nucleotide 
-database and 148 to the GSS (Genome Sequence Survey) database.
+(without choosing "Nucleotide" from the drop-down list), you will see 35429 hits to the Nucleotide 
+database and 148 to the GSS (Genome Sequence Survey) database:
+
+|image10|
 
 Note also that if you search for "Chlamydia trachomatis", without using [ORGN] to specify the organism, 
-you will get 51046 hits to the Nucleotide database and 149 to the GSS database, but some of these might 
-not be *Chlamydia trachomatis* sequences – they could just be sequences for which the NCBI sequence 
+you will get 56032 hits to the Nucleotide database and 149 to the GSS database, but some of these might 
+not be *Chlamydia trachomatis* sequences - some could be sequences from other species for which the NCBI sequence 
 record contains the phrase "Chlamydia trachomatis" somewhere.
 
-Q4. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
+An alternative way to search for nucleotide sequences from the bacterium *Chlamydia trachomatis* is to
+use the SeqinR package. We want to find nucleotide sequences, so the correct ACNUC sub-database to search
+is the "genbank" sub-database. Thus, we can carry out our search by typing:
+
+::
+
+    > library("seqinr")                                 # load the SeqinR R library
+    > choosebank("genbank")                             # select the ACNUC sub-database to be searched
+    > query("Ctrachomatis", "SP=Chlamydia trachomatis") # specify the query
+    > Ctrachomatis$nelem                                # print out the number of matching sequences
+      [1] 35471
+    > closebank()
+
+We find 35,471 nucleotide sequences from *Chlamydia trachomatis*. We do not get exactly the same number
+of sequences as we got when we searched via the NCBI website (35,577 sequences), but the numbers are very close.
+The likely reasons for the differences could be that the ACNUC "genbank" sub-database excludes some sequences from
+whole genome sequencing projects from the NCBI Nucleotide database, and in addition, the ACNUC databases
+are updated very regularly, but may be missing a few sequences that were added to the NCBI database
+in the last day or two.
+
+Q3. *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list 
 at the top of the webpage, as you want to search for nucleotide sequences.
 
-Then in the search box, type "Chlamydia trachomatis"[ORGN] AND srcdb_refseq[PROP] and press 'Search'.
+Then in the search box, type "Chlamydia trachomatis"[ORGN] AND srcdb_refseq[PROP] and press 'Search':
+
+|image11|
 
 Here [ORGN] specifies the organism, and [PROP] specifies a property of the sequences (in this case that 
 they belong to the RefSeq subsection of the NCBI database).
 
-At the top of the results page, it should say "Results: 1 to 20 of 29 sequences" [as of 19-Feb-2011]. 
-As for Q3, if you try this again in a couple of months, the number will probably be higher, due to extra 
+At the top of the results page, it should say "Results: 1 to 20 of 29 sequences", so there were
+29 matching sequences [as of 15-Jun-2011]. 
+As for Q2, if you try this again in a couple of months, the number will probably be higher, due to extra 
 sequences added to the database. 
 
-Note that the sequences in Q3 are all *Chlamydia trachomatis* DNA and RNA sequences in the NCBI database. 
-The sequences in Q4 gives the *Chlamydia trachomatis* DNA and RNA sequences in the RefSeq part of the NCBI 
+Note that the sequences in Q2 are all *Chlamydia trachomatis* DNA and RNA sequences in the NCBI database. 
+The sequences in Q3 gives the *Chlamydia trachomatis* DNA and RNA sequences in the RefSeq part of the NCBI 
 database, which is a subsection of the database for high-quality manually-curated data. 
 
 The number of sequences in RefSeq is much fewer than the total number of *C. trachomatis* sequences, 
@@ -133,7 +140,26 @@ probably not had time to add all high-quality sequences to RefSeq (this is a tim
 as the curators add additional information to the NCBI Sequence records in RefSeq, such as references to 
 papers that discuss a particular sequence). 
 
-Q5. *How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
+An alternative way to search for nucleotide sequences from the bacterium *Chlamydia trachomatis* in RefSeq
+use the SeqinR package. We want to find RefSeq sequences, so the correct ACNUC sub-database to search
+is the "refseq" sub-database. Thus, we can carry out our search by typing:
+
+::
+
+    > library("seqinr")                                  # load the SeqinR R library
+    > choosebank("refseq")                               # select the ACNUC sub-database to be searched
+    > query("Ctrachomatis2", "SP=Chlamydia trachomatis") # specify the query
+    > Ctrachomatis2$nelem                                # print out the number of matching sequences
+      [1] 1
+    > closebank()
+
+We find 1 RefSeq sequence from *Chlamydia trachomatis*. We do not get exactly the same number
+of sequences as we got when we searched via the NCBI website (29 sequences). This is because the
+29 sequences found via the NCBI website include whole genome sequences, but the whole genome sequences
+from bacteria are stored in the ACNUC "bacterial" sub-database, and so are not in the ACNUC "refseq" 
+sub-database.
+
+Q4. *How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -148,7 +174,7 @@ On the results page, it should say at the top: "Found 460052 nucleotide sequence
 Note that unfortunately the NCBI website does not allow us to search for "Berriman Matthew"[AU] so we cannot be sure 
 that all of these sequences were submitted by Matthew Berriman. 
 
-Q6. *How many nucleotide sequences from nematode worms are there in the NCBI Database?*
+Q5. *How many nucleotide sequences from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -166,7 +192,7 @@ which 378,255 are DNA/RNA sequences, 1,140,454 are ESTs, and 683,749 sequences a
 projects. These sequences are probably from a wide range of nematode worm species, including the model nematode worm
 *Caenorhabditis elegans*.
 
-Q7. *How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
+Q6. *How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
@@ -183,7 +209,7 @@ This means that 8341 DNA or RNA sequences for collagen genes from nematode worms
 NCBI records found may be for other genes but contain the word 'collagen' somewhere in the NCBI record (for example, in
 the title of a cited paper).
 
-Q8. *How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
+Q7. *How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down sequences, as you want to search for nucleotide sequences (nucleotide sequences include DNA sequences and RNA sequences, such as mRNAs). 
 
@@ -200,7 +226,7 @@ Note that in Q7 we found 8341 nucleotide (DNA or RNA) sequences from nematode wo
 only 7656 of those sequences are mRNA sequences. This means that the other (8341-7656=) 685 sequences must be DNA sequences, 
 or other types of RNA sequences (not mRNAs) such as tRNAs or rRNAs.
 
-Q9. *How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
+Q8. *How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
 
 To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Protein" from the drop-down list, 
 as you want to search for protein sequences.
@@ -210,7 +236,7 @@ Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search'.
 On the results page, you should see '1 to 20 of 1886'. This means that 1886 protein sequences from nematode
 worms were found that include the word collagen in the NCBI sequence entries [as of 19-Feb-2011].
 
-Q10. *What is the accession number for the Trypanosoma cruzi genome in NCBI?*
+Q9. *What is the accession number for the Trypanosoma cruzi genome in NCBI?*
 
 There are two ways that you can answer this.
 
@@ -252,7 +278,7 @@ Note that the answer is slightly different for the answer from the first method 
 did not find the information on the genome projects for strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3,
 because genome assemblies are not yet available for those strains.
 
-Q11. *How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
+Q10. *How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
 
 To answer this question, you need to go to the NCBI Genome webpage http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome. 
 
@@ -301,4 +327,9 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image5| image:: ../_static/A2_image5.png
 .. |image6| image:: ../_static/A2_image6.png
 .. |image7| image:: ../_static/P3_image7.png
+.. |image8| image:: ../_static/P3_image8.png
+            :width: 600
+.. |image9| image:: ../_static/P3_image9.png
+.. |image10| image:: ../_static/P3_image10.png
+.. |image11| image:: ../_static/P3_image11.png
 

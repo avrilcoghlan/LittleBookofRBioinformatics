@@ -944,18 +944,17 @@ Model answers to the exercises are given in the chapter entitled
 
 Q1. What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database? 
     What does it say in the DEFINITION and ORGANISM fields of its NCBI record?
+    Note: rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected
+    tropical disease.
+
+Q2. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the NCBI Sequence Database? 
+    Note: the bacterium *Chlamydia trachomatis* is responsible for causing `trachoma <http://www.who.int/blindness/causes/priority/en/index2.html>`_, 
+    which is classified by the WHO as a neglected tropical disease.
+
+Q3. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the *RefSeq* part of the NCBI Sequence Database? 
 
 xxx
-Q2. What were the nucleotide sequences published in *Nature* volume 460, page 352?
-    What are their accession numbers in the NCBI Sequence Database?
-
-Q3. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the NCBI Sequence Database? 
-    Remember to type **"Chlamydia trachomatis"** including the inverted commas.
-
-Q4. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the *RefSeq* part of the 
-    NCBI Sequence Database? 
-
-Q5. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
+Q4. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
     Note that the name of the person who submitted a sequence is stored
     in the author field of the NCBI record, as is the name of people
     who published papers on the sequence. There may be more than one
@@ -963,31 +962,31 @@ Q5. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
     the person who submitted the sequence and/or people who published
     papers on the sequence.
 
-Q6. How many nucleotide sequences from nematode worms are there in the NCBI Database? 
+Q5. How many nucleotide sequences from nematode worms are there in the NCBI Database? 
 
-Q7. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
+Q6. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
     Hint: look at the examples above for malaria-related genes.
 
-Q8. How many *mRNA sequences* for collagen genes from nematode worms are there in the NCBI Database? 
+Q7. How many *mRNA sequences* for collagen genes from nematode worms are there in the NCBI Database? 
     Hint: look at the notes about the "[PROP]" search tag above.
 
-Q9. How many *protein sequences* for collagen proteins from nematode worms are there in the NCBI database? 
+Q8. How many *protein sequences* for collagen proteins from nematode worms are there in the NCBI database? 
 
-Q10. What is the accession number for the *Trypanosoma cruzi* genome in NCBI? 
+Q9. What is the accession number for the *Trypanosoma cruzi* genome in NCBI? 
     Do you see genome sequences for more than one strain of *Trypanosoma cruzi*?
 
-Q11. How many fully sequenced nematode worm species are represented in the NCBI Genome database? 
+Q10. How many fully sequenced nematode worm species are represented in the NCBI Genome database? 
 
 xxx
 
 
-Q12. How many ongoing genome sequencing projects are there for Bacteria, Archaea, and Eukarotes, respectively, in the GOLD database? Q13. Are there any genome sequencing projects ongoing at University College Cork, acccording to the GOLD database? 
+Q11. How many ongoing genome sequencing projects are there for Bacteria, Archaea, and Eukarotes, respectively, in the GOLD database? Q13. Are there any genome sequencing projects ongoing at University College Cork, acccording to the GOLD database? 
     Hint: Use the 'Find' option in the 'Edit' menu of your web browser
     to search for 'Cork' in the GOLD database's webpage listing ongoing
     genome sequencing projects.
-Q14. How many genome sequences are there for *Lactobacillus salivarius* in the NCBI Genomes database? 
+Q12. How many genome sequences are there for *Lactobacillus salivarius* in the NCBI Genomes database? 
     Why are there more than one?
-Q15. How many complete or ongoing genome sequencing projects for *Lactobacillus salivarius* are listed in GOLD? 
+Q13. How many complete or ongoing genome sequencing projects for *Lactobacillus salivarius* are listed in GOLD? 
     Does GOLD or NCBI Genomes have more sequencing projects for this
     species? If not, can you suggest an explanation why?
 
