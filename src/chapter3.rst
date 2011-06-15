@@ -589,7 +589,58 @@ Note that dengueseq[1:50] refers to the elements of the vector *dengueseq* with
 indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus genome
 sequence. 
 
-Finally, when you have finished your running your query and getting the corresponding sequences, close
+As well as retrieving the DNA (or RNA or protein) sequence itself, SeqinR can also
+retrieve all the *annotations* for the sequence, for example, information
+on when the sequence was sequenced, who sequenced it, what organism is it from,
+what paper was it described in, what genes were identified in the sequence, and so on.
+
+Once you have retrieved a sequence using SeqinR, you can retrieved its annotations
+by using the "getAnnot()" function. For example, to view the annotations
+for the DEN-1 Dengue virus genome sequence, we type:
+
+::
+
+    > annots <- getAnnot(Dengue1$req[[1]])
+
+This stores the annotations information from the NCBI record for the DEN-1 Dengue
+virus sequence in a vector variable *annots*, with one line of the NCBI
+record in each element of the vector. Therefore, we can print out the first 20 lines
+of the NCBI record by typing:
+
+::
+
+    > annots[1:20]
+      [1] "LOCUS       NC_001477              10735 bp ss-RNA     linear   VRL 08-DEC-2008"
+      [2] "DEFINITION  Dengue virus type 1, complete genome."                              
+      [3] "ACCESSION   NC_001477"                                                          
+      [4] "VERSION     NC_001477.1  GI:9626685"                                            
+      [5] "DBLINK      Project: 15306"                                                     
+      [6] "KEYWORDS    ."                                                                  
+      [7] "SOURCE      Dengue virus 1"                                                     
+      [8] "  ORGANISM  Dengue virus 1"                                                     
+      [9] "            Viruses; ssRNA positive-strand viruses, no DNA stage; Flaviviridae;"
+      [10] "            Flavivirus; Dengue virus group."                                    
+      [11] "REFERENCE   1  (bases 1 to 10735)"                                              
+      [12] "  AUTHORS   Puri,B., Nelson,W.M., Henchal,E.A., Hoke,C.H., Eckels,K.H.,"        
+      [13] "            Dubois,D.R., Porter,K.R. and Hayes,C.G."                            
+      [14] "  TITLE     Molecular analysis of dengue virus attenuation after serial passage"
+      [15] "            in primary dog kidney cells"                                        
+      [16] "  JOURNAL   J. Gen. Virol. 78 (PT 9), 2287-2291 (1997)"                         
+      [17] "   PUBMED   9292016"                                                            
+      [18] "REFERENCE   2  (bases 1 to 10735)"                                              
+      [19] "  AUTHORS   McKee,K.T. Jr., Bancroft,W.H., Eckels,K.H., Redfield,R.R.,"         
+      [20] "            Summers,P.L. and Russell,P.K."                                      
+
+On the left of the annotations, you will see that there is a column containing the field name. 
+For example, the line of the with "ACCESSION" in the left column is the accession field, which 
+contains the accession for the sequence (NC_001477 for the DEN-1 Dengue virus). 
+
+The line with "ORGANISM" in the left column is the organism field, and usually contains the Latin name 
+for the organism ("Dengue virus 1" here). The line with "AUTHORS" in the
+left column is the authors field, and contain the names of authors that wrote papers to
+describe the sequence and/or the names of the people who submitted the sequence to the NCBI Database.  
+
+When you have finished your running your query and getting the corresponding sequences and annotations, close
 the connection to the ACNUC sub-database:
 
 ::
