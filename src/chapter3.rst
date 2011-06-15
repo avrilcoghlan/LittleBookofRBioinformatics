@@ -742,6 +742,38 @@ the connection to the ACNUC sub-database that we searched ("genbank" here):
 
     > closebank()
 
+Saving sequence data in a FASTA-format file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR,
+it is conveninent to save the sequences in a file in FASTA format.
+This can be done using the "write.fasta()" function in the SeqinR library, which was
+introduced in `Chapter 1 <https://github.com/./chapter1.html#writing-sequence-data-out-as-a-fasta-file>`_
+
+If you look at the help page for the "write.fasta()" function, you will see
+that as input it takes a list of vectors, where each vector contains one DNA, RNA or
+protein sequence. 
+
+For example, if you retrieve the sequences of human tRNAs from the NCBI Database by querying the
+ACNUC "genbank" sub-database, you can save the sequences in a FASTA format file called "humantRNAs.fasta"
+by typing:
+
+::
+
+    > choosebank("genbank")                             # select the ACNUC sub-database to be searched
+    > query("humtRNAs", "SP=homo sapiens AND M=TRNA")   # specify the query
+    > myseqs <- getSequence(humtRNAs)                   # get the sequences
+    > mynames <- getName(humtRNAs)                      # get the names of the sequences
+    > write.fasta(myseqs, mynames, file.out="humantRNAs.fasta")
+    > closebank()
+
+In the above code, we get the sequences of the human tRNAs using the function "getSequence()"    
+from the SeqinR library. We also use a function "getName()"
+from the SeqinR library to get the sequences' names. Then we use the "write.fasta()" function to
+write the sequences to a FASTA file "humantRNAs.fasta". The "write.fasta()" takes as arguments:
+the list *myseqs* containing the sequences, the list *mynames* containing the names of the sequences,
+and the name of the output file ("humantRNAs.fasta" here).
+
 Finding the genome sequence for a particular species
 ----------------------------------------------------
 
