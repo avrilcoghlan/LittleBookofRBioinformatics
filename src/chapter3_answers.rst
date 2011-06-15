@@ -65,7 +65,7 @@ Q2.
 ---
 *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?*
 
-To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_
 and select "Nucleotide" from the drop-down list at the top 
 of the webpage, as you want to search for nucleotide (DNA or RNA) sequences.
 
@@ -86,7 +86,8 @@ genome sequencing projects [as of 15-Jun-2011]. Note that there are new sequence
 being added to the database continuously, so if you check this again in a couple of months, you will 
 probably find a higher number of sequences (eg. 36,000 sequences).
 
-Note: if you just go to the www.ncbi.nlm.nih.gov database, and search for "Chlamydia trachomatis"[ORGN] 
+Note: if you just go to the `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ database, 
+and search for "Chlamydia trachomatis"[ORGN] 
 (without choosing "Nucleotide" from the drop-down list), you will see 35429 hits to the Nucleotide 
 database and 148 to the GSS (Genome Sequence Survey) database:
 
@@ -121,7 +122,8 @@ Q3.
 ---
 *How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list 
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ 
+and select "Nucleotide" from the drop-down list 
 at the top of the webpage, as you want to search for nucleotide sequences.
 
 Then in the search box, type "Chlamydia trachomatis"[ORGN] AND srcdb_refseq[PROP] and press 'Search':
@@ -169,7 +171,8 @@ Q4.
 ---
 *How many nucleotide sequences were submitted to NCBI by Matthew Berriman?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down list, 
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
+and select "Nucleotide" from the drop-down list, 
 as you want to search for nucleotide sequences.
 
 Then in the search box, type "Berriman M"[AU] and press 'Search'.
@@ -214,30 +217,51 @@ we cannot specify that the person is called "M. Berriman".
 
 Q5. 
 ---
-*How many nucleotide sequences from nematode worms are there in the NCBI Database?*
+*How many nucleotide sequences from the nematode worms are there in the RefSeq Database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
-as you want to search for nucleotide sequences.
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ 
+and select "Nucleotide" from the drop-down list, as you want to search for nucleotide sequences.
 
-Then in the search box, type Nematoda[ORGN] and press 'Search'.
+Then in the search box, type Nematoda[ORGN] AND srcdb_refseq[PROP] and press 'Search'.
 
-Here [ORGN] specifies the group of species that you want to search for sequences from. In Q4, [ORGN] was used to specify 
-the name of one organism (*Chlamydia trachomatis*). However, you can also use [ORGN] to specify the name of a group of 
-organisms, for example, Fungi[ORGN] would search for fungal sequences or Mammalia[ORGN] would search for mammalian 
-sequences. The name of the group of species that you want to search for must be given in Latin, so to search for sequences
+Here [ORGN] specifies the group of species that you want to search for sequences from. 
+In Q3, [ORGN] was used to specify the name of one organism (*Chlamydia trachomatis*). 
+However, you can also use [ORGN] to specify the name of a group of 
+organisms, for example, Fungi[ORGN] would search for fungal sequences or Mammalia[ORGN] 
+would search for mammalian sequences. The name of the group of species that you want to 
+search for must be given in Latin, so to search for sequences
 from nematode worms we use the Latin name Nematoda.
 
-The search page should say at the top 'Found 2202458 nucleotide sequences.   Nucleotide (378255)   EST (1140454)   GSS (683749)' [as of 19-Feb-2011]. This means that 2,202,458 DNA or RNA sequences were found from nematode worm species in the database, of
-which 378,255 are DNA/RNA sequences, 1,140,454 are ESTs, and 683,749 sequences are DNA sequences from genome sequencing
-projects. These sequences are probably from a wide range of nematode worm species, including the model nematode worm
-*Caenorhabditis elegans*.
+The search page should say at the top 'Results: 1 to 20 of 145355' [as of 15-Jun-2011].
+This means that 145,355 DNA or RNA sequences were found from nematode worm species in the RefSeq database.
+These sequences are probably from a wide range of nematode worm species, including the model nematode worm
+*Caenorhabditis elegans*, as well as parasitic nematode species.
+
+An alternative way to search for RefSeq nucleotide sequences from nematode worms is to use the SeqinR package.
+We want to find nucleotide sequences that are in RefSeq, so the appropriate ACNUC sub-database to search is
+"refseq". Therefore, we type:
+
+::
+
+    > library("seqinr")                  # load the SeqinR R library
+    > choosebank("refseq")               # select the ACNUC sub-database to be searched
+    > query("nematodes", "SP=Nematoda")  # specify the query
+    > nematodes$nelem                    # print out the number of matching sequences
+     [1] 55241
+    > closebank()
+
+That is, using SeqinR, we find 55,241 DNA or RNA sequences from nematode worms in the RefSeq database.
+This is less than the number of sequences found by searching via the NCBI website (145,355 sequences).
+This is because the "refseq" ACNUC sub-database does not contain all of the sequences in the NCBI
+RefSeq database, for various reasons, for example, some of the sequences in the NCBI RefSeq database 
+(eg. whole genome sequences) are in other ACNUC sub-databases. 
 
 Q6. 
 ---
 *How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov and select "Nucleotide" from the drop-down list, 
-as you want to search for nucleotide sequences.
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ 
+and select "Nucleotide" from the drop-down list, as you want to search for nucleotide sequences.
 
 Then in the search box, type Nematoda[ORGN] AND collagen.
 
@@ -245,42 +269,90 @@ Here [ORGN] specifies that we want sequences from nematode worms. The phrase "AN
 must appear somewhere in the NCBI entries for those sequences, for example, in the sequence name, or in a description 
 of the sequence, or in the title of a paper describing the sequence, etc.
 
-On the results page, you should see 'Found 8341 nucleotide sequences.   Nucleotide (1546)   EST (6795)' [as of 19-Feb-2011].
-This means that 8341 DNA or RNA sequences for collagen genes from nematode worms were found, of which 6795 are EST sequences
-(parts of mRNAs). Note that these 8341 nucleotide sequences may not all necessarily be for collagen genes, as some of the
-NCBI records found may be for other genes but contain the word 'collagen' somewhere in the NCBI record (for example, in
-the title of a cited paper).
+On the results page, you should see 'Found 8437 nucleotide sequences.   Nucleotide (1642)   EST (6795)' [as of 15-Jun-2011].
+This means that 8437 DNA or RNA sequences for collagen genes from nematode worms were found, of which 6795 are EST sequences
+(parts of mRNAs). Note that these 8437 nucleotide sequences may not all necessarily be for collagen genes, as some of the
+NCBI records found may be for other genes but contain the word "collagen" somewhere in the NCBI record (for example, in
+the title of a cited paper). However, a good number of them are probably collagen sequences from nematodes.
+
+An alternative way to search for collagen nucleotide sequences from nematode worms is to use the SeqinR package.
+We want to find nucleotide sequences, so the appropriate ACNUC sub-database to search is "genbank". 
+To search for collagen genes, we can specify "collagen" as a keyword by using "K=collagen" in our query.
+Therefore, we type:
+
+::
+
+    > library("seqinr")                                # load the SeqinR R library
+    > choosebank("genbank")                            # select the ACNUC sub-database to be searched
+    > query("collagen", "SP=Nematoda AND K=collagen")  # specify the query
+    > collagen$nelem                                   # print out the number of matching sequences
+     [1] 60 
+    > closebank()
+
+That is, using SeqinR, we find 60 DNA or RNA sequences with the keyword "collagen" from nematode worms.
+This is less than the number of sequences found by searching via the NCBI website (8437 sequences).
+This is probably partly because the ACNUC "genbank" sub-database excludes some sequences that are in the NCBI
+Nucleotide database (eg. short sequences from genome sequencing projects), but also partly because 
+the method used to assign keywords to sequences in ACNUC is quite conservative and relatively few
+sequences seem to be assigned the keyword "collagen". However, presumably most of the sequences tagged
+with the keyword "collagen" are collagen genes (while the search via the NCBI website may have picked
+up many non-collagen genes, as explained above).
 
 Q7. 
 ---
 *How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Nucleotide" from the drop-down sequences, as you want to search for nucleotide sequences (nucleotide sequences include DNA sequences and RNA sequences, such as mRNAs). 
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
+and select "Nucleotide" from the drop-down sequences, as you want to search for nucleotide sequences 
+(nucleotide sequences include DNA sequences and RNA sequences, such as mRNAs). 
 
 Then in the search box, type Nematoda[ORGN] AND collagen AND "biomol mRNA"[PROP].
 
 Here [ORGN] specifies the name of the group of species, collagen specifies that we want to find NCBI entries 
 that include the word collagen, and [PROP] specifies a property of those sequences (that they are mRNAs, in this case).
 
-The search page should say 'Found 7656 nucleotide sequences.   Nucleotide (861)   EST (6795)' [as of 19-Feb-2011].
-This means that 7656 mRNA sequences were found that contain the word 'collagen' in the NCBI record. Of the
-7656, 6795 are EST sequences (parts of mRNAs). 
+The search page should say 'Found 7751 nucleotide sequences.   Nucleotide (956)   EST (6795)' [as of 15-Jun-2011].
+This means that 7751 mRNA sequences from nematodes were found that contain the word 'collagen' in the NCBI record. Of the
+7751, 6795 are EST sequences (parts of mRNAs). 
 
-Note that in Q7 we found 8341 nucleotide (DNA or RNA) sequences from nematode worms. In this question, we found out that 
-only 7656 of those sequences are mRNA sequences. This means that the other (8341-7656=) 685 sequences must be DNA sequences, 
+Note that in Q6 we found 8437 nucleotide (DNA or RNA) sequences from nematode worms. In this question, we found out that 
+only 7751 of those sequences are mRNA sequences. This means that the other (8437-7751=) 686 sequences must be DNA sequences, 
 or other types of RNA sequences (not mRNAs) such as tRNAs or rRNAs.
+
+An alternative way to search for collagen mRNA sequences from nematode worms is to use the SeqinR package.
+mRNA sequences are nucleotide sequences, so the appropriate ACNUC sub-database to search is "genbank". 
+To search for mRNAs, we can specify "M=mRNA" in our query. Therefore, we type:
+
+::
+
+    > library("seqinr")                                            # load the SeqinR R library
+    > choosebank("genbank")                                        # select the ACNUC sub-database to be searched
+    > query("collagen2", "SP=Nematoda AND K=collagen AND M=mRNA")  # specify the query
+    > collagen2$nelem                                              # print out the number of matching sequences
+     [1] 14  
+    > closebank()
+
+We find 14 nematode mRNA sequences labelled with the keyword "collagen". Again, we find less sequences than found
+when searching via the NCBI website (7751 sequences), but as in Q6, the search using the keyword "collagen" in the 
+SeqinR package may be more likely to pick up true collagen sequences (rather than other sequences that just happen
+to contain the word "collagen" somewhere in their NCBI entries).
 
 Q8. 
 ---
 *How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?*
 
-To answer this, you need to go to www.ncbi.nlm.nih.gov, and select "Protein" from the drop-down list, 
-as you want to search for protein sequences.
+To answer this, you need to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_, 
+and select "Protein" from the drop-down list, as you want to search for protein sequences.
 
-Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search'.
+Then type in the search box: Nematoda[ORGN] AND collagen and press 'Search':
 
-On the results page, you should see '1 to 20 of 1886'. This means that 1886 protein sequences from nematode
-worms were found that include the word collagen in the NCBI sequence entries [as of 19-Feb-2011].
+|image13|
+
+On the results page, you should see '1 to 20 of 1982'. This means that 1982 protein sequences from nematode
+worms were found that include the word collagen in the NCBI sequence entries [as of 15-Jun-2011].
+
+As far as I know, there is not an ACNUC sub-database that contains all the protein sequences from the
+NCBI Protein database, and therefore it is not currently possible to carry out the same query using SeqinR.
 
 Q9. 
 ---
@@ -288,26 +360,38 @@ Q9.
 
 There are two ways that you can answer this.
 
-The first method is to go to www.ncbi.nlm.nih.gov and select "Genome" from the drop-down list, 
-as you want to search for genome sequences.
+The first method is to go to `www.ncbi.nlm.nih.gov <http://www.ncbi.nlm.nih.gov>`_ 
+and select "Genome" from the drop-down list, as you want to search for genome sequences.
 
-Then type in the search box: "Trypanosoma cruzi"[ORGN] and press 'Search'.
+Then type in the search box: "Trypanosoma cruzi"[ORGN] and press 'Search':
+
+|image14|
+
+This will search the NCBI Genome database, which contains fully sequenced genome sequences.
 
 The results page says 'All:1', and lists just one NCBI record, the genome sequence for *Trypanosoma cruzi*
-strain CL Brener, which has accession NZ\_AAHK00000000.
+strain CL Brener, which has accession NZ\_AAHK00000000:
 
-The second method of answering the question is to go to the NCBI Genomes webpage
-http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome.
+|image15|
+
+The second method of answering the question is to go directly to the `NCBI Genomes webpage
+<http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome>`_.
 
 Click on the 'Eukaryota' link at the middle the page, as *Trypanosoma cruzi* is a eukaryotic species.
 
-This will give you a complete list of all the eukaryotic genomes that have been sequenced.
+This will give you a complete list of all the eukaryotic genomes that have been fully sequenced.
 
-Go to the 'Edit' menu of your web browser, and choose 'Find', and search for 'Trypanosoma cruzi'.  
+Go to the 'Edit' menu of your web browser, and choose 'Find', and search for 'Trypanosoma cruzi':
+
+|image16| 
 
 You should find *Trypanosoma cruzi* strain CL Brener.
 You will also find that there are several ongoing genome sequencing projects listed for other strains of
 *Trypanosoma cruzi*: strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3.
+
+If you look 7th column of the table, you will see that it says "Assembly" for strains CL Brener and Sylvio X10/1,
+meaning that genome assemblies are available for these two strains. Presumably the other strains are still being
+sequenced, and genome assemblies are not yet available.
 
 The link 'GB' (in green) at the far right of the webpage gives a link to the NCBI record for the sequence.
 In this case, the link for *Trypanosoma cruzi* strain CL Brener leads us to the NCBI record for accession
@@ -316,46 +400,47 @@ for the genome sequence itself. On the top right of the page, you will see a lin
 on it, it will bring you to the NCBI accession NZ\_AAHK00000000, the genome sequence for *Trypanosoma cruzi* strain CL Brener.
 
 Of the other *T. cruzi* strains listed, there is only a 'GB' link for one other strain, Sylvio X10/1.
-Presumably there are no links for the other *Trypanosoma cruzi* strains, because the sequencing
-projects are still in progress. If you click on the link for *Trypanosoma cruzi* strain Sylvio X10/1, it will bring you to the
+If you click on the link for *Trypanosoma cruzi* strain Sylvio X10/1, it will bring you to the
 NCBI record for accession ADWP01000000, the accession for the *T. cruzi* strain Sylvio X10/1 sequencing
-project. At the top right of that page, there is no "Genome" link, which tells you that there is not yet
-a genome assembly available for this strain. 
+project. 
 
 Note that the answer is slightly different for the answer from the first method above, which 
 did not find the information on the genome projects for strains JR cl. 4, Sylvio X10/1, Y, and Esmeraldo Esmeraldo cl. 3,
-because genome assemblies are not yet available for those strains.
+because the sequencing projects for these species are still ongoing.
 
 Q10. 
 ----
 *How many fully sequenced nematode worm species are represented in the NCBI Genome database?*
 
-To answer this question, you need to go to the NCBI Genome webpage http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome. 
+To answer this question, you need to go to the `NCBI Genome webpage <http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome>`_. 
 
 In the search box at the top of the page, type Nematoda[ORGN] to search for genome sequences from nematode   
 worms, using the Latin name for the nematode worms. 
 
-On the results page, you will see 'Items 1 - 20 of 62', indicating that 62 genome sequences from nematode worms
+On the results page, you will see 'Items 1 - 20 of 63', indicating that 63 genome sequences from nematode worms
 have been found. If you look down the page, you will see however that many of these are mitochondrial genome
 sequences, rather than chromosomal genome sequences.
 
 If you are just interested in chromosomal genome sequences, you can type 'Nematoda[ORGN] NOT mitochondrion' in the
 search box, to search for non-mitochondrial sequences. This should give you 16 sequences, which are all chromosomal
 genome sequences for nematode worms, including the species *Caenorhabditis elegans*, *Caenorhabditis remanei*,
-*Caenorhabditis briggsae*, *Loa loa* (which causes subcutaneous filariasis), and 
-*Brugia malayi* (which causes lymphatic filariasis). Thus, there are nematode genome sequences from five different
-species that have been fully sequenced (as of 19-Feb-2011). Because nematode worms are multi-chromosomal species, 
+*Caenorhabditis briggsae*, *Loa loa* (which causes subcutaneous filariasis), and *Brugia malayi* 
+(which causes `lymphatic filariasis <http://www.who.int/lymphatic_filariasis/en/>`_). 
+
+Thus, there are nematode genome sequences from five different
+species that have been fully sequenced (as of 15-Jun-2011). Because nematode worms are multi-chromosomal species, 
 there may be several chromosomal sequences for each species.
 
-Note that when you search the NCBI Genome database at http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome, you will
+Note that when you search the `NCBI Genome database <http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome>`_, you will
 find the NCBI records for completely sequenced genomes (completely sequenced nematode genomes in this case).
 
 If you are interested in partially sequenced genomes, that is sequences from genome sequencing projects that are
-still in progress, you can go to the NCBI Genome Projects website at http://www.ncbi.nlm.nih.gov/genomeprj. If you
+still in progress, you can go to the `NCBI Genome Projects website <http://www.ncbi.nlm.nih.gov/genomeprj>`_. If you
 search the NCBI Genome Projects database for Nematoda[ORGN], you will find that genome
 sequencing projects for many other nematode species are ongoing, including for the species *Onchocerca volvulus*
-(which causes onchocerciasis), *Wuchereria bancrofti* (which causes lymphatic filariasis), and 
-*Necator americanus* (which causes soil-transmitted helminthiasis). 
+(which causes `onchocerciasis <http://www.who.int/topics/onchocerciasis/en/>`_), 
+*Wuchereria bancrofti* (which causes `lymphatic filariasis <http://www.who.int/lymphatic_filariasis/en/>`_), and 
+*Necator americanus* (which causes `soil-transmitted helminthiasis <http://www.who.int/intestinal_worms/en/>`_). 
 
 Contact
 -------
@@ -386,4 +471,12 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image11| image:: ../_static/P3_image11.png
             :width: 600
 .. |image12| image:: ../_static/P3_image12.png
+            :width: 700
+.. |image13| image:: ../_static/P3_image13.png
+            :width: 600
+.. |image14| image:: ../_static/P3_image14.png
+            :width: 600
+.. |image15| image:: ../_static/P3_image15.png
+            :width: 700
+.. |image16| image:: ../_static/P3_image16.png
             :width: 700

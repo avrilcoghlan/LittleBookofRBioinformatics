@@ -955,36 +955,26 @@ Q3. How many nucleotide sequences are there from the bacterium *Chlamydia tracho
 
 Q4. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
 
-Q5. How many nucleotide sequences from nematode worms are there in the NCBI Database? 
+Q5. How many nucleotide sequences from nematode worms are there in the RefSeq Database? 
+     Note that several parasitic nematode worms cause neglected tropical diseases, including 
+    *Brugia malayi* and *Wucheria bancrofti*, which cause `lymphatic filariasis <http://www.who.int/lymphatic_filariasis/en/>`_;
+    *Loa loa*, which causes subcutaneous filariasis; *Onchocerca volvulus*, which causes
+     `onchocerciasis <http://www.who.int/topics/onchocerciasis/en/>`_; and *Necator americanus*, which
+     causes `soil-transmitted helminthiasis <http://www.who.int/intestinal_worms/en/index.html>`_.
 
-xxx
-
-Q6. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
-    Hint: look at the examples above for malaria-related genes.
+Q6. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?  
 
 Q7. How many *mRNA sequences* for collagen genes from nematode worms are there in the NCBI Database? 
-    Hint: look at the notes about the "[PROP]" search tag above.
 
 Q8. How many *protein sequences* for collagen proteins from nematode worms are there in the NCBI database? 
 
 Q9. What is the accession number for the *Trypanosoma cruzi* genome in NCBI? 
     Do you see genome sequences for more than one strain of *Trypanosoma cruzi*?
+    Note that the *Trypanosoma cruzi* causes `Chagas disease <http://www.who.int/topics/chagas_disease/en/>`_,
+    which is classified as a neglected tropical disease by the WHO.
 
 Q10. How many fully sequenced nematode worm species are represented in the NCBI Genome database? 
-
-xxx
-
-
-Q11. How many ongoing genome sequencing projects are there for Bacteria, Archaea, and Eukarotes, respectively, in the GOLD database? Q13. Are there any genome sequencing projects ongoing at University College Cork, acccording to the GOLD database? 
-    Hint: Use the 'Find' option in the 'Edit' menu of your web browser
-    to search for 'Cork' in the GOLD database's webpage listing ongoing
-    genome sequencing projects.
-Q12. How many genome sequences are there for *Lactobacillus salivarius* in the NCBI Genomes database? 
-    Why are there more than one?
-Q13. How many complete or ongoing genome sequencing projects for *Lactobacillus salivarius* are listed in GOLD? 
-    Does GOLD or NCBI Genomes have more sequencing projects for this
-    species? If not, can you suggest an explanation why?
-
+    
 .. |image1| image:: ../_static/P3_image1.png
             :width: 900
 .. |image2| image:: ../_static/P3_image2.png
