@@ -169,10 +169,40 @@ Then in the search box, type "Berriman M"[AU] and press 'Search'.
 Here [AU] specifies the name of the person who either submitted the sequence to the NCBI database, 
 or wrote a paper describing the sequence. 
 
-On the results page, it should say at the top: "Found 460052 nucleotide sequences.   Nucleotide (250328)   EST (121075)   GSS (88649)". This means that 460052 DNA/RNA sequences were either submitted to the NCBI database by someone called M. Berriman, or were described in a paper by someone called M. Berriman. Of these, 250328 were DNA/RNA sequences, 121075 were EST sequences (part of mRNAs), and 88649 were DNA sequences from genome sequencing projects (GSS or Genome Sequence Survey sequences).
+The results page should look like this:
 
-Note that unfortunately the NCBI website does not allow us to search for "Berriman Matthew"[AU] so we cannot be sure 
-that all of these sequences were submitted by Matthew Berriman. 
+|image12|
+
+On the top of the results page, it says [as of 15-Jun-2011]: "Found 487270 nucleotide sequences.   Nucleotide (277546)   EST (121075)   GSS (88649)". This means that 487270 DNA/RNA sequences were either submitted to the NCBI database by someone called M. Berriman, or were described in a paper by someone called M. Berriman. Of these, 277546 were DNA/RNA sequences, 121075 were EST sequences (part of mRNAs), and 88649 were DNA sequences from genome sequencing projects (GSS or Genome Sequence Survey sequences).
+
+Note that unfortunately the NCBI website does not allow us to search for "Berriman Matthew"[AU] so we 
+cannot be sure that all of these sequences were submitted by Matthew Berriman. 
+
+Note also that the search above will find sequences that were either submitted to the NCBI database
+by M. Berriman, or described in a paper on which M. Berriman was an author. Therefore, not all of the
+sequences found were necessarily submitted by M. Berriman.
+
+An alternative way to search for nucleotide sequences submitted by M. Berriman is to use the SeqinR
+package. We want to find nucleotide sequences, so the appropriate ACNUC sub-database to search is
+"genbank". Therefore, we type:
+
+::
+
+    > library("seqinr")                  # load the SeqinR R library
+    > choosebank("genbank")              # select the ACNUC sub-database to be searched
+    > query("mberriman", "AU=Berriman")  # specify the query
+    > mberriman$nelem                    # print out the number of matching sequences
+     [1] 169701
+    > closebank()
+
+We find 169,701 matching sequences. This is less than the number found by searching via the NCBI
+website (487,270 sequences). The difference is probably due to the fact that the "genbank" ACNUC
+sub-database excludes some sequences from the NCBI Nucleotide database (eg. short sequences from
+genome sequencing projects). 
+
+Note that the "AU=Berriman" query will find sequences submitted or published by someone called Berriman.
+We are not able to specify the initial of the first name of this person using the "query()" command, so
+we cannot specify that the person is called "M. Berriman". 
 
 Q5. *How many nucleotide sequences from nematode worms are there in the NCBI Database?*
 
@@ -332,4 +362,4 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image9| image:: ../_static/P3_image9.png
 .. |image10| image:: ../_static/P3_image10.png
 .. |image11| image:: ../_static/P3_image11.png
-
+.. |image12| image:: ../_static/P3_image12.png

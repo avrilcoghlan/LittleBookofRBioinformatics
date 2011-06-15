@@ -413,7 +413,7 @@ Here are some examples using the query function:
 +-------------------------------------------+------------------------------------------------------------------------+
 | "SP=Chlamydia trachomatis"                | From the bacterium *Chlamydia trachomatis*                             |
 +-------------------------------------------+------------------------------------------------------------------------+
-| "AU=Berriman"                             | Published in a paper, or submitted to NCBI, by M. Berriman             |
+| "AU=Berriman"                             | Published in a paper, or submitted to NCBI, by someone called Berriman |
 +-------------------------------------------+------------------------------------------------------------------------+
 | "K=flagellin OR K=fibrinogen"             | Which have the keyword 'flagellin' or 'fibrinogen'                     |
 +-------------------------------------------+------------------------------------------------------------------------+
@@ -953,16 +953,11 @@ Q2. How many nucleotide sequences are there from the bacterium *Chlamydia tracho
 
 Q3. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the *RefSeq* part of the NCBI Sequence Database? 
 
-xxx
 Q4. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
-    Note that the name of the person who submitted a sequence is stored
-    in the author field of the NCBI record, as is the name of people
-    who published papers on the sequence. There may be more than one
-    author fields in the NCBI record for a sequence, corresponding to
-    the person who submitted the sequence and/or people who published
-    papers on the sequence.
 
 Q5. How many nucleotide sequences from nematode worms are there in the NCBI Database? 
+
+xxx
 
 Q6. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database? 
     Hint: look at the examples above for malaria-related genes.
