@@ -956,11 +956,11 @@ Q3. How many nucleotide sequences are there from the bacterium *Chlamydia tracho
 Q4. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
 
 Q5. How many nucleotide sequences from nematode worms are there in the RefSeq Database? 
-     Note that several parasitic nematode worms cause neglected tropical diseases, including 
+    Note that several parasitic nematode worms cause neglected tropical diseases, including 
     *Brugia malayi* and *Wucheria bancrofti*, which cause `lymphatic filariasis <http://www.who.int/lymphatic_filariasis/en/>`_;
     *Loa loa*, which causes subcutaneous filariasis; *Onchocerca volvulus*, which causes
-     `onchocerciasis <http://www.who.int/topics/onchocerciasis/en/>`_; and *Necator americanus*, which
-     causes `soil-transmitted helminthiasis <http://www.who.int/intestinal_worms/en/index.html>`_.
+    `onchocerciasis <http://www.who.int/topics/onchocerciasis/en/>`_; and *Necator americanus*, which
+    causes `soil-transmitted helminthiasis <http://www.who.int/intestinal_worms/en/index.html>`_.
 
 Q6. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?  
 
