@@ -1,7 +1,9 @@
 Answers to the exercises on DNA Sequence Statistics (1)
 =======================================================
 
-Q1. *What are the last twenty nucleotides of the DEN-1 Dengue virus genome sequence?*
+Q1. 
+---
+*What are the last twenty nucleotides of the DEN-1 Dengue virus genome sequence?*
 
 To answer this, you first need to install the "SeqinR" R package, and download
 the DEN-1 Dengue genome sequence from the NCBI database and save it as
@@ -29,7 +31,9 @@ extract the sequence of these nucleotides by typing:
     [1] "c" "t" "g" "t" "t" "g" "a" "a" "t" "c" "a" "a" "c" "a" "g" "g" "t" "t" "c"
     [20] "t"
     
-Q2. *What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC\_002677)?*
+Q2. 
+---
+*What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC\_002677)?*
 
 To answer this question, you first need to retrieve the *Mycobacterium leprae* TN genome
 sequence from the NCBI database. You can use this by going to the NCBI website and searching
@@ -61,7 +65,9 @@ We can get the length of the sequence by getting the length of the vector:
     > length(lepraeseq)
     [1] 3268203
 
-Q3. *How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?*
+Q3. 
+---
+*How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?*
 
 Type:
 
@@ -72,7 +78,9 @@ Type:
          a      c      g      t 
     687041 938713 950202 692247 
 
-Q4. *What is the GC content of the Mycobacterium leprae TN genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?*  
+Q4. 
+---
+*What is the GC content of the Mycobacterium leprae TN genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?*  
 
 Find out how the GC function deals with non-A/C/T/G nucleotides, type:
 
@@ -110,7 +118,9 @@ We get the same answer as when we ignored non-A/C/G/T nucleotides. This is actua
 
 However, many other genome sequences do contain non-A/C/G/T nucleotides. Note that under 'Details' in the box that appears when you type 'help('GC')', it says : "When exact is set to TRUE the G+C content is estimated with ambiguous bases taken into account. Note that this is time expensive. A first pass is made on non-ambiguous bases to estimate the probabilities of the four bases in the sequence. They are then used to weight the contributions of ambiguous bases to the G+C content."
 
-Q5. *How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?*
+Q5. 
+---
+*How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?*
 
 First you need to search for a function to calculate reverse complement, eg. by typing:
 
@@ -143,7 +153,9 @@ In the *M. leprae* sequence we had 938713 Cs, in the complement have 938713 Gs.
 In the *M. leprae* sequence we had 950202 Gs, in the complement have 950202 Cs.
 In the *M. leprae* sequence we had 692247 Ts, in the complement have 692247 As.
 
-Q6. *How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?*
+Q6. 
+---
+*How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?*
 
 ::
 
@@ -155,7 +167,9 @@ Q6. *How many occurrences of the DNA words CC, CG and GC occur in the Mycobacter
 
 Get count for CC is 236,971; count for CG is 306,986; count for GC is 293,261.
 
-Q7. *How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?*
+Q7. 
+---
+*How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?*
 
 Type:
 

@@ -1,7 +1,9 @@
 Answers to the exercises on DNA Sequence Statistics (2)
 =======================================================
 
-Q1. *Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, using a window size of 200 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
+Q1. 
+---
+*Draw a sliding window plot of GC content in the DEN-1 Dengue virus genome, using a window size of 200 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
 
 To do this, you first need to download the DEN-1 Dengue virus sequence from the NCBI database. 
 To do this follow the steps in the chapter `DNA Sequence Statistics (1) <./chapter1.html>`_.
@@ -58,7 +60,9 @@ We can also make a sliding window plot of GC content using a window size of 2000
 In this picture it is much more noticeable that the GC content is relatively high from around
 4000-7000 bases, and lower on either side (from 2500-3500 and 7000-9000 bases).
 
-Q2. *Draw a sliding window plot of GC content in the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677) using a window size of 20000 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
+Q2. 
+---
+*Draw a sliding window plot of GC content in the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677) using a window size of 20000 nucleotides. Do you see any regions of unusual DNA content in the genome (eg. a high peak or low trough)?*
 
 To do this, you first need to download the *Mycobacterium leprae* sequence from the NCBI 
 database.
@@ -102,7 +106,9 @@ in GC content very easily:
  
 |image4|
 
-Q3. *Write a function to calculate the AT content of a DNA sequence (ie. the fraction of the nucleotides in the sequence that are As or Ts). What is the AT content of the Mycobacterium leprae TN genome?*
+Q3. 
+---
+*Write a function to calculate the AT content of a DNA sequence (ie. the fraction of the nucleotides in the sequence that are As or Ts). What is the AT content of the Mycobacterium leprae TN genome?*
 
 Here is a function to calculate the AT content of a genome sequence:
 
@@ -134,7 +140,9 @@ You should notice that the AT content is (1 minus GC content), ie. (AT content +
     > 0.4220325 + 0.5779675
     [1] 1
 
-Q4. *Write a function to draw a sliding window plot of AT content. Use it to make a sliding window plot of AT content along the Mycobacterium leprae TN genome, using a windowsize of 20000 nucleotides. Do you notice any relationship between the sliding window plot of GC content along the Mycobacterium leprae genome, and the sliding window plot of AT content?*
+Q4. 
+---
+*Write a function to draw a sliding window plot of AT content. Use it to make a sliding window plot of AT content along the Mycobacterium leprae TN genome, using a windowsize of 20000 nucleotides. Do you notice any relationship between the sliding window plot of GC content along the Mycobacterium leprae genome, and the sliding window plot of AT content?*
 
 We can write a function to write a sliding window plot of AT content:
 
@@ -169,7 +177,9 @@ This is the mirror image of the plot of GC content (because AT equals 1 minus GC
 
 |image6|
   
-Q5. *Is the 3-nucleotide word GAC GC over-represented or under-represented in the Mycobacterium leprae TN genome sequence?*
+Q5. 
+---
+*Is the 3-nucleotide word GAC GC over-represented or under-represented in the Mycobacterium leprae TN genome sequence?*
 
 We can get the number of counts of each of the 3-nucleotide words by typing:
 
