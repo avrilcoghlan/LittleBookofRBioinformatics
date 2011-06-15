@@ -210,6 +210,7 @@ first need to copy and paste into R:
                closebank()
                return(seq)
             }
+            closebank()
          }
          print(paste("ERROR: accession",accession,"was not found"))
       }
