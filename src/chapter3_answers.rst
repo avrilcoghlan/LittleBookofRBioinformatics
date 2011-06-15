@@ -477,6 +477,6 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image14| image:: ../_static/P3_image14.png
             :width: 600
 .. |image15| image:: ../_static/P3_image15.png
-            :width: 700
+            :width: 600
 .. |image16| image:: ../_static/P3_image16.png
             :width: 700
