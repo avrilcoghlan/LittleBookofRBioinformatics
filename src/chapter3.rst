@@ -470,13 +470,131 @@ to close the connection to the ACNUC sub-database.
 
 Another example could be to search for mRNA sequences from the parasitic worm *Schistosoma mansoni* in the
 NCBI Nucleotide database. The appropriate ACNUC sub-database to search is the "genbank" ACNUC sub-database.
-We may decide to call our search "SchistosomamRNA". Therefore, to carry out the whole search, we type in R:
+We may decide to call our search "SchistosomamRNA". Therefore, to carry out the search, we type in R:
 
 ::
 
     > choosebank("genbank")
     > query("SchistosomamRNA", "SP=Schistosoma mansoni AND M=mrna")
     > closebank()
+ 
+
+Example: finding the sequence for the DEN-1 Dengue virus genome 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Another example could be to search for the DEN-1 Dengue virus genome sequence, which has accession NC\_001477.
+This is a viral genome sequence, and so should be in the ACNUC sub-database "refSeqViruses". Thus to search
+for this sequence, calling our search "Dengue1", we type in R:
+
+::
+
+    > choosebank("refseqViruses")
+    > query("Dengue1", "AC=NC_001477")
+
+The result of the search is now stored in the list variable *Dengue1*. 
+Remember that a list is an R object that is like a vector, but can contain elements
+that are numeric and/or contain characters. In this case, the list *Dengue1* contains information
+on the NCBI records that match the query (ie. information on the NCBI record for accession NC\_001477). 
+
+If you look at the help page for "query()", the details of the arguments are given under the heading "Arguments",
+and the details of the results (outputs) are given under the heading "Value". If you read this now, you
+will see that it tells us that the result of the "query()" function is a list with six different named
+elements, named "call", "name", "nelem", "typelist", "req", and "socket". The content of each of these
+six named elements is explained, for example, the "nelem" element contains the number of sequences
+that match the query, and the "req" element contains their accession numbers.
+
+In our example, the list object *Dengue1* is an output of the "query()" function, and
+so has each of these six named elements, as we can find out by using the "attributes()" function, 
+and looking at the named elements listed under the heading "$names":
+
+::
+
+    > attributes(Dengue1)     
+      $names
+      [1] "call"     "name"     "nelem"    "typelist" "req"      "socket"  
+      $class
+      [1] "qaw"
+
+As explained in the `brief introduction to R <./installr.html#a-brief-introduction-to-r>`_, we can retrieve 
+the value for each of the named elements in the list *Dengue1* by using "$", followed by the element's name, 
+for example, to get the value of the element named "nelem" in the list *Dengue1*, we type:
+
+::
+
+    > Dengue1$nelem
+      [1] 1 
+
+This tells us that there was one sequence in the 'refseqViruses' ACNUC database that matched the query.
+This is what we would expect, as there should only be one sequence corresponding to accession NC\_001477.
+
+To obtain the accession numbers of the sequence found, we can type:
+
+::
+
+    > Dengue1$req
+      [[1]]
+           name      length       frame      ncbicg 
+      "NC_001477"     "10735"         "0"         "1" 
+
+As expected, the accession number of the matching sequence is NC\_001477.
+
+When you type "attributes(Dengue1)" you can see that there are two headings, "$names", and
+"$class". As explained above, the named elements of the list variable *Dengue1* are listed
+under the heading "$names". In fact, the headings "$names" and "$class" are two *attributes*
+of the list variable *Dengue1*. We can retrieve the values of the attributes of a variable
+using the "attr()" function. For example, to retrieve the value of the attribute "$names"
+of *Dengue1*, we type:
+
+::
+
+    > attr(Dengue1, "names")
+      [1] "call"     "name"     "nelem"    "typelist" "req"      "socket"
+
+This gives us the value of the attribute "$names", which contains the the names of the named
+elements of the list variable *Dengue1*. Similarly, we can retrieve the value of the a
+attribute "$class" of *Dengue1*, we type:
+
+::
+
+    > attr(Dengue1, "class")
+      [1] "qaw"
+
+This tells us that the value of the attribute "$class" is "qaw".
+
+The final step in retrieving a genomic DNA sequence is to use the "getSequence()" function to tell R to 
+retrieve the sequence data. The command below uses "getSequence()" to retrieve the sequence data
+for the DEN-1 Dengue virus genome, and puts the sequence into a variable *dengueseq*:
+
+::
+
+    > dengueseq <- getSequence(Dengue1$req[[1]])
+
+Note that the input to the getSequence() command is Dengue1$req[[1]], which contains the name of the NCBI record 
+that the list *Dengue1* contains information about. 
+
+Once you have retrieved a sequence, you can then print it out. The variable *dengueseq* is a
+vector containing the nucleotide sequence. Each element of the vector contains one nucleotide of
+the sequence. Therefore, we can print out the first 50 nucleotides of 
+the DEN-1 Dengue genome sequence by typing:
+
+::
+
+    > dengueseq[1:50]
+      [1] "a" "g" "t" "t" "g" "t" "t" "a" "g" "t" "c" "t" "a" "c" "g" "t" "g" "g" "a"
+      [20] "c" "c" "g" "a" "c" "a" "a" "g" "a" "a" "c" "a" "g" "t" "t" "t" "c" "g" "a"
+      [39] "a" "t" "c" "g" "g" "a" "a" "g" "c" "t" "t" "g"
+      
+
+Note that dengueseq[1:50] refers to the elements of the vector *dengueseq* with
+indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus genome
+sequence. 
+
+Finally, when you have finished your running your query and getting the corresponding sequences, close
+the connection to the ACNUC sub-database:
+
+::
+
+> closebank()
 
 
 Example: finding the sequences published in *Nature* **460**:352-358
@@ -505,36 +623,9 @@ by using the "query()" function. For example, to search for sequences that were 
 ::
 
     > query('naturepaper', 'R=Nature/460/352')
-    > closebank()
 
 The line above tells R that we want to store the results of the query in an R list variable called
-*naturepaper*. Remember that a list is an R object that is like a vector, but can contain elements
-that are numeric and/or contain characters. In this case, the list *naturepaper* contains information
-on the NCBI records that match the query (ie. information on the NCBI records that contain sequences
-published in Nature* **460**:352-358). 
-
-If you look at the help page for "query()", the details of the arguments are given under the heading "Arguments",
-and the details of the results (outputs) are given under the heading "Value". If you read this now, you
-will see that it tells us that the result of the "query()" function is a list with six different named
-elements, named "call", "name", "nelem", "typelist", "req", and "socket". The content of each of these
-six named elements is explained, for example, the "nelem" element contains the number of sequences
-that match the query, and the "req" element contains their accession numbers.
-
-In our example, the list object *naturepaper* is an output of the "query()" function, and
-so has each of these six named elements, as we can find out by using the "attributes()" function, 
-and looking at the named elements listed under the heading "$names":
-
-::
-
-    > attributes(naturepaper)
-      $names
-      [1] "call"     "name"     "nelem"    "typelist" "req"      "socket"  
-      $class
-      [1] "qaw"
-
-As explained in the `brief introduction to R <./installr.html#a-brief-introduction-to-r>`_, we can retrieve 
-the value for each of the named elements in the list *naturepaper* by using "$", followed by the element's name, 
-for example, to get the value of the element named "nelem" in the list *naturepaper*, we type:
+*naturepaper*. To get the value of the element named "nelem" in the list *naturepaper*, we type:
 
 ::
 
@@ -573,6 +664,32 @@ To obtain the accession numbers of the first five of the 19022 sequences, we can
 This tells us that the NCBI accessions of the first five sequences (of the 19022
 DNA or RNA sequences found that were published in *Nature* **460**:352-358) are FN357292,
 FN357293, FN357294, FN357295, and FN357296. 
+
+To retrieve these first five sequences, and print out the first 10 nucleotide
+bases of each sequence, we use the getSequence() command, typing:
+
+::
+
+    > for (i in 1:5)
+      {
+         seqi <- getSequence(naturepaper$req[[i]]) 
+         print(seqi[1:10])
+      }
+      [1] "t" "t" "g" "t" "c" "g" "a" "t" "t" "a"
+      [1] "g" "g" "t" "c" "c" "t" "t" "a" "a" "g"
+      [1] "g" "c" "c" "t" "g" "a" "c" "c" "a" "t"
+      [1] "t" "a" "t" "t" "t" "c" "c" "a" "a" "t"
+      [1] "c" "a" "a" "t" "c" "a" "c" "t" "c" "a"     
+
+Note that the input to the getSequence() command is Dengue1$req[[i]], which contains the name of *i* th NCBI record 
+that the list *naturepaper* contains information about. 
+
+Once we have carried out our queries and retrieved the sequences, the final step is to close
+the connection to the ACNUC sub-database that we searched ("genbank" here):
+
+::
+
+    > closebank()
 
 Finding the genome sequence for a particular species
 ----------------------------------------------------
@@ -698,6 +815,16 @@ There is more information about the GOLD database in the paper
 describing GOLD by Liolios *et al*, which is available at
 `http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed <http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed>`_.
 
+For more in-depth information and more examples on using the SeqinR
+package for sequence analysis, look at the SeqinR documentation,
+`http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
+
+There is also a very nice chapter on "Analyzing Sequences", which
+includes examples of using SeqinR for sequence analysis, in the
+book *Applied statistics for bioinformatics using R* by Krijnen
+(available online at
+`cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
+
 Acknowledgements
 ----------------
 
@@ -708,6 +835,8 @@ this document.
 
 Thank you to Andrew Lloyd and David Lynn, who generously shared their practical on sequence databases 
 with me, which inspired many of the examples in this practical. 
+
+Thank you to Jean Lobry and Simon Penel for helpful advice on using the SeqinR library.
 
 Contact
 -------
