@@ -207,7 +207,7 @@ below:
 +------------+---------------------+------------------------------------------------------------------------+
 | Search tag | Example             | Restricts your search to sequences:                                    |  
 +============+=====================+========================================================================+
-| [AC]       | NC_001375[AC]       | With a particular accession number                                     |
+| [AC]       | NC_001477[AC]       | With a particular accession number                                     |
 +------------+---------------------+------------------------------------------------------------------------+
 | [ORGN]     | Fungi[ORGN]         | From a particular organism or taxon                                    |
 +------------+---------------------+------------------------------------------------------------------------+
@@ -240,7 +240,7 @@ Here are some examples of searches, some of them made by combining search terms 
 +-------------------------------------------+------------------------------------------------------------------------+
 | Typed in the search box                   | Searches for sequences:                                                |  
 +===========================================+========================================================================+
-| NC_001375[AC]                             | With accession number NC_001375                                        |
+| NC_001477[AC]                             | With accession number NC_001477                                        |
 +-------------------------------------------+------------------------------------------------------------------------+
 | Nature[JOUR] AND 460[VOL] AND 352[PAGE]   | Published in *Nature* **460**:352-358                                  |
 +-------------------------------------------+------------------------------------------------------------------------+
@@ -388,15 +388,15 @@ argument for the "query()" function. Here are some more possible arguments you c
 +------------+---------------------+------------------------------------------------------------------------+
 | Argument   | Example             | Restricts your search to sequences:                                    |  
 +============+=====================+========================================================================+
-| "AC="      | "AC=NC_001375"      | With a particular accession number                                     |
+| "AC="      | "AC=NC_001477"      | With a particular accession number                                     |
 +------------+---------------------+------------------------------------------------------------------------+
-| "SP="      | "SP=Fungi"          | From a particular organism or taxon                                    |
+| "SP="      | "SP=Chlamydia"      | From a particular organism or taxon                                    |
 +------------+---------------------+------------------------------------------------------------------------+
 | "M="       | "M=mRNA"            | Of a specific type (eg. mRNA)                                          |   
 +------------+---------------------+------------------------------------------------------------------------+
 | "J="       | "J=Nature"          | Described in a paper published in a particular journal                 |
 +------------+---------------------+------------------------------------------------------------------------+
-| "R="       | "R=Nature/323/22"   | Described in a paper in a particular journal, volume and start-page    |
+| "R="       | "R=Nature/460/352"  | Described in a paper in a particular journal, volume and start-page    |
 +------------+---------------------+------------------------------------------------------------------------+
 | "AU="      | "AU=Smith"          | Described in a paper, or submitted to NCBI, by a particular author     |
 +------------+---------------------+------------------------------------------------------------------------+
@@ -405,9 +405,9 @@ The full list of possible arguments for the "query()" funtion are given on its h
 Here are some examples using the query function:
 
 +-------------------------------------------+------------------------------------------------------------------------+
-| Typed in the search box                   | Searches for sequences:                                                |  
+| Input to the query() function             | Searches for sequences:                                                |  
 +===========================================+========================================================================+
-| "AC=NC_001375"                            | With accession number NC_001375                                        |
+| "AC=NC_001477"                            | With accession number NC_001477                                        |
 +-------------------------------------------+------------------------------------------------------------------------+
 | "R=Nature/460/352"                        | Published in *Nature* **460**:352-358                                  |
 +-------------------------------------------+------------------------------------------------------------------------+
@@ -439,12 +439,45 @@ for example:
 
     > choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
 
-Likewise, to specify that we want to search the 'refseq' ACNUC database, which contains sequences
+Likewise, to specify that we want to search the 'refseq' ACNUC sub-database, which contains sequences
 from the NCBI RefSeq database, we would type:
 
 ::
 
     > choosebank("refseq") # Specify that we want to search the 'refseq' ACNUC sub-database
+
+Once you have specified which ACNUC sub-database you want to search, you can carry out a search of that 
+sub-database by using the "query()" function. You need to pass the "query()" function both a name for your query 
+(which you can make up),  and the query itself (which will be in the format of the examples in the table above). For example,
+if we want to search for RefSeq sequences from Bacteria, we might decide to call our query "RefSeqBact", and we would
+call the "query()" function as follows:
+
+::
+
+    > query("RefSeqBact", "SP=Bacteria")
+
+As explained below, the results of the search are stored in a list variable called "RefSeqBact", and can
+be retrieved from that list variable. The last thing to do once you have completed your search is to close
+the connection to the ACNUC sub-database that you were searching, by typing:
+
+::
+
+    > closebank()
+
+Thus, there are three steps involved in carrying out a query using SeqinR: first use "choosebank()" to select
+the ACNUC sub-database to search, secondly use "query()" to query the database, and thirdly use "closebank()"
+to close the connection to the ACNUC sub-database. 
+
+Another example could be to search for mRNA sequences from the parasitic worm *Schistosoma mansoni* in the
+NCBI Nucleotide database. The appropriate ACNUC sub-database to search is the "genbank" ACNUC sub-database.
+We may decide to call our search "SchistosomamRNA". Therefore, to carry out the whole search, we type in R:
+
+::
+
+    > choosebank("genbank")
+    > query("SchistosomamRNA", "SP=Schistosoma mansoni AND M=mrna")
+    > closebank()
+
 
 Example: finding the sequences published in *Nature* **460**:352-358
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -472,6 +505,7 @@ by using the "query()" function. For example, to search for sequences that were 
 ::
 
     > query('naturepaper', 'R=Nature/460/352')
+    > closebank()
 
 The line above tells R that we want to store the results of the query in an R list variable called
 *naturepaper*. Remember that a list is an R object that is like a vector, but can contain elements
