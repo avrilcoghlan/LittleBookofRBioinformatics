@@ -331,8 +331,9 @@ Pairwise global alignment of protein sequences using the Needleman-Wunsch algori
 
 As well as DNA alignments, it is also possible to make alignments
 of protein sequences. In this case it is necessary to use a scoring
-matrix *σ* for amino acids rather than for nucleotides. There are
-several well known scoring matrices that come with R, such a the
+matrix for amino acids rather than for nucleotides. 
+
+There are several well known scoring matrices that come with R, such as the
 BLOSUM series of matrices. Different BLOSUM matrices exist, named
 with different numbers. BLOSUM with high numbers are designed for
 comparing closely related sequences, while BLOSUM with low numbers
@@ -341,11 +342,12 @@ example, BLOSUM62 is used for less divergent alignments (alignments
 of sequences that differ little), and BLOSUM30 is used for more
 divergent alignments (alignments of sequences that differ a lot).
 
-Many R libraries come with example data sets or data files. The
-data() function is used to load these data files. You can use the
+Many R packages come with example data sets or data files. The
+"data()" function is used to load these data files. You can use the
 data() function in R to load a data set of BLOSUM matrices that
-comes with R Biostrings() package. To load the BLOSUM50 matrix, we
-type:
+comes with R Biostrings() package. 
+
+To load the BLOSUM50 matrix, we type:
 
 ::
 
@@ -409,76 +411,61 @@ using the BLOSUM50 matrix, we type:
     subject: [1] HEAGAWGHEE 
     score: -5 
 
-Retreiving sequences from a database, and aligning them
--------------------------------------------------------
+Aligning UniProt sequences
+--------------------------
 
-In previous practicals and this one, you learnt how to retrieve
-sequences from sequence databases such as NCBI and UniProt, to save
-them as FASTA-format files, and then to read them into R using the
-read.fasta() function.
+We discussed above how you can search for UniProt accessions and retrieve
+the corresponding protein sequences, either via the UniProt website or using the
+SeqinR R package.
 
-For example, earlier in this practical, you learnt how to retrieve
-the sequences for the chorismate lyase proteins from
-*Escherichia coli* strain K12 (UniProt P26602) and
-*Salmonella typhi* (UniProt Q8Z1T7), and read them into R, and
-store them as vectors *coliseq* and *vectorseq*.
+In the examples given above, you learnt how to retrieve the sequences for the
+chorismate lyase proteins from
+*Mycobacterium leprae* (UniProt Q9CD83) and
+*Mycobacterium ulcerans* (UniProt A0PQ23), and read them into R, and
+store them as vectors *lepraeseq* and *ulceransseq*.
 
-Once you have read in sequences using read.fasta(), you can align
-them using pairwiseAlignment() from the Biostrings package.
+You can align these sequences using pairwiseAlignment() from the Biostrings package.
 
 As its input, the pairwiseAlignment() function requires that the
 sequences be in the form of a single string (eg. "ACGTA"), rather
 than as a vector of characters (eg. a vector with the first element
 as "A", the second element as "C", etc.). Therefore, to align the
-*E. coli* and *S. typhi* chorismate lyase proteins, we first need
-to convert the vectors *coliseq* and *vectorseq* into strings. We
+*M. leprae* and *M. ulcerans* chorismate lyase proteins, we first need
+to convert the vectors *lepraeeq* and *ulceransseq* into strings. We
 can do this using the c2s() function in the SeqinR package:
 
 ::
 
-    > coliseq # Print the content of vector "coliseq"
-      [1] "m" "s" "h" "p" "a" "l" "t" "q" "l" "r" "a" "l" "r" "y" "c" "k" "e" "i"
-     [19] "p" "a" "l" "d" "p" "q" "l" "l" "d" "w" "l" "l" "l" "e" "d" "s" "m" "t"
-     [37] "k" "r" "f" "e" "q" "q" "g" "k" "t" "v" "s" "v" "t" "m" "i" "r" "e" "g"
-     [55] "f" "v" "e" "q" "n" "e" "i" "p" "e" "e" "l" "p" "l" "l" "p" "k" "e" "s"
-     [73] "r" "y" "w" "l" "r" "e" "i" "l" "l" "c" "a" "d" "g" "e" "p" "w" "l" "a"
-     [91] "g" "r" "t" "v" "v" "p" "v" "s" "t" "l" "s" "g" "p" "e" "l" "a" "l" "q"
-    [109] "k" "l" "g" "k" "t" "p" "l" "g" "r" "y" "l" "f" "t" "s" "s" "t" "l" "t"
-    [127] "r" "d" "f" "i" "e" "i" "g" "r" "d" "a" "g" "l" "w" "g" "r" "r" "s" "r"
-    [145] "l" "r" "l" "s" "g" "k" "p" "l" "l" "l" "t" "e" "l" "f" "l" "p" "a" "s"
-    [163] "p" "l" "y"
-    > coliseqstring <- c2s(coliseq) # Make a string that contains the sequence in "coliseq"
-    > coliseqstring # Print the content of string coliseqstring
-    [1] "mshpaltqlralryckeipaldpqlldwllledsmtkrfeqqgktvsvtmiregfveqneipeelpllpkesrywlreillcadgepwlagrtvvpvstlsgpelalqklgktplgrylftsstltrdfieigrdaglwgrrsrlrlsgkpllltelflpasply"
-    > typhiseqstring <- c2s(typhiseq) # Make a string that contains the sequence in "typhiseq"
+    > lepraeseqstring <- c2s(lepraeseq)     # Make a string that contains the sequence in "lepraeseq"
+    > ulceransseqstring <- c2s(ulceransseq) # Make a string that contains the sequence in "ulceransseq"
 
 Furthermore, pairwiseAlignment() requires that the sequences be
-stored as uppercase characters. Therefore, we need to use the
-toupper() function to convert *coliseqstring* and *typhiseqstring*
+stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the
+toupper() function to convert *lepraeseqstring* and *ulceransseqstring*
 to uppercase:
 
 ::
 
-    > coliseqstring <- toupper(coliseqstring)
-    > coliseqstring # Print out the content of vector "coliseqstring"
-    [1] "MSHPALTQLRALRYCKEIPALDPQLLDWLLLEDSMTKRFEQQGKTVSVTMIREGFVEQNEIPEELPLLPKESRYWLREILLCADGEPWLAGRTVVPVSTLSGPELALQKLGKTPLGRYLFTSSTLTRDFIEIGRDAGLWGRRSRLRLSGKPLLLTELFLPASPLY"
-    > typhiseqstring <- toupper(typhiseqstring) 
-
-We can now align the the *E. coli* and *S. tytphi* chorismate lyase
+    > lepraeseqstring <- toupper(lepraeseqstring)
+    > ulceransseqstring <- toupper(ulceransseqstring)
+    > lepraeseqstring # Print out the content of "lepraeseqstring"
+      [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL"
+ 
+We can now align the the *M. leprae* and *M. ulcerans* chorismate lyase
 protein sequences using the pairwiseAlignment() function:
 
 ::
 
-    > globalAlignColiTyphi <- pairwiseAlignment(coliseqstring, typhiseqstring,
-    substitutionMatrix = BLOSUM50, gapOpening = -2, gapExtension = -8, scoreOnly = FALSE)
-    > globalAlignColiTyphi # Print out the optimal global alignment and its score
-    Global Pairwise Alignment (1 of 1)
-    pattern: [1] MSHPALTQLRALRYCKEIPALDPQLLDWLLLEDSMTKRFEQQGKTVSVTMI...GRYLFTSSTLTRDFIEIGRDAGLWGRRSRLRLSGKPLLLTELFLPASPLY 
-    subject: [1] MSHPALTQLRALRYFDAIPALEPHLLDWLLLEDSVTKRFEQQGKRVSVTLI...GRYLFTSSTLTRDFIEIGRDATLWGRRSRLRLSGKPLLLTELFLPASPLY 
-    score: 931 
-
+    > globalAlignLepraeUlcerans <- pairwiseAlignment(lepraeseqstring, ulceransseqstring,
+      substitutionMatrix = BLOSUM50, gapOpening = -2, gapExtension = -8, scoreOnly = FALSE)
+    > globalAlignLepraeUlcerans # Print out the optimal global alignment and its score
+      Global PairwiseAlignedFixedSubject (1 of 1)
+      pattern: [1] MT-----NR--T---LSREEIRKLDRDLRILVATN...QDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKN 
+      subject: [1] MLAVLPEKREMTECHLSDEEIRKLNRDLRILIATN...EDNSREEPIRHQRS--VGT-SA-R---SGRSICT 
+      score: 627 
+      
 As the alignment is very long, when you type
-*globalAlignColiTyphi*, you only see the start and the end of the
+*globalAlignLepraeUlcerans*, you only see the start and the end of the
 alignment (see above). Therefore, we need to have a function to
 print out the whole alignment (see below).
 
@@ -486,61 +473,99 @@ Viewing a long pairwise alignment
 ---------------------------------
 
 If you want to view a long pairwise alignment such as that between
-the *E. coli* and *S. typhi* chorismate lyase proteins, it is
-convenient to print out the alignment in blocks. As mentioned
-above, it is possible to save R functions in a file, and to load
-them for us at a later date. The file Rfunctions.R (which you can
-download from the web at
-`www.ucc.ie/microbio/MB6301/Rfunctions.R <http://www.ucc.ie/microbio/MB6301/Rfunctions.R>`_)
-contains a function printPairwiseAlignment() that contains a
-function for printing out blocks of an alignment. Download the file
-to your "My Documents" folder, and load it into R by using the
-source() function:
+the *M. leprae* and *M. ulerans* chorismate lyase proteins, it is
+convenient to print out the alignment in blocks. 
+
+The R function "printPairwiseAlignment()" below will do this for you:
 
 ::
 
-    > source("Rfunctions.R")
+    > printPairwiseAlignment <- function(alignment, chunksize=60, returnlist=FALSE)
+      {
+         library(Biostrings)
+         seq1aln <- pattern(alignment) # Get the alignment for the first sequence
+         seq2aln <- subject(alignment) # Get the alignment for the second sequence
+         alnlen  <- nchar(seq1aln)     # Find the number of columns in the alignment
+         starts  <- seq(1, alnlen, by=chunksize)
+         n       <- length(starts)     
+         seq1alnresidues <- 0
+         seq2alnresidues <- 0
+         for (i in 1:n) {
+            chunkseq1aln <- substring(seq1aln, starts[i], starts[i]+chunksize-1)
+            chunkseq2aln <- substring(seq2aln, starts[i], starts[i]+chunksize-1)
+            # Find out how many gaps there are in chunkseq1aln:
+            gaps1 <- countPattern("-",chunkseq1aln) # countPattern() is from Biostrings library
+            # Find out how many gaps there are in chunkseq2aln:                  
+            gaps2 <- countPattern("-",chunkseq2aln) # countPattern() is from Biostrings library
+            # Calculate how many residues of the first sequence we have printed so far in the alignment:
+            seq1alnresidues <- seq1alnresidues + chunksize - gaps1
+            # Calculate how many residues of the second sequence we have printed so far in the alignment:
+            seq2alnresidues <- seq2alnresidues + chunksize - gaps2
+            if (returnlist == 'FALSE')
+            {
+               print(paste(chunkseq1aln,seq1alnresidues))
+               print(paste(chunkseq2aln,seq2alnresidues))
+               print(paste(' '))
+            }
+         }
+         if (returnlist == 'TRUE')
+         {
+            vector1 <- s2c(substring(seq1aln, 1, nchar(seq1aln)))
+            vector2 <- s2c(substring(seq2aln, 1, nchar(seq2aln)))
+            mylist <- list(vector1, vector2) 
+            return(mylist)
+         }
+    }
 
-We can then use our function printPairwiseAlignment() to print out
-the alignment between the *E. coli* and *S. typhi* chorismate lyase
-proteins (which we stored this alignment in the
-*globalAlignColiTyphi* variable, see above), in blocks of 60
+To use this function you first need to copy and paste this function into R.
+You can then use our function printPairwiseAlignment() to print out
+the alignment between the *M. leprae* and *M. ulcerans* chorismate lyase
+proteins (we stored this alignment in the
+*globalAlignLepraeUlcerans* variable, see above), in blocks of 60
 alignment columns:
 
 ::
 
-    > printPairwiseAlignment(globalAlignColiTyphi, 60)
-    [1] "MSHPALTQLRALRYCKEIPALDPQLLDWLLLEDSMTKRFEQQGKTVSVTMIREGFVEQNE 60"
-    [1] "MSHPALTQLRALRYFDAIPALEPHLLDWLLLEDSVTKRFEQQGKRVSVTLIREAFVGQSE 60"
-    [1] " "
-    [1] "IPEELPLLPKESRYWLREILLCADGEPWLAGRTVVPVSTLSGPELALQKLGKTPLGRYLF 120"
-    [1] "VEEASGLLPSESRYWLREILLCADGEPWLAGRTVVPESTLCGPEQVLQHLGKTPLGRYLF 120"
-    [1] " "
-    [1] "TSSTLTRDFIEIGRDAGLWGRRSRLRLSGKPLLLTELFLPASPLY 180"
-    [1] "TSSTLTRDFIEIGRDATLWGRRSRLRLSGKPLLLTELFLPASPLY 180"
-    [1] " "
-
+    > printPairwiseAlignment(globalAlignLepraeUlcerans, 60)
+      [1] "MT-----NR--T---LSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLL 50"
+      [1] "MLAVLPEKREMTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQ 60"
+      [1] " "
+      [1] "DVAPKIPELENLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPI 110"
+      [1] "DAAPEMDGCDHSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPI 120"
+      [1] " "
+      [1] "GEIMAASRIETYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYF 170"
+      [1] "GEVMAASCIETFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYF 180"
+      [1] " "
+      [1] "LRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKN 230"
+      [1] "LRSVFEDNSREEPIRHQRS--VGT-SA-R---SGRSICT 233"
+      [1] " "
+      
 The position in the protein of the amino acid that is at the end of
 each line of the printed alignment is shown after the end of the
 line. For example, the first line of the alignment above finishes
-at amino acid position 60 in the *E. coli* protein and also at
-amino acid position 60 in the *S. typhi* protein.
+at amino acid position 50 in the *M. leprae* protein and also at
+amino acid position 60 in the *M. ulcerans* protein.
 
-If we were printing out an alignment that contained gaps in the
-first 60 alignment columns, the first 60 alignment columns may end
-before the 60th amino acid in the two sequences that were aligned.
+Since we are printing out an alignment that contained gaps in the
+first 60 alignment columns, the first 60 alignment columns ends
+before the 60th amino acid in the *M. leprae* sequence.
 
 Calculating the statistical significance of a pairwise global alignment
 -----------------------------------------------------------------------
 
 We have seen that when we align the 'PAWHEAE' and 'HEAGAWGHEE'
 protein sequences, they have some similarity, and the score for
-their optimal global alignment is -5. But is this alignment
+their optimal global alignment is -5. 
+
+But is this alignment
 *statistically significant*? In other words, is this alignment
-better than we would expect between any two random proteins? The
-Needleman-Wunsch alignment algorithm will produce a global
+better than we would expect between any two random proteins? 
+
+The Needleman-Wunsch alignment algorithm will produce a global
 alignment even if we give it two unrelated random protein
-sequences, although the alignment score would be low. Therefore, we
+sequences, although the alignment score would be low. 
+
+Therefore, we
 should ask: is the score for our alignment better than expected
 between two random sequences of the same lengths and amino acid
 compositions?
@@ -549,7 +574,9 @@ It is reasonable to expect that if the alignment score is
 statistically significant, then it will be higher than the scores
 obtained from aligning pairs of random protein sequences that have
 the same lengths and amino acid compositions as our original two
-sequences. Therefore, to assess if the score for our alignment
+sequences. 
+
+Therefore, to assess if the score for our alignment
 between the 'PAWHEAE' and 'HEAGAWGHEE' protein sequence is
 statistically significant, a first step is to make some random
 sequences that have the same amino acid composition and length as
@@ -561,13 +588,15 @@ composition and length as the sequence 'PAWHEAE'? One way is to
 generate sequences using a
 *multinomial model for protein sequences* in which the
 probabilities of the different amino acids set to be equal to their
-frequencies in the sequence 'PAWHEAE'. That is, we can generate
+frequencies in the sequence 'PAWHEAE'. 
+
+That is, we can generate
 sequences using a multinomial model for proteins, in which the
-probability of 'P', *p\ :sub:`P`\ *, is set to 0.1428571 (1/7); the
-probability of 'A', *p\ :sub:`A`\ *, is set to 0.2857143 (2/7); the
-probability of 'W', *p\ :sub:`W`\ *, is set to 0.1428571 (1/7); the
-probability of 'H', *p\ :sub:`H`\ *, is set to 0.1428571 (1/7); and
-the probabilty of 'E', *p\ :sub:`E`\ *, is set to 0.2857143 (2/7),
+probability of 'P' is set to 0.1428571 (1/7); the
+probability of 'A' is set to 0.2857143 (2/7); the
+probability of 'W' is set to 0.1428571 (1/7); the
+probability of 'H' is set to 0.1428571 (1/7); and
+the probabilty of 'E' is set to 0.2857143 (2/7),
 and the probabilities of the other 15 amino acids are set to 0.
 
 To generate a sequence with this multinomial model, we choose the
@@ -587,97 +616,134 @@ times. To generate 1000 sequences that are each 7 letters long, we
 can spin the arrow 7000 times, where the letters chosen form 1000
 7-letter amino acid sequences.
 
-The procedure above was used to generate 1000 7-letter amino acid
-sequences, using a multinomial model in which
-*p\ :sub:`P`\ *=0.1428571, *p\ :sub:`A`\ *=0.2857143,
-*p\ :sub:`W`\ *=0.1428571, *p\ :sub:`H`\ *=0.1428571, and
-*p\ :sub:`E`\ *=0.2857143. The file containing the sequences is
-called "SeqsFromMultinomial1", and you can download it from
-`http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial1 <http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial1>`_.
-(Note: I have not shown you here how to use R to generate a
-sequence according to a particular multinomial model, because this
-is one of the problems you need to solve for MB6301 Assignment 1).
-
-You can then read the sequences in file "SeqsFromMultinomial1" into
-R using the scan() function:
+To generate a certain number (eg.1000) random amino acid sequences of a certain
+length using a multinomial model, you can use the function 
+generateSeqsWithMultinomialModel() below:
 
 ::
 
-    > randomseqs1 <- scan("SeqsFromMultinomial1", what="character")
+    > generateSeqsWithMultinomialModel <- function(inputsequence, X)
+      {
+         # Change the input sequence into a vector of letters
+         library("seqinr") # Load in the SeqinR library, so we can use function "s2c".
+         inputsequencevector <- s2c(inputsequence)
+         # Find the frequencies of the letters in the input sequence "inputsequencevector":
+         mylength <- length(inputsequencevector)
+         mytable <- table(inputsequencevector)
+         # Find the names of the letters in the sequence
+         letters <- rownames(mytable)
+         numletters <- length(letters)
+         probabilities <- numeric() # Make a vector to store the probabilities of letters
+         for (i in 1:numletters)
+         {
+            letter <- letters[i]
+            count <- mytable[[i]]
+            probabilities[i] <- count/mylength
+         } 
+         # Make X random sequences using the multinomial model with probabilities "probabilities"
+         seqs <- numeric(X)
+         for (j in 1:X)
+         {
+            seq <- sample(letters, mylength, rep=TRUE, prob=probabilities) # Sample with replacement
+            seq <- c2s(seq)
+            seqs[j] <- seq
+         }
+         # Return the vector of random sequences
+         return(seqs)
+      }
 
-This reads the sequences into a vector *randomseqs1*, where each
-element in the vector contains one of the sequences generated using
-the multinomial model. Therefore, to print out the first ten
-sequences, we can print out the first ten elements of the vector
-*randomseqs1*:
+The function generateSeqsWithMultinomialModel() generates X random sequences with a 
+multinomial model, where the probabilities of the different letters are set equal to their frequencies
+in an input sequence, which is passed to the function as a string of characters
+(eg. 'PAWHEAE').
+
+The function returns X random sequences in the form of a vector which has X elements, the first
+element of the vector contains the first sequence, the second element contains the second sequence,
+and so on.
+
+You will need to copy and paste this function into R before you can use it.
+
+We can use this function to generate 1000 7-letter amino acid sequences using a multinomial
+model in which the probabilities of the letters are set equal to their frequencies in 'PAWHEAE'
+(ie. probabilities 1/7 for P, 2/7 for A, 1/7 for W, 1/7 for H and 2/7 for E), by typing:
 
 ::
 
-    > randomseqs1[1:10]
-     [1] "EEHAAAE" "AWPHPHA" "AEAPHWE" "WAHAAHA" "HAEEPHP" "APPWAWA" "WEPPPPH"
-     [8] "HEAEHWA" "EEEHWPP" "WWAAEAW"
+    > randomseqs <- generateSeqsWithMultinomialModel('PAWHEAE',1000) 
+    > randomseqs[1:10] # Print out the first 10 random sequences
+      [1] "EHHEWEA" "EAEEEAH" "WAHAWEP" "PPAPAAW" "HEPWWAA" "APAAAAA" "EAHAPHP"
+      [8] "AAPEEWE" "HEAAAAP" "EWAAPEP"
+      
+The 1000 random sequences are stored in a vector *randomseqs* that has 1000 elements,
+each of which contains one of the random sequences.
 
 We can then use the Needleman-Wunsch algorithm to align the
 sequence 'HEAGAWGHEE' to one of the 1000 random sequences generated
-using the multinomial model with *p\ :sub:`P`\ *=0.1428571,
-*p\ :sub:`A`\ *=0.2857143, *p\ :sub:`W`\ *=0.1428571,
-*p\ :sub:`H`\ *=0.1428571, and *p\ :sub:`E`\ *=0.2857143. For
-example, to align 'HEAGAWGHEE' to the first of the 1000 random
+using the multinomial model with probabilities 1/7 for P, 2/7 for A, 1/7 for W, 1/7 for H and 2/7 for E.
+
+For example, to align 'HEAGAWGHEE' to the first of the 1000 random
 sequences ('EEHAAAE'), we type:
 
 ::
 
     > s4 <- "HEAGAWGHEE"
-    > pairwiseAlignment(s4, randomseqs1[1], substitutionMatrix = "BLOSUM50", gapOpening = -2,
-    gapExtension = -8, scoreOnly = FALSE)
-    Global Pairwise Alignment (1 of 1)
-    pattern: [1] HEAGAWGHEE 
-    subject: [1] EEHAA---AE 
-    score: -12 
+    > pairwiseAlignment(s4, randomseqs[1], substitutionMatrix = "BLOSUM50", gapOpening = -2,
+      gapExtension = -8, scoreOnly = FALSE)
+      Global PairwiseAlignedFixedSubject (1 of 1)
+      pattern: [2] EAGAWGHEE 
+      subject: [1] EHHEW--EA 
+      score: -7 
 
-If we use the pairwiseAlignment() function with the argument
-'scoreOnly=TRUE', it will just give us the score for the
-alignment:
+If we use the pairwiseAlignment() function with the argument 'scoreOnly=TRUE', it will just give 
+us the score for the alignment:
 
 ::
 
-    > pairwiseAlignment(s4, randomseqs1[1], substitutionMatrix = "BLOSUM50", gapOpening = -2,
-    gapExtension = -8, scoreOnly = TRUE)
-    [1] -12
+    > pairwiseAlignment(s4, randomseqs[1], substitutionMatrix = "BLOSUM50", gapOpening = -2,
+      gapExtension = -8, scoreOnly = TRUE)
+      [1] -7
 
 If we repeat this 1000 times, that is, for each of the 1000 random
-sequences in vector *randomseqs1*, we can get a distribution of
+sequences in vector *randomseqs*, we can get a distribution of
 alignment scores expected for aligning 'HEAGAWGHEE' to random
 sequences of the same length and (approximately the same) amino
-acid composition as 'PAWHEAE'. We can then compare the actual score
-for aligning 'PAWHEAE' to 'HEAGAWGHEE' (ie. -5) to the distribution
+acid composition as 'PAWHEAE'. 
+
+We can then compare the actual score for aligning 'PAWHEAE' to 'HEAGAWGHEE' (ie. -5) to the distribution
 of scores for aligning 'HEAGAWGHEE' to the random sequences.
 
 ::
 
     > randomscores <- double(1000) # Create a numeric vector with 1000 elements
-    > for (i in 1:1000) {
-            score <- pairwiseAlignment(s4, randomseqs1[i], substitutionMatrix = "BLOSUM50", gapOpening = -2, gapExtension = -8, scoreOnly = TRUE)
-            randomscores[i] <- score
-     }
+    > for (i in 1:1000) 
+      {
+         score <- pairwiseAlignment(s4, randomseqs[i], substitutionMatrix = "BLOSUM50", 
+           gapOpening = -2, gapExtension = -8, scoreOnly = TRUE)
+         randomscores[i] <- score
+      }
 
 The code above first uses the double() function to create a numeric
 vector *randomscores* for storing real numbers (ie. not integers),
 with 1000 elements. This will be used to store the alignment scores
 for 1000 alignments between 'HEAGAWGHEE' and the 1000 different
-random sequences generated using the multinomial model. The 'for
-loop' takes each of the 1000 different random sequences, aligns
+random sequences generated using the multinomial model. 
+
+The 'for loop' takes each of the 1000 different random sequences, aligns
 each one to 'HEAGAWGHEE', and stores the 1000 alignment scores in
-the *randomscores* vector. We can make a histogram plot of the 1000
-scores in vector *randomscores* by typing:
+the *randomscores* vector. 
+
+Once we have run the 'for loop', we can make a histogram plot of the 1000 scores 
+in vector *randomscores* by typing:
 
 ::
 
     > hist(randomscores, col="red") # Draw a red histogram
 
-|image4| We can see from the histogram that a lot of the random
-sequences seem to have higher alignment scores than -3 when aligned
-to 'HEAGAWGHEE' (where -3 is the alignment score for 'PAWHEAE' and
+|image4| 
+
+We can see from the histogram that quite a lot of the random
+sequences seem to have higher alignment scores than -5 when aligned
+to 'HEAGAWGHEE' (where -5 is the alignment score for 'PAWHEAE' and
 'HEAGAWGHEE').
 
 We can use the vector *randomscores* of scores for 1000 alignments
@@ -688,13 +754,13 @@ and 'HEAGAWGHEE' (ie. -5) by chance.
 ::
 
     > sum(randomscores >= -5)
-    [1] 289
+    [1] 266
 
-We see that 289 of the 1000 alignments of random sequences to
+We see that 266 of the 1000 alignments of random sequences to
 'HEAGAWGHEE' had alignment scores that were equal to or greater
 than -5. Thus, we can estimate that the probability of getting a
-score as large as the real alignment score by chance is (289/1000
-=) 0.289. In other words, we can calculate a *P-value* of 0.289.
+score as large as the real alignment score by chance is (266/1000
+=) 0.266. In other words, we can calculate a *P-value* of 0.266.
 This probability or *P*-value is quite high (almost 30%, or 1 in
 3), so we can conclude that it is quite probable that we could get
 an alignment score as high as -5 by chance alone. This indicates
@@ -705,7 +771,7 @@ sequences.
 .. include:: <isoamsr.txt>
 
 Another way of saying this is that the *P*-value that we calculated
-is high (0.289), and as a result we conclude that the alignment
+is high (0.266), and as a result we conclude that the alignment
 score for the sequences 'HEAGAWGHEE' and 'PAWHEAE' is not
 *statistically significant*. Generally, if the *P*-value that we
 calculate for an alignment of two sequences is >0.05, we conclude
@@ -727,13 +793,11 @@ functions:
    (non-integer) numbers
 #. toupper() for converting a string of characters from lowercase
    to uppercase
-#. scan() for reading in data from a file
 
 All of these functions belong to the standard installation of R.
 
 You have also learnt the following R functions that belong to the
-bioinformatics libraries:
-
+bioinformatics packages:
 
 #. nucleotideSubstitutionMatrix() in the Biostrings package for
    making a nucleotide scoring matrix
@@ -745,9 +809,7 @@ bioinformatics libraries:
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package and SeqinR
-package for your project or assignments.
+Some links are included here for further reading. 
 
 For background reading on sequence alignment, it is recommended to
 read Chapter 3 of
@@ -757,18 +819,27 @@ by Cristianini and Hahn (Cambridge University Press;
 
 For more in-depth information and more examples on using the SeqinR
 package for sequence analysis, look at the SeqinR documentation,
-`seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
+`http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
+
+There is also a very nice chapter on "Analyzing Sequences", which
+includes examples of using SeqinR and Biostrings for sequence analysis, in the
+book *Applied statistics for bioinformatics using R* by Krijnen
+(available online at
+`cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
+
+For a more in-depth introduction to R, a good online tutorial is
+available on the "Kickstarting R" website,
+`cran.r-project.org/doc/contrib/Lemon-kickstart <http://cran.r-project.org/doc/contrib/Lemon-kickstart/>`_.
+
+There is another nice (slightly more in-depth) tutorial to R
+available on the "Introduction to R" website,
+`cran.r-project.org/doc/manuals/R-intro.html <http://cran.r-project.org/doc/manuals/R-intro.html>`_.
+
 
 For more information on and examples using the Biostrings package,
 see the Biostrings documentation at
-`bioconductor.org/packages/2.5/bioc/html/Biostrings.html <http://bioconductor.org/packages/2.5/bioc/html/Biostrings.html>`_.
+`http://www.bioconductor.org/packages/release/bioc/html/Biostrings.html <http://www.bioconductor.org/packages/release/bioc/html/Biostrings.html>`_.
 
-There is also a very nice chapter on "Analyzing Sequences", which
-includes examples of using the SeqinR and Biostrings libraries for
-sequence analysis, in the book
-*Applied statistics for bioinformatics using R* by Krijnen
-(available online at
-`cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
 
 Acknowledgements
 ----------------
@@ -792,6 +863,18 @@ on "Analyzing Sequences" in the book
 Thank you to Jean Lobry and Simon Penel for helpful advice on using
 the SeqinR package.
 
+Contact
+-------
+
+I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
+my email address a.coghlan@ucc.ie 
+
+License
+-------
+
+The content in this book is licensed under a `Creative Commons Attribution 3.0 License
+<http://creativecommons.org/licenses/by/3.0/>`_.
+
 Exercises
 ---------
 
@@ -799,21 +882,29 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
+Model answers to the exercises are given in the chapter entitled
+`Answers to the exercises on Sequence Alignment <./chapter4_answers.html>`_.
+
 Q1. Download FASTA-format files of the *Drosophila melanogaster* Eyeless protein (UniProt accession O18381) and the human Aniridia protein (UniProt accession Q66SS1) sequences from UniProt (`www.uniprot.org <http://www.uniprot.org>`_). 
     Note: the *eyeless* gene of the fruitfly *Drosophila melanogaster*
     and the human gene *aniridia* are distantly related genes that
     control eye development in these two species. Some regions of the
     fruitfly *eyeless* gene and human *aniridia* gene are almost
     identical.
-Q2. What is the alignment score for the optimal global alignment between the *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, when you use the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? Q3. Use the printPairwiseAlignment() function to view the optimal global alignment between *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, using the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5. 
+
+Q2. What is the alignment score for the optimal global alignment between the *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, when you use the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
+
+Q3. Use the printPairwiseAlignment() function to view the optimal global alignment between *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, using the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5. 
     Do you see any regions where the alignment is very good (lots of
     identities and few gaps)?
     If so, what are the coordinates of these long regions of good
     alignment with respect to the Aniridia and Eyeless proteins? It is
     sufficient to give approximate coordinates.
+
 Q4. What global alignment score do you get for the Aniridia and Eyeless proteins, when you use the *BLOSUM62* alignment matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
     Which scoring matrix do you think is more appropriate for using for
     this pair of proteins: BLOSUM50 or BLOSUM62?
+
 Q5. What is the statistical significance of the optimal global alignment for the Aniridia and Eyeless proteins made using the *BLOSUM50* scoring matrix, with a gap opening penalty of -10 and a gap extension penalty of -0.5? 
     In other words, what is the probability of getting a score as large
     as the real alignment score for Eyeless and Aniridia by chance?
@@ -824,27 +915,14 @@ Q5. What is the statistical significance of the optimal global alignment for the
     sequence:
     `http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial2 <http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial2>`_.
     Each of these 1000 random sequences is the same length as Eyeless.
+
 Q6. What is the optimal global alignment score between the *Drosophila melanogaster* Eyeless protein and the *E. coli* chorismate lyase protein? 
     Is the alignment score statistically significant (what is the
     *P-* value?)?
     Does this surprise you?
 
-Other ways to do the same thing
--------------------------------
-
-It is possible to carry out some of the analyses that you have
-carried out in the practicals via websites. For example, it is
-possible to calculate the optimal global alignment between two
-sequences using the Needleman-Wunsch algorithm using the Needle
-program, via the website
-`mobyle.rpbs.univ-paris-diderot.fr/cgi-bin/portal.py?form=needle <http://mobyle.rpbs.univ-paris-diderot.fr/cgi-bin/portal.py?form=needle>`_.
-The Needle is also available to download as part of the EMBOSS
-package
-(`emboss.sourceforge.net <http://emboss.sourceforge.net/>`_), and
-so can also be run on your own computer.
-
 .. |image0| image:: ../_static/P4_image0.png
 .. |image1| image:: ../_static/P4_image1.png
 .. |image2| image:: ../_static/P4_image2.png
-.. |image3| image:: ../_static/P4_image10.png
-.. |image4| image:: ../_static/P4_image11.png
+.. |image3| image:: ../_static/P4_image3.png
+.. |image4| image:: ../_static/P4_image4.png
