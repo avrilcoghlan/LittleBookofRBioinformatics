@@ -560,6 +560,45 @@ Since we are printing out an alignment that contained gaps in the
 first 60 alignment columns, the first 60 alignment columns ends
 before the 60th amino acid in the *M. leprae* sequence.
 
+Pairwise local alignment of protein sequences using the Smith-Waterman algorithm
+--------------------------------------------------------------------------------
+
+You can use the pairwiseAlignment() function to find the optimal local alignment of two
+sequences, that is the best alignment of parts (subsequences) of those sequences, by using
+the "type=local" argument in pairwiseAlignment(). This uses the Smith-Waterman algorithm
+for local alignment, the classic bioinformatics algorithm for finding optimal local alignments.
+
+For example, to find the best local alignment between the *M. leprae* and *M. ulcerans*
+chorismate lyase proteins, we can type:
+
+
+::
+
+    > localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseqstring, ulceransseqstring,
+      substitutionMatrix = BLOSUM50, gapOpening = -2, gapExtension = -8, scoreOnly = FALSE, type="local")
+    > localAlignLepraeUlcerans # Print out the optimal local alignment and its score
+      Local PairwiseAlignedFixedSubject (1 of 1)
+      pattern:  [1] MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVV...IITTEYFLRSVFQDTPREELDRCQYSNDIDTRSG 
+      subject: [11] MTECHLSDEEIRKLNRDLRILIATNGTLTRILNVL...IIITEYFLRSVFEDNSREEPIRHQRSVGTSARSG 
+      score: 761 
+    > printPairwiseAlignment(localAlignLepraeUlcerans, 60)
+      [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELE 60"
+      [1] "MTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQDAAPEMDGCD 60"
+      [1] " "
+      [1] "NLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIE 120"
+      [1] "HSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPIGEVMAASCIE 120"
+      [1] " "
+      [1] "TYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPR 180"
+      [1] "TFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYFLRSVFEDNSR 180"
+      [1] " "
+      [1] "EELDRCQYSNDIDTRSG 240"
+      [1] "EEPIRHQRSVGTSARSG 240"
+      [1] " "
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case,
+except that it excludes a short region of poorly aligned sequence at the start and at the ends of the
+two proteins.
+
 Calculating the statistical significance of a pairwise global alignment
 -----------------------------------------------------------------------
 
