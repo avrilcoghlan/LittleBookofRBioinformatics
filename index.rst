@@ -38,6 +38,8 @@ Contents:
    src/revisionexercises1_answers.rst
    src/chapter4.rst
    src/chapter4_answers.rst
+   src/chapter5.rst
+   src/chapter5_answers.rst
 
 Acknowledgements
 ----------------
