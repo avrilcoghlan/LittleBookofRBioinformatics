@@ -17,6 +17,7 @@ Q1.
 ---
 What is the length of (total number of base-pairs in) the *Schistosoma mansoni* mitochondrial genome
 (NCBI accession NC\_002545), and how many As, Cs, Gs and Ts does it contain?
+    You must search for this sequence via the NCBI website, as it is not present in the ACNUC database.
     Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing 
     `schistosomiasis <http://apps.who.int/tdr/svc/diseases/schistosomiasis>`_, 
     which is classified by the WHO as a neglected tropical disease.
@@ -25,6 +26,7 @@ Q2.
 ---
 What is the length of the *Brugia malayi* mitochondrial genome (NCBI accession NC\_004298),
 and how many As, Cs, Gs and Ts does it contain?
+    You must search for this sequence via the NCBI website, as it is not present in the ACNUC database.
     Note: *Brugia malayi* is a parasitic worm responsible for causing
     `lymphatic filariasis <http://apps.who.int/tdr/svc/diseases/lymphatic-filariasis>`_,
     which is classified by the WHO as a neglected tropical disease.
@@ -60,6 +62,7 @@ long, using a multinomial model with *pA* =0.28, *pC* =0.21, *pG* =0.22, and *pT
 Q7. 
 ---
 How many protein sequences from rabies virus are there in the NCBI Protein database?
+    You must search for these sequences via the NCBI website, as it's not possible to do this search using SeqinR.
     Note: rabies virus is the virus responsible for 
     `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected
     tropical disease.
