@@ -1,106 +1,15 @@
-Practical 4 for 2009/2010 - Sequence Alignment
-==============================================
-
-A little more about R
----------------------
-
-In previous practicals (for example, Practical 2,
-`www.ucc.ie/microbio/MB6301/practical2\_words\_dbs\_v2.html <http://www.ucc.ie/microbio/MB6301/practical2_words_dbs_v2.html>`_)
-you learnt that it is possible to create your own functions in R.
-For example, if you want to create a function to find the square of
-a number and add twenty to that, you can type:
-
-::
-
-    > myfunction <- function(x) { return((x*x) + 20) }
-
-You can then use this function to find the value of 20 added to the
-square of 100, by typing:
-
-::
-
-    > myfunction(100)
-    [1] 10020
-
-If you are likely to be using the same function again and again,
-you can type it into a text file, for example, using Notepad.
-(Note: Notepad is a program for writing text that is available on
-all Windows computers. Go to the "Start" menu at the bottom left of
-your Windows screen, and select "Notepad" from the list of programs
-to start up Notepad.)
-
-For example, say you use Notepad to type this line into a text
-file, which you save as file "myfunctions.R" (to save a file in
-Notepad, go to the "File" menu in Notepad and select "Save as", and
-choose "All Files" from the "Save as type" drop-down list in the
-"Save as" window that appears):
-
-myfunction <- function(x) { return((x\*x) + 20) }
-
-Whenever you start R next (for example, next week sometime), you
-can then load the functions in file "myfunctions.R" into R by
-typing:
-
-::
-
-    > source("myfunctions.R")
-
-and then you can use them straight away. This is handy as it saves
-you having to type your function into R each time that you start up
-R again.
-
-Note that when you save the file in Notepad, you must select "All
-Files" from the "Save as type" drop-down list in the "Save as"
-window. (If you don't do this, Notepad will automatically add
-".txt" to the end of the file name that you specify, so for
-example, your file will be renamed "myfunctions.R.txt").
-
-Another very useful R function is the scan() function, which is for
-reading data files into R. As its arguments (input), the scan()
-function expects you to give it the name of the input file, and the
-type of the data in that file, which is specified with the "what"
-argument. The type of data can be numbers, in which case you need
-to say "what=numeric", or can be characters/letters, in which case
-you need to say "what=character". For example, if you have a data
-file containing a column of numbers (for example, see the file
-"Data1.txt" at
-`http://www.ucc.ie/microbio/MB6301/Data1.txt <http://www.ucc.ie/microbio/MB6301/Data1.txt>`_),
-you can read it into R by typing:
-
-::
-
-    > mydata <- scan("Data1.txt", what="numeric")
-    > mydata # Print out the vector "mydata"
-    [1] "33"   "22.9" "2233" "222"  "123"  "662" 
-
-The command above reads in the column of numbers in the input file
-"Data1.txt" into a vector *mydata*, so that each of the numbers is
-stored in one element of the *mydata* vector. Similarly, you can
-use scan() to read in an input data file in which the input data
-consists of characters/letter (for example, see the file
-"Data2.txt" at
-`http://www.ucc.ie/microbio/MB6301/Data2.txt <http://www.ucc.ie/microbio/MB6301/Data2.txt>`_):
-
-::
-
-    > mydata2 <- scan("Data2.txt", what="character")
-    > mydata2 # Print out the vector "mydata2"
-    [1] "AFGAGADD" "DSDSDSDD" "CDSDGSDC"
-
-Note that the scan() function expects that the input data file will
-be in the "My Documents" folder on your computer, so you need to
-copy your input file there so that scan() will be able to find it.
+Sequence Alignment
+==================
 
 UniProt
 -------
 
-In previous practicals you learnt how to retrieve DNA and protein
-sequences from the NCBI database. The NCBI database is a key
-database in bioinformatics because it contains essentially all DNA
-sequences ever sequenced.
+In `the previous chapter <./chapter3.html>`_ you learnt how to retrieve DNA and protein
+sequences from the NCBI database. The NCBI database is a key database in bioinformatics 
+because it contains essentially all DNA sequences ever sequenced.
 
-As mentioned in previous practicals, a subsection of the NCBI
-database called "RefSeq" consists of high quality DNA and protein
+As mentioned in `the previous chapter <./chapter3.html>`_, a subsection of the NCBI
+database called `RefSeq <./chapter3.html#refseq>`_ consists of high quality DNA and protein
 sequence data. Furthermore, the NCBI entries for the RefSeq
 sequences have been *manually curated*, which means that biologists
 employed by NCBI have added additional information to the NCBI
@@ -134,8 +43,8 @@ database, it will have different NCBI and UniProt accessions.
 However, there is usually a link on the NCBI entry for the protein
 sequence to the UniProt entry, and vice versa.
 
-Viewing the UniProt page for a protein sequence
------------------------------------------------
+Viewing the UniProt webpage for a protein sequence
+--------------------------------------------------
 
 If you are given the UniProt accession for a protein, to find the
 UniProt entry for the protein, you first need to go the UniProt
@@ -146,36 +55,35 @@ search box, and then click on the "Search" button to search for
 it.
 
 For example, if you want to find the sequence for the chorismate
-lyase protein from *Escherichia coli* strain K12, which has UniProt
-accession P26602, you would type just "P26602" in the search box
-and press "Search":
+lyase protein from *Mycobacterium leprae* (the bacterium which
+causes `leprosy <http://apps.who.int/tdr/svc/diseases/leprosy>`_), which has UniProt accession
+Q9CD83, you would type just "Q9CD83" in the search box and press "Search":
 
 |image0|
 
-The UniProt entry for UniProt accession P26602 will then appear in
+The UniProt entry for UniProt accession Q9CD83 will then appear in
 your web browser. The picture below shows the top part of the
-UniProt entry for accession P26602. You can see there is a lot of
+UniProt entry for accession Q9CD83. You can see there is a lot of
 information about the protein in its UniProt entry.
 
 Beside the heading "Organism" you can see the organism is given as
-*Escherichia coli*(strain K12). Beside the heading "Taxonomic
-lineage", you can see "Bacteria > Proteobacteria >
-Gammaproteobacteria > Enterobacteriales > Enterobacteriaceae >
-Escherichia". This tells us that *Escherichia* is a species of
+*Mycobacterium leprae*. Beside the heading "Taxonomic
+lineage", you can see "Bacteria > Actinobacteria > Actinobacteridae > Actinomycetales > Corynebacterineae > Mycobacteriaceae > Mycobacterium".
+
+This tells us that *Mycobacterium* is a species of
 bacteria, which belongs to a group of related bacteria called the
-Enterobacteriaceae, which itself belongs to a larger group of
-related bacteria called the Enterobacteriales, which itself belongs
+Mycobacteriaceae, which itself belongs to a larger group of
+related bacteria called the Corynebacterineae, which itself belongs
 to an even larger group of related bacteria called the
-Enterobacteriales, which itself belongs to the Gammaproteobacteria,
+Actinomycetales, which itself belongs to the Actinobacteridae,
 which itself belongs to a huge group of bacteria called the
-Proteobacteria.
+Actinobacteria.
 
 Beside the heading "Sequence length" we see that the sequence is
-165 amino acids long (165 letters long). Further down, beside the
+210 amino acids long (210 letters long). Further down, beside the
 heading "Function", it says that the function of this protein is
-that it "Removes the pyruvyl group from chorismate, with
-concomitant aromatization of the ring, to provide 4-hydroxybenzoate
-(4HB) for the ubiquinone pathway". This tells us this protein is an
+that it "Removes the pyruvyl group from chorismate to provide 4-hydroxybenzoate (4HB)".
+This tells us this protein is an
 enzyme (a protein that increases the rate of a specific biochemical
 reaction), and tells us what is the particular biochemical reaction
 that this enzyme is involved in.
@@ -189,77 +97,118 @@ place to start.
 
 |image1|
 
-Retrieving a protein sequence from UniProt as a FASTA-format file
------------------------------------------------------------------
+Retrieving a UniProt protein sequence via the UniProt website
+-------------------------------------------------------------
 
 To retrieve a FASTA-format file containing the sequence for a
 particular protein, you need to look at the top right of the
-UniProt entry for the protein on the UniProt website. You will see
-a small orange button labelled "FASTA", which you should click on:
+UniProt entry for the protein on the `UniProt website <http://www.uniprot.org>`_. 
+
+You will see a small orange button labelled "FASTA", which you should click on:
 
 |image2|
 
 The FASTA-format sequence for the accession will now appear in your
 web browser. To save it as a file, go to the "File" menu of your
 web browser, choose "Save page as", and save the file. Remember to
-give the file a sensible name (eg. "P26602.fasta" for accession
-P26602), and in a place that you will remember (eg. in the "My
+give the file a sensible name (eg. "Q9CD83.fasta" for accession
+Q9CD83), and in a place that you will remember (eg. in the "My
 Documents" folder).
 
 For example, you can retrieve the protein sequences for the
-chorismate lyase protein from *Escherichia coli* strain K12 (which
-has UniProt accession P26602) and for the chorismate lyase protein
-from *Salmonella typhi* (UniProt accession Q8Z1T7), and save them
-as FASTA-format files (eg. "P26602.fasta" and "Q8Z1T7.fasta", as
+chorismate lyase protein from *Mycobacterium leprae* (which
+has UniProt accession Q9CD83) and for the chorismate lyase protein
+from *Mycobacterium ulcerans* (UniProt accession A0PQ23), and save them
+as FASTA-format files (eg. "Q9CD83.fasta" and "A0PQ23.fasta", as
 described above.
 
-Note that the *Escherichia coli* and *Salmonella typhi* chorismate
+Note that *Mycobacterium leprae* is the bacterium which
+causes `leprosy <http://apps.who.int/tdr/svc/diseases/leprosy>`_,
+while *Mycobacterium ulcerans* is a related bacterium which
+causes `Buruli ulcer <http://www.who.int/buruli/en/>`_, both of which
+are classified by the WHO as neglected tropical diseases. 
+
+Note that the *M. leprae* and *M. ulcerans* chorismate
 lyase proteins are an example of a pair of homologous (related)
-proteins in two related species of bacteria. *Escherichia coli* is
-often studied in microbiology laboratories as a model organism, and
-is also one of the foremost causes of food poisoning.
-*Salmonella typhi* is relatively closely related bacterium, and is
-the bacterium that causes typhoid fever, a common illness
-worldwide.
+proteins in two related species of bacteria. 
 
 Once you have downloaded the protein sequences for UniProt
-accessions P26602 and Q8Z1T7 and saved them as FASTA-format files
-(eg. "P26602.fasta" and "Q8Z1T7.fasta"), you can read them into R
-using the read.fasta() function in the SeqinR R library (as
-described in Practical 1,
-`www.ucc.ie/microbio/MB6301/practical1\_words\_v2.html#NCBI <http://www.ucc.ie/microbio/MB6301/practical1_words_v2.html#NCBI>`_).
+accessions Q9CD83 and A0PQ23 and saved them as FASTA-format files
+(eg. "Q9CD83.fasta" and "A0PQ23.fasta"), you can read them into R
+using the read.fasta() function in the SeqinR R package (as
+described in `chapter 1 <./chapter1.html#reading-sequence-data-into-r>`_).
+
 Remember that the read.fasta() function expects that you have put
 your FASTA-format files in the "My Documents" folder on your
 computer.
 
 For example, the following commands will read the FASTA-format
-files P26602.fasta and Q8Z1T7.fasta into R, and store the two
-protein sequences in two vectors *coliseq* and *typhiseq*:
+files Q9CD83.fasta and A0PQ23.fasta into R, and store the two
+protein sequences in two vectors *lepraeseq* and *ulceransseq*:
 
 ::
 
     > library("seqinr")
-    > coli <- read.fasta(file = "P26602.fasta")
-    > typhi <- read.fasta(file = "Q8Z1T7.fasta")
-    > coliseq <- coli[[1]]
-    > typhiseq <- typhi[[1]]
-    > coliseq # Display the contents of the vector "coliseq"
-      [1] "m" "s" "h" "p" "a" "l" "t" "q" "l" "r" "a" "l" "r" "y" "c" "k" "e" "i"
-     [19] "p" "a" "l" "d" "p" "q" "l" "l" "d" "w" "l" "l" "l" "e" "d" "s" "m" "t"
-     [37] "k" "r" "f" "e" "q" "q" "g" "k" "t" "v" "s" "v" "t" "m" "i" "r" "e" "g"
-     [55] "f" "v" "e" "q" "n" "e" "i" "p" "e" "e" "l" "p" "l" "l" "p" "k" "e" "s"
-     [73] "r" "y" "w" "l" "r" "e" "i" "l" "l" "c" "a" "d" "g" "e" "p" "w" "l" "a"
-     [91] "g" "r" "t" "v" "v" "p" "v" "s" "t" "l" "s" "g" "p" "e" "l" "a" "l" "q"
-    [109] "k" "l" "g" "k" "t" "p" "l" "g" "r" "y" "l" "f" "t" "s" "s" "t" "l" "t"
-    [127] "r" "d" "f" "i" "e" "i" "g" "r" "d" "a" "g" "l" "w" "g" "r" "r" "s" "r"
-    [145] "l" "r" "l" "s" "g" "k" "p" "l" "l" "l" "t" "e" "l" "f" "l" "p" "a" "s"
-    [163] "p" "l" "y"
+    > leprae <- read.fasta(file = "Q9CD83.fasta")
+    > ulcerans <- read.fasta(file = "A0PQ23.fasta")
+    > lepraeseq <- leprae[[1]]
+    > ulceransseq <- ulcerans[[1]]
+    > lepraeseq # Display the contents of the vector "lepraeseq"
+      [1] "m" "t" "n" "r" "t" "l" "s" "r" "e" "e" "i" "r" "k" "l" "d" "r" "d" "l"
+      [19] "r" "i" "l" "v" "a" "t" "n" "g" "t" "l" "t" "r" "v" "l" "n" "v" "v" "a"
+      [37] "n" "e" "e" "i" "v" "v" "d" "i" "i" "n" "q" "q" "l" "l" "d" "v" "a" "p"
+      [55] "k" "i" "p" "e" "l" "e" "n" "l" "k" "i" "g" "r" "i" "l" "q" "r" "d" "i"
+      [73] "l" "l" "k" "g" "q" "k" "s" "g" "i" "l" "f" "v" "a" "a" "e" "s" "l" "i"
+      [91] "v" "i" "d" "l" "l" "p" "t" "a" "i" "t" "t" "y" "l" "t" "k" "t" "h" "h"
+      [109] "p" "i" "g" "e" "i" "m" "a" "a" "s" "r" "i" "e" "t" "y" "k" "e" "d" "a"
+      [127] "q" "v" "w" "i" "g" "d" "l" "p" "c" "w" "l" "a" "d" "y" "g" "y" "w" "d"
+      [145] "l" "p" "k" "r" "a" "v" "g" "r" "r" "y" "r" "i" "i" "a" "g" "g" "q" "p"
+      [163] "v" "i" "i" "t" "t" "e" "y" "f" "l" "r" "s" "v" "f" "q" "d" "t" "p" "r"
+      [181] "e" "e" "l" "d" "r" "c" "q" "y" "s" "n" "d" "i" "d" "t" "r" "s" "g" "d"
+      [199] "r" "f" "v" "l" "h" "g" "r" "v" "f" "k" "n" "l"
+
+Retrieving a UniProt protein sequence using SeqinR
+--------------------------------------------------
+
+An alternative method of retrieving a UniProt protein sequence is to use the
+SeqinR package to query the ACNUC sub-database "swissprot", which contains protein
+sequences from UniProt. 
+
+We use the query() function from SeqinR to query this database, as described
+in `chapter3 <./chapter3.html>`_.
+
+For example to retrieve the protein sequences for UniProt accessions Q9CD83
+and A0PQ23, we type in R:
+
+::
+
+    > library("seqinr")
+    > choosebank("swissprot")
+    > query("leprae", "AC=Q9CD83")
+    > lepraeseq <- getSequence(leprae$req[[1]])
+    > query("ulcerans", "AC=A0PQ23")
+    > ulceransseq <- getSequence(ulcerans$req[[1]])
+    > closebank()
+    > lepraeseq # Display the contents of "lepraeseq"
+      [1] "M" "T" "N" "R" "T" "L" "S" "R" "E" "E" "I" "R" "K" "L" "D" "R" "D" "L"
+      [19] "R" "I" "L" "V" "A" "T" "N" "G" "T" "L" "T" "R" "V" "L" "N" "V" "V" "A"
+      [37] "N" "E" "E" "I" "V" "V" "D" "I" "I" "N" "Q" "Q" "L" "L" "D" "V" "A" "P"
+      [55] "K" "I" "P" "E" "L" "E" "N" "L" "K" "I" "G" "R" "I" "L" "Q" "R" "D" "I"
+      [73] "L" "L" "K" "G" "Q" "K" "S" "G" "I" "L" "F" "V" "A" "A" "E" "S" "L" "I"
+      [91] "V" "I" "D" "L" "L" "P" "T" "A" "I" "T" "T" "Y" "L" "T" "K" "T" "H" "H"
+      [109] "P" "I" "G" "E" "I" "M" "A" "A" "S" "R" "I" "E" "T" "Y" "K" "E" "D" "A"
+      [127] "Q" "V" "W" "I" "G" "D" "L" "P" "C" "W" "L" "A" "D" "Y" "G" "Y" "W" "D"
+      [145] "L" "P" "K" "R" "A" "V" "G" "R" "R" "Y" "R" "I" "I" "A" "G" "G" "Q" "P"
+      [163] "V" "I" "I" "T" "T" "E" "Y" "F" "L" "R" "S" "V" "F" "Q" "D" "T" "P" "R"
+      [181] "E" "E" "L" "D" "R" "C" "Q" "Y" "S" "N" "D" "I" "D" "T" "R" "S" "G" "D"
+      [199] "R" "F" "V" "L" "H" "G" "R" "V" "F" "K" "N" "L"
 
 Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm
 -------------------------------------------------------------------------------
 
 If you are studying a particular pair of genes or proteins, an
 important question is to what extent the two sequences are similar.
+
 To quantify similarity, it is necessary to *align* the two
 sequences, and then you can calculate a similarity score based on
 the alignment.
@@ -288,19 +237,23 @@ score for the following alignment is 2 + 2 -2 + 2 + 2 -1 = 5:
     G A A T T C
     G A - T T A
 
-The scoring system above can be represented by a *scoring matrix*,
-*σ* (also known as a *substitution matrix*). The matrix *σ*
-(pronounced "sigma") has one row and one column for each possible
+The scoring system above can be represented by a *scoring matrix*
+(also known as a *substitution matrix*). The scoring matrix 
+has one row and one column for each possible
 letter in our alphabet of letters (eg. 4 rows and 4 columns for DNA
-sequences). The *(i,j)* element of *σ*, *σ(i,j)* has a value of +2
+sequences). The *(i,j)* element of the matrix has a value of +2
 in case of a match and -1 in case of a mismatch.
 
 We can make a scoring matrix in R by using the
 nucleotideSubstitutionMatrix() function in the Biostrings()
-library. The Biostrings library is part of a set of R libraries for
+package. The Biostrings package is part of a set of R libraries for
 bioinformatics analysis known as Bioconductor
-(`www.bioconductor.org/ <http://www.bioconductor.org/>`_). The
-arguments (inputs) for the nucleotideSubstitutionMatrix() function
+(`www.bioconductor.org/ <http://www.bioconductor.org/>`_). 
+
+To use the Biostrings package, you will first need to install the
+package (see the instructions `here <./installr.html#how-to-install-a-bioconductor-r-package>`_).
+
+The arguments (inputs) for the nucleotideSubstitutionMatrix() function
 are the score that we want to assign to a match and the score that
 we want to assign to a mismatch. We can also specify that we want
 to use only the four letters representing the four nucleotides (ie.
@@ -309,7 +262,7 @@ use the letters that represent ambiguous cases where we are not
 sure what the nucleotide is (eg. 'N' = A/C/G/T).
 
 To make a scoring matrix which assigns a score of +2 to a match and
--1 to a mismatch, we type:
+-1 to a mismatch, and store it in the variable *sigma*, we type:
 
 ::
 
@@ -326,7 +279,9 @@ Instead of assigning the same penalty (eg. -8) to every gap
 position, it is common instead to assign a *gap opening penalty* to
 the first position in a gap (eg. -8), and a smaller
 *gap extension penalty* to every subsequent position in the same
-gap. The reason for doing this is that it is likely that adjacent
+gap. 
+
+The reason for doing this is that it is likely that adjacent
 gap positions were created by the same insertion or deletion event,
 rather than by several independent insertion or deletion events.
 Therefore, we don't want to penalise a 3-letter gap as much as we
@@ -338,17 +293,21 @@ independent insertion or deletion events.
 For example, if we want to compute the score for a global alignment
 of two short DNA sequences 'GAATTC' and 'GATTA', we can use the
 Needleman-Wunsch algorithm to calculate the highest-scoring
-alignment using a particular scoring function. The
-pairwiseAlignment() function in the Biostrings R library finds the
+alignment using a particular scoring function. 
+
+The "pairwiseAlignment()" function in the Biostrings R package finds the
 score for the optimal global alignment between two sequences using
 the Needleman-Wunsch algorithm, given a particular scoring system.
+
 As arguments (inputs), the pairwiseAlignment() function takes the
 two sequences that you want to align, the scoring matrix, the gap
 opening penalty, and the gap extension penalty. You can also tell
 the function that you want to just have the optimal global
 alignment's score by setting "scoreOnly = TRUE", or that you want
 to have both the optimal global alignment and its score by setting
-"scoreOnly = FALSE". For example, to find the score for the optimal
+"scoreOnly = FALSE". 
+
+For example, to find the score for the optimal
 global alignment between the sequences 'GAATTC' and 'GATTA', we
 type:
 
@@ -385,7 +344,7 @@ divergent alignments (alignments of sequences that differ a lot).
 Many R libraries come with example data sets or data files. The
 data() function is used to load these data files. You can use the
 data() function in R to load a data set of BLOSUM matrices that
-comes with R Biostrings() library. To load the BLOSUM50 matrix, we
+comes with R Biostrings() package. To load the BLOSUM50 matrix, we
 type:
 
 ::
@@ -419,8 +378,8 @@ type:
     * -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5  1
 
 You can get a list of the available scoring matrices that come with
-the Biostrings library by using the data() function, which takes as
-an argument the name of the library for which you want to know the
+the Biostrings package by using the data() function, which takes as
+an argument the name of the package for which you want to know the
 data sets that come with it:
 
 ::
@@ -465,7 +424,7 @@ the sequences for the chorismate lyase proteins from
 store them as vectors *coliseq* and *vectorseq*.
 
 Once you have read in sequences using read.fasta(), you can align
-them using pairwiseAlignment() from the Biostrings library.
+them using pairwiseAlignment() from the Biostrings package.
 
 As its input, the pairwiseAlignment() function requires that the
 sequences be in the form of a single string (eg. "ACGTA"), rather
@@ -473,7 +432,7 @@ than as a vector of characters (eg. a vector with the first element
 as "A", the second element as "C", etc.). Therefore, to align the
 *E. coli* and *S. typhi* chorismate lyase proteins, we first need
 to convert the vectors *coliseq* and *vectorseq* into strings. We
-can do this using the c2s() function in the SeqinR library:
+can do this using the c2s() function in the SeqinR package:
 
 ::
 
@@ -763,7 +722,7 @@ In this practical, you will have learnt to use the following R
 functions:
 
 
-#. data() for reading in data that comes with an R library
+#. data() for reading in data that comes with an R package
 #. double() for creating a numeric vector for storing real
    (non-integer) numbers
 #. toupper() for converting a string of characters from lowercase
@@ -776,11 +735,11 @@ You have also learnt the following R functions that belong to the
 bioinformatics libraries:
 
 
-#. nucleotideSubstitutionMatrix() in the Biostrings library for
+#. nucleotideSubstitutionMatrix() in the Biostrings package for
    making a nucleotide scoring matrix
-#. pairwiseAlignment() in the Biostrings library for making a
+#. pairwiseAlignment() in the Biostrings package for making a
    global alignment between two sequences
-#. c2s() in the SeqinR library for converting a sequence stored in
+#. c2s() in the SeqinR package for converting a sequence stored in
    a vector to a string of characters
 
 Links and Further Reading
@@ -788,7 +747,7 @@ Links and Further Reading
 
 Some links are included here for further reading, which will be
 especially useful if you need to use the R package and SeqinR
-library for your project or assignments.
+package for your project or assignments.
 
 For background reading on sequence alignment, it is recommended to
 read Chapter 3 of
@@ -797,10 +756,10 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 For more in-depth information and more examples on using the SeqinR
-library for sequence analysis, look at the SeqinR documentation,
+package for sequence analysis, look at the SeqinR documentation,
 `seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
 
-For more information on and examples using the Biostrings library,
+For more information on and examples using the Biostrings package,
 see the Biostrings documentation at
 `bioconductor.org/packages/2.5/bioc/html/Biostrings.html <http://bioconductor.org/packages/2.5/bioc/html/Biostrings.html>`_.
 
@@ -831,7 +790,7 @@ on "Analyzing Sequences" in the book
 (`cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
 
 Thank you to Jean Lobry and Simon Penel for helpful advice on using
-the SeqinR library.
+the SeqinR package.
 
 Exercises
 ---------
@@ -867,7 +826,7 @@ Q5. What is the statistical significance of the optimal global alignment for the
     Each of these 1000 random sequences is the same length as Eyeless.
 Q6. What is the optimal global alignment score between the *Drosophila melanogaster* Eyeless protein and the *E. coli* chorismate lyase protein? 
     Is the alignment score statistically significant (what is the
-    *P-*value?)?
+    *P-* value?)?
     Does this surprise you?
 
 Other ways to do the same thing
@@ -884,11 +843,8 @@ package
 (`emboss.sourceforge.net <http://emboss.sourceforge.net/>`_), and
 so can also be run on your own computer.
 
-
-
-
-.. |image0| image:: ../_static/P4_image7.png
-.. |image1| image:: ../_static/P4_image8.png
-.. |image2| image:: ../_static/P4_image9.png
+.. |image0| image:: ../_static/P4_image0.png
+.. |image1| image:: ../_static/P4_image1.png
+.. |image2| image:: ../_static/P4_image2.png
 .. |image3| image:: ../_static/P4_image10.png
 .. |image4| image:: ../_static/P4_image11.png

@@ -329,14 +329,14 @@ Querying the NCBI Database via R
 Instead of carrying out searches of the NCBI database on the NCBI website, you can
 carry out searches directly from R by using the SeqinR R package.
 
-It is possible to use the SeqinR R library to retrieve sequences from these databases.
-The SeqinR library was written by the group that created the ACNUC database in Lyon, France
+It is possible to use the SeqinR R package to retrieve sequences from these databases.
+The SeqinR package was written by the group that created the ACNUC database in Lyon, France
 (http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html).
 The ACNUC database is a database that contains most of the data from the NCBI Sequence Database,
 as well as data from other sequence databases such as UniProt and Ensembl. 
 
 An advantage of the ACNUC database is that it brings together data from various different sources, and makes
-it easy to search, for example, by using the SeqinR R library.
+it easy to search, for example, by using the SeqinR R package.
 
 As will be explained below, the ACNUC database is organised into various different ACNUC (sub)-databases,
 which contain different parts of the NCBI database, and when you want to search the NCBI database
@@ -373,7 +373,7 @@ You can find more information about what each of these ACNUC databases contains 
 looking at the `ACNUC website <http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html>`_. 
 
 You can carry out complex queries using the "query()" function from
-the SeqinR library. If you look at the help page for the query() function (by
+the SeqinR package. If you look at the help page for the query() function (by
 typing "help(query)", you will see that it allows you to specify criteria that you
 require the sequences to fulfill. 
 
@@ -747,8 +747,8 @@ Saving sequence data in a FASTA-format file
 
 Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR,
 it is conveninent to save the sequences in a file in FASTA format.
-This can be done using the "write.fasta()" function in the SeqinR library, which was
-introduced in `Chapter 1 <https://github.com/./chapter1.html#writing-sequence-data-out-as-a-fasta-file>`_.
+This can be done using the "write.fasta()" function in the SeqinR package, which was
+introduced in `Chapter 1 <./chapter1.html#writing-sequence-data-out-as-a-fasta-file>`_.
 
 If you look at the help page for the "write.fasta()" function, you will see
 that as input it takes a list of vectors, where each vector contains one DNA, RNA or
@@ -768,8 +768,8 @@ by typing:
     > closebank()
 
 In the above code, we get the sequences of the human tRNAs using the function "getSequence()"    
-from the SeqinR library. We also use a function "getName()"
-from the SeqinR library to get the sequences' names. Then we use the "write.fasta()" function to
+from the SeqinR package. We also use a function "getName()"
+from the SeqinR package to get the sequences' names. Then we use the "write.fasta()" function to
 write the sequences to a FASTA file "humantRNAs.fasta". The "write.fasta()" takes as arguments:
 the list *myseqs* containing the sequences, the list *mynames* containing the names of the sequences,
 and the name of the output file ("humantRNAs.fasta" here).
@@ -919,7 +919,7 @@ this document.
 Thank you to Andrew Lloyd and David Lynn, who generously shared their practical on sequence databases 
 with me, which inspired many of the examples in this practical. 
 
-Thank you to Jean Lobry and Simon Penel for helpful advice on using the SeqinR library.
+Thank you to Jean Lobry and Simon Penel for helpful advice on using the SeqinR package.
 
 Contact
 -------

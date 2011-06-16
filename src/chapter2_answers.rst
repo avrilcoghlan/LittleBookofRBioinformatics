@@ -8,7 +8,7 @@ Q1.
 To do this, you first need to download the DEN-1 Dengue virus sequence from the NCBI database. 
 To do this follow the steps in the chapter `DNA Sequence Statistics (1) <./chapter1.html>`_.
 
-Then read the sequence into R using the SeqinR library:
+Then read the sequence into R using the SeqinR package:
 
 .. highlight:: r
 
@@ -68,7 +68,7 @@ To do this, you first need to download the *Mycobacterium leprae* sequence from 
 database.
 To do this follow the steps in the chapter `DNA Sequence Statistics (1) <./chapter1.html>`_.
 
-Then read the sequence into R using the SeqinR library:
+Then read the sequence into R using the SeqinR package:
 
 .. highlight:: r
 
@@ -236,7 +236,7 @@ We can search for a function to calculate rho by typing:
       stats::cor.test                        Test for Association/Correlation Between Paired Samples
       survival::pbc                          Mayo Clinic Primary Biliary Cirrhosis Dat
 
-There is a function rho in the SeqinR library. For example, we can use it to calculate Rho for 
+There is a function rho in the SeqinR package. For example, we can use it to calculate Rho for 
 words of length 3 in the *M. leprae* genome by typing:
 
 ::

@@ -34,7 +34,7 @@ genome sequence (accession NC\_001542):
 
 ::
 
-    > library("seqinr")                                 # load the SeqinR R library
+    > library("seqinr")                                 # load the SeqinR R package
     > choosebank("refseqViruses")                       # select the ACNUC sub-database to be searched
     > query("rabies", "AC=NC_001542")                   # specify the query
     > annots <- getAnnot(rabies$req[[1]])               # retrieve the annotations
@@ -104,7 +104,7 @@ is the "genbank" sub-database. Thus, we can carry out our search by typing:
 
 ::
 
-    > library("seqinr")                                 # load the SeqinR R library
+    > library("seqinr")                                 # load the SeqinR R package
     > choosebank("genbank")                             # select the ACNUC sub-database to be searched
     > query("Ctrachomatis", "SP=Chlamydia trachomatis") # specify the query
     > Ctrachomatis$nelem                                # print out the number of matching sequences
@@ -154,7 +154,7 @@ is the "refseq" sub-database. Thus, we can carry out our search by typing:
 
 ::
 
-    > library("seqinr")                                  # load the SeqinR R library
+    > library("seqinr")                                  # load the SeqinR R package
     > choosebank("refseq")                               # select the ACNUC sub-database to be searched
     > query("Ctrachomatis2", "SP=Chlamydia trachomatis") # specify the query
     > Ctrachomatis2$nelem                                # print out the number of matching sequences
@@ -199,7 +199,7 @@ package. We want to find nucleotide sequences, so the appropriate ACNUC sub-data
 
 ::
 
-    > library("seqinr")                  # load the SeqinR R library
+    > library("seqinr")                  # load the SeqinR R package
     > choosebank("genbank")              # select the ACNUC sub-database to be searched
     > query("mberriman", "AU=Berriman")  # specify the query
     > mberriman$nelem                    # print out the number of matching sequences
@@ -243,7 +243,7 @@ We want to find nucleotide sequences that are in RefSeq, so the appropriate ACNU
 
 ::
 
-    > library("seqinr")                  # load the SeqinR R library
+    > library("seqinr")                  # load the SeqinR R package
     > choosebank("refseq")               # select the ACNUC sub-database to be searched
     > query("nematodes", "SP=Nematoda")  # specify the query
     > nematodes$nelem                    # print out the number of matching sequences
@@ -282,7 +282,7 @@ Therefore, we type:
 
 ::
 
-    > library("seqinr")                                # load the SeqinR R library
+    > library("seqinr")                                # load the SeqinR R package
     > choosebank("genbank")                            # select the ACNUC sub-database to be searched
     > query("collagen", "SP=Nematoda AND K=collagen")  # specify the query
     > collagen$nelem                                   # print out the number of matching sequences
@@ -325,7 +325,7 @@ To search for mRNAs, we can specify "M=mRNA" in our query. Therefore, we type:
 
 ::
 
-    > library("seqinr")                                            # load the SeqinR R library
+    > library("seqinr")                                            # load the SeqinR R package
     > choosebank("genbank")                                        # select the ACNUC sub-database to be searched
     > query("collagen2", "SP=Nematoda AND K=collagen AND M=mRNA")  # specify the query
     > collagen2$nelem                                              # print out the number of matching sequences
