@@ -36,6 +36,8 @@ Contents:
    src/chapter3_answers.rst
    src/revisionexercises1.rst
    src/revisionexercises1_answers.rst
+   src/chapter4.rst
+   src/chapter4_answers.rst
 
 Acknowledgements
 ----------------
