@@ -203,6 +203,43 @@ and A0PQ23, we type in R:
       [181] "E" "E" "L" "D" "R" "C" "Q" "Y" "S" "N" "D" "I" "D" "T" "R" "S" "G" "D"
       [199] "R" "F" "V" "L" "H" "G" "R" "V" "F" "K" "N" "L"
 
+Comparing two sequences using a dotplot
+---------------------------------------
+
+As a first step in comparing two protein, RNA or DNA sequences, it is a good idea to make a *dotplot*.
+A dotplot is a graphical method that allows the comparison of two protein or DNA sequences and identify regions of close similarity between them. A dotplot is essentially a two-dimensional matrix (like a grid), which has the sequences of the proteins being compared along the vertical and horizontal axes. 
+
+In order to make a simple dotplot to represent of the similarity between two sequences, individual cells in the matrix can be shaded black if residues are identical, so that matching sequence segments appear as runs of diagonal lines across the matrix. Identical proteins will have a line exactly on the main diagonal of the dotplot, that spans across the whole matrix. 
+
+For proteins that are not identical, but share regions of similarity, the dotplot will have shorter lines that may be on the main diagonal, or off the main diagonal of the matrix. 
+In essence, a dotplot will reveal if there are any regions 
+that are clearly very similar in two protein (or DNA) sequences. 
+
+We  can create a dotplot for two sequences using the "dotPlot()" function in the SeqinR R library.
+
+For example, if we want to create a dotplot of the sequences for the 
+chorismate lyase proteins from *Mycobacterium leprae* and *Mycobacterium ulcerans*, we would
+type:
+
+::
+
+    > dotPlot(lepraeseq, ulceransseq) 
+
+|image5|
+
+In the dotplot above, the *M. leprae* sequence is plotted along the *x*-axis (horizontal axis), and
+the *M. ulcerans* sequence is plotted along the *y*-axis (vertical axis). The dotplot displays a dot
+at points where there is an identical amino acid in the two sequences.
+
+For example, if amino acid 53 in the *M. leprae* sequence is the same amino acid (eg. "W")
+as amino acid 70 in the *M. ulcerans* sequence, then the dotplot will show a dot the position in
+the plot where *x* =50 and *y* =53. 
+
+In this case you can see a lot of dots along a diagonal
+line, which indicates that the two protein sequences contain many identical amino acids at the 
+same (or very similar) positions along their lengths. This is what you would expect, 
+because we know that these two proteins are homologues (related proteins).
+
 Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm
 -------------------------------------------------------------------------------
 
@@ -871,7 +908,8 @@ package for sequence analysis, look at the SeqinR documentation,
 `http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
 
 There is also a very nice chapter on "Analyzing Sequences", which
-includes examples of using SeqinR and Biostrings for sequence analysis, in the
+includes examples of using SeqinR and Biostrings for sequence analysis, as well as details
+on how to implement algorithms such as Needleman-Wunsch and Smith-Waterman in R yourself, in the
 book *Applied statistics for bioinformatics using R* by Krijnen
 (available online at
 `cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
@@ -969,3 +1007,5 @@ Q6. What is the optimal global alignment score between the *Brugia malayi* Vab-6
 .. |image3| image:: ../_static/P4_image3.png
             :width: 400
 .. |image4| image:: ../_static/P4_image4.png
+.. |image5| image:: ../_static/P4_image5.png
+            :width: 600
