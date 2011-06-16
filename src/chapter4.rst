@@ -324,7 +324,12 @@ type:
     score: -3
 
 The above commands print out the optimal global alignment for the
-two sequences and its score.
+two sequences and its score. 
+
+Note that we set "gapOpening" to be -2 and "gapExtension" to be -8, which means that
+the first position of a gap is assigned a score of (-8-2=)-10, and every subsequent
+position in a gap is given a score of -8. Here the alignment contains four matches,
+one mismatch, and one gap of length 1, so its score is (4*2)+(1*-1)+(1*-10) = -3.
 
 Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm
 -----------------------------------------------------------------------------------
@@ -410,6 +415,11 @@ using the BLOSUM50 matrix, we type:
     pattern: [1] P---AWHEAE 
     subject: [1] HEAGAWGHEE 
     score: -5 
+
+We set "gapOpening" to be -2 and "gapExtension" to be -8, which means that
+the first position of a gap is assigned a score of (-8-2=)-10, and every subsequent
+position in a gap is given a score of -8. This means that the gap will be given
+a score of -10-8-8 = -26.
 
 Aligning UniProt sequences
 --------------------------
@@ -777,7 +787,7 @@ score for the sequences 'HEAGAWGHEE' and 'PAWHEAE' is not
 calculate for an alignment of two sequences is >0.05, we conclude
 that the alignment score is not statistically significant, and that
 the sequences are probably not related. On the other hand, if the
-*P*-value is |les| 0.05, we conclude that the alignment score is
+*P*-value is less than or equal to 0.05, we conclude that the alignment score is
 statistically significant, and the sequences are very probably
 related (homologous).
 
@@ -885,44 +895,38 @@ get this answer.
 Model answers to the exercises are given in the chapter entitled
 `Answers to the exercises on Sequence Alignment <./chapter4_answers.html>`_.
 
-Q1. Download FASTA-format files of the *Drosophila melanogaster* Eyeless protein (UniProt accession O18381) and the human Aniridia protein (UniProt accession Q66SS1) sequences from UniProt (`www.uniprot.org <http://www.uniprot.org>`_). 
-    Note: the *eyeless* gene of the fruitfly *Drosophila melanogaster*
-    and the human gene *aniridia* are distantly related genes that
-    control eye development in these two species. Some regions of the
-    fruitfly *eyeless* gene and human *aniridia* gene are almost
-    identical.
+Q1. Download FASTA-format files of the *Brugia malayi* Vab-3 protein (UniProt accession A8PZ80) and the *Loa loa* Vab-3 protein (UniProt accession E1FTG0) sequences from UniProt.
+    Note: the *vab-3* gene of *Brugia malayi* and the *vab-3* gene of *Loa loa* are related genes that
+    control eye development in these two species. 
+    *Brugia malayi* and *Loa loa* are both parasitic nematode worms, which both
+    cause `filariasis <http://www.who.int/topics/filariasis/en/>`_, which is classified
+    by the WHO as a neglected tropical disease.
 
-Q2. What is the alignment score for the optimal global alignment between the *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, when you use the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
+Q2. What is the alignment score for the optimal global alignment between the *Brugia malayi* Vab-3 protein and the *Loa loa* Vab-3 protein, when you use the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
+    Note: to specify a gap opening penalty of -10 and a gap extension penalty of -0.5,
+    set the "gapOpening" argument to -9.5, and the "gapExtension" penalty to -0.5 in the
+    pairwiseAlignment() function.
 
-Q3. Use the printPairwiseAlignment() function to view the optimal global alignment between *Drosophila melanogaster* Eyeless protein and the human Aniridia protein, using the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5. 
-    Do you see any regions where the alignment is very good (lots of
-    identities and few gaps)?
-    If so, what are the coordinates of these long regions of good
-    alignment with respect to the Aniridia and Eyeless proteins? It is
-    sufficient to give approximate coordinates.
+Q3. Use the printPairwiseAlignment() function to view the optimal global alignment between *Brugia malayi* Vab-3 protein and the *Loa loa* Vab-3 protein, using the *BLOSUM50* scoring matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5. 
+    Do you see any regions where the alignment is very good (lots of identities and few gaps)?
 
-Q4. What global alignment score do you get for the Aniridia and Eyeless proteins, when you use the *BLOSUM62* alignment matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
-    Which scoring matrix do you think is more appropriate for using for
-    this pair of proteins: BLOSUM50 or BLOSUM62?
+Q4. What global alignment score do you get for the two Vab-3 proteins, when you use the *BLOSUM62* alignment matrix, a gap opening penalty of -10 and a gap extension penalty of -0.5? 
+    Which scoring matrix do you think is more appropriate for using for this pair of proteins: BLOSUM50 or BLOSUM62?
 
-Q5. What is the statistical significance of the optimal global alignment for the Aniridia and Eyeless proteins made using the *BLOSUM50* scoring matrix, with a gap opening penalty of -10 and a gap extension penalty of -0.5? 
+Q5. What is the statistical significance of the optimal global alignment for the *Brugia malayi* and *Loa loa* Vab-3 proteins made using the *BLOSUM50* scoring matrix, with a gap opening penalty of -10 and a gap extension penalty of -0.5? 
     In other words, what is the probability of getting a score as large
-    as the real alignment score for Eyeless and Aniridia by chance?
-    Hint: to answer your question, you may find it useful to analyse
-    this file containing 1000 random sequences generated using a
-    multinomial model with the probabilities of the 20 amino acids set
-    equal to their frequencies in the *D. melanogaster* Eyeless protein
-    sequence:
-    `http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial2 <http://www.ucc.ie/microbio/MB6301/SeqsFromMultinomial2>`_.
-    Each of these 1000 random sequences is the same length as Eyeless.
+    as the real alignment score for Vab-3 by chance?
 
-Q6. What is the optimal global alignment score between the *Drosophila melanogaster* Eyeless protein and the *E. coli* chorismate lyase protein? 
-    Is the alignment score statistically significant (what is the
-    *P-* value?)?
+Q6. What is the optimal global alignment score between the *Brugia malayi* Vab-6 protein and the *Mycobacterium leprae* chorismate lyase protein? 
+    Is the alignment score statistically significant (what is the *P-* value?)?
     Does this surprise you?
 
 .. |image0| image:: ../_static/P4_image0.png
+            :width: 600
 .. |image1| image:: ../_static/P4_image1.png
+            :width: 600
 .. |image2| image:: ../_static/P4_image2.png
+            :width: 600
 .. |image3| image:: ../_static/P4_image3.png
+            :width: 400
 .. |image4| image:: ../_static/P4_image4.png
