@@ -40,7 +40,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'Bioinformatics'
 # copyright = u'2010, Avril Coghlan'
-copyright = 'Creative Commons Attribution 3.0 License'
+copyright = 'Avril Coghlan, Licence: Creative Commons Attribution 3.0 License'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
