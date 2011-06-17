@@ -22,24 +22,21 @@ my booklet on using R for time series analysis,
 <http://a-little-book-of-r-for-time-series.readthedocs.org/>`_.
 
 Contents:
+---------
 
 .. toctree::
-   :maxdepth: 2 
+   :maxdepth: 1 
 
    src/installr.rst
    src/chapter0.rst
    src/chapter1.rst
-   src/chapter1_answers.rst
    src/chapter2.rst
-   src/chapter2_answers.rst
    src/chapter3.rst
-   src/chapter3_answers.rst
    src/revisionexercises1.rst
    src/revisionexercises1_answers.rst
    src/chapter4.rst
-   src/chapter4_answers.rst
    src/chapter5.rst
-   src/chapter5_answers.rst
+   src/chapter_answers.rst
 
 Acknowledgements
 ----------------
