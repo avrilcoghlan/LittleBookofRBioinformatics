@@ -999,13 +999,13 @@ Q6. What is the optimal global alignment score between the *Brugia malayi* Vab-6
     Does this surprise you?
 
 .. |image0| image:: ../_static/P4_image0.png
-            :width: 600
+            :width: 700
 .. |image1| image:: ../_static/P4_image1.png
-            :width: 600
+            :width: 700
 .. |image2| image:: ../_static/P4_image2.png
-            :width: 600
+            :width: 700
 .. |image3| image:: ../_static/P4_image3.png
-            :width: 400
+            :width: 350
 .. |image4| image:: ../_static/P4_image4.png
 .. |image5| image:: ../_static/P4_image5.png
-            :width: 600
+            :width: 450
