@@ -36,7 +36,7 @@ Chapters in this Book
    src/chapter4.rst
    src/chapter5.rst
    src/chapter_answers.rst
-   src/revisionexercise_answers.rst
+   src/revisionexercises_answers.rst
 
 Acknowledgements
 ----------------
