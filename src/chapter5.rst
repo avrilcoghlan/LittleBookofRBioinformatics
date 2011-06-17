@@ -1,314 +1,229 @@
-Practical 5 for 2009/2010 - Phylogenetic trees
-==============================================
+Multiple Alignment and Phylogenetic trees
+=========================================
 
+Retrieving a list of sequences from UniProt
+-------------------------------------------
 
+In previous chapters, you learnt how to search for DNA or protein sequences
+in sequence databases such as the NCBI database and UniProt, using the
+SeqinR package (see `chapter3.html <chapter3.html>`_).
 
-A little more about R
----------------------
+For example, in the `previous chapter <chapter4.html#retrieving-a-uniprot-protein-sequence-via-the-uniprot-website>`_), 
+you learnt how to retrieve a single sequence from UniProt.
 
-In previous practicals (see practical 2, at
-`http://www.ucc.ie/microbio/MB6301/practical2\_words\_dbs\_v2.html <http://www.ucc.ie/microbio/MB6301/practical2_words_dbs_v2.html>`_),
-you learnt that you can define your own functions in R using the
-function() command to define a function. We can define a function
-that carries out several functions one after another. For example,
-if we wanted to define a function that calculates the sum of the
-elements in a vector, and then calculates the log to the base 10 of
-that sum, we would type:
-
-::
-
-    > myfunction2 <- function(x) { return(log10(sum(x))) } 
-    > myvector <- c(12, 133, 423, 333)
-    > myfunction2(myvector)
-    [1] 2.954725
-
-Note that the function can be defined over several lines, and will
-do exactly the same thing:
+Oftentimes, it is useful to retrieve several sequences from UniProt at once
+if you have a list of UniProt accessions. The R function "retrieveuniprotseqs()" 
+below is useful for this purpose:
 
 ::
 
-    > myfunction <- function(x)
+    > retrieveuniprotseqs <- function(seqnames)
+      {
+         myseqs <- list() # Make a list to store the sequences
+         library("seqinr")  # Load the SeqinR R package
+         choosebank("swissprot")
+         for (i in 1:length(seqnames))
          {
-            mysum <- sum(x)        # Calculate the sum of numbers in vector x
-            mylog <- log10(mysum)  # Calculate the log of mysum
-            return(mylog)
+            seqname <- seqnames[i]
+            print(paste("Retrieving sequence",seqname,"..."))
+            queryname <- "query2"
+            query <- paste("AC=",seqname,sep="")
+            query(`queryname`,`query`)
+            seq <- getSequence(query2$req[[1]]) # Makes a vector "seq" containing the sequence
+            myseqs[[i]] <- seq
          }
-    > myvector <- c(12, 133, 423, 333)
-    > myfunction(myvector)
-    [1] 2.954725
+         closebank()
+         return(myseqs)
+      }
 
-If you are using a computer that is directly connected to the
-internet, the procedure for installing most R libraries is simple.
-You can use the function install.packages() for this, which takes
-the name of the R library that you want to install as its argument
-(input). For example, to install the Ape R library, which is a
-library for phylogenetic analysis that you will use in this
-practical, you can type:
-
-::
-
-    > install.packages("ape")
-
-When you type the command above, you may be asked which website to
-download the library from, as the R libraries are available for
-download from various websites worldwide. It is a good idea to
-select the Irish website (managed by the Irish Higher Education
-Authority, or HEA), as this will be quickest to download from.
-
-Note that the install.packages() command can be used to install a
-large number of R libraries. However, there are some R libraries
-that cannot be installed using this function, including the
-libraries in the Bioconductor set of R libraries, which have a
-special installation procedure. Furthermore, the install.packages()
-command can only be used if you are using a computer that has a
-direct internet connection (and so cannot be used in many of the
-computer labs on the UCC campus, which connect to the internet
-indirectly, via a proxy).
-
-Retrieving sequences from a database using R
---------------------------------------------
-
-In previous practicals (see Practical 3, at
-`http://www.ucc.ie/microbio/MB6301/practical3\_revised\_v2.html <http://www.ucc.ie/microbio/MB6301/practical3_revised_v2.html>`_),
-you learnt how to search for DNA or protein sequences in sequence
-databases such as FASTA-format files. You can also search and
-download the sequences using R, with the SeqinR R library. The file
-"Rfunctions.R" (which can be downloaded from
-`www.ucc.ie/microbio/MB6301/Rfunctions.R <http://www.ucc.ie/microbio/MB6301/Rfunctions.R>`_)
-contains a function retrieveuniprotseqs() which uses the SeqinR R
-library to search for and retrieve sequences from the UniProt
-database. As its arguments (inputs), the retrieveuniprotseqs()
-function takes a vector containing the names of the sequences. The
-retrieveuniprotseqs() function returns a list variable, in which
+You need to cut and paste this function into R to use it.
+As its input, you need to give it the function a vector containing
+the UniProt accessions for the sequences you wish to retrieve.
+The retrieveuniprotseqs() function returns a list variable, in which
 each element is a vector containing one of the sequences.
 
 For example, to retrieve the protein sequences for UniProt
-accessions Q9NVS1 and P62286, you can type:
+accessions P06747, P0C569, O56773 and Q5VKP1 (the accessions for rabies virus phosphoprotein,  Mokola
+virus phosphoprotein, Lagos bat virus phosphoprotein and Western Caucasian bat virus phosphoprotein, 
+respectively), you can type:
 
 ::
 
-    > source("Rfunctions.R")
-    > seqnames <- c("Q9NVS1", "P62286") # Make a vector containing the names of the sequences
-    > seqs <- retrieveuniprotseqs(seqnames)    # Retrieve the sequences and store them in list variable "seqs"
-    > length(seqs)                      # Print out the number of sequences retrieved
-    [1] 2
-    > seq1 <- seqs[[1]]                 # Get the first sequence
-    > seq1[1:20]                        # Print out the first 20 letters of the first sequence            
-     [1] "M" "A" "N" "R" "R" "V" "G" "R" "G" "C" "W" "E" "V" "S" "P" "T" "E" "R" "R" "P"
-    > seq2 <- seqs[[2]]                 # Get the second sequence
-    > seq2[1:20]                        # Print out the first 20 letters of the second sequence
-     [1] "M" "A" "T" "R" "R" "A" "G" "R" "S" "W" "E" "V" "S" "P" "S" "G" "P" "R" "P" "A"
+    > seqnames <- c("P06747", "P0C569", "O56773", "Q5VKP1")  # Make a vector containing the names of the sequences
+    > seqs <- retrieveuniprotseqs(seqnames)        # Retrieve the sequences and store them in list variable "seqs"
+    > length(seqs)                                 # Print out the number of sequences retrieved
+     [1] 4
+    > seq1 <- seqs[[1]]                            # Get the first sequence
+    > seq1[1:20]                                   # Print out the first 20 letters of the first sequence  
+     [1] "M" "S" "K" "I" "F" "V" "N" "P" "S" "A" "I" "R" "A" "G" "L" "A" "D" "L" "E"
+     [20] "M"
+    > seq2 <- seqs[[2]]                            # Get the second sequence
+    > seq2[1:20]                                   # Print out the first 20 letters of the second sequence
+     [1] "M" "S" "K" "D" "L" "V" "H" "P" "S" "L" "I" "R" "A" "G" "I" "V" "E" "L" "E"
+     [20] "M"
+     
+The commands above use the function retrieveuniprotseqs() to retrieve two UniProt sequences. 
+The sequences are returned in a list variable *seqs*. To access the elements in an R list variable, 
+you need to use double square brackets. Therefore, the second element of the list
+variable is accessed by typing *seqs[[2]]*. Each element of the list variable *seqs* contains a 
+vector which stores one of the sequences.
 
-The commands above use the function retrieveuniprotseqs() to
-retrieve two UniProt sequences. The sequences are returned in a
-list variable *seqs*. As you learnt in previous practicals (see
-Practical 1 at
-`http://www.ucc.ie/microbio/MB6301/practical1\_words\_v2.html <http://www.ucc.ie/microbio/MB6301/practical1_words_v2.html>`_),
-to access the elements in an R list variable, you need to use
-double square brackets. Therefore, the second element of the list
-variable is accessed by typing *seqs[[2]]*. Each element of the
-list variable *seqs* contains a vector which stores one of the
-sequences.
+Rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected tropical disease. Mokola virus and rabies virus are closely related viruses that both belong to a group of viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
 
-Once you have retrieved the sequences using retrieveuniprotseqs(),
-you can then use the function write.fasta() from the SeqinR library
-to write the sequences to a FASTA-format file. As its arguments
-(inputs), the write.fasta() function takes the list variable
-containing the sequences, and a vector containing the names of the
-sequences, and the name that you want to give to the FASTA-format
+Once you have retrieved the sequences using retrieveuniprotseqs(), you can then use the function 
+write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments
+(inputs), the write.fasta() function takes the list variable containing the sequences, and a vector 
+containing the names of the sequences, and the name that you want to give to the FASTA-format
 file. For example:
 
 ::
 
-    > write.fasta(seqs, seqnames, file="myseqs.fasta")
+    > write.fasta(seqs, seqnames, file="phosphoproteins.fasta")
 
 The command above will write the sequences in list variable *seqs*
-to a FASTA-format file called "myseqs.fasta" in the "My Documents"
+to a FASTA-format file called "phosphoproteins.fasta" in the "My Documents"
 folder on your computer.
 
-Note that the retrieveuniprotseqs() function will not work if you
-are using a computer that does not have a direct internet
-connection (for example, it will not work if you are using some of
-the computers in UCC campus teaching labs, as do not connect
-directly to the internet, but rather connect through a proxy). In
-this case, you will have to search and retrieve the DNA or protein
-sequences via the website for the sequence database (for example,
-via the NCBI or UniProt website).
+Installing the CLUSTAL multiple alignment software 
+--------------------------------------------------
 
-The retrieveuniprotseqs() function can be used to retrieve protein
-sequences from the UniProt protein sequence database. The file
-"Rfunctions.R" also contains a very similar function
-retrievegenbankseqs() to retrieve mRNA or DNA sequences from the
-NCBI sequence database (the subsection of the NCBI sequence
-database that contains DNA sequences is commonly known as
-"GenBank").
+A common task in bioinformatics is to download a set of related sequences from a database, and then
+to align those sequences using multiple alignment software. This is the first step in most phylogenetic analyses.
 
-Creating a multiple alignment of protein, DNA or mRNA sequences
----------------------------------------------------------------
+One commonly used multiple alignment software package is CLUSTAL. In order to build an alignment
+using CLUSTAL, you first need to install the CLUSTAL program on your computer.
 
-For most phylogenetic analyses, it is necessary to first make a
-multiple alignment of the sequences that you are including in your
-analysis. You can make a multiple alignment of DNA, mRNA, or
-protein sequences using the T-Coffee software, which can be run via
-the website
-`www.ebi.ac.uk/Tools/t-coffee/ <http://www.ebi.ac.uk/Tools/t-coffee/index.html>`_.
+To install CLUSTAL on your computer, you need to follow these steps:
 
-For example, say you want to make a multiple alignment of the human
-ASPM protein (a protein involved in brain development; UniProt
-accession Q9NVS1) and its homologs in other mammals (eg. UniProt
-P62293 is the chimp homolog; Q8CJ27 is the mouse homolog, UniProt
-P62286 is the dog homolog; UniProt P62285 is the cow homolog; and
-P62297 is the sheep homolog).
+* Go to the `http://www.clustal.org/download/current/ <http://www.clustal.org/download/current/>`_ website.
+* Right-click on the link to file clustalx-Z.Z.Z-win.msi (where Z represents some number) 
+  and choose "Save link as..." and then save the file in your "My Documents" folder.
+* Once the file has downloaded, double-click on the icon for file clustalx-Z.Z.Z-win.msi (where Z is some number). 
+* You will be asked "Are you sure you want to run this software?" Press "Run".
+* You will then see "Welcome to the ClustalX2 setup wizard". Press "Next".
+* You will be asked where to install ClustalX2. Select your "My Documents" folder.
+* Keep pressing 'yes' or 'Next' until the screen says "Completing the ClustalX2 setup wizard". Then press "Finish".
 
-We can first retrieve these sequences from UniProt using the
-retrieveuniprotseqs() function, and then write them to a
-FASTA-format file using the write.fasta() function:
+CLUSTAL should now be installed on your computer. 
 
-::
+Creating a multiple alignment of protein, DNA or mRNA sequences using CLUSTAL
+-----------------------------------------------------------------------------
 
-    > aspmnames <- c("Q9NVS1", "P62293", "Q8CJ27", "P62286", "P62285", "P62297")
-    > aspmseqs <- retrieveuniprotseqs(aspmnames)  # Retrieve the sequences and store them in list variable "aspmseqs"
-    > length(aspmseqs)                            # Find the number of sequences that were retrieved
-    [1] 6
+Once you have installed CLUSTAL, you can now align your sequences using CLUSTAL by following these steps:
 
-Note that the function retrieveuniprotseqs() may take a minute or
-so to run if you are retrieving a list of sequences, as it takes
-time to retrieve each sequence from UniProt. This will write the
-sequences in list variable *aspmseqs* to a FASTA-format file called
-"aspm.fasta" in the "My Documents" folder on your computer.
+# Go to the "Start" menu on the bottom left of your Windows screen. Select "All Programs" from the menu, then select 
+  "ClustalX2" from the menu that appears. This will start up CLUSTAL.
+# The CLUSTAL window should appear. To load the DNA or protein sequences that you want to align into CLUSTAL, go to the 
+  CLUSTAL "File" menu, and choose "Load sequences". 
+# Select the FASTA-format file containing your sequences (eg. phosphoproteins.fasta) to load it into CLUSTAL.
+# This should read the sequences into CLUSTAL. They have not been aligned yet, but will be displayed in the CLUSTAL window. 
+# You can use the scrollbar on the right to scroll down and look at all the sequences. You can use the scrollbar on the 
+  bottom to scroll from left to right, and look along the length of the sequences. 
+# Before you align the sequences using CLUSTAL, you need to tell CLUSTAL to make the output alignment file in
+  PHYLIP alignment format, so that you can read it into R. To do this, go to the "Alignment" menu in CLUSTAL, choose
+  "Output Format Options". A form will appear, and in this form you should select "PHYLIP format" and deselect "CLUSTAL format",
+  and then press "OK".
+# To now align the sequences using CLUSTAL, go to the CLUSTAL "Alignment" menu, and choose "Do Complete Alignment". 
+# A menu box will pop up, asking you where to save the output guide-tree file (eg. "phosphoproteins.dnd") and the output 
+  alignment file (called "phosphoproteins.phy"). You should choose to save them in your "My Documents" folder (so that you can 
+  easily read them into R from "My Documents" at a later stage).
+# CLUSTAL will now align the sequences. This will take a couple of minutes (eg. 2-5 minutes). You will see that at the bottom 
+  of the CLUSTAL window, it tells you which pair of sequences it is aligning at a particular point in time. If the numbers 
+  keep changing, it means that CLUSTAL is still working away, and the alignment is not finished yet. Be patient!
 
-You can then make a multiple alignment of these protein sequences
-using the T-Coffee multiple alignment software. To do this, go to
-the website
-`www.ebi.ac.uk/Tools/t-coffee/ <http://www.ebi.ac.uk/Tools/t-coffee/index.html>`_.
-On this website you will see a box for pasting in a sequence, and
-below the box there will be some text saying "Upload a file". Click
-on the "Browse" button to the right of "Upload a file", and select
-the FASTA file containing your sequences (eg. "aspm.fasta"). Then
-press the red "Run" button to the right of the "Browse" button, to
-run T-Coffee.
+Once CLUSTAL has finished making the alignment, it will be displayed in the CLUSTAL window. For example, here
+is the CLUSTAL alignment for rabies virus phosphoprotein, Mokola
+virus phosphoprotein, and Lagos bat virus phosphoprotein:
 
-When T-Coffee has finished running, you will see a page entitled
-"T-Coffee Results". You can view the multiple alignment by clicking
-on the "Start Jalview button" in the middle of the page, which will
-display the alignment in the Jalview alignment viewer. The
-alignment displayed in Jalview has a row for each of your
-sequences. Jalview colours sets of chemically similar amino acids
-in similar colours. For example, tyrosine (Y) is coloured
-blue-green, while the chemically similar amino acid phenylalanine
-(F) is coloured blue. You can scroll to the right and left along
-the alignment using the scrollbar at the bottom of the Jalview
-window.
+|image8|
 
-|image0|
+The alignment displayed in CLUSTAL has a row for each of your sequences. CLUSTAL colours sets of chemically similar amino acids
+in similar colours. For example, tyrosine (Y) is coloured blue-green, while the chemically similar amino acid phenylalanine
+(F) is coloured blue. You can scroll to the right and left along the alignment using the scrollbar at the bottom of the Jalview
+window. 
 
-To download the T-Coffee alignment, on the "T-Coffee Results"
-webpage, right-click (ie. click with your right mouse button) on
-the link beside "Phylip tree file" on the fifth line down of the
-table at the top of the Results page. Save the alignment file with
-a sensible name, eg. "aspm.phy", in the "My Documents" folder on
-your computer.
+Below the alignment, you can see a grey plot, showing the level of conservation at each point of the sequence.
+This shows a high grey bar if the conservation in a region is high (there is high percent identity between the sequence),
+and a low grey bar if it is low (there is low percent identity). This can give you an idea of which are the best conserved
+regions of the alginment. 
+
+For example, for the alignment of the four virus phosphoproteins, we can see that the region in alignment columns 35
+to 45 approximately is very well conserved, while the region in alignment columns 60 to 70 is poorly conserved.
+
+The CLUSTAL alignment will have been saved in a file in your "My Documents" folder called "something.phy" (eg. phosphoproteins.phy).
+This is a PHYLIP-format alignment file, which you can now read into R for further analysis.
 
 Reading a multiple alignment file into R
 ----------------------------------------
 
-To read a protein sequence alignment into R from a file, you can
-use the read.alignment() function in the SeqinR library. For
-example, to read in the multiple sequence alignment of ASPM
-proteins, we type:
+To read a sequence alignment into R from a file, you can use the read.alignment() function in the SeqinR package. For
+example, to read in the multiple sequence alignment of the virus phosphoproteins into R, we type:
 
 ::
 
-    > aspmaln  <- read.alignment(file = "aspm.phy", format = "phylip")
+    > virusaln  <- read.alignment(file = "phosphoproteins.phy", format = "phylip")
 
-The *aspmaln* variable is a list variable that stores the
-alignment.
+The *virusaln* variable is a list variable that stores the alignment.
 
-As you learnt in previous practicals (see Practical 1, at
-`http://www.ucc.ie/microbio/MB6301/practical1\_words\_v2.html <http://www.ucc.ie/microbio/MB6301/practical1_words_v2.html>`_),
-an R list variable can have named elements, and you can access the
-named elements of a list variable by typing the variable name,
-followed by "$", followed by the name of the named element.
+An R list variable can have named elements, and you can access the named elements of a list 
+variable by typing the variable name, followed by "$", followed by the name of the named element.
 
-The list variable *aspmaln* has named elements "nb", "nam", "seq",
-and "com". In fact, the named element "seq" contains the alignment,
-which you can view by typing:
+The list variable *virusaln* has named elements "nb", "nam", "seq", and "com". 
+
+In fact, the named element "seq" contains the alignment, which you can view by typing:
 
 ::
 
-    > aspmaln$seq
-    [[1]]
-    [1] "---------------------------------------------------------------------pnee...
-    
-    [[2]]
-    [1] "matrragr-swevspsgprpaa------geaaaasppvlslshfcrspflcfgdvrlggsrtlplllhnpnde...
-    
-    [[3]]
-    [1] "manrrvgrgcwevspterrppaglrgpaaeeeassppvlslshfcrspflcfgdvllgasrtlslaldnpnee...
-    
-    [[4]]
-    [1] "matmqaas-cpeergrrarp-------dpeagdpsppvlllshfcgvpflcfgdvrvgtsrtrslvlhnphee...
-    
-    [[5]]
-    [1] "manrrvgrgcwevspterrppaglrgpaaeeeassppvlslshfcrspflcfgdvllgasrtlslaldnpnee...
-    
-    [[6]]
-    [1] "---------------------------------------------------------------------pnee...
+    > virusaln$seq
+      [[1]]
+      [1] "mskdlvhpsliragivelemaeettdlinrtiesnqahlqgeplyvdslpedmsrlriedksrrtk...
+      [[2]]
+      [1] "mskglihpsairsglvdlemaeetvdlvhknladsqahlqgeplnvdslpedmrkmrltnapsere...
+      [[3]]
+      [1] "mskifvnpsairagladlemaeetvdlinrniednqahlqgepievdnlpedmgrlhlddgkspnp...
+      [[4]]
+      [1] "mskslihpsdlragladiemadetvdlvyknlsegqahlqgepfdikdlpegvsklqisdnvrsdt...
 
-Only the first part of the alignment stored in *aspm$seq* is shown
-here, as it is very long.
+Only the first part of the alignment stored in *virusaln$seq* is shown here, as
+it is very long.
 
 Calculating genetic distances between protein sequences
 -------------------------------------------------------
 
-A common first step in performing a phylogenetic analysis is to
-calculate the pairwise genetic distances between sequences. The
-genetic distance is an estimate of the divergence between two
-sequences, and is usually measured in quantity of evolutionary
-change (eg. number of mutations).
+A common first step in performing a phylogenetic analysis is to calculate the pairwise genetic distances between sequences. The
+genetic distance is an estimate of the divergence between two sequences, and is usually measured in quantity of evolutionary
+change (an estimate of the number of mutations that have occurred since the two sequences shared a common ancestor).
 
-We can calculate the genetic distances between protein sequences
-using the dist.alignment() function in the SeqinR library. The
-dist.alignment() function takes a multiple alignment as input.
-Based on the multiple alignment that you give it, dist.alignment()
-calculates the genetic distance between each pair of proteins in
-the multiple alignment. For example, to calculate genetic distances
-between the ASPM proteins based on the multiple sequence alignment,
-we type:
+We can calculate the genetic distances between protein sequences using the "dist.alignment()" function in the SeqinR package. The
+dist.alignment() function takes a multiple alignment as input. Based on the multiple alignment that you give it, dist.alignment()
+calculates the genetic distance between each pair of proteins in the multiple alignment. For example, to calculate genetic distances
+between the virus phosphoproteins based on the multiple sequence alignment stored in *virusaln*, we type:
 
 ::
 
-    > aspmaln  <- read.alignment(file = "aspm.phy", format = "phylip") # Read in the alignment
-    > aspmdist <- dist.alignment(aspmaln)                              # Calculate the genetic distances
-    > aspmdist                                                         # Print out the genetic distance matrix
-               P62285     P62286     P62293     P62297     Q8CJ27    
-    P62286     0.32615432                                            
-    P62293     0.32062588 0.27259970                                 
-    P62297     0.13809534 0.32468430 0.32651352                      
-    Q8CJ27     0.37921767 0.36982995 0.35654846 0.38301128           
-    Q9NVS1     0.32294090 0.27419231 0.06345439 0.32878574 0.35789648
+    > virusdist <- dist.alignment(virusaln)                            # Calculate the genetic distances
+    > virusdist                                                        # Print out the genetic distance matrix
+                    P0C569     O56773     P06747    
+      O56773      0.4142670                      
+      P06747      0.4678196  0.4714045           
+      Q5VKP1      0.4828127  0.5067117  0.5034130
 
-The genetic distance matrix above shows the genetic distance
-between each pair of proteins. Based on the genetic distance matrix
-above, we can see that the genetic distance between the cow and
-sheep ASPM proteins (P62285 and P62297) by looking at the cell at
-the intersection of the column for P62285 (the first column) and
-the row for P62297 (the third row), and see that it is 0.13809534.
-Similarly, the genetic distance between the human and cow ASPM
-proteins (Q9NVS1 and P62285) is in the cell at the intersection of
-the column for P62285 (the first column) and the row for Q9NVS1
-(the last row), and is 0.32422538.
+The genetic distance matrix above shows the genetic distance between each pair of proteins. 
 
-The larger the genetic distance between two sequences, the more
-amino acid changes that have occurred since they shared a common
-ancestor, and the longer ago their common ancestor probably lived.
-The genetic distance between the human and cow ASPM proteins is
-larger than the genetic distance between the sheep and cow ASPM
-proteins, indicating that more amino acid changes have occurred in
-the human and cow ASPM proteins since they shared a common
-ancestor, compared in the sheep and cow ASPM proteins since they
-shared a common ancestor.
+The sequences are referred to by their UniProt accessions. If you remember from above, P06747
+is rabies virus phosphoprotein, P0C569 is Mokola virus phosphoprotein, O56773 is Lagos bat
+virus phosphoprotein and Q5VKP1 is Western Caucasian bat virus phosphoprotein.
 
+Based on the genetic distance matrix above, we can see that the genetic distance between 
+Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is smallest (about 0.414).
+
+Similarly, the genetic distance between Western Caucasian bat virus phosphoprotein (Q5VKP1) and
+Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
+
+The larger the genetic distance between two sequences, the more amino acid changes or indels that have occurred since 
+they shared a common ancestor, and the longer ago their common ancestor probably lived.
+
+xxx
 Building an unrooted phylogenetic tree for protein sequences based on a distance matrix
 ---------------------------------------------------------------------------------------
 
@@ -318,7 +233,7 @@ based on that distance matrix. One method for using this is the
 neighbour-joining algorithm.
 
 You can build a phylogenetic tree using the neighbour-joining
-algorithm with the nj() function the Ape R library. The nj()
+algorithm with the nj() function the Ape R package. The nj()
 function takes a distance matrix as its argument (input), and
 builds a phylogenetic tree.
 
@@ -330,7 +245,7 @@ builds a phylogenetic tree.
     > aspmtree <- nj(aspmdist)                                         # Calculate the neighbour-joining tree   
 
 After building a neighbour-joining tree, we can then plot a picture
-of the tree using the plot.phylo() function from the Ape library.
+of the tree using the plot.phylo() function from the Ape package.
 The plot.phylo() function has an argument "type", which tells it
 what sort of tree you want. For example, if a tree does not contain
 an outgroup, then it is an unrooted tree, and you can tell
@@ -444,7 +359,7 @@ as "Q1L925 " (with 4 spaces after the accession).
 Once we have built a new tree based on the new distance matrix, we
 need to tell R that it is a tree with an outgroup, that is, a
 rooted tree. This can be done using the root() function from the R
-Ape library. The root() function takes as its argument (input) the
+Ape package. The root() function takes as its argument (input) the
 name of the sequence that you want to be the outgroup in the tree
 (the zebrafish protein Q1L925 here). We need to give the root()
 function the name for the outgroup that is used in the tree, for
@@ -514,7 +429,7 @@ a clade consisting of chimp ASPM, P62293, and human ASPM, Q9NVS1
 the bootstrap trees that this clade appears in.
 
 The bootstrap values for a phylogenetic tree can be calculated in R
-using the boot.phylo() function in the Ape R library. By default,
+using the boot.phylo() function in the Ape R package. By default,
 the boot.phylo() function calculates the bootstrap values based on
 100 bootstrap trees. The boot.phylo() function takes as arguments:
 
@@ -534,7 +449,7 @@ stored as a list variable that has named elements "nb", "nam",
 "seq", and "com". As discussed above, the named element "seq"
 stores the alignment. To convert this list variable into an
 alignment in the form of a matrix of characters, we can use the
-as.matrix.alignment() function from the SeqinR library:
+as.matrix.alignment() function from the SeqinR package:
 
 ::
 
@@ -557,7 +472,7 @@ represents one row in the alignment. Only the start of the matrix
 of characters *aspmaln2mat* is printed out above, as it is very
 large. If we have an alignment in the format of a matrix of
 characters, we can convert it back into a list variable by using
-the as.alignment function from the Ape library, for example:
+the as.alignment function from the Ape package, for example:
 
 ::
 
@@ -608,7 +523,7 @@ tree of ASPM proteins using the boot.phylo() function, by typing:
 
 We can then plot the tree using the plot.phylo() function, and
 display the bootstrap values as percentages on the nodes of the
-tree using the nodelabels() function from the Ape library, by
+tree using the nodelabels() function from the Ape package, by
 typing:
 
 ::
@@ -675,7 +590,7 @@ To carry out a phylogenetic analysis based on DNA sequences, you
 need to use slightly different methods for calculating a genetic
 distance matrix than used for protein sequences. You can calculate
 a genetic distance for DNA sequences using the dist.dna() function
-in the Ape R library. dist.dna() takes a multiple alignment of DNA
+in the Ape R package. dist.dna() takes a multiple alignment of DNA
 sequences as its input, and calculates the genetic distance between
 each pair of DNA sequences in the multiple alignment. The
 dist.dna() function requires the input alignment to be in a special
@@ -758,37 +673,37 @@ In this practical, you have learnt the following R functions that
 belong to the bioinformatics libraries:
 
 
-#. install.packages() for installing an R library (except for
+#. install.packages() for installing an R package (except for
    Bioconductor R libraries), if you have a direct internet connection
 #. retrieveuniprotseqs() from "Rfunctions.R", which uses SeqinR to
    retrieve protein sequences from UniProt
 #. retrievegenbankseqs() from "Rfunctions.R", which uses SeqinR to
    retrieve DNA or mRNA sequences from NCBI
-#. write.fasta() from the SeqinR library for writing sequences to a
+#. write.fasta() from the SeqinR package for writing sequences to a
    FASTA-format file
-#. read.alignment() from the SeqinR library for reading in a
+#. read.alignment() from the SeqinR packagek for reading in a
    multiple alignment
-#. dist.alignment() from the SeqinR library for calculating genetic
+#. dist.alignment() from the SeqinR package for calculating genetic
    distances between protein sequences
-#. nj() from the Ape library for building a neighbour-joining tree
-#. plot.phylo() from the Ape library for plotting a phylogenetic
+#. nj() from the Ape package for building a neighbour-joining tree
+#. plot.phylo() from the Ape package for plotting a phylogenetic
    tree
-#. root() from the Ape library for converting an unrooted tree to a
+#. root() from the Ape package for converting an unrooted tree to a
    rooted tree
-#. as.matrix.alignment() from the SeqinR library for converting an
+#. as.matrix.alignment() from the SeqinR package for converting an
    alignment in the form of a list variable to an alignment in the
    form of a matrix of characters
-#. as.alignment() from the Ape library for converting an alignment
+#. as.alignment() from the Ape package for converting an alignment
    in the form of a matrix of characters to an alignment int he form
    of a list variable
-#. boot.phylo() from the Ape library for calculating bootstrap
+#. boot.phylo() from the Ape package for calculating bootstrap
    values for a tree
-#. nodelabels() from the Ape library for adding labels to the nodes
+#. nodelabels() from the Ape package for adding labels to the nodes
    of a tree in a tree plot
-#. as.DNAbin() from the Ape library for convering an alignment in
+#. as.DNAbin() from the Ape package for convering an alignment in
    the form a a list to the "DNAbin" format required by the dist.dna()
    function
-#. dist.dna() from the Ape library for calculating genetic
+#. dist.dna() from the Ape package for calculating genetic
    distances between DNA or mRNA sequences
 
 Links and Further Reading
@@ -805,14 +720,14 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 For more in-depth information and more examples on using the SeqinR
-library for sequence analysis, look at the SeqinR documentation,
+package for sequence analysis, look at the SeqinR documentation,
 `seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
 
-For more in-depth information and more examples on the Ape library
+For more in-depth information and more examples on the Ape package
 for phylogenetic analysis, look at the Ape documentation,
 `ape.mpl.ird.fr/ <http://ape.mpl.ird.fr/>`_.
 
-If you are using the Ape library for a phylogenetic analysis
+If you are using the Ape package for a phylogenetic analysis
 project, it would be worthwhile to obtain a copy of the book
 *Analysis of Phylogenetics and Evolution with R* by Emmanuel
 Paradis, published by Springer, which has many nice examples of
@@ -830,10 +745,10 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 Thank you to Jean Lobry and Simon Penel for helpful advice on using
-the SeqinR library.
+the SeqinR package.
 
 Thank you to Emmanuel Paradis and François Michonneau for help in
-using the Ape library.
+using the Ape package.
 
 Exercises
 ---------
@@ -938,14 +853,11 @@ download as part of the PHYLIP package for phylogenetic analysis
 (`evolution.genetics.washington.edu/phylip.html <http://evolution.genetics.washington.edu/phylip.html>`_)
 and so can also be run on your own computer.
 
-As well as the R Ape library and PHYLIP, there are a large number
+As well as the R Ape package and PHYLIP, there are a large number
 of other software packages available for phylogenetic analyses. Joe
 Felsenstein maintains a very useful list of phylogenetic software
 packages on his website at
 `evolution.gs.washington.edu/phylip/software.html <http://evolution.gs.washington.edu/phylip/software.html>`_.
-
-
-
 
 .. |image0| image:: ../_static/P5_image0.png
 .. |image1| image:: ../_static/P5_image2b.png
@@ -953,3 +865,4 @@ packages on his website at
 .. |image3| image:: ../_static/P5_image4.png
 .. |image4| image:: ../_static/P5_image7b.png
 .. |image5| image:: ../_static/P5_image7.png
+.. |image8| image:: ../_static/P5_image8.png
