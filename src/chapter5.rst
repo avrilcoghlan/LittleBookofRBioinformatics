@@ -226,6 +226,68 @@ Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
 The larger the genetic distance between two sequences, the more amino acid changes or indels that have occurred since 
 they shared a common ancestor, and the longer ago their common ancestor probably lived.
 
+Calculating genetic distances between DNA/mRNA sequences
+--------------------------------------------------------
+
+Just like for protein sequences, you can calculate genetic distances between DNA (or mRNA) sequences
+based on an alignment of the sequences.
+
+For example, the NCBI accession AF049118 contains mRNA sequence for Mokola virus phosphoprotein,
+RefSeq AF049114 contains mRNA sequence for Mokola virus phosphoprotein, and AF049119 contains
+the mRNA sequence for Lagos bat virus phosphoprotein, while AF049115 contains the mRNA
+sequence for Duvenhage virus phosphoprotein.
+
+To retrieve these sequences from the NCBI database, we can search the ACNUC "genbank" sub-database
+(since these are nucleotide sequences), by typing:
+
+::
+
+    > seqnames <- c("AF049118", "AF049114", "AF049119", "AF049115")  # Make a vector containing the names of the sequences
+    > seqs <- retrieveseqs(seqnames,"genbank")                       # Retrieve the sequences and store them in list variable "seqs"
+
+We can then write out the sequences to a FASTA-format file by typing:
+
+::
+
+    > write.fasta(seqs, seqnames, file="virusmRNA.fasta")
+
+We can then use CLUSTAL to create a PHYLIP-format alignment of the sequences, and store it in the
+alignment file "virusmRNA.phy". This picture shows part of the alignment:
+
+|image12|
+
+We can then read the alignment into R:
+
+::
+
+    > virusmRNAaln  <- read.alignment(file = "virusmRNA.phy", format = "phylip")
+
+We saw above that the function dist.alignment() can be used to calculate a genetic
+distance matrix based on a protein sequence alignment.
+
+You can calculate a genetic distance for DNA or mRNA sequences
+using the dist.dna() function in the Ape R package. 
+dist.dna()</tt> takes a multiple alignment 
+of DNA or mRNA sequences as its input, and calculates the genetic distance between each pair of DNA sequences 
+in the multiple alignment. 
+
+The dist.dna() function requires the input alignment to be in a
+special format known as "DNAbin" format, so we must use the as.DNAbin() function to convert
+our DNA alignment into this format before using the dist.dna() function.
+
+For example, to calculate the genetic distance between each pair of mRNA sequences for the virus
+phosphoproteins, we type:
+
+::
+
+    > virusmRNAalnbin <- as.DNAbin(virusmRNAaln) # Convert the alignment to "DNAbin" format
+    > virusmRNAdist <- dist.dna(virusmRNAalnbin) # Calculate the genetic distance matrix
+    > virusmRNAdist                              # Print out the genetic distance matrix
+                AF049114  AF049119  AF049118
+      AF049119 0.3400576                    
+      AF049118 0.5235850 0.5637372          
+      AF049115 0.6854129 0.6852311 0.7656023
+
 Building an unrooted phylogenetic tree for protein sequences 
 ------------------------------------------------------------
 
@@ -237,16 +299,16 @@ You can build a phylogenetic tree using the neighbour-joining algorithm with the
 Ape R package. First you will need to install the "ape" package (see `instructions on how to
 install R packages <./installr.html#how-to-install-an-r-package>`_).
 
-The following R function "unrootedproteinNJtree()" builds a phylogenetic tree based on an alignment of
-protein sequences, using the neighbour-joining algorithm, using functions from the "ape" package.
+The following R function "unrootedNJtree()" builds a phylogenetic tree based on an alignment of
+sequences, using the neighbour-joining algorithm, using functions from the "ape" package.
 
-The "unrootedproteinNJtree()" function takes an alignment of protein sequences its
+The "unrootedNJtree()" function takes an alignment of sequences its
 input, calculates pairwise distances between the sequences based on the alignment, and then builds
 a phylogenetic tree based on the pairwise distances:
 
 ::
 
-    > unrootedproteinNJtree <- function(alignment)
+    > unrootedNJtree <- function(alignment,type)
       {
          # load the ape and seqinR packages:
          library("ape")
@@ -255,7 +317,15 @@ a phylogenetic tree based on the pairwise distances:
          makemytree <- function(alignmentmat)
          {
             alignment <- ape::as.alignment(alignmentmat)
-            mydist <- dist.alignment(alignment)
+            if      (type == "protein")  
+            {
+               mydist <- dist.alignment(alignment)
+            }
+            else if (type == "DNA")
+            {
+               alignmentbin <- as.DNAbin(alignment)
+               mydist <- dist.dna(alignmentbin)
+            }
             mytree <- nj(mydist)
             mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
             return(mytree)   
@@ -276,9 +346,12 @@ alignment:
 
 ::
 
-    > unrootedproteinNJtree(virusaln)
+    > unrootedNJtree(virusaln,type="protein")
 
 |image9|
+
+Note that you need to specify that the type of sequences that you are using are protein sequences
+when you use unrootedNJtree(), by setting "type=protein".
 
 We can see that Q5VKP1 (Western Caucasian bat virus phosphoprotein) and P06747 
 (rabies virus phosphoprotein) have been grouped together in the tree, and that
@@ -399,12 +472,12 @@ We can then read the alignment into R:
 The next step is to build a phylogenetic tree of the proteins, which again we can do using
 the neighbour-joining algorithm.
 
-This time we have an outgroup in our set of sequences, so we can build a rooted tree. The function "rootedproteinNJtree()"
+This time we have an outgroup in our set of sequences, so we can build a rooted tree. The function "rootedNJtree()"
 can be used to build a rooted tree:
 
 ::
 
-    > rootedproteinNJtree <- function(alignment, theoutgroup)
+    > rootedNJtree <- function(alignment, theoutgroup, type)
       {
          # load the ape and seqinR packages:
          library("ape")
@@ -413,7 +486,15 @@ can be used to build a rooted tree:
          makemytree <- function(alignmentmat, outgroup=`theoutgroup`)
          {
             alignment <- ape::as.alignment(alignmentmat)
-            mydist <- dist.alignment(alignment)
+            if      (type == "protein")  
+            {
+               mydist <- dist.alignment(alignment)
+            }
+            else if (type == "DNA")
+            {
+               alignmentbin <- as.DNAbin(alignment)
+               mydist <- dist.dna(alignmentbin)
+            }
             mytree <- nj(mydist)
             mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
             myrootedtree <- root(mytree, outgroup, r=TRUE)
@@ -435,7 +516,7 @@ protein and its homologues, using the fruitfly protein (UniProt Q9VT99) as the o
 
 ::
 
-    > rootedproteinNJtree(fox1aln, "Q9VT99")
+    > rootedNJtree(fox1aln, "Q9VT99",type="protein") 
 
 |image11|
 
@@ -471,135 +552,38 @@ This indicates that there has been more evolutionary change in E3M2K8 (*C. reman
 proteins since they diverged, than there has been in A8NSK3 (*Brugia malayi* Fox-1 homologue) and E1FUV2 (*Loa loa* Fox-1 homologue)
 since they diverged.
 
-xxx
+Building a phylogenetic tree for DNA or mRNA sequences 
+------------------------------------------------------
 
-Calculating genetic distances between DNA or mRNA sequences
------------------------------------------------------------
+In the example above, a phylogenetic tree was built for protein sequences.
+The genomes of distantly related organisms such as vertebrates will have accumulated many 
+mutations since they diverged. Sometimes, so many mutations have occurred since the organisms 
+diverged that their DNA sequences are hard to align correctly and it is also hard to accurately 
+estimate evolutionary distances from alignments of those DNA sequences. 
 
-In the example above, a phylogenetic tree was built of ASPM protein
-sequences from vertebrates. The genomes of distantly related
-organisms such as vertebrates will have accumulated many mutations
-since they diverged. Sometimes, so many mutations have occurred
-since the organisms diverged that their DNA sequences are hard to
-align correctly and it is also hard to accurately estimate
-evolutionary distances from alignments of those DNA sequences. In
-contrast, as many mutations at the DNA level are synonymous at the
-protein level, protein sequences diverge at a slower rate than DNA
-sequences. This is why for reasonably distantly related organisms
-such as vertebrates, it is usually preferable to use protein
-sequences for phylogenetic analyses.
+In contrast, as many mutations at the DNA level are synonymous at the protein level, protein sequences diverge at 
+a slower rate than DNA sequences. This is why for reasonably distantly related organisms 
+such as vertebrates, it is usually preferable to use protein sequences for phylogenetic analyses.
 
-If you are studying closely related organisms such as primates, few
-mutations will have occurred since they diverged. As a result, if
-you use protein sequences for a phylogenetic analysis, there may be
-too few amino acid substitutions to provide enough 'signal' to use
-for the phylogenetic analysis. Therefore, it is often preferable to
-use DNA sequences for a phylogenetic analysis of closely related
-organisms such as primates.
+If you are studying closely related organisms such as primates, few mutations will have occurred 
+since they diverged. As a result, if you use protein sequences for a phylogenetic analysis, 
+there may be too few amino acid substitutions to provide enough 'signal' to use for the phylogenetic 
+analysis. Therefore, it is often preferable to use DNA sequences for a phylogenetic analysis of 
+closely related organisms such as primates. 
 
-One example where this is the case is phylogenetic analysis of
-*aspm* genes from primates. The NCBI Sequence Database contains
-*aspm* gene mRNA sequences from various primates, including human
-(NCBI accession AF509326), chimp (NCBI accession AY367066),
-orangutan (NCBI accession AY367067), and gorilla (NCBI accession
-AY508451). We can retrieve these sequences and save them to a FASTA
-format file "aspm3.fasta" using SeqinR, by using the
-retrievegenbankseqs() function:
+We can use the functions unrootedNJtree() and rootedNJtree() described above to build unrooted or rooted neighbour-joining
+phylogenetic trees based on an alignment of DNA or mRNA sequences. In this case, we need to use "type=DNA"
+as an argument in these functions, to tell them that we are making a tree of nucleotide sequences, not protein sequences.
+
+For example, to build an unrooted phylogenetic tree based on the alignment of the virus phosphoprotein mRNA sequences,
+we type in R:
 
 ::
 
-    > aspmnames3 <- c("AF509326","AY367066","AY367067","AY508451")
-    > aspmseqs3 <- retrievegenbankseqs(aspmnames3)
-    > length(aspmseqs3) # Print out the number of sequences
-    [1] 4 
-    > write.fasta(aspmseqs3, aspmnames3, file="aspm3.fasta")
+    > virusmRNAaln  <- read.alignment(file = "virusmRNA.phy", format = "phylip")
+    > unrootedNJtree(virusmRNAaln, type="DNA") 
 
-We can then use T-Coffee to build a multiple alignment of these DNA
-sequences, and save the alignment file (eg. as "aspm3.phy"), as
-described above.
-
-Building a phylogenetic tree for DNA or mRNA sequences based on a distance matrix
----------------------------------------------------------------------------------
-
-To carry out a phylogenetic analysis based on DNA sequences, you
-need to use slightly different methods for calculating a genetic
-distance matrix than used for protein sequences. You can calculate
-a genetic distance for DNA sequences using the dist.dna() function
-in the Ape R package. dist.dna() takes a multiple alignment of DNA
-sequences as its input, and calculates the genetic distance between
-each pair of DNA sequences in the multiple alignment. The
-dist.dna() function requires the input alignment to be in a special
-format known as "DNAbin" format, so we must use the as.DNAbin()
-function to convert our DNA alignment into this format before using
-the dist.dna() function. For example, to calculate the genetic
-distance between each pair of DNA sequences in an alignment file
-"aspm3.phy", we type:
-
-::
-
-    > aspmaln3        <- read.alignment(file = "aspm3.phy", format = "phylip") # Read in the alignment
-    > aspmaln3DNAbin  <- as.DNAbin(aspmaln3)      # Convert the alignment into "DNAbin" format
-    > aspmdist3       <- dist.dna(aspmaln3DNAbin) # Calculate the genetic distance matrix
-    > aspmdist3                                   # Print out the genetic distance matrix
-                AF509326    AY367066    AY367067
-    AY367066 0.005824745                        
-    AY367067 0.013771317 0.014465548            
-    AY508451 0.007675178 0.009243747 0.014559095
-
-Once you have built a distance matrix that gives the pairwise
-distances between all your DNA sequences, you can use the nj()
-function to build a phylogenetic tree based on that distance matrix
-using the neighbour-joining algorithm. For example, to build a
-phylogenetic tree of the *aspm* mRNA sequences, using the orangutan
-sequence AY367067 as the outgroup, we type:
-
-::
-
-    > aspmaln3tree       <- nj(aspmdist3)                                         # Calculate the neighbour-joining tree
-    > rootedaspmtree3    <- root(aspmaln3tree, "AY367067", r=TRUE)                # Convert the tree to a rooted tree
-    > plot.phylo(rootedaspmtree3)                                                 # Plot the tree
-
-|image4|
-
-The orangutan sequence (accession AY367067) is used as the
-outgroup, as we know from prior knowledge that orangutans are more
-distantly related to chimp, human and gorilla than they are to each
-other.
-
-If you want to add bootstrap values to a rooted phylogenetic tree
-based on a DNA or mRNA sequence alignment, you can easily do that
-using the boot.phylo() function. You would first need to define a
-function that built a rooted tree with a certain outgroup, for
-example, here is a function to build a rooted tree using the
-orangutan "AY367067" sequence as the outgroup:
-
-::
-
-    > myrooteddnanjtree <- function(alnbin)
-     {
-        distmat    <- dist.dna(alnbin)                # Calculate the genetic distance matrix
-        tree       <- nj(distmat)                     # Calculate the neighbour-joining tree
-        rootedtree <- root(tree, "AY367067", r=TRUE)  # Convert the tree into a rooted tree
-        return(rootedtree)
-     }
-
-For example, to add bootstrap values to the phylogenetic tree of
-*aspm* mRNA sequences, we type:
-
-::
-
-    > aspmboot3          <- boot.phylo(rootedaspmtree3, aspmaln3DNAbin, myrooteddnanjtree) # Calculate the bootstrap values as percentages
-    > aspmboot3                                                                            # Print the bootstrap values as percentages 
-    [1] 100  39  99 
-    > plot.phylo(rootedaspmtree3)                                                          # Make a plot of the rooted tree
-    > nodelabels(aspmboot3)                                                                # Add the bootstrap values as labels to the nodes
-
-|image5|
-
-We can see from the tree that the human and chimp *aspm* genes
-(accessions AF509326 and AY367066) shared a common ancestor with
-each other more recently than they did with the gorilla *aspm* gene
-(AY508451).
+|image13|
 
 Summary
 -------
@@ -607,42 +591,17 @@ Summary
 In this practical, you have learnt the following R functions that
 belong to the bioinformatics libraries:
 
-
-#. install.packages() for installing an R package (except for
-   Bioconductor R libraries), if you have a direct internet connection
-#. write.fasta() from the SeqinR package for writing sequences to a
-   FASTA-format file
-#. read.alignment() from the SeqinR packagek for reading in a
+#. read.alignment() from the SeqinR package for reading in a
    multiple alignment
 #. dist.alignment() from the SeqinR package for calculating genetic
    distances between protein sequences
-#. nj() from the Ape package for building a neighbour-joining tree
-#. plot.phylo() from the Ape package for plotting a phylogenetic
-   tree
-#. root() from the Ape package for converting an unrooted tree to a
-   rooted tree
-#. as.matrix.alignment() from the SeqinR package for converting an
-   alignment in the form of a list variable to an alignment in the
-   form of a matrix of characters
-#. as.alignment() from the Ape package for converting an alignment
-   in the form of a matrix of characters to an alignment int he form
-   of a list variable
-#. boot.phylo() from the Ape package for calculating bootstrap
-   values for a tree
-#. nodelabels() from the Ape package for adding labels to the nodes
-   of a tree in a tree plot
-#. as.DNAbin() from the Ape package for convering an alignment in
-   the form a a list to the "DNAbin" format required by the dist.dna()
-   function
 #. dist.dna() from the Ape package for calculating genetic
    distances between DNA or mRNA sequences
 
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package and SeqinR and
-Ape libraries for your project or assignments.
+Some links are included here for further reading. 
 
 For background reading on phylogenetic trees, it is recommended to
 read Chapter 7 of
@@ -652,7 +611,7 @@ by Cristianini and Hahn (Cambridge University Press;
 
 For more in-depth information and more examples on using the SeqinR
 package for sequence analysis, look at the SeqinR documentation,
-`seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
+`http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
 
 For more in-depth information and more examples on the Ape package
 for phylogenetic analysis, look at the Ape documentation,
@@ -663,6 +622,14 @@ project, it would be worthwhile to obtain a copy of the book
 *Analysis of Phylogenetics and Evolution with R* by Emmanuel
 Paradis, published by Springer, which has many nice examples of
 using R for phylogenetic analyses.
+
+For a more in-depth introduction to R, a good online tutorial is
+available on the "Kickstarting R" website,
+`cran.r-project.org/doc/contrib/Lemon-kickstart <http://cran.r-project.org/doc/contrib/Lemon-kickstart/>`_.
+
+There is another nice (slightly more in-depth) tutorial to R
+available on the "Introduction to R" website,
+`cran.r-project.org/doc/manuals/R-intro.html <http://cran.r-project.org/doc/manuals/R-intro.html>`_.
 
 Acknowledgements
 ----------------
@@ -681,12 +648,27 @@ the SeqinR package.
 Thank you to Emmanuel Paradis and François Michonneau for help in
 using the Ape package.
 
+Contact
+-------
+
+I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
+my email address a.coghlan@ucc.ie 
+
+License
+-------
+
+The content in this book is licensed under a `Creative Commons Attribution 3.0 License
+<http://creativecommons.org/licenses/by/3.0/>`_.
+
 Exercises
 ---------
 
 Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
+
+Model answers to the exercises are given in
+`Answers to the exercises on Multiple Alignment and Phylogenetic Trees <./chapter_answers.html#multiple-alignment-and-phylogenetic-trees>`_.
 
 Q1. Calculate the genetic distances between the following Spike
 proteins from different coronaviruses:
@@ -756,40 +738,6 @@ Q5. Based on your phylogenetic tree from Q3, what is the relationship between th
     What role did people who stayed in the Metropole hotel probably
     play in the spread of SARS?
 
-Other ways to do the same thing
--------------------------------
-
-It is possible to carry out some of the analyses that you have
-carried out in the practicals via websites. You can download the
-T-Coffee alignment program from
-`www.tcoffee.org/Projects\_home\_page/t\_coffee\_home\_page.html <http://www.tcoffee.org/Projects_home_page/t_coffee_home_page.html>`_
-and run it on your own computer.
-
-It is possible to calculate genetic distances between protein
-sequences using the Protdist program, via the website
-`mobyle.pasteur.fr/cgi-bin/portal.py?form=protdist <http://mobyle.pasteur.fr/cgi-bin/portal.py?form=protdist>`_.
-Similarly, it is possible to calculate genetic distances between
-DNA or mRNA sequences using the DNAdist program, via the website
-`mobyle.pasteur.fr/cgi-bin/portal.py?form=dnadist <http://mobyle.pasteur.fr/cgi-bin/portal.py?form=dnadist>`_.
-You can build a phylogenetic tree based on a genetic distance
-matrix with the neighbour-joining algorithm by using the Neighbor
-program, via the website
-`mobyle.pasteur.fr/cgi-bin/portal.py?form=neighbor <http://mobyle.pasteur.fr/cgi-bin/portal.py?form=neighbor>`_.
-A nice program for plotting a phylogenetic tree produced by the
-Neighbor program is Phylodendron, available at the website
-`iubio.bio.indiana.edu/treeapp/treeprint-form.html <http://iubio.bio.indiana.edu/treeapp/treeprint-form.html>`_.
-
-The Protdist, Dnadist and Neighbor programs are also available for
-download as part of the PHYLIP package for phylogenetic analysis
-(`evolution.genetics.washington.edu/phylip.html <http://evolution.genetics.washington.edu/phylip.html>`_)
-and so can also be run on your own computer.
-
-As well as the R Ape package and PHYLIP, there are a large number
-of other software packages available for phylogenetic analyses. Joe
-Felsenstein maintains a very useful list of phylogenetic software
-packages on his website at
-`evolution.gs.washington.edu/phylip/software.html <http://evolution.gs.washington.edu/phylip/software.html>`_.
-
 .. |image0| image:: ../_static/P5_image0.png
 .. |image1| image:: ../_static/P5_image2b.png
 .. |image2| image:: ../_static/P5_image3b.png
@@ -804,4 +752,7 @@ packages on his website at
             :width: 700
 .. |image11| image:: ../_static/P5_image11.png
             :width: 400
-
+.. |image12| image:: ../_static/P5_image12.png
+            :width: 700
+.. |image13| image:: ../_static/P5_image13.png
+            :width: 400
