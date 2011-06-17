@@ -670,73 +670,15 @@ get this answer.
 Model answers to the exercises are given in
 `Answers to the exercises on Multiple Alignment and Phylogenetic Trees <./chapter_answers.html#multiple-alignment-and-phylogenetic-trees>`_.
 
-Q1. Calculate the genetic distances between the following Spike
-proteins from different coronaviruses:
+Q1. Calculate the genetic distances between the following NS1 proteins from different Dengue virus strains: Dengue virus 1 NS1 protein (Uniprot Q9YRR4), Dengue virus 2 NS1 protein (UniProt Q9YP96), Dengue virus 3 NS1 protein (UniProt B0LSS3), and Dengue virus 4 NS1 protein (UniProt Q6TFL5). Which are the most closely related proteins, and which are the least closely related, based on the genetic distances?
+     Note: Dengue virus causes `Dengue fever <http://www.who.int/topics/dengue/en/>`_, which is classified by the WHO as a neglected
+     tropical disease. There are four main types of Dengue virus, Dengue virus 1, Dengue virus 2, Dengue virus 3, and Dengue virus 4.
 
--  bovine coronavirus CoV1 Spike protein (UniProt Q8V436)
--  bovine coronavirus CoV2 Spike protein (UniProt Q91A26)
--  human coronavirus OC43 Spike protein (UniProt P36334)
--  porcine coronavirus HEV3 Spike protein (UniProt Q8BB25)
--  murine coronavirus HV2 Spike protein (UniProt P11224)
--  avian coronavirus IBV3 Spike protein (UniProt P11223)
--  porcine coronavirus PEDV Spike protein (UnniProt Q91AV1)
--  canine coronavirus CoV1 Spike protein (UniProt Q65984)
--  feline coronavirus CoV4 Spike protein (UniProt Q66951)
--  human SARS coronavirus CoV Spike protein (UniProt P59594)
--  palm civet coronavirus Spike protein (UniProt Q5GDB3)
+Q2. Build an unrooted phylogenetic tree of the NS1 proteins from Dengue virus 1, Dengue virus 2, Dengue virus 3 and Dengue virus 4,
+using the neighbour-joining algorithm. Which are the most closely related proteins, based on the tree? Based on the bootstrap values in the tree, how confident are you of this?
 
-Which protein is has the smallest genetic distance from the human
-SARS Spike protein?
-SARS (Severe Acute Respiratory Syndrome) is a human illness that
-first appeared in late 2002 in Guangdong Province, China. It is now
-known that the disease is caused by the SARS coronavirus
-(SARS-CoV), a novel coronavirus.
-Q2. Build an unrooted phylogenetic tree with bootstrap values of
-the proteins from Q1, using the neighbour-joining algorithm. Based
-on the phylogenetic tree for the coronavirus Spike proteins, which
-coronavirus do you think that human SARS is most closely related
-to?
-Based on the bootstrap values in the tree, how confident are you of
-this?
-Q3. Calculate an unrooted phylogenetic tree with bootstrap values
-of the following Spike gene DNA sequences from human SARS viruses
-that were isolated from infected patients:
+Q3. The Zika virus is related to Dengue viruses, but is not a Dengue virus, and so therefore can be used as an outgroup in phylogenetic trees of Dengue virus sequences. UniProt accession Q32ZE1 consists of a sequence with similarity to the Dengue NS1 protein, so seems to be a related protein from Zika virus. Build a rooted phylogenetic tree of the Dengue NS1 proteins, using the Zika virus protein as the outgroup. Which are the most closely related Dengue virus proteins, based on the tree? What extra information does this tree tell you, compared to the unrooted tree in Q2?
 
--  isolated from a patient in Guangzhou (Guangdong Province, China)
-   on 16th Dec 2002
--  isolated from a patient in Zhongshan (Guangdong Province, China)
-   on 26th Dec 2002
--  isolated from a patient in Zhongshan (Guangdong Province, China)
-   on 4th Jan 2003
--  isolated from a patient in Guangzhou (Guangdong Province, China)
-   on 24th Jan 2003
--  isolated from a patient in Guangzhou Hospital (Guangdong
-   Province, China) on 31st Jan 2003
--  isolated from a patient in Guangzhou (Guangdong Province, China)
-   on 18th Feb 2003
--  isolated from a patient in Hong Kong on 21st Feb 2003
--  isolated from a patient in Hanoi, Vietnam on 26th Feb 2003
--  isolated from a patient in Toronto, Canada on 27th Feb 2003
--  isolated from a patient in Singapore on 1st Mar 2003
--  isolated from a patient in Taiwan, on 8th Mar 2003
--  isolated from a patient in Hong Kong, on 19th Mar 2003
--  isolated from a patient in Hong Kong, on 15th Mar 2003
-
-To save you time, we have already made a FASTA-format file containing these DNA sequences, called `sars\_spike.fasta <http://www.ucc.ie/ucc/depts/microbio/MB6301/sars_spike.fasta>`_, which you can download to use for this analysis. Based on the Spike gene DNA phylogenetic tree, what is the relationship between the palm civet coronavirus and the human SARS isolates? 
-    Would the Spike gene sequence from palm civet make a suitable
-    outgroup, and why?
-    Make a rooted tree using the palm civet Spike gene as the outgroup.
-Q4. Based on your phylogenetic tree from Q3, is the palm civet coronavirus more closely related to human SARS isolates that were isolated early or late in the epidemic? 
-    Note: the date and place that each sample was collected should be
-    recorded in its name, eg. the sample labelled '03Feb26Han' was
-    collected on 26th February 2003 in Hanoi.
-    What does this tell us about the history of the epidemic (eg. place
-    and time of origin of the human SARS virus)?
-Q5. Based on your phylogenetic tree from Q3, what is the relationship between the human SARS isolates from the Metropole Hotel in Hong Kong and (i) those in Guangdong province? (ii) those in other world cities (Taiwan, Hanoi, Toronto, Singapore)? 
-    Note: the samples collected in the Metropole hotel in Hong Kong are
-    labelled 'YearMonthDateHon' ('Hon' stands for 'HongKong' here).
-    What role did people who stayed in the Metropole hotel probably
-    play in the spread of SARS?
 
 .. |image0| image:: ../_static/P5_image0.png
 .. |image1| image:: ../_static/P5_image2b.png
