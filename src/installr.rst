@@ -1,5 +1,5 @@
-How to install R  
-================
+How to install R and a Brief Introduction to R
+==============================================
 
 Introduction to R
 -----------------
