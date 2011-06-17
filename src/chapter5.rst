@@ -12,16 +12,16 @@ For example, in the `previous chapter <chapter4.html#retrieving-a-uniprot-protei
 you learnt how to retrieve a single sequence from UniProt.
 
 Oftentimes, it is useful to retrieve several sequences from UniProt at once
-if you have a list of UniProt accessions. The R function "retrieveuniprotseqs()" 
+if you have a list of UniProt accessions. The R function "retrieveseqs()" 
 below is useful for this purpose:
 
 ::
 
-    > retrieveuniprotseqs <- function(seqnames)
+    > retrieveseqs <- function(seqnames,acnucdb)
       {
          myseqs <- list() # Make a list to store the sequences
          library("seqinr")  # Load the SeqinR R package
-         choosebank("swissprot")
+         choosebank(acnucdb)
          for (i in 1:length(seqnames))
          {
             seqname <- seqnames[i]
@@ -38,8 +38,11 @@ below is useful for this purpose:
 
 You need to cut and paste this function into R to use it.
 As its input, you need to give it the function a vector containing
-the UniProt accessions for the sequences you wish to retrieve.
-The retrieveuniprotseqs() function returns a list variable, in which
+the accessions for the sequences you wish to retrieve, as well as the name of the ACNUC
+sub-database that the sequences should be retrieved from. In this case, we want to
+retrieve sequences from UniProt, so the sequences should be in the "swissprot" ACNUC sub-database. 
+
+The retrieveseqs() function returns a list variable, in which
 each element is a vector containing one of the sequences.
 
 For example, to retrieve the protein sequences for UniProt
@@ -50,7 +53,7 @@ respectively), you can type:
 ::
 
     > seqnames <- c("P06747", "P0C569", "O56773", "Q5VKP1")  # Make a vector containing the names of the sequences
-    > seqs <- retrieveuniprotseqs(seqnames)        # Retrieve the sequences and store them in list variable "seqs"
+    > seqs <- retrieveseqs(seqnames,"swissprot")             # Retrieve the sequences and store them in list variable "seqs"
     > length(seqs)                                 # Print out the number of sequences retrieved
      [1] 4
     > seq1 <- seqs[[1]]                            # Get the first sequence
@@ -62,7 +65,7 @@ respectively), you can type:
      [1] "M" "S" "K" "D" "L" "V" "H" "P" "S" "L" "I" "R" "A" "G" "I" "V" "E" "L" "E"
      [20] "M"
      
-The commands above use the function retrieveuniprotseqs() to retrieve two UniProt sequences. 
+The commands above use the function retrieveseqs() to retrieve two UniProt sequences. 
 The sequences are returned in a list variable *seqs*. To access the elements in an R list variable, 
 you need to use double square brackets. Therefore, the second element of the list
 variable is accessed by typing *seqs[[2]]*. Each element of the list variable *seqs* contains a 
@@ -70,7 +73,7 @@ vector which stores one of the sequences.
 
 Rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected tropical disease. Mokola virus and rabies virus are closely related viruses that both belong to a group of viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
 
-Once you have retrieved the sequences using retrieveuniprotseqs(), you can then use the function 
+Once you have retrieved the sequences using retrieveseqs(), you can then use the function 
 write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments
 (inputs), the write.fasta() function takes the list variable containing the sequences, and a vector 
 containing the names of the sequences, and the name that you want to give to the FASTA-format
@@ -368,12 +371,12 @@ the distantly related sequence from fruitfly would probably be a good choice of 
 protein is from a different animal group (insects) than the nematode worms. Thus, it is likely that the 
 fruitfly protein is more distantly related to all the nematode proteins than they are to each other. 
 
-To retrieve the sequences from UniProt we can use the "retrieveuniprotseqs()" function (see above):
+To retrieve the sequences from UniProt we can use the "retrieveseqs()" function (see above):
 
 ::
 
     > seqnames <- c("Q10572","E3M2K8","Q8WS01","E1FUV2","A8NSK3","Q9VT99")  
-    > seqs <- retrieveuniprotseqs(seqnames)        
+    > seqs <- retrieveseqs(seqnames,"swissprot")        
   
 We can then write out the sequences to a FASTA file:
 
@@ -607,10 +610,6 @@ belong to the bioinformatics libraries:
 
 #. install.packages() for installing an R package (except for
    Bioconductor R libraries), if you have a direct internet connection
-#. retrieveuniprotseqs() from "Rfunctions.R", which uses SeqinR to
-   retrieve protein sequences from UniProt
-#. retrievegenbankseqs() from "Rfunctions.R", which uses SeqinR to
-   retrieve DNA or mRNA sequences from NCBI
 #. write.fasta() from the SeqinR package for writing sequences to a
    FASTA-format file
 #. read.alignment() from the SeqinR packagek for reading in a
@@ -800,9 +799,9 @@ packages on his website at
 .. |image8| image:: ../_static/P5_image8.png
             :width: 700
 .. |image9| image:: ../_static/P5_image9.png
-            :width: 700
+            :width: 400
 .. |image10| image:: ../_static/P5_image10.png
             :width: 700
 .. |image11| image:: ../_static/P5_image11.png
-            :width: 700
+            :width: 400
 
