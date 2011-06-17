@@ -636,7 +636,7 @@ Acknowledgements
 
 Many of the ideas for the examples and exercises for this practical
 were inspired by the Matlab case study on SARS
-(`www.computational-genomics.net/case\_studies/sars\_demo.html <http://www.computational-genomics.net/case_studies/eyeless_demo.html>`_)
+(`www.computational-genomics.net/case\_studies/sars\_demo.html <http://www.computational-genomics.net/case_studies/sars_demo.html>`_)
 from the website that accompanies the book
 *Introduction to Computational Genomics: a case studies approach*
 by Cristianini and Hahn (Cambridge University Press;
