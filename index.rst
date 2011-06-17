@@ -35,6 +35,7 @@ Chapters in this Book
    src/revisionexercises1.rst
    src/chapter4.rst
    src/chapter5.rst
+   src/revisionexercises2.rst
    src/chapter_answers.rst
    src/revisionexercises_answers.rst
 
