@@ -223,320 +223,252 @@ Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
 The larger the genetic distance between two sequences, the more amino acid changes or indels that have occurred since 
 they shared a common ancestor, and the longer ago their common ancestor probably lived.
 
-xxx
-Building an unrooted phylogenetic tree for protein sequences based on a distance matrix
----------------------------------------------------------------------------------------
+Building an unrooted phylogenetic tree for protein sequences 
+------------------------------------------------------------
 
-Once we have a distance matrix that gives the pairwise distances
-between all our protein sequences, we can build a phylogenetic tree
-based on that distance matrix. One method for using this is the
-neighbour-joining algorithm.
+Once we have a distance matrix that gives the pairwise distances between all our protein sequences, 
+we can build a phylogenetic tree based on that distance matrix. One method for using this is the
+*neighbour-joining algorithm*.
 
-You can build a phylogenetic tree using the neighbour-joining
-algorithm with the nj() function the Ape R package. The nj()
-function takes a distance matrix as its argument (input), and
-builds a phylogenetic tree.
+You can build a phylogenetic tree using the neighbour-joining algorithm with the the 
+Ape R package. First you will need to install the "ape" package (see `instructions on how to
+install R packages <./installr.html#how-to-install-an-r-package>`_).
 
-::
+The following R function "unrootedproteinNJtree()" builds a phylogenetic tree based on an alignment of
+protein sequences, using the neighbour-joining algorithm, using functions from the "ape" package.
 
-    > library("ape")
-    > aspmaln  <- read.alignment(file = "aspm.phy", format = "phylip") # Read in the alignment
-    > aspmdist <- dist.alignment(aspmaln)                              # Calculate the genetic distance matrix
-    > aspmtree <- nj(aspmdist)                                         # Calculate the neighbour-joining tree   
-
-After building a neighbour-joining tree, we can then plot a picture
-of the tree using the plot.phylo() function from the Ape package.
-The plot.phylo() function has an argument "type", which tells it
-what sort of tree you want. For example, if a tree does not contain
-an outgroup, then it is an unrooted tree, and you can tell
-plot.phylo() to draw an unrooted tree by using the type="u"
-argument.
-
-For example, to plot a picture of the unrooted phylogenetic tree of
-ASPM proteins, we type:
+The "unrootedproteinNJtree()" function takes an alignment of protein sequences its
+input, calculates pairwise distances between the sequences based on the alignment, and then builds
+a phylogenetic tree based on the pairwise distances:
 
 ::
 
-                            
-    > plot.phylo(aspmtree, type="u") # Plot the tree
+    > unrootedproteinNJtree <- function(alignment)
+      {
+         # load the ape and seqinR packages:
+         library("ape")
+         library("seqinr")
+         # define a function for making a tree:
+         makemytree <- function(alignmentmat)
+         {
+            alignment <- ape::as.alignment(alignmentmat)
+            mydist <- dist.alignment(alignment)
+            mytree <- nj(mydist)
+            mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
+            return(mytree)   
+         }
+         # infer a tree
+         mymat  <- as.matrix.alignment(alignment)
+         mytree <- makemytree(mymat)
+         # bootstrap the tree
+         myboot <- boot.phylo(mytree, mymat, makemytree)
+         # plot the tree:
+         plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
+         nodelabels(myboot,cex=0.7)    # plot the bootstrap values
+      }
 
-|image1|
-
-In the plot of the phylogenetic tree, pairs of sequences that
-dist.alignment() calculated as having small pairwise genetic
-distances should be close together in the tree, while pairs of
-sequences that dist.alignment() calculated as having large pairwise
-genetic distances should be further apart in the tree. For example,
-the human and cow ASPM proteins (Q9NVS1 and P62285), which are
-separated by a relatively large genetic distance, are further apart
-in the tree than the sheep and cow ASPM proteins (P62297 and
-P62285), which are separated by a relatively small genetic distance
-(see above).
-
-Furthermore, the lengths of the branches in the plot of the tree
-are proportional to the evolutionary change along the the branches.
-Thus, we can see from the tree above that the human and chimp ASPM
-proteins (Q9NVS1 and P62293) are more closely related to each other
-than to any other ASPM proteins, and that the genetic distances
-between these two proteins and their last common ancestor node are
-relatively small compared to the other genetic distances in the
-tree (ie. lengths of the branches, shown in red in the plot above,
-are short compared to other branch lengths in the tree).
-
-Finding an outgroup to make a rooted phylogenetic tree
-------------------------------------------------------
-
-The tree above of the ASPM proteins is an *unrooted* phylogenetic
-tree as it does not contain an outgroup sequence. As a result, we
-cannot tell which direction evolutionary time ran in along the
-internal branches of the tree.
-
-In order to convert the unrooted tree into a rooted tree, we need
-to add an outgroup sequence. Normally, the outgroup sequence is a
-sequence that we know from some prior knowledge to be more
-distantly related to the other sequences under study than they are
-to each other.
-
-For example, as an outgroup to the ASPM proteins, we could add the
-ASPM homolog from the zebrafish (UniProt accession Q1L925). It is
-well known from fossil and morphological evidence that the
-zebrafish is more distantly related to the other species under
-study (human, chimp, dog, mouse, cow and sheep) than they are to
-each other, so we can assume that the zebrafish ASPM protein is
-more distantly related to the ASPM human, chimp, dog, mouse, cow
-and sheep ASPM proteins than they are to each other. Therefore, the
-zebrafish ASPM protein is a suitable outgroup for the tree of ASPM
-proteins.
-
-To add an outgroup sequence to the tree, we need to first retrieve
-the outgroup sequence from the database (UniProt here). To do this
-for the ASPM proteins, we type:
+To use the function to make a phylogenetic tree, you must first copy and paste the function into R.
+You can then use it to make a tree, for example of the virus phosphoproteins, based on the sequence
+alignment:
 
 ::
 
-    > aspmnames2 <- c("Q9NVS1", "P62293", "Q8CJ27", "P62286", "P62285", "P62297", "Q1L925")
-    > aspmseqs2 <- retrieveuniprotseqs(aspmnames2)  # Retrieve the sequences and store them in list variable "aspmseqs2"
-    > length(aspmseqs2)                             # Find the number of sequences that were retrieved
-    [1] 7 
-    > write.fasta(aspmseqs2, aspmnames2, file="aspm2.fasta")
+    > unrootedproteinNJtree(virusaln)
 
-We then need to build a new alignment of the sequences including
-the outgroup sequences, for example, using T-Coffee as described
-above (eg. to make file "aspm2.phy").
+|image9|
 
-Building a rooted phylogenetic tree for protein sequences based on a distance matrix
-------------------------------------------------------------------------------------
+We can see that Q5VKP1 (Western Caucasian bat virus phosphoprotein) and P06747 
+(rabies virus phosphoprotein) have been grouped together in the tree, and that
+O56773 (Lagos bat virus phosphoprotein) and P0C569 (Mokola virus phosphoprotein) are grouped together in the tree.
 
-To build a rooted phylogenetic tree that contains the outgroup
-sequence, we need to build a new distance matrix based on the new
-alignment containing the outgroup, and then a new tree based on the
-new distance matrix:
+This is consistent with what we saw above in the genetic distance matrix, which showed that 
+the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein 
+(P0C569) is relatively small.
 
-::
+The numbers in blue boxes are *bootstrap values* for the nodes in the tree.
+    
+A bootstrap value for a particular node in the tree gives an idea of the confidence that we have
+in the clade (group) defined by that node in the tree. If a node has a high bootstrap value (near 100\%) then we are
+very confident that the clade defined by the node is correct, while if it has a low bootstrap value (near 0\%) then we
+are not so confident. 
 
-    > aspmaln2  <- read.alignment(file = "aspm2.phy", format = "phylip")
-    > aspmdist2 <- dist.alignment(aspmaln2)
-    > aspmdist2 # Print out the genetic distance matrix
-               P62285     P62286     P62293     P62297     Q1L925     Q8CJ27    
-    P62286     0.32574573                                                       
-    P62293     0.32104239 0.27210625                                            
-    P62297     0.13809534 0.32427367 0.32737556                                 
-    Q1L925     0.51374081 0.51107841 0.50982780 0.51253811                      
-    Q8CJ27     0.37928066 0.36994931 0.35604085 0.38307486 0.52414242           
-    Q9NVS1     0.32335374 0.27370220 0.06345439 0.32964116 0.51044540 0.35739034
-    > aspmtree2 <- nj(aspmdist2)
-    > aspmtree2$tip.label # Print out the names of the sequences in the tree
-    [1] "P62285    " "P62286    " "P62293    " "P62297    " "Q1L925    " "Q8CJ27    " "Q9NVS1    "
-
-The last line of the commands above prints out the names of the
-sequences in the tree *aspmtree2* (this is because *aspmtree2* is a
-list variable that has a named element "tip.label" containing the
-names of the sequences in the tree). The sequence names may include
-some extra spaces when they are stored in a phylogenetic tree such
-as *aspmtree2*, for example, the zebrafish protein's name is stored
-as "Q1L925 " (with 4 spaces after the accession).
-
-Once we have built a new tree based on the new distance matrix, we
-need to tell R that it is a tree with an outgroup, that is, a
-rooted tree. This can be done using the root() function from the R
-Ape package. The root() function takes as its argument (input) the
-name of the sequence that you want to be the outgroup in the tree
-(the zebrafish protein Q1L925 here). We need to give the root()
-function the name for the outgroup that is used in the tree, for
-example, "Q1L925 " (with the 4 extra spaces after the accession).
-This is necessary so that R realises which sequence in the tree you
-want to be the outgroup
-
-For example, to make a bifurcating rooted tree of the ASPM
-proteins, we type:
-
-::
-
-    > rootedaspmtree2 <- root(aspmtree2,"Q1L925    ",r=TRUE) # Specify that Q1L925 is the outgroup.
-    > plot.phylo(rootedaspmtree2) 
-
-|image2|
-
-The above tree shows the zebrafish protein Q1L925 as the outgroup
-to the ASPM protein tree. As this is a rooted tree, we know the
-direction that evolutionary time ran: from left to right in this
-case. Thus, we can infer from the tree that the human, chimp and
-dog proteins (human Q9NVS1, chimp P62293, and dog P62286) shared a
-common ancestor with each other more recently than they did with
-the other ASPM proteins in the tree. In addition, the sheep and cow
-ASPM proteins (sheep P62297 and cow P62285) shared a common
-ancestor with each other more recently than they did with the other
-ASPM proteins in the tree.
-
-The lengths of branches in this tree are proportional to the amount
-of evolutionary change that occurred along the branches. The
-branches leading back from the sheep and cow ASPM proteins to their
-last common ancestor (coloured blue) are slightly longer than the
-branches leading back from the chimp and human ASPM proteins to
-their last common ancestor (coloured red). This indicates that
-there has been more evolutionary change in the sheep and cow ASPM
-proteins since they diverged, than there has been in the chimp and
-human ASPM proteins since they diverged.
-
-Building a phylogenetic tree with bootstrap values
---------------------------------------------------
-
-The above tree gives us an idea of the evolutionary relationships
-between the ASPM proteins. However, if we want to know how
-confident we are in each part of the tree, it is necessary to build
-a phylogenetic tree with bootstrap values.
+Note that the fact that a bootstrap value for a node is high does not necessarily
+guarantee that the clade defined by the node is correct, but just tells us that it is quite likely that it is correct. 
 
 The bootstrap values are calculated by making many (for example,
-100) random "resamples" of the alignment that the phylogenetic tree
-was based upon. Each "resample" of the alignment consists of a
-certain number *x* (eg. 200) of randomly sampled columns from the
-alignment. Each "resample" of the alignment (eg. 200 randomly
-sampled columns) forms a sort of fake alignment of its own, and a
-phylogenetic tree can be based upon the "resample". We can make 100
-random resamples of the alignment, and build 100 phylogenetic trees
-based on the 100 resamples. These 100 trees are known as the
-"bootstrap trees". For each clade that we see in our original
-phylogenetic tree, we can count in how many of the 100 bootstrap
-trees it appears. This is known as the "bootstrap value" for the
-clade in our original phylogenetic tree.
+100) random "resamples" of the alignment that the phylogenetic tree was based upon. Each "resample" of the alignment consists of a
+certain number *x* (eg. 200) of randomly sampled columns from the alignment. Each "resample" of the alignment (eg. 200 randomly
+sampled columns) forms a sort of fake alignment of its own, and a phylogenetic tree can be based upon the "resample". We can make 100
+random resamples of the alignment, and build 100 phylogenetic trees based on the 100 resamples. These 100 trees are known as the
+"bootstrap trees". For each clade (grouping) that we see in our original phylogenetic tree, we can count in how many of the 100 bootstrap
+trees it appears. This is known as the "bootstrap value" for the clade in our original phylogenetic tree.
 
-For example, if we calculate 100 random resamples of the ASPM
-protein alignment, and build 100 phylogenetic trees based on these
-resamples, we can calculate the bootstrap values for each clade in
-the ASPM phylogenetic tree. For example, in the tree above, we saw
-a clade consisting of chimp ASPM, P62293, and human ASPM, Q9NVS1
-(shown in red). The bootstrap value for this clade is the number of
-the bootstrap trees that this clade appears in.
+For example, if we calculate 100 random resamples of the virus phosphoprotein alignment, and build 100 phylogenetic trees based on these
+resamples, we can calculate the bootstrap values for each clade in the virus phosphoprotein phylogenetic tree.
 
-The bootstrap values for a phylogenetic tree can be calculated in R
-using the boot.phylo() function in the Ape R package. By default,
-the boot.phylo() function calculates the bootstrap values based on
-100 bootstrap trees. The boot.phylo() function takes as arguments:
+In this case, the bootstrap value for the node defining the clade containing Q5VKP1 (Western Caucasian bat virus phosphoprotein) 
+and P06747 (rabies virus phosphoprotein) is 25\%, while the bootstrap value for node defining the clade containg of 
+Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein 
+(P0C569) is 100\%. The bootstrap values for each of these clades is the percent of
+100 bootstrap trees that the clade appears in. 
 
+Therefore, we are very confident that Lagos bat virus and Mokola virus phosphoproteins
+should be grouped together in the tree. However, we are not so confident that the Western Caucasian
+bat virus and rabies virus phosphoproteins should be grouped together.
 
--  the original tree that we want to add bootstrap values to (eg.
-   the tree *rootedaspmtree2*)
--  the alignment in the form of a matrix of characters
--  the function to use to build both the original tree (eg.
-   *rootedaspmtree2*) and the bootstrap trees
+The lengths of the branches in the plot of the tree are proportional to the amount of evolutionary change 
+(estimated number of mutations) along the branches.
 
-If you look at the help page for the boot.phylo() function, you
-will see that it requires its second argument (input) to be the
-alignment in the form of a matrix of characters with one row per
-sequence and one column per alignment column. Normally, when you
-read in an alignment using the read.alignment() function, it is
-stored as a list variable that has named elements "nb", "nam",
-"seq", and "com". As discussed above, the named element "seq"
-stores the alignment. To convert this list variable into an
-alignment in the form of a matrix of characters, we can use the
-as.matrix.alignment() function from the SeqinR package:
+In this case, the branches leading to Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein 
+(P0C569) from the node representing their common ancestor are slightly shorter than the branches leading to the 
+Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) phosphoproteins from the node representing their common ancestor.
 
-::
+This suggests that there might have been more mutations in the Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) 
+phosphoproteins since they shared a common ancestor, than in the  Lagos bat virus phosphoprotein (O56773) and Mokola 
+virus phosphoprotein (P0C569) since they shared a common ancestor.
 
-    > aspmaln2        <- read.alignment(file = "aspm2.phy", format = "phylip")      # Read in the alignment
-    > aspmaln2mat     <- as.matrix.alignment(aspmaln2)                              # Convert alignment to a matrix of characters
-    > aspmaln2mat                                                                   # Print out aspmaln2mat
-              1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20 
-    P62285     "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-"
-    P62286     "m" "a" "t" "r" "r" "a" "g" "r" "-" "s" "w" "e" "v" "s" "p" "s" "g" "p" "r" "p"
-    P62293     "m" "a" "n" "r" "r" "v" "g" "r" "g" "c" "w" "e" "v" "s" "p" "t" "e" "r" "r" "p"
-    P62297     "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-"
-    Q1L925     "m" "s" "f" "k" "v" "a" "k" "s" "e" "c" "l" "d" "f" "s" "p" "p" "l" "d" "s" "h"
-    Q8CJ27     "m" "a" "t" "m" "q" "a" "a" "s" "-" "c" "p" "e" "e" "r" "g" "r" "r" "a" "r" "p"
-    Q9NVS1     "m" "a" "n" "r" "r" "v" "g" "r" "g" "c" "w" "e" "v" "s" "p" "t" "e" "r" "r" "p"
-    ...
+The tree above of the virus phosphoproteins is an *unrooted* phylogenetic
+tree as it does not contain an *outgroup* sequence, that is a sequence of a protein that is known to be
+more distantly related to the other proteins in the tree than they are to each other. 
 
-In the matrix of characters representing the alignment, each column
-of the matrix represents one column of the alignment, and each row
-represents one row in the alignment. Only the start of the matrix
-of characters *aspmaln2mat* is printed out above, as it is very
-large. If we have an alignment in the format of a matrix of
-characters, we can convert it back into a list variable by using
-the as.alignment function from the Ape package, for example:
+As a result, we cannot tell which direction evolutionary time ran in along the
+internal branches of the tree. For example, we cannot tell whether the node representing the common ancestor
+of (O56773, P0C569) was an ancestor of the node representing the common ancestor of (Q5VKP1, P06747), or the
+other way around.
 
-::
+In order to build a *rooted* phylogenetic tree, we need to have an outgroup sequence in our tree.
+In the case of the virus phosphoproteins, this is unfortunately not possible, as (as far as I know) there
+is not any protein known that is more distantly related to the four proteins already in our tree than 
+they are to each other. 
 
-    > aspmaln2b       <- as.alignment(aspmaln2mat) # Convert the matrix of characters into a list variable aspmaln2b
+However, in many other cases, an outgroup - a sequence known to be more distantly relatd to the other
+sequences in the tree than they are to each other - is known, and so it is possible to build a rooted phylogenetic
+tree.
 
-To build a rooted phylogenetic tree with bootstrap values using
-boot.phylo(), we can first define the function that we want to use
-to build the tree, for example:
+Building a rooted phylogenetic tree for protein sequences 
+---------------------------------------------------------
 
-::
+In order to convert the unrooted tree into a rooted tree, we need to add an outgroup sequence. 
+Normally, the outgroup sequence is a sequence that we know from some prior knowledge to be more
+distantly related to the other sequences under study than they are to each other.
 
-    > myrootedprotnjtree <- function(alignmentmat)
-     {
-        alignment  <- as.alignment(alignmentmat)   # Convert alignmentmat into the format required by dist.alignment() 
-        distmat    <- dist.alignment(alignment)    # Calculate the genetic distance matrix
-        tree       <- nj(distmat)                  # Calculate the neighbour-joining tree
-        rootedtree <- root(tree, "Q1L925    " , r=TRUE) # Convert the tree into a rooted tree
-        return(rootedtree)
-     }
+For example, the protein Fox-1 is involved in determining the sex (gender) of an embryo in the
+nematode worm *Caenorhabditis elegans* (UniProt accession Q10572). Related proteins are found in
+other nematodes, including *Caenorhabditis remanei* (UniProt E3M2K8), *Caenorhabditis briggsae* (A8WS01),
+*Loa loa* (E1FUV2), and *Brugia malayi* (UniProt A8NSK3).
 
-This function builds a rooted phylogenetic tree using the zebrafish
-sequence Q1L925 as the outgroup. It takes as its argument a matrix
-of characters representing the alignment, that is, the alignment in
-the format produced by function as.matrix.alignment(). The
-dist.alignment() function requires as its argument the alignment in
-the form of a list variable, so we use the as.alignment() function
-to convert the matrix of characters representing the alignment
-*alignmentmat* into a list variable format.
+Note that *Caenorhabditis elegans* is a model organism commonly studied in molecular biology.
+The nematodes *Loa loa*, and *Brugia malayi* are parasitic nematodes that cause 
+`filariasis <http://www.who.int/topics/filariasis/en/>`_, which is classified by the WHO as
+a neglected tropical disease.
 
-Once we have defined the function that we want to use to build a
-phylogenetic tree, we can then build a rooted phylogenetic tree of
-ASPM proteins by typing:
+The UniProt database contains a distantly related sequence from the fruitfly *Drosophila melanogaster*
+(UniProt accession Q9VT99). If we were to build a phylogenetic tree of the nematode worm Fox-1 homologues,
+the distantly related sequence from fruitfly would probably be a good choice of outgroup, since the
+protein is from a different animal group (insects) than the nematode worms. Thus, it is likely that the 
+fruitfly protein is more distantly related to all the nematode proteins than they are to each other. 
+
+To retrieve the sequences from UniProt we can use the "retrieveuniprotseqs()" function (see above):
 
 ::
 
-    > aspmaln2        <- read.alignment(file = "aspm2.phy", format = "phylip")        # Read in the alignment
-    > aspmaln2mat     <- as.matrix.alignment(aspmaln2)                                # Convert the alignment to the format required by boot.phylo()
-    > rootedaspmtree2 <- myrootedprotnjtree(aspmaln2mat)                              # Build a rooted phylogenetic tree
-
-We can then calculate bootstrap values for the rooted phylogenetic
-tree of ASPM proteins using the boot.phylo() function, by typing:
+    > seqnames <- c("Q10572","E3M2K8","Q8WS01","E1FUV2","A8NSK3","Q9VT99")  
+    > seqs <- retrieveuniprotseqs(seqnames)        
+  
+We can then write out the sequences to a FASTA file:
 
 ::
 
-    > aspmboot        <- boot.phylo(rootedaspmtree2, aspmaln2mat, myrootedprotnjtree) # Calculate the bootstrap values as percentages
-    > aspmboot                                                                        # Print out the bootstrap values as percentages
-    [1] 100 100 100 100 100 100
+    > write.fasta(seqs, seqnames, file="fox1.fasta")
 
-We can then plot the tree using the plot.phylo() function, and
-display the bootstrap values as percentages on the nodes of the
-tree using the nodelabels() function from the Ape package, by
-typing:
+We can then use CLUSTAL to create a PHYLIP-format alignment of the sequences, and store it in the
+alignment file "fox1.phy". This picture shows part of the alignment (the alignment is quite long,
+so not all of it is shown):
+
+|image10|
+
+We can then read the alignment into R:
 
 ::
 
-    > plot.phylo(rootedaspmtree2)
-    > nodelabels(aspmboot)
+    > fox1aln  <- read.alignment(file = "fox1.phy", format = "phylip")
 
-|image3|
+The next step is to build a phylogenetic tree of the proteins, which again we can do using
+the neighbour-joining algorithm.
 
-In the plot above, the bootstrap value for the clade containing the
-human ASPM (Q9NVS1) and chimp ASPM (P62293) proteins is 100 (100%),
-which means that this clade occurred in 100% of the bootstrap
-trees.
+This time we have an outgroup in our set of sequences, so we can build a rooted tree. The function "rootedproteinNJtree()"
+can be used to build a rooted tree:
+
+::
+
+    > rootedproteinNJtree <- function(alignment, theoutgroup)
+      {
+         # load the ape and seqinR packages:
+         library("ape")
+         library("seqinr")
+         # define a function for making a tree:
+         makemytree <- function(alignmentmat, outgroup=`theoutgroup`)
+         {
+            alignment <- ape::as.alignment(alignmentmat)
+            mydist <- dist.alignment(alignment)
+            mytree <- nj(mydist)
+            mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
+            myrootedtree <- root(mytree, outgroup, r=TRUE)
+            return(myrootedtree)   
+         }
+         # infer a tree
+         mymat  <- as.matrix.alignment(alignment)
+         myrootedtree <- makemytree(mymat, outgroup=theoutgroup)
+         # bootstrap the tree
+         myboot <- boot.phylo(myrootedtree, mymat, makemytree)
+         # plot the tree:
+         plot.phylo(myrootedtree, type="p")  # plot the rooted phylogenetic tree
+         nodelabels(myboot,cex=0.7)          # plot the bootstrap values
+      }
+
+The function takes the alignment and the name of the outgroup as its inputs.
+For example, to use it to make a phylogenetic tree of the *C. elegans* Fox-1
+protein and its homologues, using the fruitfly protein (UniProt Q9VT99) as the outgroup, we type:
+
+::
+
+    > rootedproteinNJtree(fox1aln, "Q9VT99")
+
+|image11|
+
+Here we can see that E3M2K8 (*C. remanei* Fox-1 homologue) and Q10572 (*C. elegans* Fox-1)
+have been grouped together with bootstrap 100\%, and A8NSK3 (*Brugia malayi* Fox-1 homologue) and
+E1FUV2 (*Loa loa* Fox-1 homologue) have been grouped together with bootstrap 100\%. These
+four proteins have also been grouped together in a larger clade with bootstrap 100\%.
+
+Compared to these four proteins, the Q8WS01 (*C. briggsae* Fox-1 homologue) and Q9VT99 (fruitfly
+outgroup) seem to be relatively distantly related. 
+
+As this is a rooted tree, we know the direction that evolutionary time ran.
+Say we call the ancestor of the four sequences (E3M2K8, Q10572, A8NSK3, E1FUV2) *ancestor1*,
+the ancestor of the two sequences (E3M2K8, Q10572) *ancestor2*, and the ancestor of the
+two sequences (A8NSK3, E1FUV2) *ancestor3*. 
+
+Because it is a rooted tree, we know that time ran from left to right along the branches of the tree, so that *ancestor1* was the
+ancestor of *ancestor2*, and *ancestor1* was also the ancestor of *ancestor3*.
+In other words, *ancestor1* lived before *ancestor2* or *ancestor3*; *ancestor2*
+and *ancestor3* were descendants of *ancestor1*.
+
+Another way of saying this is that E3M2K8 and Q10572 shared a common ancestor
+with each other more recently than they did with A8NSK3 and E1FUV2.
+
+The lengths of branches in this tree are proportional to the amount
+of evolutionary change (estimated number of mutations) that occurred along the branches. The
+branches leading back from E3M2K8 and Q10572 to their
+last common ancestor are slightly longer than the
+branches leading back from A8NSK3 and E1FUV2 to
+their last common ancestor. 
+
+This indicates that there has been more evolutionary change in E3M2K8 (*C. remanei* Fox-1 homologue) and Q10572 (*C. elegans* Fox-1) 
+proteins since they diverged, than there has been in A8NSK3 (*Brugia malayi* Fox-1 homologue) and E1FUV2 (*Loa loa* Fox-1 homologue)
+since they diverged.
+
+xxx
 
 Calculating genetic distances between DNA or mRNA sequences
 -----------------------------------------------------------
@@ -866,5 +798,11 @@ packages on his website at
 .. |image4| image:: ../_static/P5_image7b.png
 .. |image5| image:: ../_static/P5_image7.png
 .. |image8| image:: ../_static/P5_image8.png
+            :width: 700
+.. |image9| image:: ../_static/P5_image9.png
+            :width: 700
+.. |image10| image:: ../_static/P5_image10.png
+            :width: 700
+.. |image11| image:: ../_static/P5_image11.png
             :width: 700
 
