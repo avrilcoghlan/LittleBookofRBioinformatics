@@ -866,3 +866,4 @@ packages on his website at
 .. |image4| image:: ../_static/P5_image7b.png
 .. |image5| image:: ../_static/P5_image7.png
 .. |image8| image:: ../_static/P5_image8.png
+            :width:700
