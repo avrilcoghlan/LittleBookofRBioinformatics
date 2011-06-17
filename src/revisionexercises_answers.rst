@@ -275,6 +275,132 @@ type "Mokola virus"[ORGN] in the search box, and press 'Search'. On the results 
 to the Nucleotide and Protein databases, and 1 hit to the Genome database. If you click on the 1 hit beside
 "Genome", it will bring you to accession NC\_006429, the Mokola virus genome sequence.
 
+Revision Exercises 2
+--------------------
+
+Q1.
+^^^
+*Use the dotPlot() function in the SeqinR R library to make a dotplot of the rabies virus phosphoprotein and Mokkola virus phosphoprotein, using a windowsize of 10 and threshold of 5.*
+
+First we need to retrieve the rabies virus phosphoprotein (UniProt P06747) and Mokola virus phosphoprotein (UniProt P0C569) sequences from UniProt, which we can do using SeqinR:
+
+::
+
+    > library("seqinr")                                      # load the SeqinR package
+    > choosebank("swissprot")                                # select the ACNUC sub-database to search
+    > query("rabies", "AC=P06747")                           # specify the query
+    > rabiesseq <- getSequence(rabies$req[[1]])              # get the sequence
+    > query("mokola", "AC=P0C569")                           # specify the query
+    > mokolaseq <- getSequence(mokola$req[[1]])              # get the sequence
+    > closebank()                                            # close the connection to the ACNUC sub-database
+
+If you look at the help page of the dotPlot function (by typing "help(dotPlot)"), you will see that the
+windowsize can be specified using the "wsize" argument and the threshold can be specified using the "nmatch"
+argument. 
+
+We can therefore use dotPlot() to make a dotplot of the two proteins, using a windowsize of 10 and a 
+threshold of 5, by typing:
+
+::
+
+    > dotPlot(mokolaseq,rabiesseq,wsize=10,nmatch=5)
+
+|image7|
+
+You can see that there is a region of similarity that covers about 60-70 amino acids at the start of the two proteins, then there is a region of similarity from about 210-280 in each of the two proteins. There is also a weak amount of similarity in a region from about 85-100 in the two proteins.
+
+Q2.
+^^^
+*Use the function makeDotPlot1 to make a dotplot of the rabies virus phosphoprotein and the Mokola virus phosphoprotein, setting the argument "dotsize" to 0.1*.
+
+To use the function makeDotPlot1(), we first need to copy and paste it into R.
+
+We can then use it to make a dotplot, setting "dotsize" to 0.1, by typing:
+
+::
+
+    > makeDotPlot1(mokolaseq,rabiesseq,dotsize=0.1)
+
+|image8|
+
+As in Q1, you can see that there is a region of similarity that covers about 60-70 amino acids at the start of the two proteins, then there is a region of similarity from about 210-280 in each of the two proteins. 
+
+There are a lot of off-diagonal dots in this picture, because a dot is plotted at every position where the two sequences are identical in one letter (while in Q1, we only plotted a dot at the start of a 10-letter window, where 5 or more out of 10 positions in the window were identical). 
+
+The fact that there are so many dots in the picture makes it hard to see the weak region of similarity seen in Q1, from about 85-100 in the two proteins.
+
+Q3.
+^^^
+*Adapt the R code in Q2 to write a function that makes a dotplot using a window of size x letters, where a dot is plotted in the first  cell of the window if y or more letters compared in that window are identical in the two sequences.*
+
+Here is an R function that will do this:
+
+::
+
+    > makeDotPlot3 <- function(seq1,seq2,windowsize,threshold,dotsize=1)
+      {
+         length1 <- length(seq1)
+         length2 <- length(seq2)
+         # make a plot:
+         x <- 1
+         y <- 1 
+         plot(x,y,ylim=c(1,length2),xlim=c(1,length1),col="white")
+         for (i in 1:(length1-windowsize+1))
+         {
+            word1 <- seq1[i:(i+windowsize)]
+            word1b <- c2s(word1)
+            for (j in 1:(length2-windowsize+1))
+            {
+               word2 <- seq2[j:(j+windowsize)]
+               word2b <- c2s(word2)
+               # count how many identities there are:
+               identities <- 0
+               for (k in 1:windowsize)
+               {
+                  letter1 <- seq1[(i+k-1)]
+                  letter2 <- seq2[(j+k-1)]
+                  if (letter1 == letter2)
+                  {
+                     identities <- identities + 1
+                  }
+               }
+               if (identities >= threshold)
+               {
+                  # add a point to the plot at the position
+                  for (k in 1:1)
+                  {
+                     points(x=(i+k-1),(y=j+k-1),cex=dotsize,col="blue",pch=7)
+                  }
+               } 
+            }
+         }  
+         print(paste("FINISHED NOW"))
+      }
+
+Q4.
+^^^
+*Use the dotPlot() function in the SeqinR R library to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (x) of 3 and a threshold (y) of 3. Are the two plots similar or different, and can you explain why?*
+
+We can use the dotPlot() function from SeqinR to make a dotplot of the rabies and Mokola virus
+phosphoproteins, using a window size of 3 and a threshold of 3, by typing:
+
+::
+
+    > dotPlot(mokolaseq,rabiesseq,wsize=3,nmatch=3)
+
+|image9|
+
+We can also use our function makeDotPlot3 to make a dotplot of the rabies and Mokola virus
+proteins, using a window size of 3 and a threshold of 3:
+
+::
+
+    > makeDotPlot3(mokolaseq,rabiesseq,windowsize=3,threshold=3,dotsize=0.1)
+
+|image10|
+
+The two pictures are the same, as they should be, as both are plotting a dot in the first position of a 3-letter window if all 3 letters in that window are identical in the two sequences.
+
 Contact
 -------
 
@@ -294,4 +420,8 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image4| image:: ../_static/A2_image4.png
 .. |image5| image:: ../_static/A2_image5.png
 .. |image6| image:: ../_static/A2_image6.png
+.. |image7| image:: ../_static/A2_image7.png
+.. |image8| image:: ../_static/A2_image8.png
+.. |image9| image:: ../_static/A2_image9.png
+.. |image10| image:: ../_static/A2_image10.png
 
