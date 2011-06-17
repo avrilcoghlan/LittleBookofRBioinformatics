@@ -111,23 +111,23 @@ Creating a multiple alignment of protein, DNA or mRNA sequences using CLUSTAL
 
 Once you have installed CLUSTAL, you can now align your sequences using CLUSTAL by following these steps:
 
-# Go to the "Start" menu on the bottom left of your Windows screen. Select "All Programs" from the menu, then select 
+* Go to the "Start" menu on the bottom left of your Windows screen. Select "All Programs" from the menu, then select 
   "ClustalX2" from the menu that appears. This will start up CLUSTAL.
-# The CLUSTAL window should appear. To load the DNA or protein sequences that you want to align into CLUSTAL, go to the 
+* The CLUSTAL window should appear. To load the DNA or protein sequences that you want to align into CLUSTAL, go to the 
   CLUSTAL "File" menu, and choose "Load sequences". 
-# Select the FASTA-format file containing your sequences (eg. phosphoproteins.fasta) to load it into CLUSTAL.
-# This should read the sequences into CLUSTAL. They have not been aligned yet, but will be displayed in the CLUSTAL window. 
-# You can use the scrollbar on the right to scroll down and look at all the sequences. You can use the scrollbar on the 
+* Select the FASTA-format file containing your sequences (eg. phosphoproteins.fasta) to load it into CLUSTAL.
+* This should read the sequences into CLUSTAL. They have not been aligned yet, but will be displayed in the CLUSTAL window. 
+* You can use the scrollbar on the right to scroll down and look at all the sequences. You can use the scrollbar on the 
   bottom to scroll from left to right, and look along the length of the sequences. 
-# Before you align the sequences using CLUSTAL, you need to tell CLUSTAL to make the output alignment file in
+* Before you align the sequences using CLUSTAL, you need to tell CLUSTAL to make the output alignment file in
   PHYLIP alignment format, so that you can read it into R. To do this, go to the "Alignment" menu in CLUSTAL, choose
   "Output Format Options". A form will appear, and in this form you should select "PHYLIP format" and deselect "CLUSTAL format",
   and then press "OK".
-# To now align the sequences using CLUSTAL, go to the CLUSTAL "Alignment" menu, and choose "Do Complete Alignment". 
-# A menu box will pop up, asking you where to save the output guide-tree file (eg. "phosphoproteins.dnd") and the output 
+* To now align the sequences using CLUSTAL, go to the CLUSTAL "Alignment" menu, and choose "Do Complete Alignment". 
+* A menu box will pop up, asking you where to save the output guide-tree file (eg. "phosphoproteins.dnd") and the output 
   alignment file (called "phosphoproteins.phy"). You should choose to save them in your "My Documents" folder (so that you can 
   easily read them into R from "My Documents" at a later stage).
-# CLUSTAL will now align the sequences. This will take a couple of minutes (eg. 2-5 minutes). You will see that at the bottom 
+* CLUSTAL will now align the sequences. This will take a couple of minutes (eg. 2-5 minutes). You will see that at the bottom 
   of the CLUSTAL window, it tells you which pair of sequences it is aligning at a particular point in time. If the numbers 
   keep changing, it means that CLUSTAL is still working away, and the alignment is not finished yet. Be patient!
 
