@@ -1,8 +1,7 @@
-REVISION EXERCISES 1
+REVISION EXERCISES 2
 ====================
 
-These are some revision exercises on sequence statistics and sequence
-databases.
+These are some revision exercises on sequence alignment and phylogenetic trees.
 
 Exercises
 ---------
@@ -11,67 +10,50 @@ Answer the following questions. For each question, please record
 your answer, and what you did/typed to get this answer.
 
 Model answers to the exercises are given in 
-`Answers to Revision Exercises 1 <./revisionexercises_answers.html#revision-exercises-1>`_.
+`Answers to Revision Exercises 2 <./revisionexercises_answers.html#revision-exercises-2>`_.
 
-Q1. 
+Q1.
 ---
-What is the length of (total number of base-pairs in) the *Schistosoma mansoni* mitochondrial genome
-(NCBI accession NC\_002545), and how many As, Cs, Gs and Ts does it contain?
-    You must search for this sequence via the NCBI website, as it is not present in the ACNUC database.
-    Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing 
-    `schistosomiasis <http://apps.who.int/tdr/svc/diseases/schistosomiasis>`_, 
-    which is classified by the WHO as a neglected tropical disease.
+One of the key proteins produced by rabies virus is the rabies phosphoprotein (also known as rabies virus protein P).  The UniProt accession for rabies virus phosphoprotein is P06747. The Mokola virus also produces a phosphoprotein, which has UniProt accession P0C569. Use the dotPlot() function in the SeqinR R library to make a dotplot of these two proteins, using a windowsize of 10 and threshold of 5. Are there any long regions of similarity between the two proteins (if so, where are they)?
+    Note: rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected tropical disease. Mokola virus and rabies virus are closely related viruses that both belong to a group of viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
 
-Q2. 
+Q2.
 ---
-What is the length of the *Brugia malayi* mitochondrial genome (NCBI accession NC\_004298),
-and how many As, Cs, Gs and Ts does it contain?
-    You must search for this sequence via the NCBI website, as it is not present in the ACNUC database.
-    Note: *Brugia malayi* is a parasitic worm responsible for causing
-    `lymphatic filariasis <http://apps.who.int/tdr/svc/diseases/lymphatic-filariasis>`_,
-    which is classified by the WHO as a neglected tropical disease.
+The function "makeDotPlot1()" below is an R function that makes a dotplot of two sequences by plotting a dot at every position where the two sequences share an identical letter.  Use this function to make a dotplot of the rabies virus phosphoprotein and the Mokola virus phosphoprotein, setting the argument "dotsize" to 0.1 (this determines the radius of each dot plotted). Are there any long regions of similarity between the two proteins (if so, where are they)? Do you find the same regions as found in Q1, and if not, can you explain why?
 
-Q3. 
----
-What is the probability of the *Brugia malayi* mitochondrial genome sequence (NCBI accession NC\_004298), 
-according to a multinomial model in which the probabilities of As, Cs, Gs and Ts (*pA*, *pC*, *pG*, and *pT*) 
-are set equal to the fraction of As, Cs, Gs and Ts in the *Schistosoma mansoni* mitochondrial genome?
+::
 
-Q4. 
----
-What are the top three most frequent 4-bp words (4-mers) in the genome of the
-bacterium *Chlamydia trachomatis* strain D/UW-3/CX (NCBI accession NC\_000117), and
-how many times do they occur in its sequence?
-    Note: *Chlamydia trachomatis* is a bacterium responsible for 
-    `trachoma <http://www.who.int/blindness/causes/priority/en/index2.html>`_, which is
-    classified by the WHO as a neglected tropical disease. 
+    > makeDotPlot1 <- function(seq1,seq2,dotsize=1)
+      {
+         length1 <- length(seq1)
+         length2 <- length(seq2)
+         # make a plot:
+         x <- 1
+         y <- 1 
+         plot(x,y,ylim=c(1,length2),xlim=c(1,length1),col="white") # make an empty plot
+         # now plot dots at every position where the two sequences have the same letter:
+         for (i in 1:length1)
+         {
+            letter1 <- seq1[i]
+            for (j in 1:length2)
+            {
+               letter2 <- seq2[j]
+               if (letter1 == letter2)
+               {
+                  # add a point to the plot
+                  points(x=i,y=j,cex=dotsize,col="blue",pch=7)
+               }   
+            }
+         }
+      }
 
-Q5. 
+Q3.
 ---
-Write an R function to generate a random DNA sequence that is *n* letters long (that is, 
-*n* bases long) using a multinomial model in which the probabilities *pA*, *pC*, *pG*, 
-and *pT* are set equal to the fraction of As, Cs, Gs and Ts in the *Schistosoma mansoni*
-mitochondrial genome (here *pA* stands for the probability of As, *pC* is the probability of Cs, etc.)
-    Hint: look at the help page for the "sample()" function in R, as it might be useful to use within your R function.
+Adapt the R code in Q2 to write a function that makes a dotplot using a window of size *x* letters, where a dot is plotted in the first  cell of the window if *y* or more letters compared in that window are identical in the two sequences.  
 
-Q6. 
+Q4.
 ---
-Give an example of using your function from Q5 to calculate a random sequence that is 20 letters 
-long, using a multinomial model with *pA* =0.28, *pC* =0.21, *pG* =0.22, and *pT* =0.29.
-
-Q7. 
----
-How many protein sequences from rabies virus are there in the NCBI Protein database?
-    You must search for these sequences via the NCBI website, as it's not possible to do this search using SeqinR.
-    Note: rabies virus is the virus responsible for 
-    `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected
-    tropical disease.
-
-Q8. 
----
-What is the NCBI accession for the Mokola virus genome?
-    Note: Mokola virus and rabies virus are closely related viruses that both belong to a group of 
-    viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
+Use the dotPlot() function in the SeqinR R library to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (*x*) of 3 and a threshold (*y*) of 3. Are the two plots similar or different, and can you explain why?
 
 Contact
 -------
