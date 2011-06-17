@@ -1,4 +1,4 @@
-Revision Exercises 1
+REVISION EXERCISES 1
 ====================
 
 These are some revision exercises on sequence statistics and sequence
@@ -10,8 +10,8 @@ Exercises
 Answer the following questions. For each question, please record
 your answer, and what you did/typed to get this answer.
 
-Model answers to the exercises are given in the chapter entitled
-`Answers to Revision Exercises 1 <./revisionexercises1_answers.html>`_.
+Model answers to the exercises are given in 
+`Answers to Revision Exercises 1 <./revisionexercises_answers.html#revision-exercises-1>`_.
 
 Q1. 
 ---

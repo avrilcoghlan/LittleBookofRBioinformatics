@@ -21,8 +21,8 @@ my booklet on using R for time series analysis,
 `http://a-little-book-of-r-for-time-series.readthedocs.org/
 <http://a-little-book-of-r-for-time-series.readthedocs.org/>`_.
 
-Contents:
----------
+Chapters in this Book
+---------------------
 
 .. toctree::
    :maxdepth: 1 

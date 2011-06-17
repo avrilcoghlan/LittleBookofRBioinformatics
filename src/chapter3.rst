@@ -48,14 +48,14 @@ The NCBI database contains several sub-databases, the most important of which ar
 Searching for an accession number in the NCBI database
 ------------------------------------------------------
 
-In the `DNA Sequence Statistics chapter (1) <chapter1.html>`_, 
+In the `DNA Sequence Statistics chapter (1) <./chapter1.html>`_, 
 you learnt how to obtain a FASTA file containing the DNA sequence
 corresponding to a particular accession number, eg. accession
 number NC\_001477 (the DEN-1 Dengue virus genome sequence), either
 `via the NCBI website <./chapter1.html#retrieving-genome-sequence-data-via-the-ncbi-website>`_
 or `using the getncbiseq() function in R <./chapter1.html#retrieving-genome-sequence-data-using-seqinr>`_.
 
-As explained in the `DNA Sequence Statistics (1) chapter <chapter1.html#fasta-format>`_, 
+As explained in the `DNA Sequence Statistics (1) chapter <./chapter1.html#fasta-format>`_, 
 the FASTA format is a file format commonly used to store sequence information. The first line starts
 with the character '>' followed by a name and/or description for
 the sequence. Subsequent lines contain the sequence itself.
@@ -939,8 +939,8 @@ Exercises
 Answer the following questions. For each question, please record
 your answer, and what you did/typed to get this answer.
 
-Model answers to the exercises are given in the chapter entitled
-`Answers to the exercises on Sequence Databases <./chapter3_answers.html>`_.
+Model answers to the exercises are given in 
+`Answers to the exercises on Sequence Databases <./chapter_answers.html#sequence-databases>`_.
 
 Q1. What information about the rabies virus sequence (NCBI accession NC\_001542) can you obtain from its annotations in the NCBI Sequence Database? 
     What does it say in the DEFINITION and ORGANISM fields of its NCBI record?

@@ -969,8 +969,8 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
-Model answers to the exercises are given in the chapter entitled
-`Answers to the exercises on Sequence Alignment <./chapter4_answers.html>`_.
+Model answers to the exercises are given in
+`Answers to the exercises on Sequence Alignment <./chapter_answers.html#sequence-alignment>`_.
 
 Q1. Download FASTA-format files of the *Brugia malayi* Vab-3 protein (UniProt accession A8PZ80) and the *Loa loa* Vab-3 protein (UniProt accession E1FTG0) sequences from UniProt.
     Note: the *vab-3* gene of *Brugia malayi* and the *vab-3* gene of *Loa loa* are related genes that

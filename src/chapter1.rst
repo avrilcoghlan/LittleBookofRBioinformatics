@@ -543,8 +543,8 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
-Model answers to the exercises are given in the chapter entitled
-`Answers to the exercises on DNA Sequence Statistics (1) <./chapter1_answers.html>`_.
+Model answers to the exercises are given in 
+`Answers to the exercises on DNA Sequence Statistics (1) <./chapter_answers.html#dna-sequence-statistics-1>`_.
 
 Q1. What are the last twenty nucleotides of the Dengue virus genome sequence?
 
