@@ -1,5 +1,5 @@
-Sequence Alignment
-==================
+Pairwise Sequence Alignment
+===========================
 
 UniProt
 -------
