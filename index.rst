@@ -33,10 +33,10 @@ Chapters in this Book
    src/chapter2.rst
    src/chapter3.rst
    src/revisionexercises1.rst
-   src/revisionexercises1_answers.rst
    src/chapter4.rst
    src/chapter5.rst
    src/chapter_answers.rst
+   src/revisionexercise_answers.rst
 
 Acknowledgements
 ----------------
