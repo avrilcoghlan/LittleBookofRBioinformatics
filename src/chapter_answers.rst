@@ -1200,7 +1200,7 @@ We can build an unrooted phylogenetic tree of the NS1 proteins using the neighbo
 
 ::
 
-    > unrootedNJtree(NS1aln,type="protein")
+    > NS1alntree <- unrootedNJtree(NS1aln,type="protein")
 
 |image17|
 
@@ -1228,7 +1228,7 @@ We can then build an unrooted tree based on the filtered alignment:
 
 ::
 
-    > unrootedNJtree(cleanedNS1aln,type="protein")
+    > cleanedNS1alntree <- unrootedNJtree(cleanedNS1aln,type="protein")
 
 |image18|
 
@@ -1349,7 +1349,7 @@ using the rootedNJtree() function:
 
 ::
 
-    > rootedNJtree(cleanedNS1baln, "Q32ZE1",type="protein") 
+    > cleanedNS1balntree <- rootedNJtree(cleanedNS1baln, "Q32ZE1",type="protein") 
 
 |image19|
 

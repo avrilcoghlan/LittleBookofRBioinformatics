@@ -520,7 +520,8 @@ sequences, using the neighbour-joining algorithm, using functions from the "ape"
 
 The "unrootedNJtree()" function takes an alignment of sequences its
 input, calculates pairwise distances between the sequences based on the alignment, and then builds
-a phylogenetic tree based on the pairwise distances:
+a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also
+makes a picture of that tree:
 
 ::
 
@@ -554,6 +555,8 @@ a phylogenetic tree based on the pairwise distances:
          # plot the tree:
          plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
          nodelabels(myboot,cex=0.7)    # plot the bootstrap values
+         mytree$node.label <- myboot   # make the bootstrap values be the node labels
+         return(mytree)
       }
 
 To use the function to make a phylogenetic tree, you must first copy and paste the function into R.
@@ -562,7 +565,7 @@ alignment:
 
 ::
 
-    > unrootedNJtree(virusaln,type="protein")
+    > virusalntree <- unrootedNJtree(virusaln,type="protein")
 
 |image9|
 
@@ -645,7 +648,7 @@ and see if it agrees with the phylogenetic tree based on the original alignment:
 
 ::
 
-    > unrootedNJtree(cleanedvirusaln,type="protein")
+    > cleanedvirusalntree <- unrootedNJtree(cleanedvirusaln,type="protein")
 
 |image14|
 
@@ -710,7 +713,7 @@ The next step is to build a phylogenetic tree of the proteins, which again we ca
 the neighbour-joining algorithm.
 
 This time we have an outgroup in our set of sequences, so we can build a rooted tree. The function "rootedNJtree()"
-can be used to build a rooted tree:
+can be used to build a rooted tree. It returns the phylogenetic tree, and also makes a picture of the tree:
 
 ::
 
@@ -745,6 +748,8 @@ can be used to build a rooted tree:
          # plot the tree:
          plot.phylo(myrootedtree, type="p")  # plot the rooted phylogenetic tree
          nodelabels(myboot,cex=0.7)          # plot the bootstrap values
+         mytree$node.label <- myboot   # make the bootstrap values be the node labels
+         return(mytree)
       }
 
 The function takes the alignment and the name of the outgroup as its inputs.
@@ -753,7 +758,7 @@ protein and its homologues, using the fruitfly protein (UniProt Q9VT99) as the o
 
 ::
 
-    > rootedNJtree(fox1aln, "Q9VT99",type="protein") 
+    > fox1alntree <- rootedNJtree(fox1aln, "Q9VT99",type="protein") 
 
 |image11|
 
@@ -818,9 +823,26 @@ we type in R:
 ::
 
     > virusmRNAaln  <- read.alignment(file = "virusmRNA.phy", format = "phylip")
-    > unrootedNJtree(virusmRNAaln, type="DNA") 
+    > virusmRNAalntree <- unrootedNJtree(virusmRNAaln, type="DNA") 
 
 |image13|
+
+Saving a phylogenetic tree as a Newick-format tree file
+-------------------------------------------------------
+
+A commonly used format for representing phylogenetic trees is the Newick format. 
+Once you have built a phylogenetic tree using R, it is convenient to store it as
+a Newick-format tree file. This can be done using the "write.tree()" function
+in the Ape R package.
+
+For example, to save the unrooted phylogenetic tree of virus phosphoprotein mRNA sequences
+as a Newick-format tree file called "virusmRNA.tre", we type:
+
+::
+
+    > write.tree(virusmRNAalntree, "virusmRNA.tre") 
+
+The Newick-format file "virusmRNA.tre" should now appear in your "My Documents" folder.
 
 Summary
 -------
