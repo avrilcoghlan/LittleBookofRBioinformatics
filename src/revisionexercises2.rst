@@ -57,6 +57,10 @@ Q4.
 ---
 Use the dotPlot() function in the SeqinR R library to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (*x*) of 3 and a threshold (*y*) of 3. Are the two plots similar or different, and can you explain why?
 
+Q5.
+---
+Write an R function to calculate an unrooted phylogenetic tree with bootstraps, using the minimum evolution method (rather than the neighbour-joining method, which is used by the function `unrootedNJtree <./chapter5.html#building-an-unrooted-phylogenetic-tree-for-protein-sequences>`_).
+
 Contact
 -------
 
