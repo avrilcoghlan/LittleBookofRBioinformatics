@@ -1403,8 +1403,8 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image16| image:: ../_static/P3_image16.png
             :width: 700
 .. |image17| image:: ../_static/P3_image17.png
-            :width: 700
+            :width: 500
 .. |image18| image:: ../_static/P3_image18.png
-            :width: 700
+            :width: 500
 .. |image19| image:: ../_static/P3_image19.png
-            :width: 700
+            :width: 500

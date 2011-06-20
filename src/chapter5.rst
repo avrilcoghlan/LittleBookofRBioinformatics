@@ -959,3 +959,5 @@ Q4. The Zika virus is related to Dengue viruses, but is not a Dengue virus, and 
             :width: 700
 .. |image13| image:: ../_static/P5_image13.png
             :width: 400
+.. |image14| image:: ../_static/P5_image14.png
+            :width: 400
