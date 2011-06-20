@@ -403,6 +403,67 @@ proteins, using a window size of 3 and a threshold of 3:
 
 The two pictures are the same, as they should be, as both are plotting a dot in the first position of a 3-letter window if all 3 letters in that window are identical in the two sequences.
 
+Q5.
+^^^
+*Write an R function to calculate an unrooted phylogenetic tree with bootstraps, using the minimum evolution method.*
+
+We can adjust the function `unrootedNJtree <./chapter5.html#building-an-unrooted-phylogenetic-tree-for-protein-sequences>`_, which uses the neighbour-joining method, as it calls the function "nj()" to build a tree.
+
+You can search for R functions that build a tree using minimum evolution method by typing:
+
+::
+
+    > help.search("evolution")
+      ape::fastme                Tree Estimation Based on the Minimum Evolution
+                                 Algorithm
+
+We find that there is a function "fastme()" in the Ape package to build a
+tree using the minimum evolution method. 
+
+You can view the help page for this function
+by typing 'help("fastme")'. If you do this, you will see that it can be run by
+typing fastme.bal() or fastme.ols(), which are two different versions of the minimum
+evolution function. 
+
+Thus, we can adapt the `unrootedNJtree <./chapter5.html#building-an-unrooted-phylogenetic-tree-for-protein-sequences>`_ to make a function that builds a tree using
+minimum evolution, by using "fastme.bal()" instead of "nj()":
+
+::
+
+    > unrootedMEtree <- function(alignment,type)
+      {
+         # load the ape and seqinR packages:
+         library("ape")
+         library("seqinr")
+         # define a function for making a tree:
+         makemytree <- function(alignmentmat)
+         {
+            alignment <- ape::as.alignment(alignmentmat)
+            if      (type == "protein")  
+            {
+               mydist <- dist.alignment(alignment)
+            }
+            else if (type == "DNA")
+            {
+               alignmentbin <- as.DNAbin(alignment)
+               mydist <- dist.dna(alignmentbin)
+            }
+            mytree <- fastme.bal(mydist)
+            mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
+            return(mytree)   
+         }
+         # infer a tree
+         mymat  <- as.matrix.alignment(alignment)
+         mytree <- makemytree(mymat)
+         # bootstrap the tree
+         myboot <- boot.phylo(mytree, mymat, makemytree)
+         # plot the tree:
+         plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
+         nodelabels(myboot,cex=0.7)    # plot the bootstrap values
+         mytree$node.label <- myboot   # make the bootstrap values be the node labels
+         return(mytree)
+      }
+
 Contact
 -------
 
