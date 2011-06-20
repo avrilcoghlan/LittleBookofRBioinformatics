@@ -192,6 +192,214 @@ In fact, the named element "seq" contains the alignment, which you can view by t
 Only the first part of the alignment stored in *virusaln$seq* is shown here, as
 it is very long.
 
+Viewing a long multiple alignment
+---------------------------------
+
+If you want to view a long multiple alignment, it is convenient to view the multiple alignment in blocks.
+
+The R function "printMultipleAlignment()" below will do this for you:
+
+::
+
+    > printMultipleAlignment <- function(alignment, chunksize=60)
+      { 
+         # load the Biostrings package
+         library("Biostrings")
+         # find the number of sequences in the alignment
+         numseqs <- length(alignment)
+         # find the length of the alignment
+         alignmentlen <- nchar(alignment$seq[[1]])
+         starts <- seq(1, alignmentlen, by=chunksize)
+         n <- length(starts)
+         # get the alignment for each of the sequences:
+         aln <- vector()
+         lettersprinted <- vector()
+         for (j in 1:numseqs)
+         {
+            alignmentj <- alignment$seq[[j]]
+            aln[j] <- alignmentj
+            lettersprinted[j] <- 0
+         }
+         # print out the alignment in blocks of 'chunksize' columns:
+         for (i in 1:n) { # for each of n chunks
+            for (j in 1:numseqs)
+            {
+               alnj <- aln[j]
+               chunkseqjaln <- substring(alnj, starts[i], starts[i]+chunksize-1)
+               chunkseqjaln <- toupper(chunkseqjaln)
+               # Find out how many gaps there are in chunkseqjaln:
+               gapsj <- countPattern("-",chunkseqjaln) # countPattern() is from Biostrings package
+               # Calculate how many residues of the first sequence we have printed so far in the alignment:
+               lettersprinted[j] <- lettersprinted[j] + chunksize - gapsj
+               print(paste(chunkseqjaln,lettersprinted[j]))
+            }
+            print(paste(' '))
+         }
+      }
+
+As its inputs, the function "printMultipleAlignment()" takes the input alignment, and the number of columns
+to print out in each block.
+
+For example, to print out the multiple alignment of virus phosphoproteins (which we stored in variable
+*virusaln*, see above) in blocks of 60 columns, we type:
+
+::
+
+    > printMultipleAlignment(virusaln, 60)
+      [1] "MSKDLVHPSLIRAGIVELEMAEETTDLINRTIESNQAHLQGEPLYVDSLPEDMSRLRIED 60"
+      [1] "MSKGLIHPSAIRSGLVDLEMAEETVDLVHKNLADSQAHLQGEPLNVDSLPEDMRKMRLTN 60"
+      [1] "MSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDD 60"
+      [1] "MSKSLIHPSDLRAGLADIEMADETVDLVYKNLSEGQAHLQGEPFDIKDLPEGVSKLQISD 60"
+      [1] " "
+      [1] "KSRRTKTEEEERDEGSSEEDNYLSEGQDPLIPFQNFLDEIGARAVKRLKTGEGFFRVWSA 120"
+      [1] "APSEREIIEEDEEEYSSEDEYYLSQGQDPMVPFQNFLDELGTQIVRRMKSGDGFFKIWSA 120"
+      [1] "GKSPNPGEMAKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQ 120"
+      [1] "NVRSDTSPNEYSDEDDEEGEDEYEEVYDPVSAFQDFLDETGSYLISKLKKGEKIKKTWSE 120"
+      [1] " "
+      [1] "LSDDIKGYVSTNIM-TSGERDTKSIQIQTEPTASVSSGNESRHDSESMHDPNDKKDHTPD 179"
+      [1] "ASEDIKGYVLSTFM-KPETQATVSKPTQTDSLSVPRPSQGYTSVPRDKPSNSESQGGGVK 179"
+      [1] "TVEEIISYVAVNFP-NPPGKSSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTAS 179"
+      [1] "VSRVIYSYVMSNFPPRPPKPTTKDIAVQADLKKPNEIQKISEHKSKSEPSPREPVVEMHK 180"
+      [1] " "
+      [1] "HDVVPDIESSTDKGEIRDIEGEVAHQVAESFSKKYKFPSRSSGIFLWNFEQLKMNLDDIV 239"
+      [1] "PKKVQKSEWTRDTDEISDIEGEVAHQVAESFSKKYKFPSRSSGIFLWNFEQLKMNLDDIV 239"
+      [1] "GPPALEWSATNEEDDLS-VEAEIAHQIAESFSKKYKFPSRSSGILLYNFEQLKMNLDDIV 238"
+      [1] "HATLE-----NPEDDEGALESEIAHQVAESYSKKYKFPSKSSGIFLWNFEQLKMNLDDIV 235"
+      [1] " "
+      [1] "KAAMNVPGVERIAEKGGKLPLRCILGFVALDSSKRFRLLADNDKVARLIQEDINSYMARL 299"
+      [1] "KTSMNVPGVDKIAEKGGKLPLRCILGFVSLDSSKRFRLLADTDKVARLMQDDIHNYMTRI 299"
+      [1] "KEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVESNKLSKIMQDDLNRYTSC- 297"
+      [1] "QVARGVPGISQIVERGGKLPLRCMLGYVGLETSKRFRSLVNQDKLCKLMQEDLNAYSVSS 295"
+      [1] " "
+      [1] "EEAE-- 357"
+      [1] "EEIDHN 359"
+      [1] "------ 351"
+      [1] "NN---- 351"
+      [1] " "
+
+Discarding very poorly conserved regions from an alignment
+----------------------------------------------------------
+
+It is often a good idea to discard very poorly conserved regions from a mulitple 
+alignment before building a phylogenetic tree, as the very poorly conserved regions are
+likely to be regions that are either not homologous between the sequences being considered
+(and so do not add any phylogenetic signal), or are homologous but are so diverged that
+they are very difficult to align accurately (and so may add noise to the phylogenetic analysis,
+and decrease the accuracy of the inferred tree).
+
+To discard very poorly conserved regions from a multiple alignment, you can use the following
+R function, "cleanAlignment()":
+
+::
+
+    > cleanAlignment <- function(alignment, minpcnongap, minpcid)
+      {
+         # make a copy of the alignment to store the new alignment in:
+         newalignment <- alignment
+         # find the number of sequences in the alignment
+         numseqs <- length(alignment)
+         # empty the alignment in "newalignment")
+         for (j in 1:numseqs) { newalignment$seq[[j]] <- "" }
+         # find the length of the alignment
+         alignmentlen <- nchar(alignment$seq[[1]])
+         # look at each column of the alignment in turn:
+         for (i in 1:alignmentlen)
+         {
+            # see what percent of the letters in this column are non-gaps:
+            nongap <- 0
+            for (j in 1:(numseqs-1))
+            {
+               seqj <- alignment$seq[[j]]
+               letterij <- substr(seqj,i,i)
+               if (letterij != "-") { nongap <- nongap + 1}
+            }
+            pcnongap <- (nongap*100)/numseqs
+            # Only consider this column if at least minpcnongap % of the letters are not gaps:
+            if (pcnongap >= minpcnongap)
+            {
+               # see what percent of the pairs of letters in this column are identical:
+               numpairs <- 0; numid <- 0
+               # find the letters in all of the sequences in this column:
+               for (j in 1:(numseqs-1))
+               {
+                  seqj <- alignment$seq[[j]]
+                  letterij <- substr(seqj,i,i)
+                  for (k in (j+1):numseqs)
+                  {
+                     seqk <- alignment$seq[[k]]
+                     letterkj <- substr(seqk,i,i)
+                     if (letterij != "-" && letterkj != "-")
+                     {
+                        numpairs <- numpairs + 1
+                        if (letterij == letterkj) { numid <- numid + 1} 
+                     }
+                  }
+               }
+               pcid <- (numid*100)/(numpairs)
+               # Only consider this column if at least %minpcid of the pairs of letters are identical:
+               if (pcid >= minpcid) 
+               {
+                   for (j in 1:numseqs)
+                   {
+                      seqj <- alignmentseq[[j]] 
+                      letterij <- substr(seqj,i,i) 
+                      newalignmentj <- newalignment$seq[[j]]
+                      newalignmentj <- paste(newalignmentj,letterij,sep="") 
+                      newalignment$seq[[j]] <- newalignmentj
+                   }
+               }
+            } 
+         }
+         return(newalignment)
+      }
+
+The function cleanAlignment() takes three arguments (inputs): the input alignment; the minimum percent of
+letters in an alignment column that must be non-gap characters for the column to be kept; and the 
+minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
+
+For example, if we have a column with letters "T", "A", "T", "-" (in four sequences), then 75\% of the letters are
+non-gap characters; and the pairs of letters are "T,A", "T,T", and "A,T", and 33\% of the pairs of letters are identical. 
+
+We can use the function cleanAlignment() to discard the very poorly aligned columns from a multiple alignment.
+
+For example, if you look at the multiple alignment for the virus phosphoprotein sequences (which we 
+printed out using function printMultipleAlignment(), see above), we can see that the last few columns are
+poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
+
+Therefore, to filter out the well conserved columns of the alignment, and discard the very poorly conserved
+columns, we can type:
+
+::
+
+    > cleanedvirusaln <- cleanAlignment(virusaln, 30, 30) 
+
+In this case, we required that at least 30\% of letters in a column are not gap characters for that column to be kept,
+and that at least 30\% of pairs of letters in an alignment column must be identical for the column to be kept.
+
+We can print out the filtered alignment by typing:
+
+::
+
+    > printMultipleAlignment(cleanedvirusaln)
+      [1] "MSKLVHPSIRAGIVELEMAEETTDLIRTIQAHLQGEPVDLPEDMRLIDREEEDEGDPFQF 60"
+      [1] "MSKLIHPSIRSGLVDLEMAEETVDLVKNLQAHLQGEPVDLPEDMKMLNSEEEEQGDPFQF 60"
+      [1] "MSKFVNPSIRAGLADLEMAEETVDLIRNIQAHLQGEPVDLPEDMRLLDSAERDEGDPFQY 60"
+      [1] "MSKLIHPSLRAGLADIEMADETVDLVKNLQAHLQGEPIKLPEGVKLIDREEEEEVDPFQF 60"
+      [1] " "
+      [1] "LDEGVKGEFRWSSIGYVNIMSTSIQTHSDESGEDEEVAHQVAESFSKKYKFPSRSSGIFL 120"
+      [1] "LDEGVKGDFKWSSIGYVTFMPTSKQTSDSETDEDEEVAHQVAESFSKKYKFPSRSSGIFL 120"
+      [1] "LDNGVRGEFKWSVISYVNFPPSDKQTSSSSTDD-EEIAHQIAESFSKKYKFPSRSSGILL 119"
+      [1] "LDEGIKGEIKWSSISYVNFPPTDIQAHSS--DDAEEIAHQVAESYSKKYKFPSKSSGIFL 118"
+      [1] " "
+      [1] "WNFEQLKMNLDDIVKANVPGVIAEGGKLPLRCLGVLSKRFRLLADKVRLIQEDINYEE 180"
+      [1] "WNFEQLKMNLDDIVKSNVPGVIAEGGKLPLRCLGVLSKRFRLLADKVRLMQDDIHYEE 180"
+      [1] "YNFEQLKMNLDDIVKANVPGVLARGSKLPLRCLGVLSKKFQLLVNKLKIMQDDLNY-- 177"
+      [1] "WNFEQLKMNLDDIVQAGVPGIIVEGGKLPLRCLGVLSKRFRSLVDKLKLMQEDLNYNN 178"
+      [1] " "
+
+The filtered alignment is shorter, but is missing some of the poorly conserved regions of the original
+alignment. 
+
 Calculating genetic distances between protein sequences
 -------------------------------------------------------
 
@@ -422,6 +630,27 @@ they are to each other.
 However, in many other cases, an outgroup - a sequence known to be more distantly relatd to the other
 sequences in the tree than they are to each other - is known, and so it is possible to build a rooted phylogenetic
 tree.
+
+We discussed above that it is a good idea to investigate whether discarding the poorly
+conserved regions of a multiple alignment has an effect on the phylogenetic analysis.
+In this case, we made a filtered copy of the multiple alignment and stored it in the variable
+*cleanedvirusaln* (see above). We can make a phylogenetic tree based this filtered alignment,
+and see if it agrees with the phylogenetic tree based on the original alignment:
+
+::
+
+    > unrootedNJtree(cleanedvirusaln,type="protein")
+
+|image14|
+
+Here O56773 and P0C569 are grouped together, and Q5VKP1 and P06747 are grouped together, as in the
+phylogenetic tree based on the raw (unfiltered) multiple alignment (see above). Thus, filtering
+the multiple alignment does not have an effect on the tree. 
+
+If we had found a difference in the trees made using the unfiltered and filtered multiple alignments, 
+we would have to examine the multiple alignments closely, to see if the unfiltered multiple alignment
+contains a lot of very poorly aligned regions that might be adding noise to the phylogenetic analysis (if
+this is true, the tree based on the filtered alignment is likely to be more reliable).
 
 Building a rooted phylogenetic tree for protein sequences 
 ---------------------------------------------------------
