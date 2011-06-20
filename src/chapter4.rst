@@ -217,7 +217,7 @@ For proteins that are not identical, but share regions of similarity, the dotplo
 In essence, a dotplot will reveal if there are any regions 
 that are clearly very similar in two protein (or DNA) sequences. 
 
-We  can create a dotplot for two sequences using the "dotPlot()" function in the SeqinR R library.
+We  can create a dotplot for two sequences using the "dotPlot()" function in the SeqinR R package.
 
 For example, if we want to create a dotplot of the sequences for the 
 chorismate lyase proteins from *Mycobacterium leprae* and *Mycobacterium ulcerans*, we would
@@ -285,7 +285,7 @@ in case of a match and -1 in case of a mismatch.
 
 We can make a scoring matrix in R by using the
 nucleotideSubstitutionMatrix() function in the Biostrings()
-package. The Biostrings package is part of a set of R libraries for
+package. The Biostrings package is part of a set of R packages for
 bioinformatics analysis known as Bioconductor
 (`www.bioconductor.org/ <http://www.bioconductor.org/>`_). 
 
@@ -543,9 +543,9 @@ The R function "printPairwiseAlignment()" below will do this for you:
             chunkseq1aln <- substring(seq1aln, starts[i], starts[i]+chunksize-1)
             chunkseq2aln <- substring(seq2aln, starts[i], starts[i]+chunksize-1)
             # Find out how many gaps there are in chunkseq1aln:
-            gaps1 <- countPattern("-",chunkseq1aln) # countPattern() is from Biostrings library
+            gaps1 <- countPattern("-",chunkseq1aln) # countPattern() is from Biostrings package 
             # Find out how many gaps there are in chunkseq2aln:                  
-            gaps2 <- countPattern("-",chunkseq2aln) # countPattern() is from Biostrings library
+            gaps2 <- countPattern("-",chunkseq2aln) # countPattern() is from Biostrings package 
             # Calculate how many residues of the first sequence we have printed so far in the alignment:
             seq1alnresidues <- seq1alnresidues + chunksize - gaps1
             # Calculate how many residues of the second sequence we have printed so far in the alignment:
@@ -713,7 +713,7 @@ generateSeqsWithMultinomialModel() below:
     > generateSeqsWithMultinomialModel <- function(inputsequence, X)
       {
          # Change the input sequence into a vector of letters
-         library("seqinr") # Load in the SeqinR library, so we can use function "s2c".
+         library("seqinr") # Load in the SeqinR package, so we can use function "s2c".
          inputsequencevector <- s2c(inputsequence)
          # Find the frequencies of the letters in the input sequence "inputsequencevector":
          mylength <- length(inputsequencevector)

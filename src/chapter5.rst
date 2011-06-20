@@ -820,7 +820,7 @@ Summary
 -------
 
 In this practical, you have learnt the following R functions that
-belong to the bioinformatics libraries:
+belong to the bioinformatics packages:
 
 #. read.alignment() from the SeqinR package for reading in a
    multiple alignment
