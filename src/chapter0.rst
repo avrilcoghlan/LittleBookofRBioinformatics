@@ -29,8 +29,8 @@ been fully sequenced, or are currently being sequenced, including:
 
 To encourage research into these organisms, many of the examples in this booklet are based on analysing these genomes.
 
-.. rubric:: Contact
--------------------
+Contact
+-------
 
 I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
 my email address a.coghlan@ucc.ie 

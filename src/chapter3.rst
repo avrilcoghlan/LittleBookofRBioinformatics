@@ -60,6 +60,8 @@ the FASTA format is a file format commonly used to store sequence information. T
 with the character '>' followed by a name and/or description for
 the sequence. Subsequent lines contain the sequence itself.
 
+.. highlight:: r
+
 ::
 
     >mysequence1

@@ -21,6 +21,8 @@ Q2.
 ---
 The function "makeDotPlot1()" below is an R function that makes a dotplot of two sequences by plotting a dot at every position where the two sequences share an identical letter.  Use this function to make a dotplot of the rabies virus phosphoprotein and the Mokola virus phosphoprotein, setting the argument "dotsize" to 0.1 (this determines the radius of each dot plotted). Are there any long regions of similarity between the two proteins (if so, where are they)? Do you find the same regions as found in Q1, and if not, can you explain why?
 
+.. highlight:: r
+
 ::
 
     > makeDotPlot1 <- function(seq1,seq2,dotsize=1)

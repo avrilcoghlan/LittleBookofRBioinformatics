@@ -15,6 +15,8 @@ Oftentimes, it is useful to retrieve several sequences from UniProt at once
 if you have a list of UniProt accessions. The R function "retrieveseqs()" 
 below is useful for this purpose:
 
+.. highlight:: r
+
 ::
 
     > retrieveseqs <- function(seqnames,acnucdb)

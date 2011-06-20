@@ -20,6 +20,8 @@ with a name that you will remember (eg. "smansoni.fasta") in your "My Documents"
 
 You can then read the sequence into R by typing:
 
+.. highlight:: r
+
 ::
 
     > library("seqinr")                                 # load the SeqinR R package

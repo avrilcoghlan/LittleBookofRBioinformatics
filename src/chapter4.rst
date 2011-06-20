@@ -146,6 +146,8 @@ For example, the following commands will read the FASTA-format
 files Q9CD83.fasta and A0PQ23.fasta into R, and store the two
 protein sequences in two vectors *lepraeseq* and *ulceransseq*:
 
+.. highlight:: r
+
 ::
 
     > library("seqinr")
