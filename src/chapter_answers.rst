@@ -1145,7 +1145,224 @@ about whether the alignment is statistically significant.
 
 In fact, the *B. malayi* Vab-3 and *M. leprae* chorismate lyase proteins are not known to be 
 homologous (related), and so it is likely that the relatively high alignment score (67.5) is
-just due to chance alone. 
+just due to chance alone.
+
+
+Multiple Alignment and Phylogenetic Trees
+-----------------------------------------
+
+Q1. 
+^^^
+*Calculate the genetic distances between the following NS1 proteins from different Dengue virus strains: Dengue virus 1 NS1 protein (Uniprot Q9YRR4), Dengue virus 2 NS1 protein (UniProt Q9YP96), Dengue virus 3 NS1 protein (UniProt B0LSS3), and Dengue virus 4 NS1 protein (UniProt Q6TFL5). Which are the most closely related proteins, and which are the least closely related, based on the genetic distances?*
+
+To retrieve the sequences of the four proteins, we can use the retrieveseqs() function in R, to retrieve
+the sequences from the "swissprot" ACNUC sub-database:
+
+::
+
+    > library("seqinr")                                      # Load the SeqinR package
+    > seqnames <- c("Q9YRR4", "Q9YP96", "B0LSS3", "Q6TFL5")  # Make a vector containing the names of the sequences
+    > seqs <- retrieveseqs(seqnames,"swissprot")             # Retrieve the sequences and store them in list variable "seqs"
+
+We then can write out the sequences to a FASTA-format file called "NS1.fasta", by typing:
+
+::
+
+    > write.fasta(seqs, seqnames, file="NS1.fasta")
+
+We can then use the CLUSTAL software to make a multiple alignment of the protein sequences
+in NS1.fasta, and store it in a PHYLIP-format alignment file called "NS1.phy", 
+as `described in the chapter <./chapter5.html#creating-a-multiple-alignment-of-protein-dna-or-mrna-sequences-using-clustal>`_.
+
+The next step is to read the PHYLIP-format alignment into R, and calculate the genetic distances
+between the protein sequences, by typing:
+
+::
+
+    > NS1aln  <- read.alignment(file = "NS1.phy", format = "phylip")
+    > NS1dist <- dist.alignment(NS1aln) 
+    > NS1dist 
+                    Q9YRR4     Q9YP96     B0LSS3    
+      Q9YP96      0.2544567                      
+      B0LSS3      0.2302831  0.2268713           
+      Q6TFL5      0.3058189  0.3328595  0.2970443
+
+We see that the two sequences with the greatest genetic distance are Q6TFL5 (Dengue virus 4 NS1) and Q9YP96 (Dengue virus 2 NS1), which
+have a genetic distance of about 0.33. The two sequences with the smallest genetic distance are
+Q9YRR4 (Dengue virus 1 NS1) and B0LSS3 (Dengue virus 3 NS1), which have a genetic distance of about 0.23. 
+
+Q2.
+^^^
+*Build an unrooted phylogenetic tree of the NS1 proteins from Dengue virus 1, Dengue virus 2, Dengue virus 3 and Dengue virus 4,
+using the neighbour-joining algorithm. Which are the most closely related proteins, based on the tree? Based on the bootstrap values in the tree, how confident are you of this?*
+
+We can build an unrooted phylogenetic tree of the NS1 proteins using the neighbour-joining algorithm by typing:
+
+::
+
+    > unrootedNJtree(NS1aln,type="protein")
+
+|image17|
+
+We see in the tree that Q6TFL5 (Dengue virus 4 NS1) and Q9YRR4 (Dengue virus 1 NS1) are grouped together, with
+a bootstrap value of 100\%, which is a high bootstrap value, so we are reasonably confident of this grouping.
+
+The other two proteins, B0LSS3 (Dengue virus 3 NS1) and Q9YP96 (Dengue virus 2 NS1) are grouped together, but
+the bootstrap value for the node representing the ancestor of this clade is just 19\%. 
+
+One thing that is surprising is that Q6TFL5 and Q9YRR4 were not the two closest proteins when we calculated
+the genetic distance (in Q1), and we should bear this in mind, as it should make us a little bit cautious in
+trusting this phylogenetic tree.
+
+Q3.
+^^^
+*Build an unrooted phylogenetic tree of the NS1 proteins from Dengue viruses 1-4, based on a filtered alignment of the four proteins (keeping alignment columns in which at least 30\% of letters are not gaps, and in which at least 30\% of pairs of letters are identical). Does this differ from the tree based on the unfiltered alignment (in Q2)? Can you explain why?*
+
+To filter the alignment of the NS1 proteins, we can use the "cleanAlignment()" function:
+
+::
+
+    > cleanedNS1aln <- cleanAlignment(NS1aln, 30, 30) 
+
+We can then build an unrooted tree based on the filtered alignment:
+
+::
+
+    > unrootedNJtree(cleanedNS1aln,type="protein")
+
+|image18|
+
+We find that B0LSS3 (Dengue virus 3 NS1) and Q9YRR4 (Dengue virus 1 NS1) are grouped together with bootstrap of 100\%.
+This disagrees with what we found in the phylogenetic tree based on the unfiltered alignment (in Q2), in which 
+B0LSS3 was grouped with Q9YP96. However, it agrees with what we found when we calculated the genetic distance matrix
+(in Q1), which suggested that B0LSS3 is most closely related to Q9YRR4.
+
+Why do the filtered and unfiltered alignments disagree? To find out, it is a good idea to print out both
+alignments:
+
+::
+
+    > printMultipleAlignment(NS1aln)
+      [1] "------------------------------------------------------------ 0"
+      [1] "DSGCVVSWKNKELKCGSGIFITDNVHTWTEQYKFQPESPSKLASAIQKAQEEGICGIRSV 60"
+      [1] "------------------------------------------------------------ 0"
+      [1] "DMGCVVSWNGKELKCGSGIFVIDNVHTRTEQYKFQPESPARLASAILNAHKDGVCGVRST 60"
+      [1] " "
+      [1] "------------------------------------------------------------ 0"
+      [1] "TRLENLMWKQITPELNHILSENEVKLTIMTGDIKGIMQAGKRSLRPQPTELKYSWKAWGK 120"
+      [1] "------------------------------------------------------------ 0"
+      [1] "TRLENVMWKQITNELNYVLWEGGHDLTVVAGDVKGVLTEGKRALTPPVNDLKYSWKTWGK 120"
+      [1] " "
+      [1] "------------------------------------------------------------ 0"
+      [1] "AKMLSTESHNQTFLIDGPETAECPNTNRAWNSLEVEDYGFGVFTTNIWLKLKEKQDAFCD 180"
+      [1] "------------------------------------------------------------ 0"
+      [1] "AKIFTLEARNSTFLIDGPDTSECPNERRAWNFLEVEDYGFGMFTTNIWMKFREGSSEVCD 180"
+      [1] " "
+      [1] "----------------DMGYWIESEKNETWKLARASFIEVKTCIWPKSHTLWSNGVWESE 44"
+      [1] "SKLMSAAIKDNRAVHADMGYWIESALNDTWKIEKASFIEVKNCHWPKSHTLWSNGVLESE 240"
+      [1] "------------ASHADMGYWIESQKNGSWKLEKASLIEVKTCTWPKSHTLWSNGVLESD 48"
+      [1] "HRLMSAAIKDQKAVHADMGYWIESSKNQTWQIEKASLIEVKTCLWPKTHTLWSNGVLESQ 240"
+      [1] " "
+      [1] "MIIPKIYGGPISQHNYRPGYFTQTAGPWHLGKLELDFDLCEGTTVVVDEHCGNRGPSLRT 104"
+      [1] "MIIPKNFAGPVSQHNYRPGYHTQIAGPWHLGKLEMDFDFCDGTTVVVTEDCGNRGPSLRT 300"
+      [1] "MIIPKSLAGPISQHNYRPGYHTQTAGPWHLGKLELDFNYCEGTTVVITENCGTRGPSLRT 108"
+      [1] "MLIPRSYAGPFSQHNYRQGYATQTMGPWHLGKLEINFGECPGTTVAIQEDCGHRGPSLRT 300"
+      [1] " "
+      [1] "TTVTGKIIHEWCCRFCTLPPLRFRGEDGCWYGMEI----------------- 147"
+      [1] "TTASGKLITEWCCRSCTLPPLRYRGEDGCWYGMEIRPLKEKEENLVNSLVTA 360"
+      [1] "TTVSGKLIHEWCCRSCTLPPLRYMGEDG------------------------ 144"
+      [1] "TTASGKLVTQWCCRSCAMPPLRFLGEDGCWYGMEIRPLSEKEENMVKSQVTA 360"
+      [1] " "
+
+We can see that the unfiltered (original) alignment (above) contains a lot of columns with gaps in them.
+This could possibly be adding noise to the phylogenetic analysis. 
+
+Let's print out the filtered alignment now:
+
+::
+
+    > printMultipleAlignment(cleanedNS1aln)
+      [1] "------------------------------------------------------------ 0"
+      [1] "DGCVVSWKELKCGSGIFDNVHTTEQYKFQPESPLASAIAGCGRSTRLENMWKQITELNLE 60"
+      [1] "------------------------------------------------------------ 0"
+      [1] "DGCVVSWKELKCGSGIFDNVHTTEQYKFQPESPLASAIAGCGRSTRLENMWKQITELNLE 60"
+      [1] " "
+      [1] "------------------------------------------------------------ 0"
+      [1] "LTGDKGGKRLPLKYSWKWGKAKENTFLIDGPTECPNRAWNLEVEDYGFGFTTNIWKECDL 120"
+      [1] "------------------------------------------------------------ 0"
+      [1] "LTGDKGGKRLPLKYSWKWGKAKENTFLIDGPTECPNRAWNLEVEDYGFGFTTNIWKECDL 120"
+      [1] " "
+      [1] "-----------DMGYWIESKNTWKLARASFIEVKTCWPKSHTLWSNGVWESMIIPKGGPS 49"
+      [1] "MSAAIKDAVHADMGYWIESLNTWKIEKASFIEVKNCWPKSHTLWSNGVLESMIIPKAGPS 180"
+      [1] "-------ASHADMGYWIESKNSWKLEKASLIEVKTCWPKSHTLWSNGVLESMIIPKAGPS 53"
+      [1] "MSAAIKDAVHADMGYWIESKNTWQIEKASLIEVKTCWPKTHTLWSNGVLESMLIPRAGPS 180"
+      [1] " "
+      [1] "QHNYRPGYTQTAGPWHLGKLEDFCGTTVVVECGRGPSLRTTTVTGKIIHEWCCRFCTLPP 109"
+      [1] "QHNYRPGYTQIAGPWHLGKLEDFCGTTVVVECGRGPSLRTTTASGKLITEWCCRSCTLPP 240"
+      [1] "QHNYRPGYTQTAGPWHLGKLEDFCGTTVVIECGRGPSLRTTTVSGKLIHEWCCRSCTLPP 113"
+      [1] "QHNYRQGYTQTMGPWHLGKLENFCGTTVAIECGRGPSLRTTTASGKLVTQWCCRSCAMPP 240"
+      [1] " "
+      [1] "LRFGEDGCWYGMEI------------- 156"
+      [1] "LRYGEDGCWYGMEIRPLEKEENVSVTA 300"
+      [1] "LRYGEDG-------------------- 153"
+      [1] "LRFGEDGCWYGMEIRPLEKEENVSVTA 300"
+      [1] " "
+
+The unfiltered alignment contains far fewer "gappy" columns (columns where two
+or more sequences have gaps) compared to the original unfiltered alignment. It is
+likely that the gappy columns in the original unfiltered alignment were adding noise
+to the phylogenetic analysis, and that the phylogenetic tree based on the filtered
+alignment is more reliable in this case.
+
+Q4.
+*Build a rooted phylogenetic tree of the Dengue NS1 proteins based on a filtered alignment, using the Zika virus protein as the outgroup. Which are the most closely related Dengue virus proteins, based on the tree? What extra information does this tree tell you, compared to the unrooted tree in Q2?*
+
+First we need to obtain the Zika virus protein (UniProt accession Q32ZE1):
+
+::
+
+    > seqnames <- c("Q9YRR4", "Q9YP96", "B0LSS3", "Q6TFL5", "Q32ZE1")  # Make a vector containing the names of the sequences
+    > seqs <- retrieveseqs(seqnames,"swissprot")                       # Retrieve the sequences and store them in list variable "seqs"
+
+We then write out the sequences to a FASTA-format file called "NS1b.fasta":
+
+::
+
+    > write.fasta(seqs, seqnames, file="NS1b.fasta")
+
+We then use CLUSTAL to make a PHYLIP-format alignment, and save it as "NS1b.phy".
+
+We then read the alignment into R:
+
+::
+
+    > NS1baln  <- read.alignment(file = "NS1b.phy", format = "phylip")
+
+We then discard unreliable columns from the alignment:
+
+::
+
+    > cleanedNS1baln <- cleanAlignment(NS1baln, 30, 30) 
+
+We then can build a rooted phylogenetic tree using the Zika virus protein (accession Q32ZE1) as the outgroup, by
+using the rootedNJtree() function:
+
+::
+
+    > rootedNJtree(cleanedNS1baln, "Q32ZE1",type="protein") 
+
+|image19|
+
+We see in this tree that Q9YP96 (Dengue virus 2 NS1) and Q6TFL5 (Dengue virus 4 NS1) are grouped
+together with bootstrap 47\%. The next closest sequence is B0LSS3 (Dengue virus 3 NS1). The Q9YRR4
+sequence (Dengue virus 1 NS1) diverged earliest of the four Dengue virus NS1 proteins, as it is grouped with the outgroup.
+
+Note that in Q3, we found that B0LSS3 (Dengue virus 3 NS1) and Q9YRR4 (Dengue virus 1 NS1) were grouped together in 
+an unrooted tree. The current rooted tree is consistent with this; it has B0LSS3 and Q9YRR4 as the two earliest diverging
+Dengue NS1 proteins, as they are nearest to the outgroup in the tree.
+
+Thus, the rooted tree tells you which of the Dengue virus NS1 proteins branched off the earliest from the ancestors of the
+other proteins, and which branched off next, and so on... We were not able to tell this from the unrooted tree.
 
 Contact
 -------
@@ -1184,4 +1401,10 @@ The content in this book is licensed under a `Creative Commons Attribution 3.0 L
 .. |image15| image:: ../_static/P3_image15.png
             :width: 600
 .. |image16| image:: ../_static/P3_image16.png
+            :width: 700
+.. |image17| image:: ../_static/P3_image17.png
+            :width: 700
+.. |image18| image:: ../_static/P3_image18.png
+            :width: 700
+.. |image19| image:: ../_static/P3_image19.png
             :width: 700

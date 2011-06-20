@@ -206,7 +206,7 @@ The R function "printMultipleAlignment()" below will do this for you:
          # load the Biostrings package
          library("Biostrings")
          # find the number of sequences in the alignment
-         numseqs <- length(alignment)
+         numseqs <- alignment$nb
          # find the length of the alignment
          alignmentlen <- nchar(alignment$seq[[1]])
          starts <- seq(1, alignmentlen, by=chunksize)
@@ -297,7 +297,7 @@ R function, "cleanAlignment()":
          # make a copy of the alignment to store the new alignment in:
          newalignment <- alignment
          # find the number of sequences in the alignment
-         numseqs <- length(alignment)
+         numseqs <- alignment$nb
          # empty the alignment in "newalignment")
          for (j in 1:numseqs) { newalignment$seq[[j]] <- "" }
          # find the length of the alignment
@@ -307,7 +307,7 @@ R function, "cleanAlignment()":
          {
             # see what percent of the letters in this column are non-gaps:
             nongap <- 0
-            for (j in 1:(numseqs-1))
+            for (j in 1:numseqs)
             {
                seqj <- alignment$seq[[j]]
                letterij <- substr(seqj,i,i)
@@ -341,7 +341,7 @@ R function, "cleanAlignment()":
                {
                    for (j in 1:numseqs)
                    {
-                      seqj <- alignmentseq[[j]] 
+                      seqj <- alignment$seq[[j]] 
                       letterij <- substr(seqj,i,i) 
                       newalignmentj <- newalignment$seq[[j]]
                       newalignmentj <- paste(newalignmentj,letterij,sep="") 
@@ -399,6 +399,12 @@ We can print out the filtered alignment by typing:
 
 The filtered alignment is shorter, but is missing some of the poorly conserved regions of the original
 alignment. 
+
+Note that it is not a good idea to filter out too much of your alignment, as if you are
+left with few columns in your filtered alignment, you will be basing your phylogenetic tree
+upon a very short alignment (little data), and so the tree may be unreliable. Therefore, you
+need to achieve a balance between discarding the dodgy (poorly aligned) parts of your alignment,
+and retaining enough columns of the alignment that you will have enough data to based your tree upon.
 
 Calculating genetic distances between protein sequences
 -------------------------------------------------------
@@ -910,7 +916,7 @@ using the neighbour-joining algorithm. Which are the most closely related protei
 
 Q3. Build an unrooted phylogenetic tree of the NS1 proteins from Dengue viruses 1-4, based on a filtered alignment of the four proteins (keeping alignment columns in which at least 30\% of letters are not gaps, and in which at least 30\% of pairs of letters are identical). Does this differ from the tree based on the unfiltered alignment (in Q2)? Can you explain why?
 
-Q4. The Zika virus is related to Dengue viruses, but is not a Dengue virus, and so therefore can be used as an outgroup in phylogenetic trees of Dengue virus sequences. UniProt accession Q32ZE1 consists of a sequence with similarity to the Dengue NS1 protein, so seems to be a related protein from Zika virus. Build a rooted phylogenetic tree of the Dengue NS1 proteins, using the Zika virus protein as the outgroup. Which are the most closely related Dengue virus proteins, based on the tree? What extra information does this tree tell you, compared to the unrooted tree in Q2?
+Q4. The Zika virus is related to Dengue viruses, but is not a Dengue virus, and so therefore can be used as an outgroup in phylogenetic trees of Dengue virus sequences. UniProt accession Q32ZE1 consists of a sequence with similarity to the Dengue NS1 protein, so seems to be a related protein from Zika virus. Build a rooted phylogenetic tree of the Dengue NS1 proteins based on a filtered alignment (keeping alignment columns in which at least 30\% of letters are not gaps, and in which at least 30\% of pairs of letters are identical), using the Zika virus protein as the outgroup. Which are the most closely related Dengue virus proteins, based on the tree? What extra information does this tree tell you, compared to the unrooted tree in Q2?
 
 
 .. |image0| image:: ../_static/P5_image0.png
