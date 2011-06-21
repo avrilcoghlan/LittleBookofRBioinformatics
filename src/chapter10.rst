@@ -764,7 +764,11 @@ Q3. Make a two-state HMM to model protein sequence evolution, with "hydrophilic"
 
 
 
-.. |image0| image:: ../_static/P10_image4.png
+.. |image0| image:: ../_static/P10_image4.pno
+            :width: 500
 .. |image1| image:: ../_static/P10_image3.png
+            :width: 500
 .. |image2| image:: ../_static/P10_image5.png
+            :width: 500
 .. |image3| image:: ../_static/P10_image6.png
+            :width: 500
