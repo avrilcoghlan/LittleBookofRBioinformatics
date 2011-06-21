@@ -12,15 +12,13 @@ a gene can be "TGA", "TAA" or "TAG".
 
 In R, you can view the *standard genetic code*, the correspondence
 between codons and the amino acids that they are translated into,
-by using the tablecode() function in the SeqinR library:
+by using the tablecode() function in the SeqinR package:
 
 .. highlight:: r
 
 ::
 
     > library(seqinr)
-    > par(mfrow = c(1,1)) # Make plots with just 1 column and 1 row again
-    > library("seqinr")
     > tablecode() 
 
 |image2|
@@ -37,8 +35,8 @@ To look for all the potential start and stop codons in a DNA
 sequence, we need to find all the "ATG"s, "TGA"s, "TAA"s, and
 "TAG"s in the sequence.
 
-To do this, we can use the matchPattern function from the
-Biostrings R library, which identifies all occurrences of a
+To do this, we can use the "matchPattern()" function from the
+Biostrings R package, which identifies all occurrences of a
 particular motif (eg. "ATG") in a sequence. As input, the
 matchPattern() function requires that the sequences be in the form
 of a string of single characters.
@@ -68,18 +66,57 @@ Similarly, if you use matchPattern() to find the positions of
 you will find that it has one "TAA" at nucleotides 10-12, but no
 "TAG"s or "TGA"s.
 
-In previous practicals, you learnt that you can read in your own or
-other people's R functions from a text file by using the source()
-command. The file
-`www.ucc.ie/microbio/MB6301/Rfunctions.R <http://www.ucc.ie/microbio/MB6301/Rfunctions.R>`_)
-contains a function findPotentialStartsAndStops() that contains a
-function for finding all potential start and stop codons in a DNA
-sequence. For example, we can use this function to find potential
+The following R function "findPotentialStartsAndStops()" can be used
+to find all potential start and stop codons in a DNA
+sequence:
+
+::
+
+    > findPotentialStartsAndStops <- function(sequence)
+      {
+         # Define a vector with the sequences of potential start and stop codons
+         codons            <- c("atg", "taa", "tag", "tga")   
+         # Find the number of occurrences of each type of potential start or stop codon
+         for (i in 1:4)                                     
+         {
+            codon <- codons[i]
+            # Find all occurrences of codon "codon" in sequence "sequence" 
+            occurrences <- matchPattern(codon, sequence) 
+            # Find the start positions of all occurrences of "codon" in sequence "sequence"
+            codonpositions <- attr(occurrences,"start")     
+            # Find the total number of potential start and stop codons in sequence "sequence"
+            numoccurrences <- length(codonpositions)        
+            if (i == 1) 
+            {
+               # Make a copy of vector "codonpositions" called "positions"
+               positions <- codonpositions                
+               # Make a vector "types" containing "numoccurrences" copies of "codon"   
+               types <- rep(codon, numoccurrences)    
+            } 
+            else
+            {
+               # Add the vector "codonpositions" to the end of vector "positions":
+               positions   <- append(positions, codonpositions, after=length(positions))
+               # Add the vector "rep(codon, numoccurrences)" to the end of vector "types":
+               types       <- append(types, rep(codon, numoccurrences), after=length(types))
+            }
+         }
+         # Sort the vectors "positions" and "types" in order of position along the input sequence:
+         indices <- order(positions)
+         positions <- positions[indices]
+         types <- types[indices] 
+         # Return a list variable including vectors "positions" and "types":
+         mylist <- list(positions,types)
+         return(mylist)
+      }
+
+To use the function, you will need to copy and paste it into R.
+For example, we can use this function to find potential
 start and stop codons in sequence *s1*:
 
 ::
 
-    > source("Rfunctions.R")
+    > s1 <- "aaaatgcagtaacccatgccc"
     > findPotentialStartsAndStops(s1)
     [[1]]
     [1]  4 10 16
@@ -92,7 +129,9 @@ contains two elements: the first element of the list is a vector
 containing the positions of potential start and stop codons in the
 input sequence, and the second element of the list is a vector
 containing the type of those start/stop codons ("atg", "taa",
-"tag", or "tga"). The output for sequence *s1* tells us that
+"tag", or "tga"). 
+
+The output for sequence *s1* tells us that
 sequence *s1* has an "ATG" starting at nucleotide 4, a "TAA"
 starting at nucleotide 10, and another "ATG" starting at nucleotide
 16.
@@ -100,94 +139,92 @@ starting at nucleotide 10, and another "ATG" starting at nucleotide
 We can use the function findPotentialStartsAndStops() to find all
 potential start and stop codons in longer sequences. For example,
 say we want to find all potential start and stop codons in the
-first 500 nucleotides of the genome sequence of Bacteriophage
-lambda. We would first need to retrieve the sequence from the NCBI
-Sequence Database.
+first 500 nucleotides of the genome sequence of the DEN-1 Dengue virus
+(NCBI accession NC\_001477).
 
-In previous practicals (see Practical 5,
-`http://www.ucc.ie/microbio/MB6301/practical5\_trees.html <http://www.ucc.ie/microbio/MB6301/practical5_trees.html>`_),
-you learnt about the functions retriveuniprotseqs() and
-retreivegenbankseqs() in file Rfunctions.R for retrieving protein
-sequences from UniProt, or DNA sequences from the NCBI database,
-respectively. Bacteriophage lambda is a virus, and the file
-"Rfunctions.R" contains a special function retrievevirusseqs() for
-retrieving virus DNA sequences from the NCBI database.
-
-The NCBI accession for the Bacteriophage lambda genome sequence is
-NC\_001416, and we can retrieve the sequence using
-retrievevirusseqs() by typing:
+In a `previous chapter <./chapter1.html#retrieving-genome-sequence-data-using-seqinr>`_, you
+learnt that you can retrieve a sequence for an NCBI accession using the
+"getncbiseq()" function. Thus, to retrieve the genome sequence of the DEN-1
+Dengue virus (NCBI accession NC\_001477), we can type:
 
 ::
 
-    > source("Rfunctions.R")
-    > seqnames <- c("NC_001416")
-    > seqs <- retrievevirusseqs(seqnames)
-    > lambdaseq <- seqs[[1]] # The first (and only, in this case) sequence retrieved is the Bacteriophage lambda sequence
+    > dengueseq <- getncbiseq("NC_001477")
 
-The variable *lambdaseq* is a vector variable, and each letter in
-the Bacteriophage lambda DNA sequence is stored in one element of
+The variable *dengueseq* is a vector variable, and each letter in
+the DEN-1 Dengue virus DNA sequence is stored in one element of
 this vector. Thus, to cut out the first 500 nucleotides of the
-lambda sequence, we can just take the first 500 elements of this
+DEN-1 Dengue virus sequence, we can just take the first 500 elements of this
 vector:
 
 ::
 
-    > lambdaseqstart <- lambdaseq[1:500] # Take the first 500 nucleotides of the lambda sequence
-    > length(lambdaseqstart)             # Find the length of the "lambdaseq" start vector
+    > dengueseqstart <- dengueseq[1:500] # Take the first 500 nucleotides of the DEN-1 Dengue sequence
+    > length(dengueseqstart)             # Find the length of the "dengueseqstart" start vector
     [1] 500
 
 Next we want to find potential start and stop codons in the first
-500 nucleotides of the lambda sequence. We can do this using the
+500 nucleotides of the Dengue virus sequence. We can do this using the
 findPotentialStartsAndStops() function described above. However,
 the findPotentialStartsAndStops() function requires that the input
 sequence be in the format of a string of characters, rather than a
 vector. Therefore, we first need to convert the vector
-*lambdaseqstart* into a string of characters. We can do that using
-the c2s() function in the SeqinR library:
+*dengueseqstart* into a string of characters. We can do that using
+the c2s() function in the SeqinR package:
 
 ::
 
-    > lambdaseqstart                    # Print out the vector lambdaseqstart
-      [1] "g" "g" "g" "c" "g" "g" "c" "g" "a" "c" "c" "t" "c" "g" "c" "g" "g" "g" "t" "t" "t" "t" "c" "g" "c" "t" "a" "t" "t" "t" "a"
-     [32] "t" "g" "a" "a" "a" "a" "t" "t" "t" "t" "c" "c" "g" "g" "t" "t" "t" "a" "a" "g" "g" "c" "g" "t" "t" "t" "c" "c" "g" "t" "t"
-     [63] "c" "t" "t" "c" "t" "t" "c" "g" "t" "c" "a" "t" "a" "a" "c" "t" "t" "a" "a" "t" "g" "t" "t" "t" "t" "t" "a" "t" "t" "t" "a"
-     [94] "a" "a" "a" "t" "a" "c" "c" "c" "t" "c" "t" "g" "a" "a" "a" "a" "g" "a" "a" "a" "g" "g" "a" "a" "a" "c" "g" "a" "c" "a" "g"
-    [125] "g" "t" "g" "c" "t" "g" "a" "a" "a" "g" "c" "g" "a" "g" "g" "c" "t" "t" "t" "t" "t" "g" "g" "c" "c" "t" "c" "t" "g" "t" "c"
-    [156] "g" "t" "t" "t" "c" "c" "t" "t" "t" "c" "t" "c" "t" "g" "t" "t" "t" "t" "t" "g" "t" "c" "c" "g" "t" "g" "g" "a" "a" "t" "g"
-    [187] "a" "a" "c" "a" "a" "t" "g" "g" "a" "a" "g" "t" "c" "a" "a" "c" "a" "a" "a" "a" "a" "g" "c" "a" "g" "c" "t" "g" "g" "c" "t"
-    [218] "g" "a" "c" "a" "t" "t" "t" "t" "c" "g" "g" "t" "g" "c" "g" "a" "g" "t" "a" "t" "c" "c" "g" "t" "a" "c" "c" "a" "t" "t" "c"
-    [249] "a" "g" "a" "a" "c" "t" "g" "g" "c" "a" "g" "g" "a" "a" "c" "a" "g" "g" "g" "a" "a" "t" "g" "c" "c" "c" "g" "t" "t" "c" "t"
-    [280] "g" "c" "g" "a" "g" "g" "c" "g" "g" "t" "g" "g" "c" "a" "a" "g" "g" "g" "t" "a" "a" "t" "g" "a" "g" "g" "t" "g" "c" "t" "t"
-    [311] "t" "a" "t" "g" "a" "c" "t" "c" "t" "g" "c" "c" "g" "c" "c" "g" "t" "c" "a" "t" "a" "a" "a" "a" "t" "g" "g" "t" "a" "t" "g"
-    [342] "c" "c" "g" "a" "a" "a" "g" "g" "g" "a" "t" "g" "c" "t" "g" "a" "a" "a" "t" "t" "g" "a" "g" "a" "a" "c" "g" "a" "a" "a" "a"
-    [373] "g" "c" "t" "g" "c" "g" "c" "c" "g" "g" "g" "a" "g" "g" "t" "t" "g" "a" "a" "g" "a" "a" "c" "t" "g" "c" "g" "g" "c" "a" "g"
-    [404] "g" "c" "c" "a" "g" "c" "g" "a" "g" "g" "c" "a" "g" "a" "t" "c" "t" "c" "c" "a" "g" "c" "c" "a" "g" "g" "a" "a" "c" "t" "a"
-    [435] "t" "t" "g" "a" "g" "t" "a" "c" "g" "a" "a" "c" "g" "c" "c" "a" "t" "c" "g" "a" "c" "t" "t" "a" "c" "g" "c" "g" "t" "g" "c"
-    [466] "g" "c" "a" "g" "g" "c" "c" "g" "a" "c" "g" "c" "a" "c" "a" "g" "g" "a" "a" "c" "t" "g" "a" "a" "g" "a" "a" "t" "g" "c" "c"
-    [497] "a" "g" "a" "g"
-    > library("seqinr")                 # Load the SeqinR library
-    > lambdaseqstartstring <- c2s(lambdaseqstart) # Convert the vector "lambdaseqstart" to a string of characters
-    > lambdaseqstartstring              # Print out the variable string of characters "lambdaseqstartstring"
-    [1] "gggcggcgacctcgcgggttttcgctatttatgaaaattttccggtttaaggcgtttccgttcttcttcgtcataacttaatgtttttatttaaaataccctctgaaaagaaaggaaacgacaggtgctgaaagcgaggctttttggcctctgtcgtttcctttctctgtttttgtccgtggaatgaacaatggaagtcaacaaaaagcagctggctgacattttcggtgcgagtatccgtaccattcagaactggcaggaacagggaatgcccgttctgcgaggcggtggcaagggtaatgaggtgctttatgactctgccgccgtcataaaatggtatgccgaaagggatgctgaaattgagaacgaaaagctgcgccgggaggttgaagaactgcggcaggccagcgaggcagatctccagccaggaactattgagtacgaacgccatcgacttacgcgtgcgcaggccgacgcacaggaactgaagaatgccagag"
+    > library("seqinr")                 # Load the SeqinR package
+    > dengueseqstart                    # Print out the vector dengueseqstart
+      [1] "a" "g" "t" "t" "g" "t" "t" "a" "g" "t" "c" "t" "a" "c" "g" "t" "g" "g" "a"
+      [20] "c" "c" "g" "a" "c" "a" "a" "g" "a" "a" "c" "a" "g" "t" "t" "t" "c" "g" "a"
+      [39] "a" "t" "c" "g" "g" "a" "a" "g" "c" "t" "t" "g" "c" "t" "t" "a" "a" "c" "g"
+      [58] "t" "a" "g" "t" "t" "c" "t" "a" "a" "c" "a" "g" "t" "t" "t" "t" "t" "t" "a"
+      [77] "t" "t" "a" "g" "a" "g" "a" "g" "c" "a" "g" "a" "t" "c" "t" "c" "t" "g" "a"
+      [96] "t" "g" "a" "a" "c" "a" "a" "c" "c" "a" "a" "c" "g" "g" "a" "a" "a" "a" "a"
+      [115] "g" "a" "c" "g" "g" "g" "t" "c" "g" "a" "c" "c" "g" "t" "c" "t" "t" "t" "c"
+      [134] "a" "a" "t" "a" "t" "g" "c" "t" "g" "a" "a" "a" "c" "g" "c" "g" "c" "g" "a"
+      [153] "g" "a" "a" "a" "c" "c" "g" "c" "g" "t" "g" "t" "c" "a" "a" "c" "t" "g" "t"
+      [172] "t" "t" "c" "a" "c" "a" "g" "t" "t" "g" "g" "c" "g" "a" "a" "g" "a" "g" "a"
+      [191] "t" "t" "c" "t" "c" "a" "a" "a" "a" "g" "g" "a" "t" "t" "g" "c" "t" "t" "t"
+      [210] "c" "a" "g" "g" "c" "c" "a" "a" "g" "g" "a" "c" "c" "c" "a" "t" "g" "a" "a"
+      [229] "a" "t" "t" "g" "g" "t" "g" "a" "t" "g" "g" "c" "t" "t" "t" "t" "a" "t" "a"
+      [248] "g" "c" "a" "t" "t" "c" "c" "t" "a" "a" "g" "a" "t" "t" "t" "c" "t" "a" "g"
+      [267] "c" "c" "a" "t" "a" "c" "c" "t" "c" "c" "a" "a" "c" "a" "g" "c" "a" "g" "g"
+      [286] "a" "a" "t" "t" "t" "t" "g" "g" "c" "t" "a" "g" "a" "t" "g" "g" "g" "g" "c"
+      [305] "t" "c" "a" "t" "t" "c" "a" "a" "g" "a" "a" "g" "a" "a" "t" "g" "g" "a" "g"
+      [324] "c" "g" "a" "t" "c" "a" "a" "a" "g" "t" "g" "t" "t" "a" "c" "g" "g" "g" "g"
+      [343] "t" "t" "t" "c" "a" "a" "g" "a" "a" "a" "g" "a" "a" "a" "t" "c" "t" "c" "a"
+      [362] "a" "a" "c" "a" "t" "g" "t" "t" "g" "a" "a" "c" "a" "t" "a" "a" "t" "g" "a"
+      [381] "a" "c" "a" "g" "g" "a" "g" "g" "a" "a" "a" "a" "g" "a" "t" "c" "t" "g" "t"
+      [400] "g" "a" "c" "c" "a" "t" "g" "c" "t" "c" "c" "t" "c" "a" "t" "g" "c" "t" "g"
+      [419] "c" "t" "g" "c" "c" "c" "a" "c" "a" "g" "c" "c" "c" "t" "g" "g" "c" "g" "t"
+      [438] "t" "c" "c" "a" "t" "c" "t" "g" "a" "c" "c" "a" "c" "c" "c" "g" "a" "g" "g"
+      [457] "g" "g" "g" "a" "g" "a" "g" "c" "c" "g" "c" "a" "c" "a" "t" "g" "a" "t" "a"
+      [476] "g" "t" "t" "a" "g" "c" "a" "a" "g" "c" "a" "g" "g" "a" "a" "a" "g" "a" "g"
+      [495] "g" "a" "a" "a" "a" "t"
+    > dengueseqstartstring <- c2s(dengueseqstart) # Convert the vector "dengueseqstart" to a string of characters
+    > dengueseqstartstring                        # Print out the variable string of characters "dengueseqstartstring"
+      [1] "agttgttagtctacgtggaccgacaagaacagtttcgaatcggaagcttgcttaacgtagttctaacagttttttattagagagcagatctctgatgaacaaccaacggaaaaagacgggtcgaccgtctttcaatatgctgaaacgcgcgagaaaccgcgtgtcaactgtttcacagttggcgaagagattctcaaaaggattgctttcaggccaaggacccatgaaattggtgatggcttttatagcattcctaagatttctagccatacctccaacagcaggaattttggctagatggggctcattcaagaagaatggagcgatcaaagtgttacggggtttcaagaaagaaatctcaaacatgttgaacataatgaacaggaggaaaagatctgtgaccatgctcctcatgctgctgcccacagccctggcgttccatctgaccacccgagggggagagccgcacatgatagttagcaagcaggaaagaggaaaat"
 
 We can then find potential start and stop codons in the first 500
-nucleotides of the lambda sequence by typing:
+nucleotides of the DEN-1 Dengue virus sequence by typing:
 
 ::
 
-    > findPotentialStartsAndStops(lambdaseqstartstring)
-    [[1]]
-     [1]  31  32  48  74  79  81  92 104 129 184 185 191 217 269 298 300 301 312 313 330 334 339 351 355 361
-    [26] 388 436 486 492
-    
-    [[2]]
-     [1] "atg" "tga" "taa" "taa" "taa" "atg" "taa" "tga" "tga" "atg" "tga" "atg" "tga" "atg" "taa" "atg"
-    [17] "tga" "atg" "tga" "taa" "atg" "atg" "atg" "tga" "tga" "tga" "tga" "tga" "atg"
+    > findPotentialStartsAndStops(dengueseqstartstring)
+      [[1]]
+      [1]   7  53  58  64  78  93  95  96 137 141 224 225 234 236 246 255 264 295 298 318
+      [21] 365 369 375 377 378 399 404 413 444 470 471 474 478
+      [[2]]
+      [1] "tag" "taa" "tag" "taa" "tag" "tga" "atg" "tga" "atg" "tga" "atg" "tga" "tga"
+      [14] "atg" "tag" "taa" "tag" "tag" "atg" "atg" "atg" "tga" "taa" "atg" "tga" "tga"
+      [27] "atg" "atg" "tga" "atg" "tga" "tag" "tag"
 
 We see that the lambda sequence has many different potential start
-and stop codons, for example, a potential start codon (ATG) at
-nucleotide 31, a potential stop codon (TGA) at nucleotide 32, a
-potential stop codon (TAA) at nucleotide 48, and so on.
+and stop codons, for example, a potential stop codon (TAG) at
+nucleotide 7, a potential stop codon (TAA) at nucleotide 53, a
+potential stop codon (TAG) at nucleotide 58, and so on.
 
 Reading frames
 --------------
@@ -404,15 +441,15 @@ this case), and ends with a predicted stop codon (TAA).
 
 If you have the DNA sequence of an ORF, you can predict the protein
 sequence for the ORF by using the translate() function from the
-SeqinR library. Note that as there is a function called translate()
-in both the Biostrings and SeqinR libraries, we need to type
+SeqinR package. Note that as there is a function called translate()
+in both the Biostrings and SeqinR packages, we need to type
 seqinr::translate() to specify that we want to use the SeqinR
 translate() function.
 
 The translate() function requires that the input sequence be in the
 form of a vector of characters. If your sequence is in the form of
 a string of characters, you can convert it to a vector of
-characters using the s2c() function from the SeqinR library. For
+characters using the s2c() function from the SeqinR package. For
 example, to predict the protein sequence of the ORF *myorf*, you
 would type:
 
@@ -442,7 +479,7 @@ to find ORFs on the reverse strand.
 The reverse strand sequence easily can be inferred from the forward
 strand sequence, as it is always the reverse complement sequence of
 the forward strand sequence. We can use the comp() function from
-the SeqinR library to calculate the complement of a sequence, and
+the SeqinR package to calculate the complement of a sequence, and
 the rev() function to reverse that sequence in order to give us the
 reverse complement sequence.
 
@@ -728,21 +765,20 @@ functions:
 All of these functions belong to the standard installation of R.
 
 You have also learnt the following R functions that belong to the
-bioinformatics libraries:
+bioinformatics packages:
 
-
-#. tablecode() in the SeqinR library for viewing the genetic code
-#. MatchPattern() in the Biostrings library for finding all
+#. tablecode() in the SeqinR package for viewing the genetic code
+#. MatchPattern() in the Biostrings package for finding all
    occurrences of a motif in a sequence
 #. retrievevirusseqs() (in file "Rfunctions.R") for retrieving
    virus DNA sequences from the NCBI database
-#. translate() in the SeqinR library to get the predicted protein
+#. translate() in the SeqinR package to get the predicted protein
    sequence for an ORF
-#. s2c() in the SeqinR library to convert a sequence stored as a
+#. s2c() in the SeqinR package to convert a sequence stored as a
    string of characters into a vector
-#. c2s() in the SeqinR library to convert a sequence stored in a
+#. c2s() in the SeqinR package to convert a sequence stored in a
    vector into a string of characters
-#. comp() in the SeqinR library to find the complement of a DNA
+#. comp() in the SeqinR package to find the complement of a DNA
    sequence
 #. generateSeqsWithMultinomialModel() (in file "Rfunctions.R") to
    generate a random sequence using a multinomial model
@@ -761,15 +797,15 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 For more in-depth information and more examples on using the SeqinR
-library for sequence analysis, look at the SeqinR documentation,
+package for sequence analysis, look at the SeqinR documentation,
 `seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
 
-For more information on and examples using the Biostrings library,
+For more information on and examples using the Biostrings package,
 see the Biostrings documentation at
 `bioconductor.org/packages/2.5/bioc/html/Biostrings.html <http://bioconductor.org/packages/2.5/bioc/html/Biostrings.html>`_.
 
 There is also a very nice chapter on "Analyzing Sequences", which
-includes examples of using the SeqinR and Biostrings libraries for
+includes examples of using the SeqinR and Biostrings packages for
 sequence analysis, in the book
 *Applied statistics for bioinformatics using R* by Krijnen
 (available online at
@@ -788,7 +824,7 @@ by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
 Thank you to Jean Lobry and Simon Penel for helpful advice on using
-the SeqinR library.
+the SeqinR package.
 
 Exercises
 ---------
