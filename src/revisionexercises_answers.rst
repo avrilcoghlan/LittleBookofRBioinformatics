@@ -282,7 +282,7 @@ Revision Exercises 2
 
 Q1.
 ^^^
-*Use the dotPlot() function in the SeqinR R library to make a dotplot of the rabies virus phosphoprotein and Mokkola virus phosphoprotein, using a windowsize of 10 and threshold of 5.*
+*Use the dotPlot() function in the SeqinR R package to make a dotplot of the rabies virus phosphoprotein and Mokkola virus phosphoprotein, using a windowsize of 10 and threshold of 5.*
 
 First we need to retrieve the rabies virus phosphoprotein (UniProt P06747) and Mokola virus phosphoprotein (UniProt P0C569) sequences from UniProt, which we can do using SeqinR:
 
@@ -381,7 +381,7 @@ Here is an R function that will do this:
 
 Q4.
 ^^^
-*Use the dotPlot() function in the SeqinR R library to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (x) of 3 and a threshold (y) of 3. Are the two plots similar or different, and can you explain why?*
+*Use the dotPlot() function in the SeqinR R package to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (x) of 3 and a threshold (y) of 3. Are the two plots similar or different, and can you explain why?*
 
 We can use the dotPlot() function from SeqinR to make a dotplot of the rabies and Mokola virus
 phosphoproteins, using a window size of 3 and a threshold of 3, by typing:
@@ -433,8 +433,8 @@ minimum evolution, by using "fastme.bal()" instead of "nj()":
     > unrootedMEtree <- function(alignment,type)
       {
          # load the ape and seqinR packages:
-         library("ape")
-         library("seqinr")
+         require("ape")
+         require("seqinr")
          # define a function for making a tree:
          makemytree <- function(alignmentmat)
          {

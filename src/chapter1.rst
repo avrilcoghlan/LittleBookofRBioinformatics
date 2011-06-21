@@ -190,7 +190,7 @@ first need to copy and paste into R:
 
     > getncbiseq <- function(accession)
       {
-         library("seqinr") # load the SeqinR R package
+         require("seqinr") # this function requires the SeqinR R package
          # first find which ACNUC database the accession is stored in:
          dbs <- c("genbank","refseq","refseqViruses","bacterial")
          numdbs <- length(dbs)

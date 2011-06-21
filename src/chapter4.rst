@@ -531,7 +531,7 @@ The R function "printPairwiseAlignment()" below will do this for you:
 
     > printPairwiseAlignment <- function(alignment, chunksize=60, returnlist=FALSE)
       {
-         library(Biostrings)
+         require(Biostrings)           # This function requires the Biostrings package
          seq1aln <- pattern(alignment) # Get the alignment for the first sequence
          seq2aln <- subject(alignment) # Get the alignment for the second sequence
          alnlen  <- nchar(seq1aln)     # Find the number of columns in the alignment
@@ -713,7 +713,7 @@ generateSeqsWithMultinomialModel() below:
     > generateSeqsWithMultinomialModel <- function(inputsequence, X)
       {
          # Change the input sequence into a vector of letters
-         library("seqinr") # Load in the SeqinR package, so we can use function "s2c".
+         require("seqinr") # This function requires the SeqinR package.
          inputsequencevector <- s2c(inputsequence)
          # Find the frequencies of the letters in the input sequence "inputsequencevector":
          mylength <- length(inputsequencevector)

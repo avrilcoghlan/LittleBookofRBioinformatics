@@ -21,8 +21,8 @@ below is useful for this purpose:
 
     > retrieveseqs <- function(seqnames,acnucdb)
       {
-         myseqs <- list() # Make a list to store the sequences
-         library("seqinr")  # Load the SeqinR R package
+         myseqs <- list()   # Make a list to store the sequences
+         require("seqinr")  # This function requires the SeqinR R package
          choosebank(acnucdb)
          for (i in 1:length(seqnames))
          {
@@ -203,8 +203,8 @@ The R function "printMultipleAlignment()" below will do this for you:
 
     > printMultipleAlignment <- function(alignment, chunksize=60)
       { 
-         # load the Biostrings package
-         library("Biostrings")
+         # this function requires the Biostrings package
+         require("Biostrings")
          # find the number of sequences in the alignment
          numseqs <- alignment$nb
          # find the length of the alignment
@@ -527,9 +527,9 @@ makes a picture of that tree:
 
     > unrootedNJtree <- function(alignment,type)
       {
-         # load the ape and seqinR packages:
-         library("ape")
-         library("seqinr")
+         # this function requires the ape and seqinR packages:
+         require("ape")
+         require("seqinr")
          # define a function for making a tree:
          makemytree <- function(alignmentmat)
          {
@@ -720,8 +720,8 @@ can be used to build a rooted tree. It returns the phylogenetic tree, and also m
     > rootedNJtree <- function(alignment, theoutgroup, type)
       {
          # load the ape and seqinR packages:
-         library("ape")
-         library("seqinr")
+         require("ape")
+         require("seqinr")
          # define a function for making a tree:
          makemytree <- function(alignmentmat, outgroup=`theoutgroup`)
          {
@@ -906,6 +906,8 @@ the SeqinR package.
 
 Thank you to Emmanuel Paradis and François Michonneau for help in
 using the Ape package.
+
+Thank you also to Klaus Schliep for helpful comments.
 
 Contact
 -------

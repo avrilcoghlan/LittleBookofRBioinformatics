@@ -443,7 +443,7 @@ The following function findORFsinSeq() finds ORFs in an input sequence:
 
     > findORFsinSeq <- function(sequence)
       {
-         library(Biostrings)
+         require(Biostrings)
          # Make vectors "positions" and "types" containing information on the positions of ATGs in the sequence:
          mylist <- findPotentialStartsAndStops(sequence)
          positions <- mylist[[1]]

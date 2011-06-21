@@ -14,7 +14,7 @@ Model answers to the exercises are given in
 
 Q1.
 ---
-One of the key proteins produced by rabies virus is the rabies phosphoprotein (also known as rabies virus protein P).  The UniProt accession for rabies virus phosphoprotein is P06747. The Mokola virus also produces a phosphoprotein, which has UniProt accession P0C569. Use the dotPlot() function in the SeqinR R library to make a dotplot of these two proteins, using a windowsize of 10 and threshold of 5. Are there any long regions of similarity between the two proteins (if so, where are they)?
+One of the key proteins produced by rabies virus is the rabies phosphoprotein (also known as rabies virus protein P).  The UniProt accession for rabies virus phosphoprotein is P06747. The Mokola virus also produces a phosphoprotein, which has UniProt accession P0C569. Use the dotPlot() function in the SeqinR R package to make a dotplot of these two proteins, using a windowsize of 10 and threshold of 5. Are there any long regions of similarity between the two proteins (if so, where are they)?
     Note: rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the WHO as a neglected tropical disease. Mokola virus and rabies virus are closely related viruses that both belong to a group of viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
 
 Q2.
@@ -55,7 +55,7 @@ Adapt the R code in Q2 to write a function that makes a dotplot using a window o
 
 Q4.
 ---
-Use the dotPlot() function in the SeqinR R library to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (*x*) of 3 and a threshold (*y*) of 3. Are the two plots similar or different, and can you explain why?
+Use the dotPlot() function in the SeqinR R package to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a window size of 3 and a threshold of 3. Use your own R function from Q3 to make a dotplot of rabies virus phosphoprotein and Mokola virus phosphoprotein, using a windowsize (*x*) of 3 and a threshold (*y*) of 3. Are the two plots similar or different, and can you explain why?
 
 Q5.
 ---
