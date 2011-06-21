@@ -1,146 +1,6 @@
 Computational Gene-finding
 ==========================
 
-A little more about R
----------------------
-
-In previous practicals (see Practical 1,
-`http://www.ucc.ie/microbio/MB6301/practical1\_words\_v2.html <http://www.ucc.ie/microbio/MB6301/practical1_words_v2.html>`_),
-you learnt that you can make a vector in R using the c() (combine)
-function. For example, to make a vector *myvector* with values 8,
-6, 9, 10, and 5, we type:
-
-::
-
-    > myvector <- c(8, 6, 9, 10, 5)
-
-We can print out the values of the elements of *myvector* by simply
-typing its name:
-
-::
-
-    > myvector
-    [1]  8  6  9 10  5
-
-Furthermore, the length() function can be used to find the length
-of a vector, so we can find the length of *myvector* by typing:
-
-::
-
-    > length(myvector)
-    [1] 5
-
-If we want to make another vector *myvector2* that is identical to
-*myvector*, we can just type:
-
-::
-
-    > myvector2 <- myvector
-    > myvector2 # Print out the values of the elements of "myvector2"
-    [1]  8  6  9 10  5
-
-We may then want to append the elements in a vector *myvector2*
-onto the end of a vector *myvector*. To do this, we can use the
-append() function. If you look at the help page for the append()
-function, you will see that it takes its arguments (inputs) the
-first vector that you want to append to, the second vector that you
-want to append to the first vector, and the index in the first
-vector at which you want to append the second vector. For example,
-to append the vector *myvector2* at the end of vector *myvector*,
-we type:
-
-::
-
-    > append(myvector, myvector2, after=length(myvector))
-    [1]  8  6  9 10  5  8  6  9 10  5
-
-We could alternatively append the vector *myvector2* after the
-second element of vector *myvector*:
-
-::
-
-    > append(myvector, myvector2, after=2)
-    [1]  8  6  8  6  9 10  5  9 10  5
-
-In previous practicals (see Practical 4,
-`http://www.ucc.ie/microbio/MB6301/practical4\_aln\_revised.html <http://www.ucc.ie/microbio/MB6301/practical4_aln_revised.html>`_),
-you learnt that you make a histogram plot of the numbers in a
-vector by using the hist() function. This is an extremely useful
-function, so we will learn a couple more things about hist() here.
-If you look at the help page for the hist() function, you will see
-that it has a lot of optional arguments (inputs). These include the
-range of *x*-values that you want to plot the histogram for, which
-you can set using the "xlim" argument; the colour of the histogram,
-which you can set using the "col" argument, and the set of bin
-sizes to use, which you can set using the "breaks" argument. For
-example, if you want to make a histogram plot of the numbers in
-vector *myvector*, coloured blue, with bins 0-3, 3-6, 6-9, and
-9-12, you would type:
-
-::
-
-    > hist(myvector, col="blue", breaks = c(0,3,6,9,12))
-
-|image0|
-
-Another useful function is the seq() function, which can be used to
-generate a regular sequence of numbers. For example, if we want to
-generate a sequence of numbers from 0 to 12 in steps of 3, we
-type:
-
-::
-
-    > myseq <- seq(0,12,3)
-    > myseq
-    [1]  0  3  6  9 12
-
-We can of course use the output of the seq() function to set the
-bins for a histogram plot, for example:
-
-::
-
-    > hist(myvector, col="blue", breaks = myseq)
-
-This gives the exact same histogram as the one in the picture
-above.
-
-Sometimes it is useful to make several plots beside each other, or
-one above the other. We can tell R to make several plots on the
-same page using the par() function. For example, to tell R to make
-several plots on the same page, with *x* (eg. 2) rows and *y* (eg.
-3) columns of plots, we type:
-
-::
-
-    > x <- 2
-    > y <- 3
-    > par(mfrow = c(x, y))
-
-We can then make a page of 6 plots, that is, with 2 rows and 3
-columns of plots:
-
-::
-
-    > hist(myvector, col="blue", breaks = seq(0,12,1))
-    > hist(myvector, col="blue", breaks = seq(0,12,2))
-    > hist(myvector, col="blue", breaks = seq(0,12,3))
-    > hist(myvector, col="blue", breaks = seq(0,12,4))
-    > hist(myvector, col="blue", breaks = seq(0,12,5))
-    > hist(myvector, col="blue", breaks = seq(0,12,6))
-
-|image1|
-
-In previous practicals, you have used functions from various
-different R libraries, including SeqinR and Biostrings. When you
-are using different R libraries, they may contain functions with
-the same name. For example, two R libraries called Biostrings and
-SeqinR both contain functions called translate(). In this case, if
-we have loaded both R libararies and want to tell R which one we
-want to use, we need to use the library name when using the
-function. For example, to use the SeqinR translate() library, we
-use the command seqinr::translate(), while to use the Biostrings
-library, we use the command Biostrings::translate().
-
 The genetic code
 ----------------
 
@@ -156,6 +16,7 @@ by using the tablecode() function in the SeqinR library:
 
 ::
 
+    > library(seqinr)
     > par(mfrow = c(1,1)) # Make plots with just 1 column and 1 row again
     > library("seqinr")
     > tablecode() 
@@ -934,46 +795,42 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
+Model answers to the exercises are given in
+`Answers to the exercises on Computational Gene-finding <./chapter_answers.html#computational-gene-finding>`_.
+
 Q1. How many ORFs are there on the forward strand of the
 Bacteriophage lambda genome (NCBI accession NC\_001416)?
+
 Q2. What are the coordinates of the rightmost (most 3', or last)
 ORF in the forward strand of the Bacteriophage lambda genome?
+
 Q3. What is the predicted protein sequence for the rightmost (most
 3', or last) ORF in the forward strand of the Bacteriophage lambda
 genome?
+
 Q4. How many ORFs are there of 30 nucleotides or longer in the
 forward strand of the Bacteriophage lambda genome sequence?
 Hint: use a for loop to to calculate the length of each ORF in
 turn.
+
 Q5. How many ORFs longer than 267 nucleotides are there in the
 forward strand of the Bacteriophage lambda genome sequence?
+
 Q6. If an ORF is 267 nucleotides long, what length in amino acids
 will its predicted protein sequence be?
+
 Q7. How many ORFs are there on the forward strand of the HIV virus
 genome (NCBI accession NC\_001802)?
+
 Q8. What is the length of the longest ORF among the 99% of longest
 ORFs in 10 random sequences of the same lengths and composition as
 the HIV sequence?
-Hint: generate 10 random sequences using a multinomial model in
-which the probabilities of the 4 bases are set equal to their
-frequencies in the HIV sequence.
-Q9. How many ORFs are there in the HIV genome that are longer than
+        Hint: generate 10 random sequences using a multinomial model in
+        which the probabilities of the 4 bases are set equal to their
+        frequencies in the HIV sequence.
+
+        Q9. How many ORFs are there in the HIV genome that are longer than
 the threshold length that you found in Q8?
-Other ways to do the same thing
--------------------------------
-
-It is possible to carry out some of the analyses that you have
-carried out in the practicals via websites. For example, it is
-possible to identify ORFs in a sequence using the Getorf program,
-via the website
-`mobyle.rpbs.univ-paris-diderot.fr/cgi-bin/portal.py?form=getorf <http://mobyle.rpbs.univ-paris-diderot.fr/cgi-bin/portal.py?form=getorf>`_.
-The Getorf program is also available to download as part of the
-EMBOSS package
-(`emboss.sourceforge.net <http://emboss.sourceforge.net/>`_), and
-so can also be run on your own computer.
-
-
-
 
 .. |image0| image:: ../_static/P7_image6.png
 .. |image1| image:: ../_static/P7_image7.png
