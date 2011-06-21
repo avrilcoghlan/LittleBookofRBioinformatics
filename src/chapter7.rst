@@ -876,14 +876,14 @@ Thus, by looking at the lengths of ORFs in the random
 sequence, we can see what is the longest ORF that is likely to
 occur by chance alone.
 
-But where can we get random sequences from? In a `previous chapter`
+But where can we get random sequences from? In a `previous chapter
 <./chapter4.html#calculating-the-statistical-significance-of-a-pairwise-global-alignment>`_,
 you learnt that you can generate random sequences using a
 multinomial model with a particular probability of each letter (a
 particular probability of A, C, G, and T in the case of random DNA
 sequences).
 
-In that `previous chapter`
+In that `previous chapter
 <./chapter4.html#calculating-the-statistical-significance-of-a-pairwise-global-alignment>`_,
 we used the function generateSeqsWithMultinomialModel() to generate random sequences 
 using a multinomial model in which the probability of each letter is set equal to the
