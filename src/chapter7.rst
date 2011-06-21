@@ -255,15 +255,15 @@ For a potential start and stop codon to be part of the same gene,
 they must be in the same reading frame.
 
 From the output of findPotentialStartsAndStops() for the first 500
-nucleotides of the genome of lambda, you can see that there is a
-potential start codon (ATG) that starts at nucleotide 31, and a
-potential stop codon (TAA) that starts at nucleotide 48. That is,
-the potential start codon is from nucleotides 31-33 and the
-potential stop codon is from nucleotides 48-50. Could the region
-from nucleotides 31 to 50 possibly be a gene?
+nucleotides of the genome of DEN-1 Dengue virus (see above), you can see that there is a
+potential start codon (ATG) that starts at nucleotide 137, and a
+potential stop codon (TGA) that starts at nucleotide 141. That is,
+the potential start codon is from nucleotides 137-139 and the
+potential stop codon is from nucleotides 141-143. Could the region
+from nucleotides 137 to 143 possibly be a gene?
 
-We can cut out the region from nucleotides 31 to 50 of the sequence
-*lambdaseqstartstring* to have a look, by using the substring()
+We can cut out the region from nucleotides 137 to 143 of the sequence
+*dengueseqstartstring* to have a look, by using the substring()
 function. If you look at the help page for the substring()
 function, you will see that its arguments (inputs) are the name of
 the variable containing the string of characters (ie., the DNA
@@ -271,39 +271,40 @@ sequence), and the coordinates of the substring that you want:
 
 ::
 
-    > substring(lambdaseqstartstring,31,50)
-    [1] "atgaaaattttccggtttaa" 
+    > substring(dengueseqstartstring,137,143)
+      [1] "atgctga"
 
-If we look at the sequence from nucleotides 31-50,
-"ATGAAAATTTTCCGGTTTAA", we see that it starts with a potential
-start codon (ATG) and ends with a potential stop codon (TAA).
+If we look at the sequence from nucleotides 137-143,
+"ATGCTGA", we see that it starts with a potential
+start codon (ATG) and ends with a potential stop codon (TGA).
+
 However, the ribosome reads the sequence by scanning the codons
 (triplets) one-by-one from left to right, and when we break up the
 sequence into codons (triplets) we see that it does not contain an
-integer (whole) number of triplets: "ATG AAA ATT TTC CGG TTT AA".
+integer (whole) number of triplets: "ATG CTG A".
 
 This means that even if the ribosome will not recognise the region
-from 31-50 as a potential gene, as the ATG at nucleotide 31 is not
-separated from the TAA at nucleotide 48 by an integer number of
-codons. That is, this ATG and TAA are not in the same
+from 137-143 as a potential gene, as the ATG at nucleotide 137 is not
+separated from the TGA at nucleotide 141 by an integer number of
+codons. That is, this ATG and TGA are not in the same
 *reading frame*, and so cannot be the start and stop codon of the
 same gene.
 
-The potential start codon at nucleotide 31 of the
-*lambdaseqstartstring* sequence is in the +1 reading frame, as
-there is an integer number of triplets between the start of the
+The potential start codon at nucleotide 137 of the
+*lambdaseqstartstring* sequence is in the +2 reading frame, as
+there is an integer number of triplets, plus one nucleotide, between the start of the
 sequence and the start of the start codon (ie. triplets 1-3, 4-6,
-7-9, 10-12, 13-15, 16-18, 19-21, 22-24, 25-27, 28-30).
+7-9, 10-12, 13-15, 16-18, 19-21, 22-24, 25-27, 28-30, ..., 133-135, and a single nucleotide 136).
 
-However, the potential stop codon at nucleotide 48 is the +3
+However, the potential stop codon at nucleotide 141 is the +2
 reading frame, as there are two nucleotides plus an integer number
 of triplets between the start of the sequence and the start of the
 stop codon (ie. triplets 1-3, 4-6, 7-9, 10-12, 13-15, 16-18, 19-21,
-22-24, 25-27, 28-30, 31-33, 34-36, 37-39, 40-42, 43-45, and
-nucleotides 46, 47).
+22-24, 25-27, 28-30, 31-33, 34-36, 37-39, 40-42, 43-45, ..., 133-135, 136-138, and two
+nucleotides 139, 140). 
 
-As the potential start codon at nucleotide 31 and the potential
-stop codon at nucleotide 48 are in different reading frames, they
+As the potential start codon at nucleotide 137 and the potential
+stop codon at nucleotide 141 are in different reading frames, they
 are not separated by an integer number of codons, and therefore
 cannot be part of the same gene.
 
