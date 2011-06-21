@@ -1364,6 +1364,171 @@ Dengue NS1 proteins, as they are nearest to the outgroup in the tree.
 Thus, the rooted tree tells you which of the Dengue virus NS1 proteins branched off the earliest from the ancestors of the
 other proteins, and which branched off next, and so on... We were not able to tell this from the unrooted tree.
 
+Computational Gene-finding
+--------------------------
+
+Q1.
+^^^
+*How many ORFs are there on the forward strand of the DEN-1 Dengue virus genome (NCBI accession NC\_001477)?*
+
+To answer this, we can use the findORFsinSeq() function to find ORFs on the forward strand of the
+DEN-1 Dengue virus sequence. This function requires a string of characters as its input, so we first
+use "c2s()" to convert the Dengue virus sequence to a string of characters:
+
+::
+    > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
+    > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
+    > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "dengueseqstring"
+    > length(orflengths)                          # Find the number of ORFs that were found
+      [1] 116
+
+We find that there are 116 ORFs on the forward strand of the DEN-1 Dengue virus genome.
+
+Q2.
+^^^
+*What are the coordinates of the rightmost (most 3', or last) ORF in the forward strand of the DEN-1 Dengue virus genome?*
+
+To answer this, we need to get the coordinates of the ORFs in the DEN-1 Dengue virus genome, as follows:
+
+::
+    > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
+    > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
+    > starts <- mylist[[1]]                       # Start positions of ORFs
+    > stops <- mylist[[2]]                        # Stop positions of ORFs
+
+The vector *starts* contains the start coordinates of the predicted start codons, and the vector
+*stops* contains the end coordinates of the predicted stop codons. We know there are 116 ORFs
+on the forward strand (from Q1), and we want the coordinates of the 116th ORF. Thus, we type:
+
+::
+    > starts[116]
+      [1] 10705
+    > stops[116]
+      [1] 10722
+
+This tells us that the most 3' ORF has a predicted start codon from 10705-10707 and a 
+predicted stop codon from 10720-10722. Thus, the coordinates of the 3'-most ORF are 10705-10722.
+
+Q3.
+^^^
+*What is the predicted protein sequence for the rightmost (most 3', or last) ORF in the forward strand of the DEN-1 Dengue virus genome?* 
+
+To get the predicted protein sequence of the 5'-most ORF (from 10705-10722), we type:
+
+::
+
+    > myorfvector <- dengueseq[10705:10722] # Get the DNA sequence of the ORF
+    > seqinr::translate(myorfvector)
+      [1] "M" "E" "W" "C" "C" "*"
+
+The sequence of the ORF is "MEWCC".
+
+Q4.
+^^^
+*How many ORFs are there of 30 nucleotides or longer in the forward strand of the DEN-1 Dengue virus genome sequence?*
+
+The findORFsinSeq() function returns a list variable, the third element of which is a vector containing
+the lengths of the ORFs found. Thus we can type:
+
+::
+    > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
+    > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
+    > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "dengueseqstring"
+    > summary(orflengths >= 30) 
+          Mode   FALSE    TRUE    NA's 
+      logical      54      62       0 
+
+This tells us that 62 ORFs on the forward strand of the DEN-1 Dengue virus are 30 nucleotides or longer.
+
+Q5.
+^^^
+*How many ORFs longer than 248 nucleotides are there in the forward strand of the DEN-1 Dengue genome sequence?*
+
+To answer this, we type:
+
+::
+    > summary(orflengths >= 248) 
+          Mode   FALSE    TRUE    NA's 
+      logical     114       2       0 
+
+This tells us that there are 2 ORFs of 248 nucleotides or longer on the forward strand.
+
+Q6.
+^^^
+*If an ORF is 248 nucleotides long, what length in amino acids will its predicted protein sequence be?*
+
+If we include the predicted stop codon in the length of the ORF, it means that the last three
+bases of the ORF are not coding for any amino acid. Therefore, the length of the ORF that is
+coding for amino acids is 245 bp. Each amino acid is coded for by 3 bp, so there can be 
+245/3 = 81 amino acids. Thus, the predicted protein sequence will be 81 amino acids long.
+
+Q7.
+^^^
+*How many ORFs are there on the forward strand of the rabies virus genome (NCBI accession NC\_001542)?*
+
+We first retrieve the rabies virus sequence by copying and pasting the "getncbiseq()" function into R,
+and then typing:
+
+::
+
+    > rabiesseq <- getncbiseq("NC_001542")
+
+We then find the ORFs in the forward strand by typing:
+
+::
+    > rabiesseqstring <- c2s(rabiesseq)           # Convert the rabies sequence to a string of characters
+    > rabieslist <- findORFsinSeq(rabiesseqstring)# Find ORFs in "rabiesseqstring"
+    > rabiesorflengths <- rabieslist[[3]]         # Find the lengths of ORFs in "rabiesseqstring"
+    > length(rabiesorflengths)                    # Find the number of ORFs that were found
+      [1] 111
+
+There were 111 ORFs on the forward strand.
+
+Q8.
+^^^
+*What is the length of the longest ORF among the 99% of longest ORFs in 10 random sequences of the same lengths and composition as the rabies virus genome sequence?*
+
+We generate 10 random sequences using a multinomial model in which the probabilities of the 4 bases are set equal to their frequencies in the rabies sequence:
+
+::
+    
+    > randseqs <- generateSeqsWithMultinomialModel(rabiesseqstring, 10) # Generate 10 random sequences using the multinomial model
+    > randseqorflengths <- numeric()              # Tell R that we want to make a new vector of numbers
+    > for (i in 1:10)
+      {
+        print(i)
+        randseq <- randseqs[i]                    # Get the ith random sequence
+        mylist <- findORFsinSeq(randseq)          # Find ORFs in "randseq"
+        lengths <- mylist[[3]]                    # Find the lengths of ORFs in "randseq"
+        randseqorflengths <- append(randseqorflengths, lengths, after=length(randseqorflengths))
+      }
+
+To find the length of the longest ORF among the 99\% of the longest ORFs in the 10 random sequences, we 
+find the 99th quantile of *randomseqorflengths*:
+
+::
+    
+    > quantile(randseqorflengths, probs=c(0.99))
+      99% 
+      259.83
+
+That is, the longest of the longest 99\% of ORFs in the random sequences is 260 nucleotides.
+      
+Q9.
+^^^
+*How many ORFs are there in the rabies virus genome that are longer than the threshold length that you found in Q8?*
+
+To answer this, we type:
+
+::
+    
+    > summary(rabiesorflengths > 260)
+          Mode   FALSE    TRUE    NA's 
+      logical     105       6       0 
+
+There are 6 ORFs in the rabies virus genome that are longer than the threshold length found in Q8 (260
+nucleotides).
+
 Contact
 -------
 

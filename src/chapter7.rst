@@ -153,7 +153,12 @@ Dengue virus (NCBI accession NC\_001477), we can type:
 
 The variable *dengueseq* is a vector variable, and each letter in
 the DEN-1 Dengue virus DNA sequence is stored in one element of
-this vector. Thus, to cut out the first 500 nucleotides of the
+this vector. 
+
+Dengue virus causes `Dengue fever <http://apps.who.int/tdr/svc/diseases/dengue>`_, 
+which is classified as a neglected tropical disease by the WHO.
+
+To cut out the first 500 nucleotides of the
 DEN-1 Dengue virus sequence, we can just take the first 500 elements of this
 vector:
 
@@ -1087,7 +1092,7 @@ sequence analysis, in the book
 (available online at
 `cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
 
-or a more in-depth introduction to R, a good online tutorial is
+For a more in-depth introduction to R, a good online tutorial is
 available on the "Kickstarting R" website,
 `cran.r-project.org/doc/contrib/Lemon-kickstart <http://cran.r-project.org/doc/contrib/Lemon-kickstart/>`_.
 
@@ -1120,39 +1125,26 @@ get this answer.
 Model answers to the exercises are given in
 `Answers to the exercises on Computational Gene-finding <./chapter_answers.html#computational-gene-finding>`_.
 
-Q1. How many ORFs are there on the forward strand of the
-Bacteriophage lambda genome (NCBI accession NC\_001416)?
+Q1. How many ORFs are there on the forward strand of the DEN-1 Dengue virus genome (NCBI accession NC\_001477)?
 
-Q2. What are the coordinates of the rightmost (most 3', or last)
-ORF in the forward strand of the Bacteriophage lambda genome?
+Q2. What are the coordinates of the rightmost (most 3', or last) ORF in the forward strand of the DEN-1 Dengue virus genome?
 
-Q3. What is the predicted protein sequence for the rightmost (most
-3', or last) ORF in the forward strand of the Bacteriophage lambda
-genome?
+Q3. What is the predicted protein sequence for the rightmost (most 3', or last) ORF in the forward strand of the DEN-1 Dengue virus genome?
 
-Q4. How many ORFs are there of 30 nucleotides or longer in the
-forward strand of the Bacteriophage lambda genome sequence?
-Hint: use a for loop to to calculate the length of each ORF in
-turn.
+Q4. How many ORFs are there of 30 nucleotides or longer in the forward strand of the DEN-1 Dengue virus genome sequence?
 
-Q5. How many ORFs longer than 267 nucleotides are there in the
-forward strand of the Bacteriophage lambda genome sequence?
+Q5. How many ORFs longer than 248 nucleotides are there in the forward strand of the DEN-1 Dengue genome sequence?
 
-Q6. If an ORF is 267 nucleotides long, what length in amino acids
-will its predicted protein sequence be?
+Q6. If an ORF is 248 nucleotides long, what length in amino acids will its predicted protein sequence be?
 
-Q7. How many ORFs are there on the forward strand of the HIV virus
-genome (NCBI accession NC\_001802)?
+Q7. How many ORFs are there on the forward strand of the rabies virus genome (NCBI accession NC\_001542)?
+    Note: rabies virus is the virus responsible for `rabies <http://www.who.int/rabies/en/>`_, which is classified by the 
+    WHO as a neglected tropical disease.
 
-Q8. What is the length of the longest ORF among the 99% of longest
-ORFs in 10 random sequences of the same lengths and composition as
-the HIV sequence?
-        Hint: generate 10 random sequences using a multinomial model in
-        which the probabilities of the 4 bases are set equal to their
-        frequencies in the HIV sequence.
+Q8. What is the length of the longest ORF among the 99% of longest ORFs in 10 random sequences of the same lengths and composition as
+the rabies virus genome sequence?
 
-        Q9. How many ORFs are there in the HIV genome that are longer than
-the threshold length that you found in Q8?
+Q9. How many ORFs are there in the rabies virus genome that are longer than the threshold length that you found in Q8?
 
 .. |image0| image:: ../_static/P7_image6.png
 .. |image1| image:: ../_static/P7_image7.png
