@@ -1376,6 +1376,7 @@ DEN-1 Dengue virus sequence. This function requires a string of characters as it
 use "c2s()" to convert the Dengue virus sequence to a string of characters:
 
 ::
+
     > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
     > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
     > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "dengueseqstring"
@@ -1391,6 +1392,7 @@ Q2.
 To answer this, we need to get the coordinates of the ORFs in the DEN-1 Dengue virus genome, as follows:
 
 ::
+
     > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
     > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
     > starts <- mylist[[1]]                       # Start positions of ORFs
@@ -1401,6 +1403,7 @@ The vector *starts* contains the start coordinates of the predicted start codons
 on the forward strand (from Q1), and we want the coordinates of the 116th ORF. Thus, we type:
 
 ::
+
     > starts[116]
       [1] 10705
     > stops[116]
@@ -1431,6 +1434,7 @@ The findORFsinSeq() function returns a list variable, the third element of which
 the lengths of the ORFs found. Thus we can type:
 
 ::
+
     > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
     > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
     > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "dengueseqstring"
@@ -1447,6 +1451,7 @@ Q5.
 To answer this, we type:
 
 ::
+
     > summary(orflengths >= 248) 
           Mode   FALSE    TRUE    NA's 
       logical     114       2       0 
@@ -1476,6 +1481,7 @@ and then typing:
 We then find the ORFs in the forward strand by typing:
 
 ::
+
     > rabiesseqstring <- c2s(rabiesseq)           # Convert the rabies sequence to a string of characters
     > rabieslist <- findORFsinSeq(rabiesseqstring)# Find ORFs in "rabiesseqstring"
     > rabiesorflengths <- rabieslist[[3]]         # Find the lengths of ORFs in "rabiesseqstring"
