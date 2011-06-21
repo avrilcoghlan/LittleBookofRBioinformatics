@@ -683,7 +683,6 @@ the picture produced by plotPotentialStartsAndStops() above.
 Predicting the protein sequence for an ORF
 ------------------------------------------
 
-xxx
 If you find an ORF in a DNA sequence, it is interesting to find the
 DNA sequence of the ORF. For example, the function findORFsinSeq()
 indicates that there is an ORF from nucleotides 4-12 of the
@@ -695,9 +694,10 @@ type:
 
 ::
 
+    > s1 <- "aaaatgcagtaacccatgccc"
     > myorf <- substring(s1, 4, 12)
     > myorf # Print out the sequence of "myorf"
-    [1] "atgcagtaa"
+      [1] "atgcagtaa"
 
 As you can see, the ORF starts with a predicted start codon (ATG),
 is followed by an integer number of codons (just one codon, CAG, in
@@ -751,7 +751,9 @@ The comp() and rev() functions require that the input sequence is
 in the form of a vector of characters. The s2c() function can be
 used to convert a sequence in the form of a string of characters to
 a vector, while the c2s() function is useful for convering a vector
-back to a string of characters. For example, if our forward strand
+back to a string of characters. 
+
+For example, if our forward strand
 sequence is "AAAATGCTTAAACCATTGCCC", and we want to find the
 reverse strand sequence, we type:
 
@@ -798,7 +800,7 @@ sequence:
     [1] 9
 
 This indicates that there is one ORF of length 9 bp in the reverse
-strand of sequence *s2*, that has a predicted start codon that
+strand of sequence "AAAATGCTTAAACCATTGCCC", that has a predicted start codon that
 starts at nucleotide 6 in the reverse strand sequence and a
 predicted stop codon that ends at nucleotide 14 in the reverse
 strand sequence.
