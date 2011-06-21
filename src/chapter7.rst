@@ -812,11 +812,14 @@ As you can see from the picture displaying the genetic code made
 using tablecode() (above), three of the 64 different codons are
 stop codons. This means that in a random DNA sequence the
 probability that any codon is a potential stop codon is 3/64, or
-about 1/21 (about 5%). Therefore, you might expect that sometimes
+about 1/21 (about 5\%). 
+
+Therefore, you might expect that sometimes
 potential start and stop codons can occur in a DNA sequence just
 due to chance alone, not because they are actually part of any real
-gene that is transcribed and translated into a protein. As a
-result, many of the ORFs in a DNA sequence may not correspond to
+gene that is transcribed and translated into a protein. 
+
+As a result, many of the ORFs in a DNA sequence may not correspond to
 real genes, but just be stretches of DNA between potential start
 and stop codons that happened by chance to be found in the
 sequence.
@@ -829,18 +832,24 @@ be a false positive gene prediction).
 How can we tell whether the potential start and stop codons of an
 ORF are probably real start and stop codons, that is, whether an
 ORF probably corresponds to a real gene that is transcribed and
-translated into a protein? In fact, we cannot tell using
+translated into a protein? 
+
+In fact, we cannot tell using
 bioinformatics methods alone (we actually need to do some lab
 experiments to know), but we can make a fairly confident
 prediction. We can make our prediction based on the length of the
-ORF. By definition, an ORF is a stretch of DNA that starts with a
+ORF. 
+
+y definition, an ORF is a stretch of DNA that starts with a
 potential start codon, and ends with a potential stop codon in the
 same reading frame, and so has no internal stop codons in that
-reading frame. Because about 1/21 of codons (~5%) in a random DNA
+reading frame. Because about 1/21 of codons (~5\%) in a random DNA
 sequence are expected to be potential stop codons just by chance
 alone, if we see a very long ORF of hundreds of codons, it would be
 surprising that there would be no internal stop codons in such a
-long stretch of DNA if the ORF were not a real gene. In other
+long stretch of DNA if the ORF were not a real gene. 
+
+In other
 words, long ORFs that are hundreds of codons long are unlikely to
 occur due to chance alone, and therefore we can be fairly confident
 that such long ORFs probably correspond to real genes.
@@ -850,28 +859,34 @@ Identifying significant open reading frames
 
 How long does an ORF need to be in order for us to be confident
 that it probably corresponds to a real gene? This is a difficult
-question. One approach to answer this is to ask: what is the
+question. 
+
+One approach to answer this is to ask: what is the
 longest ORF found in a random sequence of the same length and
-nucleotide composition as our original sequence? The ORFs in a
+nucleotide composition as our original sequence? 
+
+The ORFs in a
 random sequence do not correspond to real genes, but are just due
 to potential start and stop codons that have occurred by chance in
 those sequences (since, by definition, a random sequence is one
 that was generated randomly, rather than by evolution as in a real
-organism). Thus, by looking at the lengths of ORFs in the random
+organism).
+
+Thus, by looking at the lengths of ORFs in the random
 sequence, we can see what is the longest ORF that is likely to
 occur by chance alone.
 
-But where can we get random sequences from? In previous practicals
-(see Practical 4,
-`http://www.ucc.ie/microbio/MB6301/practical4\_aln\_revised.html <http://www.ucc.ie/microbio/MB6301/practical4_aln_revised.html>`_),
+But where can we get random sequences from? In a `previous chapter`
+<./chapter4.html#calculating-the-statistical-significance-of-a-pairwise-global-alignment>`_,
 you learnt that you can generate random sequences using a
 multinomial model with a particular probability of each letter (a
 particular probability of A, C, G, and T in the case of random DNA
 sequences).
 
-The function generateSeqsWithMultinomialModel() in file
-"Rfunctions.R" will generate random sequences using a multinomial
-model in which the probability of each letter is set equal to the
+In that `previous chapter`
+<./chapter4.html#calculating-the-statistical-significance-of-a-pairwise-global-alignment>`_,
+we used the function generateSeqsWithMultinomialModel() to generate random sequences 
+using a multinomial model in which the probability of each letter is set equal to the
 fraction of an input sequence that consists of that letter. This
 function takes two arguments, the input sequence, and the number of
 the random sequences that you want to generate.
@@ -879,45 +894,48 @@ the random sequences that you want to generate.
 For example, to create a random sequence of the same length as
 'AAAATGCTTAAACCATTGCCC', using a multinomial model in which the
 probabilities of A, C, G and T are set equal to their fractions in
-this sequence, we type:
+this sequence, we copy and paste the generateSeqsWithMultinomialModel() into R, then type:
 
 ::
 
-    > source("Rfunctions.R")
     > myseq    <- "AAAATGCTTAAACCATTGCCC"
     > generateSeqsWithMultinomialModel(myseq, 1) # Generate one random sequence using the multinomial model
-    [1] "CTCAATAAACAACTCAACTAC"
+    [1] "AACAATTCTACCCTATTCTTC"
 
 We can then use the findORFsinSeq() function to find ORFs in this
 random sequence. If we repeat this 10 times, we can find the
 lengths of the ORFs found in the 10 random sequences. We can then
 compare the lengths of the ORFs found in the original sequence, to
-the lengths of the ORFs found in the random sequences. For example,
-to compare the lengths of ORFs found in the Bacteriophage lambda
-sequence *lambdaseq* to the lengths of ORFs found in 10 random
+the lengths of the ORFs found in the random sequences. 
+
+For example,
+to compare the lengths of ORFs found in the DEN-1 Dengue virus genome
+sequence *dengueseq* to the lengths of ORFs found in 10 random
 sequences generated using a multinomial model in which the
 probabilities of the four bases are set equal to their fractions in
-the lambda sequence, we type:
+the DEN-1 Dengue virus sequence, we type:
 
 ::
 
-    > lambdaseqstring <- c2s(lambdaseq)           # Convert the lambda sequence to a string of characters
-    > mylist <- findORFsinSeq(lambdaseqstring)    # Find ORFs in "lambdaseqstring"
-    > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "lambdaseqstring"
-    > randseqs <- generateSeqsWithMultinomialModel(lambdaseqstring, 10) # Generate 10 random sequences using the multinomial model
+    > dengueseqstring <- c2s(dengueseq)           # Convert the Dengue sequence to a string of characters
+    > mylist <- findORFsinSeq(dengueseqstring)    # Find ORFs in "dengueseqstring"
+    > orflengths <- mylist[[3]]                   # Find the lengths of ORFs in "dengueseqstring"
+    > randseqs <- generateSeqsWithMultinomialModel(dengueseqstring, 10) # Generate 10 random sequences using the multinomial model
     > randseqorflengths <- numeric()              # Tell R that we want to make a new vector of numbers
     > for (i in 1:10)
-    {
-       print(i)
-       randseq <- randseqs[i]                     # Get the ith random sequence
-       mylist <- findORFsinSeq(randseq)           # Find ORFs in "randseq"
-       lengths <- mylist[[3]]                     # Find the lengths of ORFs in "randseq"
-       randseqorflengths <- append(randseqorflengths, lengths, after=length(randseqorflengths))
-    }
+      {
+         print(i)
+         randseq <- randseqs[i]                     # Get the ith random sequence
+         mylist <- findORFsinSeq(randseq)           # Find ORFs in "randseq"
+         lengths <- mylist[[3]]                     # Find the lengths of ORFs in "randseq"
+         randseqorflengths <- append(randseqorflengths, lengths, after=length(randseqorflengths))
+      }
 
 This may take a little time to run, however, the for loop above
 prints out the value of *i* each time that it starts the loop, so
-you can see how far it has got. In the code above, we retrieve the
+you can see how far it has got. 
+
+In the code above, we retrieve the
 lengths of the ORFs found by function findORFsinSeq() by taking the
 third element of the list returned by this function. As mentioned
 above, the third element of the list returned by this function is a
@@ -925,14 +943,14 @@ vector containing the lengths of all the ORFs found in the input
 sequence.
 
 We can then plot a histogram of the lengths of the ORFs in the real
-Bacteriophage lambda genome sequence (*orflengths*) beside a
+DEN-1 Dengue genome sequence (*orflengths*) beside a
 histogram of the lengths of the ORFs in the 10 random sequences
 (*randseqorflengths*):
 
 ::
 
     > par(mfrow = c(1,2))                      # Make a picture with two plots side-by-side (one row, two columns)
-    > bins <- seq(0,3500,50)                   # Set the bins for the histogram
+    > bins <- seq(0,11000,50)                  # Set the bins for the histogram
     > hist(randseqorflengths, breaks=bins, col="red", xlim=c(0,1000))
     > hist(orflengths, breaks=bins, col="red", xlim=c(0,1000))
 
@@ -942,8 +960,8 @@ In other words, the histogram of the lengths of the ORFs in the 10
 random sequences gives us an idea of the length distribution of
 ORFs that you would expect by chance alone in a random DNA sequence
 (generated by a multinomial model in which the probabilities of the
-four bases are set equal to their frequencies in the Bacteriophage
-lambda genome sequence).
+four bases are set equal to their frequencies in the DEN-1 Dengue 
+virus genome sequence).
 
 We can calculate the longest of the ORFs that occurs in the random
 sequences, using the max() function, which can be used to find the
@@ -952,38 +970,42 @@ largest element in a vector of numbers:
 ::
 
     > max(randseqorflengths)
-    [1] 531
+    [1] 342
 
 This indicates that the longest ORF that occurs in the random
-sequences is 531 nucleotides long. Thus, it is possible for an ORF
-of up to 531 nucleotides to occur by chance alone in a random
+sequences is 342 nucleotides long. Thus, it is possible for an ORF
+of up to 342 nucleotides to occur by chance alone in a random
 sequence of the same length and roughly the same composition as the
-Bacteriophage lambda genome. Therefore, we could use 531
+DEN-1 Dengue virus genome. 
+
+Therefore, we could use 342
 nucleotides as a threshold, and discard all ORFs found in the
-Bacteriophage lambda genome that are shorter than this, under the
+DEN-1 Dengue virus genome that are shorter than this, under the
 assumption that they probably arose by chance and probably do not
 correspond to real genes. How many ORFs would be left in the
-Bacteriophage lambda genome sequence if we used 531 nucleotides as
+DEN-1 Dengue virus genome sequence if we used 342 nucleotides as
 a threshold?
 
 ::
 
-    > summary(orflengths > 531)
-       Mode   FALSE    TRUE    NA's 
-    logical     479      24       0 
+    > summary(orflengths > 342)
+         Mode   FALSE    TRUE    NA's 
+      logical     115       1       0
 
-If we did use 531 nucleotides as a threshold, there would only be
-24 ORFs left in the Bacteriophage lambda genome. Some of the 479
+If we did use 342 nucleotides as a threshold, there would only be
+1 ORF left in the DEN-1 Dengue virus genome. Some of the 115
 shorter ORFs that we discarded may correspond to real genes.
+
 Generally, we don't want to miss many real genes, we may want to
 use a more tolerant threshold. For example, instead of discarding
-all lambda ORFs that are shorter than the longest ORF found in the
-10 random sequences, we could discard all lambda ORFs that are
+all Dengue ORFs that are shorter than the longest ORF found in the
+10 random sequences, we could discard all Dengue ORFs that are
 shorter than the longest 99% of ORFs in the random sequences.
 
 We can use the quantile() function to find *quantiles* of a set of
 numbers. The *99th* quantile for a set of numbers is the value *x*
 such that 99% of the numbers in the set have values less than *x*.
+
 For example, to find the 99th quantile of *randomseqorflengths*, we
 type:
 
@@ -991,16 +1013,18 @@ type:
 
     > quantile(randseqorflengths, probs=c(0.99))
     99% 
-    282.87
+    248.07
 
-This means that 99% of the ORFs in the random sequences have
-lengths less than 282 nucleotides long. In other words, the longest
-of the longest 99% of ORFs in the random sequences is 282
-nucleotides. Thus, if we were using this as a threshold, we would
-discard all ORFs from the Bacteriophage lambda genome that are 282
+This means that 99\% of the ORFs in the random sequences have
+lengths less than 248 nucleotides long. In other words, the longest
+of the longest 99\% of ORFs in the random sequences is 248
+nucleotides. 
+
+Thus, if we were using this as a threshold, we would
+discard all ORFs from the DEN-1 Dengue genome that are 248
 nucleotides or shorter. This will result in fewer ORFs being
-discarded than if we used the more stringent threshold of 531
-nucleotides (ie. discarding all ORFs of <531 nucleotides), so we
+discarded than if we used the more stringent threshold of 342
+nucleotides (ie. discarding all ORFs of <342 nucleotides), so we
 will probably have discarded fewer ORFs that correspond to real
 genes. Unfortunately, it probably means that we will also have kept
 more false positives at the same time, that is, ORFs that do not
@@ -1012,18 +1036,10 @@ Summary
 In this practical, you will have learnt to use the following R
 functions:
 
-
-#. c() (combine) for making a vector
-#. length() for finding the length of a vector
-#. append() for appending the elements in one vector onto another
-   vector
-#. source() for reading in R functions from a file on your computer
 #. substring() for cutting out a substring of a string of
    characters (eg. a subsequence of a DNA sequence)
 #. rev() for reversing the order of the elements in a vector
 #. hist() to make a histogram plot
-#. par() to set the number of plots to fit in one page of plots
-#. seq() to generate a regular sequence of numbers
 #. max() to find the largest element in a vector of numbers
 #. quantile() to find quantiles of a set of numbers that correspond
    to particular probabilities
@@ -1036,8 +1052,6 @@ bioinformatics packages:
 #. tablecode() in the SeqinR package for viewing the genetic code
 #. MatchPattern() in the Biostrings package for finding all
    occurrences of a motif in a sequence
-#. retrievevirusseqs() (in file "Rfunctions.R") for retrieving
-   virus DNA sequences from the NCBI database
 #. translate() in the SeqinR package to get the predicted protein
    sequence for an ORF
 #. s2c() in the SeqinR package to convert a sequence stored as a
@@ -1046,15 +1060,11 @@ bioinformatics packages:
    vector into a string of characters
 #. comp() in the SeqinR package to find the complement of a DNA
    sequence
-#. generateSeqsWithMultinomialModel() (in file "Rfunctions.R") to
-   generate a random sequence using a multinomial model
 
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package for your project
-or assignments.
+Some links are included here for further reading.
 
 For background reading on computational gene-finding, it is
 recommended to read Chapter 2 of
@@ -1064,11 +1074,11 @@ by Cristianini and Hahn (Cambridge University Press;
 
 For more in-depth information and more examples on using the SeqinR
 package for sequence analysis, look at the SeqinR documentation,
-`seqinr.r-forge.r-project.org/seqinr\_2\_0-1.pdf <http://seqinr.r-forge.r-project.org/seqinr_2_0-1.pdf>`_.
+`http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
 
 For more information on and examples using the Biostrings package,
 see the Biostrings documentation at
-`bioconductor.org/packages/2.5/bioc/html/Biostrings.html <http://bioconductor.org/packages/2.5/bioc/html/Biostrings.html>`_.
+`http://www.bioconductor.org/packages/release/bioc/html/Biostrings.html <http://www.bioconductor.org/packages/release/bioc/html/Biostrings.html>`_.
 
 There is also a very nice chapter on "Analyzing Sequences", which
 includes examples of using the SeqinR and Biostrings packages for
@@ -1076,6 +1086,14 @@ sequence analysis, in the book
 *Applied statistics for bioinformatics using R* by Krijnen
 (available online at
 `cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf <http://cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf>`_).
+
+or a more in-depth introduction to R, a good online tutorial is
+available on the "Kickstarting R" website,
+`cran.r-project.org/doc/contrib/Lemon-kickstart <http://cran.r-project.org/doc/contrib/Lemon-kickstart/>`_.
+
+There is another nice (slightly more in-depth) tutorial to R
+available on the "Introduction to R" website,
+`cran.r-project.org/doc/manuals/R-intro.html <http://cran.r-project.org/doc/manuals/R-intro.html>`_.
 
 Acknowledgements
 ----------------
@@ -1141,4 +1159,4 @@ the threshold length that you found in Q8?
 .. |image2| image:: ../_static/P7_image1.png
 .. |image3| image:: ../_static/P7_image3b.png
 .. |image4| image:: ../_static/P7_image4.png
-.. |image5| image:: ../_static/P7_image5.png
+.. |image5| image:: ../_static/P7_image5b.png
