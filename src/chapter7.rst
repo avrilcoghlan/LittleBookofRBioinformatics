@@ -296,7 +296,7 @@ there is an integer number of triplets, plus one nucleotide, between the start o
 sequence and the start of the start codon (ie. triplets 1-3, 4-6,
 7-9, 10-12, 13-15, 16-18, 19-21, 22-24, 25-27, 28-30, ..., 133-135, and a single nucleotide 136).
 
-However, the potential stop codon at nucleotide 141 is the +2
+However, the potential stop codon at nucleotide 141 is the +3
 reading frame, as there are two nucleotides plus an integer number
 of triplets between the start of the sequence and the start of the
 stop codon (ie. triplets 1-3, 4-6, 7-9, 10-12, 13-15, 16-18, 19-21,
@@ -409,7 +409,6 @@ type:
 
 |image3|
 
-xxx
 In the picture produced by plotPotentialStartsAndStops(), the
 x-axis represents the input sequence (*dengueseqstartstring* here).
 The potential start codons are represented by vertical red lines,
@@ -419,19 +418,104 @@ Three different layers in the picture show potential start/stop
 codons in the +1 reading frame (bottom layer), +2 reading frame
 (middle layer), and +3 reading frame (top layer).
 
-We can see that the start codon at nucleotide 31 is represented by
-a vertical red line in the layer corresponding to the +1 reading
-frame (bottom layer). The next potential stop codon in the +1
-reading frame to the right of that start codon is a potential stop
-codon that begins at nucleotide 79 (ie. the stop codon is from
-nucleotides 79-81). Thus, the region from nucleotides 31 to 81
-could be a potential gene in the +1 reading frame. In other words,
-the region from nucleotides 31 to 81 is an open reading frame, or
+We can see that the start codon at nucleotide 137 is represented by
+a vertical red line in the layer corresponding to the +2 reading
+frame (middle layer). There are no potential stop codons in the +2
+reading frame to the right of that start codon. Thus, the start codon
+at nucleotide 137 does not seem to be part of an open reading frame.
+
+We can see however that in the +3 reading frame (top layer) there is
+a predicted start codon (red line) at position 318 and that this is
+followed by a predicted stop codon (blue line) at position 371. 
+Thus, the region from nucleotides 318 to 371
+could be a potential gene in the +3 reading frame. In other words,
+the region from nucleotides 318 to 371 is an open reading frame, or
 ORF.
 
-The file Rfunctions.R contains a function findORFsinSeq() that
-finds ORFs in an input sequence. For example, we can use it to find
-all ORFs in the sequence *s1*:
+The following function findORFsinSeq() finds ORFs in an input sequence:
+
+::
+
+    > findORFsinSeq <- function(sequence)
+      {
+         library(Biostrings)
+         # Make vectors "positions" and "types" containing information on the positions of ATGs in the sequence:
+         mylist <- findPotentialStartsAndStops(sequence)
+         positions <- mylist[[1]]
+         types <- mylist[[2]]
+         # Make vectors "orfstarts" and "orfstops" to store the predicted start and stop codons of ORFs
+         orfstarts <- numeric()
+         orfstops <- numeric() 
+         # Make a vector "orflengths" to store the lengths of the ORFs
+         orflengths <- numeric()
+         # Print out the positions of ORFs in the sequence:
+         # Find the length of vector "positions"
+         numpositions <- length(positions) 
+         # There must be at least one start codon and one stop codon to have an ORF.
+         if (numpositions >= 2)                
+         {
+            for (i in 1:(numpositions-1))
+            {
+               posi <- positions[i]
+               typei <- types[i]
+               found <- 0
+               while (found == 0)
+               {
+                  for (j in (i+1):numpositions)
+                  {
+                     posj  <- positions[j]
+                     typej <- types[j]
+                     posdiff <- posj - posi
+                     posdiffmod3 <- posdiff %% 3
+                     # Add in the length of the stop codon
+                     orflength <- posj - posi + 3 
+                     if (typei == "atg" && (typej == "taa" || typej == "tag" || typej == "tga") && posdiffmod3 == 0) 
+                     {
+                        # Check if we have already used the stop codon at posj+2 in an ORF
+                        numorfs <- length(orfstops)
+                        usedstop <- -1    
+                        if (numorfs > 0)
+                        {
+                          for (k in 1:numorfs)
+                          {
+                              orfstopk <- orfstops[k] 
+                              if (orfstopk == (posj + 2)) { usedstop <- 1 }
+                          }
+                        }
+                        if (usedstop == -1)
+                        {
+                           orfstarts <- append(orfstarts, posi, after=length(orfstarts))
+                           orfstops <- append(orfstops, posj+2, after=length(orfstops)) # Including the stop codon.
+                           orflengths <- append(orflengths, orflength, after=length(orflengths))
+                        }
+                        found <- 1
+                        break
+                     }
+                     if (j == numpositions) { found <- 1 }
+                  }
+               }
+            }
+         }
+         # Sort the final ORFs by start position:
+         indices <- order(orfstarts)
+         orfstarts <- orfstarts[indices] 
+         orfstops <- orfstops[indices]
+         # Find the lengths of the ORFs that we have
+         orflengths <- numeric()
+         numorfs <- length(orfstarts)
+         for (i in 1:numorfs)
+         {
+            orfstart <- orfstarts[i]
+            orfstop <- orfstops[i]
+            orflength <- orfstop - orfstart + 1
+            orflengths <- append(orflengths,orflength,after=length(orflengths))
+         }
+         mylist <- list(orfstarts, orfstops, orflengths)
+         return(mylist)                    
+      }
+
+You will need to copy and paste this function into R before you can use it.
+For example, we can use it to find all ORFs in the sequence *s1*:
 
 ::
 
@@ -450,47 +534,148 @@ The function findORFsinSeq() returns a list variable, where the
 first element of the list is a vector of the start positions of
 ORFs, the second element of the list is a vector of the end
 positions of those ORFs, and the third element is a vector
-containing the lengths of the ORFs. The output for the
+containing the lengths of the ORFs. 
+
+The output for the
 findORFsinSeq() function for *s1* tells us that there is one ORF in
 the sequence *s1*, and that the predicted start codon starts at
 nucleotide 4 in the sequence, and that the predicted stop codon
 ends at nucleotide 12 in the sequence.
 
 We can use the function findORFsinSeq() to find the ORFs in the
-first 500 nucleotides of the Bacteriophage lambda genome sequence
+first 500 nucleotides of the DEN-1 Dengue virus genome sequence
 by typing:
 
 ::
 
-    > findORFsinSeq(lambdaseqstartstring)
-    [[1]]
-    [1]  31  81 184 300 334 339
-    
-    [[2]]
-    [1]  81 131 219 332 357 488
-    
-    [[3]]
-    [1]  51  51  36  33  24 150
+    > findORFsinSeq(dengueseqstartstring)
+      [[1]]
+      [1] 298 318
+      [[2]]
+      [1] 480 371
+      [[3]]
+      [1] 183  54
 
-The result from findORFsinSeq() indicates that there are six ORFs
-in the first 500 nucleotides of the lambda genome, at nucleotides
-31-81, 81-131, 184-219, 300-332, 334-357, and 339-488.
+The result from findORFsinSeq() indicates that there are two ORFs
+in the first 500 nucleotides of the DEN-1 Dengue virus genome, at nucleotides
+298-480 (start codon at 298-300, stop codon at 478-480), and 318-371 (start codon
+at 318-320, stop codon at 369-371).
 
-The file "Rfunctions.R" contains a function plotORFsinSeq() for
-plotting the positions of ORFs in a sequence. We can use this
-function to plot the positions of the ORFs in
-*lambdaseqstartstring* by typing:
+The following function "plotORFsinSeq()" plots the positions of ORFs in a sequence:
 
 ::
 
-    > plotORFsinSeq(lambdaseqstartstring)
+    > plotORFsinSeq <- function(sequence)
+      {
+         # Make vectors "positions" and "types" containing information on the positions of ATGs in the sequence:
+         mylist <- findPotentialStartsAndStops(sequence)
+         positions <- mylist[[1]]
+         types <- mylist[[2]]
+         # Make vectors "orfstarts" and "orfstops" to store the predicted start and stop codons of ORFs
+         orfstarts <- numeric()
+         orfstops <- numeric() 
+         # Make a vector "orflengths" to store the lengths of the ORFs
+         orflengths <- numeric()
+         # Print out the positions of ORFs in the sequence:
+         numpositions <- length(positions) # Find the length of vector "positions"
+         # There must be at least one start codon and one stop codon to have an ORF.
+         if (numpositions >= 2)                
+         {
+            for (i in 1:(numpositions-1))
+            {
+               posi <- positions[i]
+               typei <- types[i]
+               found <- 0
+               while (found == 0)
+               {
+                  for (j in (i+1):numpositions)
+                  {
+                     posj <- positions[j]
+                     typej <- types[j]
+                     posdiff <- posj - posi
+                     posdiffmod3 <- posdiff %% 3
+                     orflength <- posj - posi + 3 # Add in the length of the stop codon
+                     if (typei == "atg" && (typej == "taa" || typej == "tag" || typej == "tga") && posdiffmod3 == 0) 
+                     {
+                        # Check if we have already used the stop codon at posj+2 in an ORF
+                        numorfs <- length(orfstops)
+                        usedstop <- -1    
+                        if (numorfs > 0)
+                        {
+                           for (k in 1:numorfs)
+                           {
+                              orfstopk <- orfstops[k] 
+                              if (orfstopk == (posj + 2)) { usedstop <- 1 }
+                           }
+                        }
+                        if (usedstop == -1)
+                        {
+                           orfstarts <- append(orfstarts, posi, after=length(orfstarts))
+                           orfstops <- append(orfstops, posj+2, after=length(orfstops)) # Including the stop codon.
+                           orflengths <- append(orflengths, orflength, after=length(orflengths))
+                        }
+                        found <- 1
+                        break
+                     }
+                     if (j == numpositions) { found <- 1 }
+                  }
+               }
+            }
+         }
+         # Sort the final ORFs by start position:
+         indices <- order(orfstarts)
+         orfstarts <- orfstarts[indices] 
+         orfstops <- orfstops[indices]
+         # Make a plot showing the positions of ORFs in the input sequence:
+         # Draw a line at y=0 from 1 to the length of the sequence:
+         x <- c(1,nchar(sequence))
+         y <- c(0,0)
+         plot(x, y, ylim=c(0,3), type="l", axes=FALSE, xlab="Nucleotide", ylab="Reading frame", main="Predicted ORFs")
+         segments(1,1,nchar(sequence),1)
+         segments(1,2,nchar(sequence),2)
+         # Add the x-axis at y=0: 
+         axis(1, pos=0) 
+         # Add the y-axis labels:
+         text(0.9,0.5,"+1")
+         text(0.9,1.5,"+2")
+         text(0.9,2.5,"+3")
+         # Make a plot of the ORFs in the sequence:
+         numorfs <- length(orfstarts)
+         for (i in 1:numorfs)
+         {
+            orfstart <- orfstarts[i]
+            orfstop <- orfstops[i]
+            remainder <- (orfstart-1) %% 3
+            if    (remainder == 0) # +1 reading frame
+            {
+               rect(orfstart,0,orfstop,1,col="cyan",border="black")
+            }
+            else if (remainder == 1)
+            {
+               rect(orfstart,1,orfstop,2,col="cyan",border="black")
+            }
+            else if (remainder == 2)
+            { 
+               rect(orfstart,2,orfstop,3,col="cyan",border="black")
+            }
+         }
+      }
+
+To use this function, you will first need to copy and paste it into R.
+You can then use this function to plot the positions of the ORFs in
+*dengueseqstartstring* by typing:
+
+::
+
+    > plotORFsinSeq(dengueseqstartstring)
 
 |image4|
 
-The picture produced by plotORFsinSeq() represents the six ORFs in
+The picture produced by plotORFsinSeq() represents the two ORFs in
 the first 500 nucleotides of the lambda genome as blue rectangles.
-Three of the ORFs are in the +1 reading frame, and three are in the
-+3 reading frame. There are no ORFs in the +2 reading frame, as
+
+One of the ORFs is in the +3 reading frame, and one is in the
++1 reading frame. There are no ORFs in the +2 reading frame, as
 there are no potential stop codons to the right (3') of the
 potential start codons in the +2 reading frame, as we can see from
 the picture produced by plotPotentialStartsAndStops() above.
@@ -498,6 +683,7 @@ the picture produced by plotPotentialStartsAndStops() above.
 Predicting the protein sequence for an ORF
 ------------------------------------------
 
+xxx
 If you find an ORF in a DNA sequence, it is interesting to find the
 DNA sequence of the ORF. For example, the function findORFsinSeq()
 indicates that there is an ORF from nucleotides 4-12 of the
@@ -952,5 +1138,5 @@ the threshold length that you found in Q8?
 .. |image1| image:: ../_static/P7_image7.png
 .. |image2| image:: ../_static/P7_image1.png
 .. |image3| image:: ../_static/P7_image3b.png
-.. |image4| image:: ../_static/P7_image3.png
+.. |image4| image:: ../_static/P7_image4.png
 .. |image5| image:: ../_static/P7_image5.png
