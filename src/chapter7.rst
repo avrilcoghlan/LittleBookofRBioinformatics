@@ -14,6 +14,8 @@ In R, you can view the *standard genetic code*, the correspondence
 between codons and the amino acids that they are translated into,
 by using the tablecode() function in the SeqinR library:
 
+.. highlight:: r
+
 ::
 
     > library(seqinr)
