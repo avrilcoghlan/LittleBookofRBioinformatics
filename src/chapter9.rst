@@ -14,8 +14,9 @@ One of the first questions to ask when comparing the genomes of two
 species is: do the two species have the same number of genes (ie.
 the same *gene content*)? Since all life on earth shared a common
 ancestor at some point, any two species, for example, human and a
-fruitfly, must have descended from a common ancestor species. Since
-the time of the common ancestor of two species (eg. of human and
+fruitfly, must have descended from a common ancestor species. 
+
+Since the time of the common ancestor of two species (eg. of human and
 mouse), some of the genes that were present in the common ancestor
 species may have been lost from either of the two descendant
 lineages. Furthermore, the two descendant lineages may have gained
@@ -24,118 +25,165 @@ genes that were not present in the common ancestor species.
 Using the biomaRt R Library to Query the Ensembl Database
 ---------------------------------------------------------
 
-To carry out comparative genomic analyses of two vertebrate species
-(eg. human and mouse), it is useful to analyse the data in the
-Ensembl database (`www.ensembl.org <http://www.ensembl.org>`_). The
-Ensembl database contains genes from fully sequenced vertebrate, as
+To carry out comparative genomic analyses of two animal species whose
+genomes have been fully sequenced (eg. human and mouse), it is useful to 
+analyse the data in the Ensembl database (`www.ensembl.org <http://www.ensembl.org>`_). 
+
+The main Ensembl database which you can browse on the 
+`main Ensembl webpage <http://www.ensembl.org>`_ 
+contains genes from fully sequenced vertebrates, as
 well as *Saccharomyces cerevisiae* (yeast) and a small number of
-additional model organism animals (eg. the nematode worm
-*Caenorhabditis elegans* and the fruit-fly
-*Drosophila melanogaster*).
+additional model organism animals (eg. the nematode worm *Caenorhabditis elegans* 
+and the fruit-fly *Drosophila melanogaster*).
+
+There are also Ensembl databases for other groups of organisms,
+for example `Ensembl Protists <http://protists.ensembl.org/index.html>`_ for
+Protists, `Ensembl Metazoa <http://metazoa.ensembl.org/index.html>`_ for 
+Metazoans, `Ensembl Bacteria <http://bacteria.ensembl.org/index.html>`_ for Bacteria,
+`Ensembl Plants <http://plants.ensembl.org/index.html>`_ for Plants, and
+`Ensembl Fungi <http://fungi.ensembl.org/index.html>`_ for Fungi.
 
 It is possible to carry out analyses of the Ensembl database using
-R, with the "biomaRt" R library. The "biomaRt" library can connect
-to the Ensembl database, and perform queries on the data. The
-"biomaRt" R library is part of the Bioconductor set of R libraries,
-and so can be installed by typing:
+R, with the "biomaRt" R package. The "biomaRt" package can connect
+to the Ensembl database, and perform queries on the data. 
+
+The "biomaRt" R package is part of the Bioconductor set of R packages,
+and so can be installed as explained `here <./installr.html#how-to-install-a-bioconductor-r-package>`_.
+
+Once you have installed the "biomaRt" package, you can get a list
+of databases that can be queried using this package by typing:
 
 ::
 
-    > source("http://bioconductor.org/biocLite.R")
-    > biocLite("biomaRt")
-
-Once you have installed the "biomaRt" library, you can get a list
-of databases that can be queried using this library by typing:
-
-::
-
-    > library("biomaRt") # Load the biomaRt library in R
+    > library("biomaRt") # Load the biomaRt package in R
     > listMarts()        # List all databases that can be queried
-                         biomart                                                 version
-    1                    ensembl                            ENSEMBL GENES 57 (SANGER UK)
-    2                        snp                        ENSEMBL VARIATION 57 (SANGER UK)
-    3        functional_genomics              ENSEMBL FUNCTIONAL GENOMICS 57 (SANGER UK)
-    4                       vega                                     VEGA 37 (SANGER UK)
-    5           bacterial_mart_4                             ENSEMBL BACTERIA 4 (EBI UK)
-    6              fungal_mart_4                               ENSEMBL FUNGAL 4 (EBI UK)
-    7             metazoa_mart_4                              ENSEMBL METAZOA 4 (EBI UK)
-    8               plant_mart_4                                ENSEMBL PLANT 4 (EBI UK)
-    9             protist_mart_4                             ENSEMBL PROTISTS 4 (EBI UK)
-    10                       msd                                  MSD PROTOTYPE (EBI UK)
-    11                      htgt HIGH THROUGHPUT GENE TARGETING AND TRAPPING (SANGER UK)
-    12                  REACTOME                                      REACTOME (CSHL US)
-    13          wormbase_current                                      WORMBASE (CSHL US)
-    ...
+                                       biomart
+      1                                ensembl
+      2                                    snp
+      3                    functional_genomics
+      4                                   vega
+      5                       bacterial_mart_9
+      6                          fungal_mart_9
+      7                    fungal_variations_9
+      8                         metazoa_mart_9
+      9                   metazoa_variations_9
+      10                          plant_mart_9
+      11                    plant_variations_9
+      12                        protist_mart_9
+      13                  protist_variations_9
+      14                                   msd
+      15                                  htgt
+      16                              REACTOME
+      17                         WS220-testing
+      ...    
+                                                          version
+      1                              ENSEMBL GENES 62 (SANGER UK)
+      2                         ENSEMBL  VARIATION 62 (SANGER UK)
+      3                ENSEMBL FUNCTIONAL GENOMICS 62 (SANGER UK)
+      4                                      VEGA 42  (SANGER UK)
+      5                               ENSEMBL BACTERIA 9 (EBI UK)
+      6                                  ENSEMBL FUNGI 9 (EBI UK)
+      7                        ENSEMBL FUNGI VARIATION 9 (EBI UK)
+      8                                ENSEMBL METAZOA 9 (EBI UK)
+      9                      ENSEMBL METAZOA VARIATION 9 (EBI UK)
+      10                                ENSEMBL PLANTS 9 (EBI UK)
+      11                      ENSEMBL PLANTS VARIATION 9 (EBI UK)
+      12                              ENSEMBL PROTISTS 9 (EBI UK)
+      13                    ENSEMBL PROTISTS VARIATION 9 (EBI UK)
+      14                                             MSD (EBI UK)
+      15                  WTSI MOUSE GENETICS PROJECT (SANGER UK)
+      16                                       REACTOME (CSHL US)
+      17                                   WORMBASE 220 (CSHL US)
+      ...
 
-You will see that the "biomaRt" R library can actually be used to
+The names of the databases are listed, and then an explanation of what each
+database is, and what is the version of the database.
+
+You will see that the "biomaRt" R package can actually be used to
 query many different databases including WormBase, UniProt,
-Ensembl, etc. In today's practical, we will discuss using the
-"biomaRt" library to query the Ensembl database, but it is worth
+Ensembl, etc. 
+
+Here, we will discuss using the
+"biomaRt" package to query the Ensembl database, but it is worth
 remembering that it also be used to perform queries on other
-databases such as UniProt. You can see above that "biomaRt" tells
+databases such as UniProt. 
+
+You can see above that "biomaRt" tells
 you which version of each database can be searched, for example,
-the Ensembl version that can be searched is Ensembl 57 (the current
-release).
+the version of the main Ensembl database that can be searched is Ensembl 62 (the current
+release), while the version of the Ensembl Protists database that can be searched is
+Ensembl Protists 9.
 
 If you want to perform a query on the Ensembl database using
 "biomaRt", you first need to specify that this is the database that
 you want to query. You can do this using the useMart() function
-from the "biomaRt" library:
+from the "biomaRt" package:
 
 ::
 
-    > ensembl <- useMart("ensembl") # Specify that we want to query the Ensembl database
+    > ensemblprotists <- useMart("protist_mart_9") # Specify that we want to query the Ensembl Protists database
 
-This tells "biomaRt" that you want to query the Ensembl database.
-The Ensembl database contains data sets of genomic information for
-many different vertebrate species. To see which data sets you can
+This tells "biomaRt" that you want to query the Ensembl Protists database.
+The Ensembl Protists database contains data sets of genomic information for
+different protist species whose genomes have been fully sequenced.
+
+To see which data sets you can
 query in the database that you have selected (using useMart()), you
 can type:
 
 ::
 
-    > listDatasets(ensembl)         # List the data sets in the Ensembl database
-    1          oanatinus_gene_ensembl        Ornithorhynchus anatinus genes (OANA5)
-    2           tguttata_gene_ensembl       Taeniopygia guttata genes (taeGut3.2.4)
-    3         cporcellus_gene_ensembl               Cavia porcellus genes (cavPor3)
-    4         gaculeatus_gene_ensembl        Gasterosteus aculeatus genes (BROADS1)
-    5          lafricana_gene_ensembl            Loxodonta africana genes (loxAfr2)
-    6         mlucifugus_gene_ensembl              Myotis lucifugus genes (myoLuc1)
-    7           hsapiens_gene_ensembl                   Homo sapiens genes (GRCh37)
-    ...
+    > listDatasets(ensemblprotists)         # List the data sets in the Ensembl Protists database
+                dataset                                   description
+      1      pramorum_eg_gene         Phytophthora ramorum genes (Phyra1_1)
+      2        pvivax_eg_gene                Plasmodium vivax genes (EPr 2)
+      3   pfalciparum_eg_gene           Plasmodium falciparum genes (2.1.4)
+      4  ptricornutum_eg_gene      Phaeodactylum tricornutum genes (Phatr2)
+      5     pchabaudi_eg_gene          Plasmodium chabaudi genes (May_2010)
+      6   ddiscoideum_eg_gene Dictyostelium discoideum genes (dictybase.01)
+      7        lmajor_eg_gene    Leishmania major strain Friedlin genes (1)
+      ...
+        version
+      1      Phyra1_1
+      2         EPr 2
+      3         2.1.4
+      4        Phatr2
+      5      May_2010
+      6  dictybase.01
+      7             1
+      ...
 
-You will see a long list of the organisms for which the Ensembl
-database has genome data, including *Ornithorhynchus anatinus*
-(platypus), *Taeniopygia guttata* (zebra finch), *Cavia porcellus*
-(guinea pig), *Gasterosteus aculeatus* (three-spined stickleback),
-*Loxodonta africana* (African elephant), *Myotis lucifugus* (little
-brown bat), *Homo sapiens* (human), and so on..
+You will see a long list of the organisms for which the Ensembl Protists
+database has genome data, including *Plasmodium vivax* and *Plasmodium falciparium* (which cause malaria),
+and *Leishmania major*, which causes `leishmaniasis <http://www.who.int/leishmaniasis/en/>`_, which is
+classified by the WHO as a neglected tropical disease.
 
 To perform a query on the Ensembl database using the "biomaRt" R
-library, you first need to specify which Ensembl data set your
+package, you first need to specify which Ensembl data set your
 query relates to. You can do this using the useDataset() function
-from the "biomaRt" library. For example, to specify that you want
-to perform a query on the Ensembl human data set, you would type:
+from the "biomaRt" package. For example, to specify that you want
+to perform a query on the Ensembl Leishmania major data set, you would type:
 
 ::
 
-    > ensembl <- useDataset("hsapiens_gene_ensembl",mart=ensembl) 
+    > ensemblleishmania <- useDataset("lmajor_eg_gene",mart=ensemblprotists) 
 
-Note that the name of the human Ensembl data set is
-"hsapiens\_gene\_ensembl"; this is the data set listed for human
-genomic information when we typed listDatasets(ensembl) above.
+Note that the name of the *Leishmania major* Ensembl data set is
+"lmajor\_eg\_gene"; this is the data set listed for *Leishmania major*
+genomic information when we typed listDatasets(ensemblprotists) above.
 
 Once you have specified the particular Ensembl data set that you
 want to perform a query on, you can perform the query using the
-getBM() function from the "biomaRt" library. Usually, you will want
-to perform a query to a particular set of features from the human
+getBM() function from the "biomaRt" package. 
+
+Usually, you will want to perform a query to a particular set of features from the *Leishmania major*
 Ensembl data set. What types of features can you search for? You
 can find this out by using the listAttributes() function from the
-"biomaRt" library:
+"biomaRt" package:
 
 ::
 
-    > attributes <- listAttributes(ensembl)
+    > leishmaniaattributes <- listAttributes(ensemblleishmania)
 
 The listAttributes() function returns a list object, the first
 element of which is a vector of all possible features that you can
@@ -144,15 +192,16 @@ explanations of all those features:
 
 ::
 
-    > attributenames <- attributes[[1]]
-    > attributedescriptions <- attributes[[2]]
+    > attributenames <- leishmaniaattributes[[1]]
+    > attributedescriptions <- leishmaniaattributes[[2]]
     > length(attributenames)                     # Find the length of vector "attributenames"
-    [1] 961
+     [1] 292
     > attributenames[1:10]                       # Print out the first 10 entries in vector "attributenames"
-     [1] "ensembl_gene_id"                "ensembl_transcript_id"          "ensembl_peptide_id"            
-     [4] "canonical_transcript_stable_id" "description"                    "chromosome_name"               
-     [7] "start_position"                 "end_position"                   "strand"                        
-    [10] "band" 
+     [1] "ensembl_gene_id"                "ensembl_transcript_id"         
+     [3] "ensembl_peptide_id"             "canonical_transcript_stable_id"
+     [5] "description"                    "chromosome_name"               
+     [7] "start_position"                 "end_position"                  
+     [9] "strand"                         "band"       
     > attributedescriptions[1:10]                # Print out the first 10 entries in vector "attributedescriptions"
     > attributedescriptions[1:10]   
      [1] "Ensembl Gene ID"                   "Ensembl Transcript ID"            
@@ -161,72 +210,70 @@ explanations of all those features:
      [7] "Gene Start (bp)"                   "Gene End (bp)"                    
      [9] "Strand"                            "Band"     
 
-This gives us a very long list of 961 features in the human Ensembl
+This gives us a very long list of 292 features in the *Leishmania major* Ensembl
 data set that we can search for by querying the database, such as
-human genes, human transcripts (mRNAs), human peptides (proteins),
-chromosomes, GO (Gene Ontology) terms, and so on.
+genes, transcripts (mRNAs), peptides (proteins), chromosomes, GO (Gene Ontology) terms, and so on.
 
-When you are performing a query on the Ensembl human data set using
+When you are performing a query on the Ensembl *Leishmania major* data set using
 getBM(), you have to specify which of these features you want to
 retrieve. For example, you can see from the output of
 listAttributes() (see above) that one possible type of feature we
-can search for are human genes. To retrieve a list of all human
-genes from the human Ensembl data set, we just need to type:
+can search for are *Leishmania major* genes. To retrieve a list of all *Leishmania major*
+genes from the *Leishmania major* Ensembl data set, we just need to type:
 
 ::
 
-    > humgenes <- getBM(attributes = c("ensembl_gene_id"), mart=ensembl)
+    > leishmaniagenes <- getBM(attributes = c("ensembl_gene_id"), mart=ensemblleishmania)
 
-This returns a list variable *humgenes*, the first element of which
-is a vector containing the names of all human genes. Thus, to find
+This returns a list variable *leishmaniagenes*, the first element of which
+is a vector containing the names of all *Leishmania major* genes. Thus, to find
 the number of genes, and print out the names of the first ten genes
 stored in the vector, we can type:
 
 ::
 
-    > humgenenames <- humgenes[[1]] # Get the vector of the names of all human genes
-    > length(humgenenames) 
-    [1] 51682
-    > humgenenames[1:10]
-     [1] "ENSG00000000003" "ENSG00000000005" "ENSG00000000419" "ENSG00000000457"
-     [5] "ENSG00000000460" "ENSG00000000938" "ENSG00000000971" "ENSG00000001036"
-     [9] "ENSG00000001084" "ENSG00000001167"
+    > leishmaniagenenames <- leishmaniagenes[[1]] # Get the vector of the names of all L. major genes
+    > length(leishmaniagenenames) 
+    [1] 9379 
+    > leishmaniagenenames[1:10]
+    [1] "LmjF.01.0010" "LmjF.01.0020" "LmjF.01.0030" "LmjF.01.0040" "LmjF.01.0050"
+    [6] "LmjF.01.0060" "LmjF.01.0070" "LmjF.01.0080" "LmjF.01.0090" "LmjF.01.0100"
 
-This tells us that there are 51,682 different human genes in the
-human Ensembl data set. Note that this includes various types of
+This tells us that there are 9379 different *Leishmania major* genes in the
+*L. major* Ensembl data set. Note that this includes various types of
 genes including protein-coding genes (both "known" and "novel"
 genes, where the "novel" genes are gene predictions that don't have
 sequence similarity to any sequences in sequence databases), RNA
 genes, and pseudogenes.
 
-As mentioned above, the 51,682 different human genes in the human
-Ensembl data set probably include various classes of genes, such as
-protein-coding genes, RNA genes, or pseudogenes. What if we are
-only interested in protein-coding genes? If you look at the output
-of listAttributes(ensembl), you will see that one of the features
+What if we are only interested in protein-coding genes? If you look at the output
+of listAttributes(ensemblleishmania), you will see that one of the features
 is "gene\_biotype", which is tells us what sort of gene each gene
 is (eg. protein-coding, pseudogene, etc.):
 
 ::
 
-    > humgenes2 <- getBM(attributes = c("ensembl_gene_id", "gene_biotype"), mart=ensembl)
+    > leishmaniagenes2 <- getBM(attributes = c("ensembl_gene_id", "gene_biotype"), mart=ensemblleishmania)
 
 In this case, the getBM() function will return a list variable
-*humgenes2*, the first element of which is a vector containing the
-names of all human genes, and the second of which is a vector
+*leishmaniagenes2*, the first element of which is a vector containing the
+names of all *Leishmania major* genes, and the second of which is a vector
 containing the types of those genes:
 
 ::
 
-    > humgenenames2 <- humgenes2[[1]] # Get the vector of the names of all human genes
-    > humgenebiotypes2 <- humgenes2[[2]] # Get the vector of the biotypes of all genes
+    > leishmaniagenenames2 <- leishmaniagenes2[[1]] # Get the vector of the names of all L. major genes
+    > leishmaniagenebiotypes2 <- leishmaniagenes2[[2]] # Get the vector of the biotypes of all genes
 
 We can make a table of all the different types of genes using the
 table() function:
 
 ::
 
-    > table(humgenebiotypes2) 
+    > table(leishmaniagenebiotypes2) 
+
+
+
                IG_C_gene            IG_D_gene            IG_J_gene            IG_V_gene 
                       21                   30                   93                  226 
                  lincRNA                miRNA     miRNA_pseudogene             misc_RNA 
@@ -248,13 +295,14 @@ protein-coding genes.
 Comparing the number of genes in two vertebrate species
 -------------------------------------------------------
 
+xxx
 Ensembl is a very useful resource for comparing the gene content of
 different species. For example, one simple question that we can ask
 by analysing the Ensembl data is: how many protein-coding genes are
 there in mouse, and how many in human? We know how many
 protein-coding genes are in humans (22,320; see above), but what
 about mouse? To answer this question, we first need to tell the
-"biomaRt" library that we want to make a query on the Ensembl mouse
+"biomaRt" package that we want to make a query on the Ensembl mouse
 data set. We can do this using the useDataset() function to select
 the mouse (*Mus musculus*) Ensembl data set:
 
@@ -435,14 +483,14 @@ In this practical, you will have learnt to use the following R
 functions:
 
 
-#. useMart() to select a database to query (in the biomaRt library)
+#. useMart() to select a database to query (in the biomaRt package)
 #. useDataset() to select a data set in a database to query (in the
-   biomaRt library)
+   biomaRt package)
 #. listDatasets() to get a list of all data sets in a database (in
-   the biomaRt library)
+   the biomaRt package)
 #. listAttributes() to get a list of all features of a data set (in
-   the biomaRt library)
-#. getBM() to make a query on a database (in the biomaRt library)
+   the biomaRt package)
+#. getBM() to make a query on a database (in the biomaRt package)
 #. unique() to remove duplicate elements from a vector
 #. merge() to merge R list objects that contain some named elements
    in common
