@@ -565,7 +565,7 @@ Q5. How many *Mycobacterium ulcerans* genes have Pfam domains?
 
 Q6. What are the top 5 most common Pfam domains in *Mycobacterium ulcerans* genes?
 
-Q7. how many copies of each of the top 5 domains found in Q6 are there in the *Mycobacterium ulcerans* protein set?
+Q7. How many copies of each of the top 5 domains found in Q6 are there in the *Mycobacterium ulcerans* protein set?
 
 Q8. How many of copies are there in the *Mycobacterium lepraae* protein set, of each of the top 5 *Mycobacterium ulcerans* Pfam protein domains? 
  
