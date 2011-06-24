@@ -271,89 +271,84 @@ table() function:
 ::
 
     > table(leishmaniagenebiotypes2) 
+      leishmaniagenebiotypes2
+             ncRNA nontranslating_cds     protein_coding         pseudogene 
+                84                  2               8310                 90 
+              rRNA             snoRNA              snRNA               tRNA 
+                63                741                  6                 83 
 
-
-
-               IG_C_gene            IG_D_gene            IG_J_gene            IG_V_gene 
-                      21                   30                   93                  226 
-                 lincRNA                miRNA     miRNA_pseudogene             misc_RNA 
-                    3517                 1698                   18                 1564 
-     misc_RNA_pseudogene              Mt_rRNA              Mt_tRNA   Mt_tRNA_pseudogene 
-                       7                    2                   22                  580 
-    processed_transcript       protein_coding           pseudogene                 rRNA 
-                    6762                22320                 9456                  461 
-         rRNA_pseudogene     scRNA_pseudogene               snoRNA    snoRNA_pseudogene 
-                     338                  834                 1217                  457 
-                   snRNA     snRNA_pseudogene      tRNA_pseudogene 
-                    1441                  490                  128 
-
-This tells us that there are 22,320 protein-coding genes, 9456
+This tells us that there are 8310 protein-coding genes, 90
 pseudogenes, and various types of RNA genes (tRNA genes, rRNA
-genes, snRNA genes, etc.). Thus, there are 22,320 human
+genes, snRNA genes, etc.). Thus, there are 8310 human
 protein-coding genes.
 
-Comparing the number of genes in two vertebrate species
--------------------------------------------------------
+Comparing the number of genes in two species
+--------------------------------------------
 
-xxx
 Ensembl is a very useful resource for comparing the gene content of
 different species. For example, one simple question that we can ask
 by analysing the Ensembl data is: how many protein-coding genes are
-there in mouse, and how many in human? We know how many
-protein-coding genes are in humans (22,320; see above), but what
-about mouse? To answer this question, we first need to tell the
-"biomaRt" package that we want to make a query on the Ensembl mouse
-data set. We can do this using the useDataset() function to select
-the mouse (*Mus musculus*) Ensembl data set:
+there in *Leishmania major*, and how many in *Plasmodium falciparum*? 
+
+We know how many protein-coding genes are in *Leishmania major* (8310; see above), but what
+about *Plasmodium falciparum*? To answer this question, we first need to tell the
+"biomaRt" package that we want to make a query on the Ensembl *Plasmodium falciparum*
+data set. 
+
+We can do this using the useDataset() function to select
+the *Plasmodium falciparum* Ensembl data set. 
 
 ::
 
-    > ensembl2 <- useDataset("mmusculus_gene_ensembl",mart=ensembl) 
+    > ensemblpfalciparum <- useDataset("pfalciparum_eg_gene",mart=ensemblprotists) 
 
-We can then use getBM() as above to retrieve the names of all mouse
+Note that the name of the *Plasmodium falciparum* Ensembl data set is
+"pfalciparum\_eg\_gene"; this is the data set listed for *Plasmodium falciparum*
+genomic information when we typed listDatasets(ensemblprotists) above.
+
+We can then use getBM() as above to retrieve the names of all *Plasmodium falciparum*
 protein-coding genes. This time we have to set the "mart" option in
-the getBM() function to "ensembl2", to specify that we want to
-query the mouse Ensembl data set rather than the human Ensembl data
+the getBM() function to "ensemblpfalciparum", to specify that we want to
+query the *Plasmodium falciparum* Ensembl data set rather than the *Leishmania major* Ensembl data
 set:
 
 ::
 
-    > mousegenes <- getBM(attributes = c("ensembl_gene_id", "gene_biotype"), mart=ensembl2)
-    > mousegenenames <- mousegenes[[1]]    # Get the names of the mouse genes
-    > length(mousegenenames)               # Get the number of mouse genes
-    [1] 34213
-    > mousegenebiotypes <- mousegenes[[2]] # Get the types of the mouse genes 
-    > table(mousegenebiotypes)
-                 IG_C_gene              IG_D_gene              IG_J_gene              IG_V_gene 
-                        20                     15                     87                    361 
-                   lincRNA                  miRNA               misc_RNA                Mt_rRNA 
-                       495                   1081                    148                      2 
-                   Mt_tRNA polymorphic_pseudogene   processed_transcript         protein_coding 
-                        22                      1                   2208                  23062 
-                pseudogene                   rRNA                 snoRNA                  snRNA 
-                      4677                    222                    949             
+    > pfalciparumgenes <- getBM(attributes = c("ensembl_gene_id", "gene_biotype"), mart=ensemblpfalciparum)
+    > pfalciparumgenenames <- pfalciparumgenes[[1]] # Get the names of the P. falciparum genes
+    > length(pfalciparumgenenames)                  # Get the number of P. falciparum genes
+    [1] 6213  
+    > pfalciparumgenebiotypes <- pfalciparumgenes[[2]] # Get the types of the P. falciparum genes 
+    > table(pfalciparumgenebiotypes)
+      pfalciparumgenebiotypes
+              ncRNA non_translating_cds      protein_coding                rRNA 
+                712                   1                5428                  24 
+              snRNA                tRNA 
+                  3                  45 
 
-This tells us that there are 23,062 mouse protein-coding genes in
-Ensembl. That is, mouse seems to have slightly more protein-coding
-genes than human (23,062 mouse genes versus 22,320 human genes).
 
-It is interesting to ask: why does mouse have more protein-coding
-genes than human? There are several possible explanations: (i) that
-there have been gene duplications in the mouse lineage since mouse
-and human shared a common ancestor, which gave rise to new mouse
+This tells us that there are 5428 *Plasmodium falciparum* protein-coding genes in
+Ensembl. That is, *Plasmodium falciparum* seems to have less protein-coding
+genes than *Leishmania major* (8310 protein-coding genes; see above).
+
+It is interesting to ask: why does *Plasmodium falciparum* have less protein-coding
+genes than *Leishmania major*? There are several possible explanations: (i) that
+there have been gene duplications in the *Leishmania major* lineage since *Leishmania*
+and *Plasmodium* shared a common ancestor, which gave rise to new *Leishmania major*
 genes; (ii) that completely new genes (that are not related to any
-other mouse gene) have arisen in the mouse lineage since mouse and
-human shared a common ancestor; or (iii) that there have been genes
-lost from the human genome since mouse and human shared a common
+other *Leishmania major* gene) have arisen in the *Leishmania major* lineage since *Leishmania* and
+*Plasmodium* shared a common ancestor; or (iii) that there have been genes
+lost from the *Plasmodium falciparum* genome since *Leishmania* and *Plasmodium* shared a common
 ancestor.
 
 To investigate which of these explanations is most likely to be
-correct, we need to figure out how the human protein-coding genes
-are related to mouse protein-coding genes.
+correct, we need to figure out how the *Leishmania major* protein-coding genes
+are related to *Plasmodium falciparum* protein-coding genes.
 
 Identifying homologous genes between two species
 ------------------------------------------------
 
+xxx
 The Ensembl database groups homologous (related) genes together
 into gene families. If a gene from human and a gene from mouse are
 related, they should be placed together into the same Ensembl gene
