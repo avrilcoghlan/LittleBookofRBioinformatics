@@ -486,35 +486,60 @@ lack *Plasmodium falciparum* orthologues.
 Summary
 -------
 
-xxx
 In this practical, you will have learnt to use the following R
 functions:
 
-
 #. useMart() to select a database to query (in the biomaRt package)
-#. useDataset() to select a data set in a database to query (in the
-   biomaRt package)
-#. listDatasets() to get a list of all data sets in a database (in
-   the biomaRt package)
-#. listAttributes() to get a list of all features of a data set (in
-   the biomaRt package)
+#. useDataset() to select a data set in a database to query (in the biomaRt package)
+#. listDatasets() to get a list of all data sets in a database (in the biomaRt package)
+#. listAttributes() to get a list of all features of a data set (in the biomaRt package)
 #. getBM() to make a query on a database (in the biomaRt package)
-#. unique() to remove duplicate elements from a vector
-#. merge() to merge R list objects that contain some named elements
-   in common
+#. merge() to merge R list objects that contain some named elements in common
 
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package for your project
-or assignments.
+Some links are included here for further reading. 
 
 For background reading on comparative genomics, it is recommended
 to read Chapter 8 of
 *Introduction to Computational Genomics: a case studies approach*
 by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
+
+For more information and examples on using the biomaRt R package, see
+the `biomaRt package website <http://www.bioconductor.org/packages/release/bioc/html/biomaRt.html>`_.
+
+For a more in-depth introduction to R, a good online tutorial is
+available on the "Kickstarting R" website,
+`cran.r-project.org/doc/contrib/Lemon-kickstart <http://cran.r-project.org/doc/contrib/Lemon-kickstart/>`_.
+
+There is another nice (slightly more in-depth) tutorial to R
+available on the "Introduction to R" website,
+`cran.r-project.org/doc/manuals/R-intro.html <http://cran.r-project.org/doc/manuals/R-intro.html>`_.
+
+Acknowledgements
+----------------
+
+Many of the ideas for the examples and exercises for this practical
+were inspired by the Matlab case study on *Chlamydia*
+(`http://www.computational-genomics.net/case\_studies/chlamydia\_demo.html <http://www.computational-genomics.net/case\_studies/chlamydia\_demo.html>`_)
+from the website that accompanies the book
+*Introduction to Computational Genomics: a case studies approach*
+by Cristianini and Hahn (Cambridge University Press;
+`www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
+
+Contact
+-------
+
+I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
+my email address a.coghlan@ucc.ie 
+
+License
+-------
+
+The content in this book is licensed under a `Creative Commons Attribution 3.0 License
+<http://creativecommons.org/licenses/by/3.0/>`_.
 
 Exercises
 ---------
@@ -523,11 +548,18 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
+Model answers to the exercises are given in
+`Answers to the exercises on Comparative Genomics <./chapter_answers.html#comparative-genomics>`_.
+
+xxx
+
 Q1. How many cow genes are there in the current version of the Ensembl database? 
     How many of the cow Ensembl genes are protein-coding genes?
+
 Q2. How many cow protein-coding genes have human orthologues? 
     How many of the cow protein-coding genes have one-to-one
     orthologues in human?
+
 Q3. How many cow genes have Pfam domains? Q4. What are the top 5 most common Pfam domains in cow genes, and how many copies of each are there in the cow protein set? Q5. How many of copies are there in the human protein set, of each of the top 5 cow protein domains? 
     Are the numbers of copies of some domains different in the two
     species?
