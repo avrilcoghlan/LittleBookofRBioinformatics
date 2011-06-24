@@ -868,6 +868,10 @@ read Chapter 7 of
 by Cristianini and Hahn (Cambridge University Press;
 `www.computational-genomics.net/book/ <http://www.computational-genomics.net/book/>`_).
 
+Another more in-depth (but very accesssible) book on phylogenetics is
+*Molecular Evolution: A Phylogenetic Approach* by Roderic DM Page and
+Edward C Holmes.
+
 For more in-depth information and more examples on using the SeqinR
 package for sequence analysis, look at the SeqinR documentation,
 `http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng <http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng>`_.
