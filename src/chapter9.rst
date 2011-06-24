@@ -551,19 +551,26 @@ get this answer.
 Model answers to the exercises are given in
 `Answers to the exercises on Comparative Genomics <./chapter_answers.html#comparative-genomics>`_.
 
-xxx
+Q1. How many *Mycobacterium ulcerans* genes are there in the current version of the Ensembl Bacteria database? 
+    Note: the bacterium *Mycobacterium ulcerans* causes `Buruli ulcer <http://www.who.int/buruli/en/>`_, which is classified by the WHO as a neglected tropical disease.
 
-Q1. How many cow genes are there in the current version of the Ensembl database? 
-    How many of the cow Ensembl genes are protein-coding genes?
+Q2. How many of the *Mycobacterium ulcerans* Ensembl genes are protein-coding genes?
 
-Q2. How many cow protein-coding genes have human orthologues? 
-    How many of the cow protein-coding genes have one-to-one
-    orthologues in human?
+Q3. How many *Mycobacterium ulcerans* protein-coding genes have *Mycobacterium leprae* orthologues? 
+    Note: *Mycobacterium leprae* is the bacterium that causes `leprosy <http://www.who.int/lep/en/>`_, which is classified by the WHO as a neglected tropical disease.
 
-Q3. How many cow genes have Pfam domains? Q4. What are the top 5 most common Pfam domains in cow genes, and how many copies of each are there in the cow protein set? Q5. How many of copies are there in the human protein set, of each of the top 5 cow protein domains? 
-    Are the numbers of copies of some domains different in the two
-    species?
-    How would you check if this is a statistically significant
-    difference?
+Q4. How many of the*Mycobacterium ulcerans* protein-coding genes have one-to-one orthologues in *Mycobacterium leprae*?
+
+Q5. How many *Mycobacterium ulcerans* genes have Pfam domains? 
+
+Q6. What are the top 5 most common Pfam domains in *Mycobacterium ulcerans* genes?
+
+Q7. how many copies of each of the top 5 domains found in Q6 are there in the *Mycobacterium ulcerans* protein set?
+
+Q8. How many of copies are there in the *Mycobacterium lepraae* protein set, of each of the top 5 *Mycobacterium ulcerans* Pfam protein domains? 
+ 
+Q9. Are the numbers of copies of some domains different in the two species?
+ 
+Q10. Of the differences found in Q9, are any of the differencess statistically significant?
 
 
