@@ -348,132 +348,145 @@ are related to *Plasmodium falciparum* protein-coding genes.
 Identifying homologous genes between two species
 ------------------------------------------------
 
-xxx
 The Ensembl database groups homologous (related) genes together
-into gene families. If a gene from human and a gene from mouse are
+into gene families. If a gene from *Leishmania major* and a gene from *Plasmodium falciparum* are
 related, they should be placed together into the same Ensembl gene
-family. In fact, if a human gene has any homologues (related
-genes), it should be placed into some Ensembl gene family.
+family in the Ensembl Protists database. In fact, if a *Leishmania major* gene has any 
+homologues (related genes) in other protists, it should be placed into some Ensembl gene family
+in the Ensembl Protists database.
 
-For all human and mouse genes that are placed together in a gene
+For all *Leishmania major* and *Plasmodium falciparum* genes that are placed together in a gene
 family, Ensembl classifies the relationship between each pair of
-human and mouse genes as *orthologues* (related genes that shared a
-common ancestor in the ancestor of human and mouse, and arose due
-to the human-mouse speciation event) or *paralogues* (related genes
+*Leishmania major* and *Plasmodium falciparum* genes as *orthologues* (related genes that shared a
+common ancestor in the ancestor of *Leishmania* and *Plasmodium*, and arose due
+to the *Leishmania* - *Plasmodium* speciation event) or *paralogues* (related genes
 that arose due to a duplication event within a species, for
-example, due to a duplication event in mouse, or a duplication
-event in the human-mouse ancestor).
+example, due to a duplication event in *Leishmania major*, or a duplication
+event in the *Leishmania* - *Plasmodium* ancestor).
 
-If you type listAttributes(ensembl) again, you will see that one
-possible feature that you can search for is "mouse\_ensembl\_gene",
-which is the mouse orthologue of a human Ensembl gene. Another
-possible feature that you can search for is
-"mouse\_orthology\_type", which describes the type of orthology
-relationship between a particular human gene and its mouse
-orthologue. For example, if a particular human gene has two mouse
-orthologues, the relationship between the human gene and each of
-the mouse orthologues will be "ortholog\_one2many"
-(one-human-to-many-mouse orthology). This can arise in the case
-where there was a duplication in the mouse lineage after human and
-mouse diverged, which means that two different mouse genes (which
+If you type listAttributes(ensemblleishmania) again, you will see that one
+possible feature that you can search for is "pfalciparum\_eg\_gene",
+which is the *Plasmodium falciparum* orthologue of a *Leishmania major* gene. 
+
+Another possible feature that you can search for is
+"pfalciparum\_eg\_orthology_type", which describes the type of orthology
+relationship between a particular *Leishmania major* gene and its *Plasmodium falciparum*
+orthologue. For example, if a particular *Leishmania major* gene has two *Plasmodium falciparum*
+orthologues, the relationship between the *Leishmania major* gene and each of
+the *Plasmodium falciparum* orthologues will be "ortholog\_one2many"
+(one-to-many orthology). 
+
+This can arise in the case
+where there was a duplication in the *Plasmodium falciparum* lineage after *Plasmodium* and
+*Leishmania* diverged, which means that two different *Plasmodium falciparum* genes (which
 are paralogues of each other) are both orthologues of the same
-human gene.
+*Leishmania major* gene.
 
-Therefore, we can retrive the Ensembl identifiers of the mouse
-orthologues of all human protein-coding genes by typing:
+Therefore, we can retrive the Ensembl identifiers of the *Plasmodium falciparum*
+orthologues of all *Leishmania major* genes by typing:
 
 ::
 
-    > humgenes4 <- getBM(attributes = c("ensembl_gene_id", "mouse_ensembl_gene", "mouse_orthology_type"), mart=ensembl)
+    > leishmaniagenes <- getBM(attributes = c("ensembl_gene_id", "pfalciparum_eg_gene", 
+       "pfalciparum_eg_orthology_type"), mart=ensemblleishmania)
 
-This will return an R list variable *humgenes4*, the first element
-of which is a vector of Ensembl identifiers for all human
-protein-coding genes, and the second element of which is a vector
-of Ensembl identifiers for their mouse orthologues, and the third
+This will return an R list variable *leishmaniagenes*, the first element
+of which is a vector of Ensembl identifiers for all *Leishmania major*
+coding genes, and the second element of which is a vector
+of Ensembl identifiers for their *Plasmodium falciparum* orthologues, and the third
 element of which is a vector with information on the orthology
 types.
 
-We can print out the names of the first 10 human genes and their
-mouse orthologues, and their orthology types, by typing:
+We can print out the names of the first 10 *Leishmania major* genes and their
+*Plasmodium falciparum* orthologues, and their orthology types, by typing:
 
 ::
 
-    > humgenenames4 <- humgenes4[[1]]            # Get the names of all human genes
-    > hummouseorthologues4 <- humgenes4[[2]]     # Get the names of the mouse orthologues of all human genes
-    > hummouseorthologuetypes4 <- humgenes4[[3]] # Get the orthology relationship type
-    > humgenenames4[1:10] 
-     [1] "ENSG00000211890" "ENSG00000211892" "ENSG00000211892" "ENSG00000211892" "ENSG00000211892"
-     [6] "ENSG00000211891" "ENSG00000211891" "ENSG00000211895" "ENSG00000211893" "ENSG00000211893"
-    > hummouseorthologues4[1:10] 
-     [1] "ENSMUSG00000076610" "ENSMUSG00000076614" "ENSMUSG00000076612" "ENSMUSG00000076613"
-     [5] "ENSMUSG00000076615" "ENSMUSG00000076611" "ENSMUSG00000087642" "ENSMUSG00000076610"
-     [9] "ENSMUSG00000076614" "ENSMUSG00000076612"
-    > hummouseorthologuetypes4[1:10] 
-     [1] "ortholog_one2many"  "ortholog_many2many" "ortholog_many2many" "ortholog_many2many"
-     [5] "ortholog_many2many" "ortholog_one2many"  "ortholog_one2many"  "ortholog_one2many" 
-     [9] "ortholog_many2many" "ortholog_many2many"
+    > leishmaniagenenames <- leishmaniagenes[[1]]      # Get the names of all Leishmania major genes
+    > leishmaniaPforthologues <- leishmaniagenes[[2]]  # Get the P. falciparum orthologues of all L. major genes
+    > leishmaniaPforthologuetypes <- leishmaniagenes[[3]] # Get the orthology relationship type
+    > leishmaniagenenames[1:10] 
+      [1] "LmjF.34.2510" "LmjF.14.0650" "LmjF.14.0650" "LmjF.14.0670" "LmjF.14.0670"
+      [6] "LmjF.14.0680" "LmjF.14.0680" "LmjF.14.0710" "LmjF.14.0710" "LmjF.36.2350"
+    > leishmaniaPforthologues[1:10] 
+      [1] ""         "PFA0455c" "PFI0980w" "PFA0455c" "PFI0980w" "PFA0455c"
+      [7] "PFI0980w" "PFA0455c" "PFI0980w" ""
+    > leishmaniaPforthologuetypes[1:10] 
+      [1] ""                   "ortholog_many2many" "ortholog_many2many"
+      [4] "ortholog_many2many" "ortholog_many2many" "ortholog_many2many"
+      [7] "ortholog_many2many" "ortholog_many2many" "ortholog_many2many"
+      [10] ""      
 
-Not all human genes have mouse orthologues. To find out how many
-human genes are orthologues, we can first find the indices of the
-elements of the vector *hummouseorthologues4* that are empty:
+Not all *Leishmania major* genes have *Plasmodium falciparum* orthologues; this is why
+when we print out the first 10 elements of the vector *leishmaniaPforthologues*, some of the
+elements are empty. 
+
+To find out how many *Leishmania major* genes have orthologues in *Plasmodium falciparum*, 
+we can first find the indices of the elements of the vector *leishmaniaPforthologues* that are empty:
 
 ::
 
-    > myindex4 <- hummouseorthologues4=="" 
+    > myindex <- leishmaniaPforthologues=="" 
 
-We can then find out the names of the human genes corresponding to
+We can then find out the names of the *Leishmania gene* genes corresponding to
 those indices:
 
 ::
 
-    > humgenenames4b <- humgenenames4[myindex4]
-    > length(unique(humgenenames4b))
-    [1] 34115
+    > leishmaniagenenames2 <- leishmaniagenenames[myindex]
+    > length(leishmaniagenenames2)
+    [1] 7723 
 
-This tells us that 34,115 human genes do not have mouse
-orthologues. Note that we have to use the unique() function (which
-removes duplicates from a vector) to count the number of human gene
-names in vector *humgenenames4b*, as some human gene names appear
-twice in that vector (because they have more than one mouse
-orthologue listed in vector *hummouseorthologues4*).
+This tells us that 7723 *Leishmania major* genes do not have *Plasmodium falciparum*
+orthologues. 
 
-How many of the 34,115 human genes that do not have mouse
+How many of the 7723 *Leishmania major* genes that do not have *Plasmodium falaciparum*
 orthologues are protein-coding genes? To answer this question, we
 can merge together the information in the R list variable
-*humgenes2* (which contains information on the name of each human
-gene and its type), and the R list variable *humgenes4*. This can
-be done using the merge() function in R, which can merge together
-two list variables that contain some named elements in common (in
-this case, both list variables contain a vector that has the names
-of human genes):
+*leishmaniagenes2* (which contains information on the name of each *Leishmania major*
+gene and its type; see above), and the R list variable *leishmaniagenes* (which contains
+information on the name of each *L. major* gene and its *Plasmodium falciparum* orthologues). 
+
+Remember that *leishmaniagenes2* was created by typing:
 
 ::
 
-    > humgenes5 <- merge(humgenes2, humgenes4)
+    > leishmaniagenes2 <- getBM(attributes = c("ensembl_gene_id", "gene_biotype"), mart=ensemblleishmania)
 
-The first element of the merged list variable *humgenes5* contains
-a vector of the human gene names, the second has a vector of the
+To combine *leishmaniagenes* and *leishmaniagenes2*, we can use 
+the merge() function in R, which can merge together
+two list variables that contain some named elements in common (in
+this case, both list variables contain a vector that has the names
+of *Leishmania major* genes):
+
+::
+
+    > leishmaniagenes3 <- merge(leishmaniagenes2, leishmaniagenes)
+
+The first element of the merged list variable *leishmaniagenes3* contains
+a vector of the *Leishmania major* gene names, the second has a vector of the
 types of those genes (eg. protein-coding, pseudogene etc.), and the
-third element has a vector of the mouse orthologues' names. We can
-therefore find out how many protein-coding human genes lack mouse
+third element has a vector of the *Plasmodium falciparum* orthologues' names. We can
+therefore find out how many protein-coding *Leishmania major* genes lack *Plasmodium falciparum*
 orthologues by typing:
 
 ::
 
-    > humgenenames5 <- humgenes5[[1]] 
-    > humgenebiotypes5 <- humgenes5[[2]]
-    > hummouseorthologues5 <- humgenes5[[3]]
-    > myindex5 <- hummouseorthologues5=="" & humgenebiotypes5=="protein_coding"
-    > humgenenames5b <- humgenenames5[myindex5] 
-    > length(unique(humgenenames5b)) 
-    [1] 4857 
+    > leishmaniagenenames <- leishmaniagenes3[[1]] 
+    > leishmaniagenebiotypes <- leishmaniagenes3[[2]]
+    > leishmaniaPforthologues <- leishmaniagenes3[[3]]
+    > myindex <- leishmaniaPforthologues=="" & leishmaniagenebiotypes=="protein_coding"
+    > leishmaniagenenames2 <- leishmaniagenenames[myindex] 
+    > length(leishmaniagenenames2) 
+    [1] 6654
 
-This tells us that there are 4857 human protein-coding genes that
-lack mouse orthologues.
+This tells us that there are 6654 *Leishmania major* protein-coding genes that
+lack *Plasmodium falciparum* orthologues.
 
 Summary
 -------
 
+xxx
 In this practical, you will have learnt to use the following R
 functions:
 
