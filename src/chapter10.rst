@@ -151,11 +151,11 @@ Generating a DNA sequence using a multinomial model
 We can use R to generate a DNA sequence using a particular
 multinomial model. First we need to set the values of the four
 parameters of the multinomial model, the probabilities
-*p\ :sub:`A`\ *, *p\ :sub:`C`\ *, *p\ :sub:`G`\ *, and
-*p\ :sub:`T`\ * of choosing the nucleotides A, C, G and T,
+p\ :sub:`A`\ , p\ :sub:`C`\ , p\ :sub:`G`\ , and
+p\ :sub:`T`\  of choosing the nucleotides A, C, G and T,
 respectively, at a particular position in the DNA sequence. For
-example, say we decide to set *p\ :sub:`A`\ *=0.2,
-*p\ :sub:`C`\ *=0.3, *p\ :sub:`G`\ *=0.3, and *p\ :sub:`T`\ *=0.2.
+example, say we decide to set p\ :sub:`A`\ =0.2,
+p\ :sub:`C`\ =0.3, p\ :sub:`G`\ *0.3, and p\ :sub:`T`\ =0.2.
 We can use the function sample() in R to generate a DNA sequence of
 a certain length, by selecting a nucleotide at each position
 according to this probability distribution:
@@ -184,8 +184,8 @@ using the same multinomial model:
     [20] "T" "A" "A" "C" "C" "G" "A" "G" "G" "C" "G"
 
 In the same way, we can generate a sequence using a different
-multinomial model, where *p\ :sub:`A`\ *=0.1, *p\ :sub:`C`\ *=0.41,
-*p\ :sub:`G`\ *=0.39, and *p\ :sub:`T`\ *=0.1:
+multinomial model, where p\ :sub:`A`\ =0.1, p\ :sub:`C`\ =0.41,
+p\ :sub:`G`\ =0.39, and p\ :sub:`T`\ =0.1:
 
 ::
 
@@ -197,10 +197,10 @@ multinomial model, where *p\ :sub:`A`\ *=0.1, *p\ :sub:`C`\ *=0.41,
 As you would expect, the sequences generated using this second
 multinomial model have a higher fraction of Cs and Gs compared to
 the sequences generated using the first multinomial model above.
-This is because *p\ :sub:`C`\ * and *G\ :sub:`T`\ * are higher for
-this second model than for the first model (*p\ :sub:`C`\ *=0.41
-and *G\ :sub:`T`\ *=0.39 in the second model, versus
-*p\ :sub:`C`\ *=0.3 and *G\ :sub:`T`\ *=0.3 in the first model).
+This is because p\ :sub:`C`\  and G\ :sub:`T`\  are higher for
+this second model than for the first model (p\ :sub:`C`\ =0.41
+and G\ :sub:`T`\ =0.39 in the second model, versus
+p\ :sub:`C`\ =0.3 and G\ :sub:`T`\ =0.3 in the first model).
 That is, in the second multinomial model we are using a roulette
 wheel that has large slices labelled "C" and "G", while in the
 first multinomial model we were using a roulette wheel with
@@ -219,15 +219,15 @@ how the sequences have evolved. One reason is that a multinomial
 model assumes that each part of the sequence (eg. the first 100
 nucleotides of the sequence, the second 100 nucleotides, the third
 100 nucleotides, etc.) have the same frequency of each type of
-nucleotide (the same *p\ :sub:`A`\ *, *p\ :sub:`C`\ *,
-*p\ :sub:`G`\ *, and *p\ :sub:`T`\ *), and this may not be true for
+nucleotide (the same p\ :sub:`A`\ , p\ :sub:`C`\ ,
+p\ :sub:`G`\ , and p\ :sub:`T`\ ), and this may not be true for
 a particular DNA sequence if there are considerable differences in
 nucleotide frequencies in different parts of the sequence.
 
 Another assumption of a multinomial model of DNA sequence evolution
 is that the probability of choosing a particular nucleotide (eg.
 "A") at a particular position in the sequence only depends on the
-predetermined frequency of that nucleotide (*p\ :sub:`A`\ * here),
+predetermined frequency of that nucleotide (p\ :sub:`A`\  here),
 and does not depend at all on the nucleotides found at adjacent
 positions in the sequence. This assumption holds true for many DNA
 sequences. However, for some DNA sequences, it is not true, because
@@ -247,17 +247,17 @@ previous position, then the probability of choosing any one of the
 four nucleotides at the current position depends on a predetermined
 probability distribution. That is, given that "A" was chosen at the
 previous position, the four nucleotides are chosen at the current
-position with probabilities of *p\ :sub:`A`\ *, *p\ :sub:`C`\ *,
-*p\ :sub:`G`\ *, and *p\ :sub:`T`\ * of choosing "A", "C", "G", or
-"T", respectively (eg. *p\ :sub:`A`\ *=0.2, *p\ :sub:`C`\ *=0.3,
-*p\ :sub:`G`\ *=0.3, and *p\ :sub:`T`\ *=0.2). In contrast, if "C"
+position with probabilities of p\ :sub:`A`\ , p\ :sub:`C`\ ,
+p\ :sub:`G`\ , and p\ :sub:`T`\  of choosing "A", "C", "G", or
+"T", respectively (eg. p\ :sub:`A`\ =0.2, p\ :sub:`C`\ =0.3,
+p\ :sub:`G`\ =0.3, and p\ :sub:`T`\ =0.2). In contrast, if "C"
 was chosen at the previous position, then the probability of
 choosing any one of the four nucleotides at the current position
 depends on a different predetermined probability distribution, that
 is, the probabilities of choosing "A", "C", "G", or "T" at the
-current position are now different (eg. *p\ :sub:`A`\ *=0.1,
-*p\ :sub:`C`\ *=0.41, *p\ :sub:`G`\ *=0.39, and
-*p\ :sub:`T`\ *=0.1).
+current position are now different (eg. p\ :sub:`A`\ =0.1,
+p\ :sub:`C`\ =0.41, p\ :sub:`G`\ =0.39, and
+p\ :sub:`T`\ =0.1).
 
 A Markov sequence model is like having four different roulette
 wheels, labelled "afterA", "afterT", "afterG", and "afterC", for
@@ -266,8 +266,8 @@ position in a sequence, respectively. Each of the four roulette
 wheels has four slices labelled "A", "T", "G", and "C", but in each
 roulette wheel a different fraction of the wheel is taken up by the
 four slices. That is, each roulette wheel has a different
-*p\ :sub:`A`\ *, *p\ :sub:`T`\ *, *p\ :sub:`G`\ * and
-*p\ :sub:`C`\ *. If we are generating a new DNA sequence using a
+p\ :sub:`A`\ , p\ :sub:`T`\ , p\ :sub:`G`\  and
+p\ :sub:`C`\ . If we are generating a new DNA sequence using a
 Markov sequence model, to decide what nucleotide to choose at a
 particular position in the sequence, you spin the arrow at the
 centre of a roulette wheel, and see in which slice the arrow stops.
@@ -279,7 +279,7 @@ example, if "T" was chosen at the previous position, we use the
 position. The probability of choosing a particular nucleotide at
 the current position (eg. "A") then depends on the fraction of the
 "afterT" roulette wheel taken up by the the slice labelled with
-that nucleotide (*p\ :sub:`A`\ * here; see the picture below).
+that nucleotide (p\ :sub:`A`\  here; see the picture below).
 
 |image2|
 
@@ -287,16 +287,16 @@ The transition matrix for a Markov model
 ----------------------------------------
 
 A multinomial model of DNA sequence evolution just has four
-parameters: the probabilities *p\ :sub:`A`\ *, *p\ :sub:`C`\ *,
-*p\ :sub:`G`\ *, and *p\ :sub:`T`\ *. In contrast, a Markov model
+parameters: the probabilities p\ :sub:`A`\ , p\ :sub:`C`\ ,
+p\ :sub:`G`\ , and p\ :sub:`T`\ . In contrast, a Markov model
 has many more parameters: four sets of probabilities
-*p\ :sub:`A`\ *, *p\ :sub:`C`\ *, *p\ :sub:`G`\ *, and
-*p\ :sub:`T`\ *, that differ according to whether the previous
-nucleotide was "A", "G", "T" or "C". The symbols *p\ :sub:`AA`\ *,
-*p\ :sub:`AC`\ *, *p\ :sub:`AG`\ *, and *p\ :sub:`AT`\ * are
+p\ :sub:`A`\ , p\ :sub:`C`\ , p\ :sub:`G`\ , and
+p\ :sub:`T`\ , that differ according to whether the previous
+nucleotide was "A", "G", "T" or "C". The symbols p\ :sub:`AA`\ ,
+p\ :sub:`AC`\ , p\ :sub:`AG`\ , and p\ :sub:`AT`\  are
 usually used to represent the four probabilities for the case where
-the previous nucleotide was "A", the symbols *p\ :sub:`CA`\ *,
-*p\ :sub:`CC`\ *, *p\ :sub:`CG`\ *, and *p\ :sub:`CT`\ * for the
+the previous nucleotide was "A", the symbols p\ :sub:`CA`\ ,
+p\ :sub:`CC`\ , p\ :sub:`CG`\ , and p\ :sub:`CT`\  for the
 case when the previous nucleotide was "C", and so on.
 
 It is common to store the probability parameters for a Markov model
@@ -327,11 +327,11 @@ the matrix. For example, to create a transition matrix, we type:
     T 0.50 0.17 0.17 0.17
 
 Rows 1, 2, 3 and 4 of the transition matrix give the probabilities
-*p\ :sub:`A`\ *, *p\ :sub:`C`\ *, *p\ :sub:`G`\ *, and
-*p\ :sub:`T`\ * for the cases where the previous nucleotide was
+p\ :sub:`A`\ , p\ :sub:`C`\ , p\ :sub:`G`\ , and
+p\ :sub:`T`\  for the cases where the previous nucleotide was
 "A", "C", "G", or "T", respectively. That is, the element in a
 particular row and column of the transition matrix (eg. the row for
-"A", column for "C") holds the probability (*p\ :sub:`AC`\ *) of
+"A", column for "C") holds the probability (p\ :sub:`AC`\ ) of
 choosing a particular nucleotide ("C") at the current position in
 the sequence, given that was a particular nucleotide ("A") at the
 previous position in the sequence.
@@ -346,8 +346,8 @@ using a Markov model, the nucleotide chosen at each position at the
 sequence depends on the nucleotide chosen at the previous position.
 As there is no previous nucleotide at the first position in the new
 sequence, we need to define the probabilities of choosing "A", "C",
-"G" or "T" for the first position. The symbols *Π\ :sub:`A`\ *,
-*Π\ :sub:`C`\ *, *Π\ :sub:`G`\ *, and *Π\ :sub:`T`\ * are used to
+"G" or "T" for the first position. The symbols Π\ :sub:`A`\ ,
+Π\ :sub:`C`\ , Π\ :sub:`G`\ , and Π\ :sub:`T`\  are used to
 represent the probabilities of choosing "A", "C", "G", or "T" at
 the first position.
 
@@ -377,13 +377,13 @@ sequence using a particular Markov model:
 
 The function generatemarkovseq() takes as its arguments (inputs)
 the transition matrix for the particular Markov model; a vector
-containing the values of *Π\ :sub:`A`\ *, *Π\ :sub:`C`\ *,
-*Π\ :sub:`G`\ *, and *Π\ :sub:`T`\ *; and the length of the DNA
+containing the values of Π\ :sub:`A`\ , Π\ :sub:`C`\ ,
+Π\ :sub:`G`\ , and Π\ :sub:`T`\ ; and the length of the DNA
 sequence to be generated.
 
 The probabilities of choosing each of the four nucleotides at the
-first position in the sequence are *Π\ :sub:`A`\ *,
-*Π\ :sub:`C`\ *, *Π\ :sub:`G`\ *, and *Π\ :sub:`T`\ *. The
+first position in the sequence are Π\ :sub:`A`\ ,
+Π\ :sub:`C`\ , Π\ :sub:`G`\ , and Π\ :sub:`T`\ . The
 probabilities of choosing each of the four nucleotides at the
 second position in the sequence depend on the particular nucleotide
 that was chosen at the first position in the sequence. The
@@ -395,8 +395,8 @@ We can use the generatemarkovseq() function to generate a sequence
 using a particular Markov model. For example, to create a sequence
 of 30 nucleotides using the Markov model described in the
 transition matrix *mytransitionmatrix*, using uniform starting
-probabilities (ie. *Π\ :sub:`A`\ * = 0.25, *Π\ :sub:`C`\ * = 0.25,
-*Π\ :sub:`G`\ * = 0.25, and *Π\ :sub:`T`\ * = 0.25) , we type:
+probabilities (ie. Π\ :sub:`A`\  = 0.25, Π\ :sub:`C`\  = 0.25,
+Π\ :sub:`G`\  = 0.25, and Π\ :sub:`T`\  = 0.25) , we type:
 
 ::
 
@@ -406,10 +406,10 @@ probabilities (ie. *Π\ :sub:`A`\ * = 0.25, *Π\ :sub:`C`\ * = 0.25,
     [24] "A" "C" "A" "A" "A" "T" "C"
 
 As you can see, there are many "A"s after "T"s in the sequence.
-This is because *p\ :sub:`TA`\ * has a high value (0.5) in the
+This is because p\ :sub:`TA`\  has a high value (0.5) in the
 Markov transition matrix *mytransitionmatrix*. Similarly, there are
-few "A"s or "T"s after "C"s, which is because *p\ :sub:`CA`\ * and
-*p\ :sub:`CT`\ * have low values (0.1) in this transition matrix.
+few "A"s or "T"s after "C"s, which is because p\ :sub:`CA`\  and
+p\ :sub:`CT`\  have low values (0.1) in this transition matrix.
 
 A Hidden Markov Model of DNA sequence evolution
 -----------------------------------------------
@@ -432,8 +432,8 @@ and an "AT-rich" roulette wheel. Each of the roulette wheels has
 four slices labelled "A", "T", "G", and "C", and in each roulette
 wheel a different fraction of the wheel is taken up by the four
 slices. That is, the "GC-rich" and "AT-rich" roulette wheels have
-different *p\ :sub:`A`\ *, *p\ :sub:`T`\ *, *p\ :sub:`G`\ * and
-*p\ :sub:`C`\ * values. If we are generating a new DNA sequence
+different p\ :sub:`A`\ , p\ :sub:`T`\ , p\ :sub:`G`\  and
+p\ :sub:`C`\  values. If we are generating a new DNA sequence
 using a HMM, to decide what nucleotide to choose at a particular
 sequence position, we spin the arrow of a particular roulette
 wheel, and see in which slice it stops.
@@ -503,11 +503,11 @@ holds the probabilities of choosing the four nucleotides "A", "C",
 and a GC-rich state, the emission matrix will hold the
 probabilities of choosing each of the four nucleotides "A", "C",
 "G" and "T" in the AT-rich state (for example,
-*p\ :sub:`A`\ *=0.39, *p\ :sub:`C`\ *=0.1, *p\ :sub:`G`\ *=0.1, and
-*p\ :sub:`T`\ *=0.41 for the AT-rich state), and the probabilities
+p\ :sub:`A`\ =0.39, p\ :sub:`C`\ =0.1, p\ :sub:`G`\ =0.1, and
+p\ :sub:`T`\ =0.41 for the AT-rich state), and the probabilities
 of choosing "A", "C", "G", and "T" in the GC-rich state (for
-example, *p\ :sub:`A`\ *=0.1, *p\ :sub:`C`\ *=0.41,
-*p\ :sub:`G`\ *=0.39, and *p\ :sub:`T`\ *=0.1 for the GC-rich
+example, p\ :sub:`A`\ =0.1, p\ :sub:`C`\ =0.41,
+p\ :sub:`G`\ =0.39, and p\ :sub:`T`\ =0.1 for the GC-rich
 state).
 
 ::
@@ -585,8 +585,8 @@ is chosen at each position depending on the state at the previous
 position in the sequence. As there is no previous nucleotide at the
 first position in the sequence, the function generatehmmseq() also
 requires the probabilities of the choosing each of the states at
-the first position (eg. *Π\ :sub:`AT-rich`\ * and
-*Π\ :sub:`GC-rich`\ * being the probability of the choosing the
+the first position (eg. Π\ :sub:`AT-rich`\  and
+Π\ :sub:`GC-rich`\  being the probability of the choosing the
 "AT-rich" or "GC-rich" states at the first position for a HMM with
 these two states).
 
@@ -595,8 +595,8 @@ using a particular HMM. For example, to create a sequence of 30
 nucleotides using the HMM with "AT-rich" and "GC-rich" states
 described in the transition matrix *thetransitionmatrix*, the
 emission matrix *theemissionmatrix*, and uniform starting
-probabilities (ie. *Π\ :sub:`AT-rich`\ * = 0.5,
-*Π\ :sub:`GC-rich`\ * = 0.5), we type:
+probabilities (ie. Π\ :sub:`AT-rich`\  = 0.5,
+Π\ :sub:`GC-rich`\  = 0.5), we type:
 
 ::
 
@@ -635,10 +635,10 @@ probabilities (ie. *Π\ :sub:`AT-rich`\ * = 0.5,
 
 As you can see, the nucleotides generated by the GC-rich state are
 mostly but not all "G"s and "C"s (because of the high values of
-*p\ :sub:`G`\ * and *p\ :sub:`C`\ * for the GC-rich state in the
+p\ :sub:`G`\  and p\ :sub:`C`\  for the GC-rich state in the
 HMM emission matrix), while the nucleotides generated by the
 AT-rich state are mostly but not all "A"s and "T"s (because of the
-high values of *p\ :sub:`T`\ * and *p\ :sub:`A`\ * for the AT-rics
+high values of p\ :sub:`T`\  and p\ :sub:`A`\  for the AT-rics
 state in the HMM emission matrix).
 
 Furthermore, there tends to be runs of nucleotides that are either
@@ -789,15 +789,15 @@ Similarly, when using a HMM to model protein sequence evolution, we
 may have states such as "hydrophobic" and "hydrophilic". In a
 protein HMM with "hydrophilic" and "hydrophilic" states, the
 "hydrophilic" HMM will have probabilities *p\ :sub:`A`\ *,
-*p\ :sub:`R`\ *, *p\ :sub:`C`\ *... of choosing each of the 20
+p\ :sub:`R`\ , p\ :sub:`C`\ ... of choosing each of the 20
 amino acids alanine (A), arginine (R), cysteine (C), etc. when in
 that state. Similarly, the "hydrophilic" state will have different
-probabilities *p\ :sub:`A`\ *, *p\ :sub:`R`\ *, *p\ :sub:`C`\ *...
+probabilities p\ :sub:`A`\ , p\ :sub:`R`\ , p\ :sub:`C`\ ...
 of choosing each of the 20 amino acids. The probability of choosing
 a hydrophobic amino acid such as alanine will be higher in the
 "hydrophobic" state than in the "hydrophilic" state (ie.
-*p\ :sub:`A`\ * of the "hydrophobic" state will be higher than the
-*p\ :sub:`A`\ * of of the "hydrophilic" state, where A represents
+p\ :sub:`A`\  of the "hydrophobic" state will be higher than the
+p\ :sub:`A`\  of of the "hydrophilic" state, where A represents
 alanine here). A HMM of protein sequence evolution also defines a
 certain probability of switching from the "hydrophilic" state to
 the "hydrophobic" state, and a certain probability of switching
