@@ -876,7 +876,7 @@ Q1. In a previous practical, you saw that the Bacteriophage lambda genome sequen
    infer which state of the HMM is most likely to have generated each nucleotide position in the Bacteriophage 
    lambda genome sequence. For the AT-rich state, set p\ :sub:`A`\ = 0.27, p\ :sub:`C`\ = 0.2084, 
    p\ :sub:`G`\ = 0.198, and p\ :sub:`T`\ = 0.3236. For the GC-rich state, set p\ :sub:`A`\ = 0.2462, 
-   p\ :sub:`C`\ *= 0.2476, p\ :sub:`G`\ = 0.2985, and p\ :sub:`T`\ = 0.2077. 
+   p\ :sub:`C`\ = 0.2476, p\ :sub:`G`\ = 0.2985, and p\ :sub:`T`\ = 0.2077. 
    Set the probability of switching from the AT-rich state to the GC-rich state to be 0.0002, and the 
     probability of switching from the GC-rich state to the AT-rich state to be 0.0002. 
     What is the most probable state path?
