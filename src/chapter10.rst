@@ -155,7 +155,7 @@ p\ :sub:`A`\ , p\ :sub:`C`\ , p\ :sub:`G`\ , and
 p\ :sub:`T`\  of choosing the nucleotides A, C, G and T,
 respectively, at a particular position in the DNA sequence. For
 example, say we decide to set p\ :sub:`A`\ =0.2,
-p\ :sub:`C`\ =0.3, p\ :sub:`G`\ *0.3, and p\ :sub:`T`\ =0.2.
+p\ :sub:`C`\ =0.3, p\ :sub:`G`\ =0.3, and p\ :sub:`T`\ =0.2.
 We can use the function sample() in R to generate a DNA sequence of
 a certain length, by selecting a nucleotide at each position
 according to this probability distribution:
@@ -788,7 +788,7 @@ evolution, we may have states such as "AT-rich" and "GC-rich".
 Similarly, when using a HMM to model protein sequence evolution, we
 may have states such as "hydrophobic" and "hydrophilic". In a
 protein HMM with "hydrophilic" and "hydrophilic" states, the
-"hydrophilic" HMM will have probabilities *p\ :sub:`A`\ *,
+"hydrophilic" HMM will have probabilities p\ :sub:`A`\ ,
 p\ :sub:`R`\ , p\ :sub:`C`\ ... of choosing each of the 20
 amino acids alanine (A), arginine (R), cysteine (C), etc. when in
 that state. Similarly, the "hydrophilic" state will have different
@@ -870,13 +870,43 @@ Answer the following questions, using the R package. For each
 question, please record your answer, and what you typed into R to
 get this answer.
 
-Q1. In a previous practical, you saw that the Bacteriophage lambda genome sequence (NCBI accession NC\_001416) has long stretches of either very GC-rich (mostly in the first half of the genome) or very AT-rich sequence (mostly in the second half of the genome). Use a HMM with two different states ("AT-rich" and "GC-rich") to infer which state of the HMM is most likely to have generated each nucleotide position in the Bacteriophage lambda genome sequence. For the AT-rich state, set *p\ :sub:`A`\ *= 0.27, *p\ :sub:`C`\ *= 0.2084, *p\ :sub:`G`\ *= 0.198, and *p\ :sub:`T`\ *= 0.3236. For the GC-rich state, set *p\ :sub:`A`\ *= 0.2462, *p\ :sub:`C`\ *= 0.2476, *p\ :sub:`G`\ *= 0.2985, and *p\ :sub:`T`\ *= 0.2077. Set the probability of switching from the AT-rich state to the GC-rich state to be 0.0002, and the probability of switching from the GC-rich state to the AT-rich state to be 0.0002. 
+Q1. In a previous practical, you saw that the Bacteriophage lambda genome sequence (NCBI accession NC\_001416) has 
+   long stretches of either very GC-rich (mostly in the first half of the genome) or very AT-rich sequence 
+   (mostly in the second half of the genome). Use a HMM with two different states ("AT-rich" and "GC-rich") to 
+   infer which state of the HMM is most likely to have generated each nucleotide position in the Bacteriophage 
+   lambda genome sequence. For the AT-rich state, set p\ :sub:`A`\ = 0.27, p\ :sub:`C`\ = 0.2084, 
+   p\ :sub:`G`\ = 0.198, and p\ :sub:`T`\ = 0.3236. For the GC-rich state, set p\ :sub:`A`\ = 0.2462, 
+   p\ :sub:`C`\ *= 0.2476, p\ :sub:`G`\ = 0.2985, and p\ :sub:`T`\ = 0.2077. 
+   Set the probability of switching from the AT-rich state to the GC-rich state to be 0.0002, and the 
+    probability of switching from the GC-rich state to the AT-rich state to be 0.0002. 
     What is the most probable state path?
-Q2. Given a HMM with four different states ("A-rich", "C-rich", "G-rich" and "T-rich"), infer which state of the HMM is most likely to have generated each nucleotide position in the Bacteriophage lambda genome sequence. For the A-rich state, set *p\ :sub:`A`\ *= 0.3236, *p\ :sub:`C`\ *= 0.2084, *p\ :sub:`G`\ *= 0.198, and *p\ :sub:`T`\ *= 0.27. For the C-rich state, set *p\ :sub:`A`\ *= 0.2462, *p\ :sub:`C`\ *= 0.2985, *p\ :sub:`G`\ *= 0.2476, and *p\ :sub:`T`\ *= 0.2077. For the G-rich state, set *p\ :sub:`A`\ *= 0.2462, *p\ :sub:`C`\ *= 0.2476, *p\ :sub:`G`\ *= 0.2985, and *p\ :sub:`T`\ *= 0.2077. For the T-rich state, set *p\ :sub:`A`\ *= 0.27, *p\ :sub:`C`\ *= 0.2084, *p\ :sub:`G`\ *= 0.198, and *p\ :sub:`T`\ *= 0.3236. Set the probability of switching from the A-rich state to any of the three other states to be 6.666667e-05. Likewise, set the probability of switching from the C-rich/G-rich/T-rich state to any of the three other states to be 6.666667e-05. 
+Q2. Given a HMM with four different states ("A-rich", "C-rich", "G-rich" and "T-rich"), infer which state of 
+    the HMM is most likely to have generated each nucleotide position in the Bacteriophage lambda genome sequence. 
+    For the A-rich state, set p\ :sub:`A`\ = 0.3236, p\ :sub:`C`\ = 0.2084, p\ :sub:`G`\ = 0.198, and 
+    p\ :sub:`T`\ = 0.27. For the C-rich state, set p\ :sub:`A`\ = 0.2462, p\ :sub:`C`\ = 0.2985, 
+    p\ :sub:`G`\ = 0.2476, and p\ :sub:`T`\ = 0.2077. For the G-rich state, set p\ :sub:`A`\ = 0.2462, 
+    p\ :sub:`C`\ = 0.2476, p\ :sub:`G`\ = 0.2985, and p\ :sub:`T`\ = 0.2077. For the T-rich state, 
+    set p\ :sub:`A`\ = 0.27, p\ :sub:`C`\ = 0.2084, p\ :sub:`G`\ = 0.198, and p\ :sub:`T`\ = 0.3236. 
+    Set the probability of switching from the A-rich state to any of the three other states to be 
+    6.666667e-05. Likewise, set the probability of switching from the C-rich/G-rich/T-rich state to any 
+    of the three other states to be 6.666667e-05. 
     What is the most probable state path?
     Do you find differences between these results and the results from
     simply using a two-state HMM (as in Q1)?
-Q3. Make a two-state HMM to model protein sequence evolution, with "hydrophilic" and "hydrophobic" states. For the hydrophilic state, set *p\ :sub:`A`\ *= 0.02, *p\ :sub:`R`\ *= 0.068, *p\ :sub:`N`\ *= 0.068, *p\ :sub:`D`\ *= 0.068, *p\ :sub:`C`\ *= 0.02, *p\ :sub:`Q`\ *= 0.068, *p\ :sub:`E`\ *= 0.068, *p\ :sub:`G`\ *= 0.068, *p\ :sub:`H`\ *= 0.068, *p\ :sub:`I`\ *= 0.012, *p\ :sub:`L`\ *= 0.012, *p\ :sub:`K`\ *= 0.068, *p\ :sub:`M`\ *= 0.02, *p\ :sub:`F`\ *= 0.02, *p\ :sub:`P`\ *= 0.068, *p\ :sub:`S`\ *= 0.068, *p\ :sub:`T`\ *= 0.068, *p\ :sub:`W`\ *= 0.068, *p\ :sub:`Y`\ *= 0.068, and *p\ :sub:`V`\ *= 0.012. For the hydrophobic state, set *p\ :sub:`A`\ *= 0.114, *p\ :sub:`R`\ *= 0.007, *p\ :sub:`N`\ *= 0.007, *p\ :sub:`D`\ *= 0.007, *p\ :sub:`C`\ *= 0.114, *p\ :sub:`Q`\ *= 0.007, *p\ :sub:`E`\ *= 0.007, *p\ :sub:`G`\ *= 0.025, *p\ :sub:`H`\ *= 0.007, *p\ :sub:`I`\ *= 0.114, *p\ :sub:`L`\ *= 0.114, *p\ :sub:`K`\ *= 0.007, *p\ :sub:`M`\ *= 0.114, *p\ :sub:`F`\ *= 0.114, *p\ :sub:`P`\ *= 0.025, *p\ :sub:`S`\ *= 0.026, *p\ :sub:`T`\ *= 0.026, *p\ :sub:`W`\ *= 0.025, *p\ :sub:`Y`\ *= 0.026, and *p\ :sub:`V`\ *= 0.114. Set the probability of switching from the hydrophilic state to the hydrophobic state to be 0.01. Set the probability of switching from the hydrophobic state to the hydrophilic state to be 0.01. Now infer which state of the HMM is most likely to have generated each amino acid position in the the human odorant receptor 5BF1 protein (UniProt accession Q8NHC7). 
+Q3. Make a two-state HMM to model protein sequence evolution, with "hydrophilic" and "hydrophobic" states. 
+    For the hydrophilic state, set p\ :sub:`A`\ = 0.02, p\ :sub:`R`\ = 0.068, p\ :sub:`N`\ = 0.068, 
+    p\ :sub:`D`\ = 0.068, p\ :sub:`C`\ = 0.02, p\ :sub:`Q`\ = 0.068, p\ :sub:`E`\ = 0.068, p\ :sub:`G`\ = 0.068, 
+    p\ :sub:`H`\ = 0.068, p\ :sub:`I`\ = 0.012, p\ :sub:`L`\ = 0.012, p\ :sub:`K`\ = 0.068, p\ :sub:`M`\ = 0.02, 
+    p\ :sub:`F`\ = 0.02, p\ :sub:`P`\ = 0.068, p\ :sub:`S`\ = 0.068, p\ :sub:`T`\ = 0.068, p\ :sub:`W`\ = 0.068, 
+    p\ :sub:`Y`\ = 0.068, and p\ :sub:`V`\ = 0.012. For the hydrophobic state, set p\ :sub:`A`\ = 0.114, 
+    p\ :sub:`R`\ = 0.007, p\ :sub:`N`\ = 0.007, p\ :sub:`D`\ = 0.007, p\ :sub:`C`\ = 0.114, p\ :sub:`Q`\ = 0.007, 
+    p\ :sub:`E`\ = 0.007, p\ :sub:`G`\ = 0.025, p\ :sub:`H`\ = 0.007, p\ :sub:`I`\ = 0.114, p\ :sub:`L`\ = 0.114, 
+    p\ :sub:`K`\ = 0.007, p\ :sub:`M`\ = 0.114, p\ :sub:`F`\ = 0.114, p\ :sub:`P`\ = 0.025, p\ :sub:`S`\ = 0.026, 
+    p\ :sub:`T`\ = 0.026, p\ :sub:`W`\ = 0.025, p\ :sub:`Y`\ = 0.026, and p\ :sub:`V`\ = 0.114. 
+    Set the probability of switching from the hydrophilic state to the hydrophobic state to be 0.01. 
+    Set the probability of switching from the hydrophobic state to the hydrophilic state to be 0.01. 
+    Now infer which state of the HMM is most likely to have generated each amino acid position in the the 
+    human odorant receptor 5BF1 protein (UniProt accession Q8NHC7). 
     What is the most probable state path?
     The odorant receptor is a 7-transmembrane protein, meaning that it
     crosses the cell membrane seven times. As a consequence the protein
@@ -888,7 +918,7 @@ Q3. Make a two-state HMM to model protein sequence evolution, with "hydrophilic"
 
 
 
-.. |image0| image:: ../_static/P10_image4.pno
+.. |image0| image:: ../_static/P10_image4.png
             :width: 500
 .. |image1| image:: ../_static/P10_image3.png
             :width: 500
