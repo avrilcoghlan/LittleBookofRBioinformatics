@@ -116,32 +116,32 @@ sequence has been produced by a random process that randomly chose
 any of the four nucleotides at each position in the sequence, where
 the probability of choosing any one of the four nucleotides depends
 on a predetermined probability distribution. That is, the four
-nucleotides are chosen with *p\ :sub:`A`\ *, *p\ :sub:`C`\ *,
-*p\ :sub:`G`\ *, and *p\ :sub:`T`\ * respectively. This is known as
+nucleotides are chosen with p\ :sub:`A`\ , p\ :sub:`C`\ ,
+p\ :sub:`G`\ , and p\ :sub:`T`\  respectively. This is known as
 the *multinomial sequence model*.
 
 A multinomial model for DNA sequence evolution has four parameters:
-the probabilities of the four nucleotides *p\ :sub:`A`\ *,
-*p\ :sub:`C`\ *, *p\ :sub:`G`\ *, and *p\ :sub:`T`\ *. For example,
-say we may create a multinomial model where *p\ :sub:`A`\ *=0.2,
-*p\ :sub:`C`\ *=0.3, *p\ :sub:`G`\ *=0.3, and *p\ :sub:`T`\ *=0.2.
+the probabilities of the four nucleotides p\ :sub:`A`\ ,
+p\ :sub:`C`\ , p\ :sub:`G`\ , and p\ :sub:`T`\ . For example,
+say we may create a multinomial model where p\ :sub:`A`\ =0.2,
+p\ :sub:`C`\ =0.3, p\ :sub:`G`\ =0.3, and p\ :sub:`T`\ =0.2.
 This means that the probability of choosing a A at any particular
 sequence position is set to be 0.2, the probability of choosing a C
 is 0.3, of choosing a G is 0.3, and of choosing a T is 0.2. Note
-that *p\ :sub:`A`\ * + *p\ :sub:`C`\ * + *p\ :sub:`G`\ * +
-*p\ :sub:`T`\ * = 1, as the sum of the probabilities of the four
+that p\ :sub:`A`\  + p\ :sub:`C`\  + p\ :sub:`G`\  +
+p\ :sub:`T`\  = 1, as the sum of the probabilities of the four
 different types of nucleotides must be equal to 1, as there are
 only four possible types of nucleotide.
 
 The multinomial sequence model is like having a roulette wheel that
 is divided into four different slices labelled "A", "T", "G" and
-"C", where the *p\ :sub:`A`\ *, *p\ :sub:`T`\ *, *p\ :sub:`G`\ *
-and *p\ :sub:`C`\ * are the fractions of the wheel taken up by the
+"C", where the p\ :sub:`A`\ , p\ :sub:`T`\ , p\ :sub:`G`\ 
+and p\ :sub:`C`\  are the fractions of the wheel taken up by the
 slices with these four labels. If you spin the arrow attached to
 the centre of the roulette wheel, the probability that it will stop
 in the slice with a particular label (eg. the slice labelled "A")
 only depends on the fraction of the wheel taken up by that slice
-(*p\ :sub:`A`\ * here; see the picture below).
+(p\ :sub:`A`\  here; see the picture below).
 
 |image0|
 
