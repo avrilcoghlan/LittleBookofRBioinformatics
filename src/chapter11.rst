@@ -838,10 +838,10 @@ Q5. What proteins does yeast protein YPR119W interact with, in de Lichtenberg *e
 
 
 
-.. |image0| image:: ../../_static/sysbio/MB6300_P1_image5.png
-.. |image1| image:: ../../_static/sysbio/MB6300_P1_image1.png
-.. |image2| image:: ../../_static/sysbio/MB6300_P1_image2.png
-.. |image3| image:: ../../_static/sysbio/MB6300_P1_image7.png
-.. |image4| image:: ../../_static/sysbio/MB6300_P1_image8.png
-.. |image5| image:: ../../_static/sysbio/MB6300_P1_image4.png
-.. |image6| image:: ../../_static/sysbio/MB6300_P1_image6.png
+.. |image0| image:: ../../_static/MB6300_P1_image5.png
+.. |image1| image:: ../../_static/MB6300_P1_image1.png
+.. |image2| image:: ../../_static/MB6300_P1_image2.png
+.. |image3| image:: ../../_static/MB6300_P1_image7.png
+.. |image4| image:: ../../_static/MB6300_P1_image8.png
+.. |image5| image:: ../../_static/MB6300_P1_image4.png
+.. |image6| image:: ../../_static/MB6300_P1_image6.png
