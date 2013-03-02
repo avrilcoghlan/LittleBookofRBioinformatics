@@ -304,6 +304,7 @@ in different subgraphs. In this case, the subgraphs are known as
 For example, the graph below contains three connected components:
 
 |image1|
+
 Image source:
 `http://en.wikipedia.org/wiki/Connected\_component\_(graph\_theory) <http://en.wikipedia.org/wiki/Connected_component_(graph_theory)>`_
 
@@ -454,14 +455,12 @@ type:
 
 ::
 
-    > source("Rfunctions.R")
     > mycomponent <- findcomponent(litG, "YBR009C")
     > mycomponent # Print out the members of this connected component. 
-     [1] "YBR009C" "YBR010W" "YNL030W" "YNL031C" "YOL139C" "YAR007C" "YBR073W"
-     [8] "YER095W" "YJL173C" "YNL312W" "YBL084C" "YDR146C" "YLR127C" "YNL172W"
-    [15] "YLR134W" "YMR284W" "YER179W" "YIL144W" "YML104C" "YOR191W" "YDL008W"
-    [22] "YDL030W" "YDL042C" "YDR004W" "YGR162W" "YMR117C" "YDR386W" "YDR485C"
-    [29] "YDL043C"
+       [1] "YBR009C" "YBR010W" "YNL030W" "YNL031C" "YOL139C" "YAR007C" "YBR073W" "YER095W" "YJL173C" "YNL312W"
+      [11] "YBL084C" "YDR146C" "YLR127C" "YNL172W" "YLR134W" "YMR284W" "YER179W" "YIL144W" "YML104C" "YOR191W"
+      [21] "YDL008W" "YDL030W" "YDL042C" "YDR004W" "YGR162W" "YMR117C" "YDR386W" "YDR485C" "YDL043C" "YDR118W"
+      [31] "YMR106C" "YML032C" "YDR076W" "YDR180W" "YDL013W" "YDR227W"
 
 Extracting a subgraph from a graph in R
 ---------------------------------------
@@ -565,10 +564,43 @@ different results. That is, the particular method used for
 detecting communities will decide how you split a connected
 component into one or more communities.
 
-The file Rfunctions.R (which you can download from the web at
-`www.ucc.ie/microbio/MB6300/Rfunctions.R <http://www.ucc.ie/microbio/MB6300/Rfunctions.R>`_)
-contains one function findcommunities() that identifies communities
-within a graph (or subgraph of a graph). The function
+The function findcommunities() below identifies communities within
+a graph (or subgraph of a graph):
+
+::
+
+    > findcommunities <- function(mygraph,minsize)
+      {
+         # Function to find network communities in a graph
+         # Load up the igraph library:
+         require("igraph")
+         # Set the counter for the number of communities:
+         cnt <- 0
+         # First find the connected components in the graph:
+         myconnectedcomponents <- connectedComp(mygraph)
+         # For each connected component, find the communities within that connected component:
+         numconnectedcomponents <- length(myconnectedcomponents)
+         for (i in 1:numconnectedcomponents)
+         {
+            component <- myconnectedcomponents[[i]]
+            # Find the number of nodes in this connected component:
+            numnodes <- length(component)
+            if (numnodes > 1) # We can only find communities if there is more than one node
+            {
+               mysubgraph <- subGraph(component, mygraph)
+               # Find the communities within this connected component:
+               # print(component)
+               myvector <- vector()
+               mylist <- findcommunities2(mysubgraph,cnt,"FALSE",myvector,minsize)
+               cnt <- mylist[[1]]
+               myvector <- mylist[[2]]
+            }
+         }
+         print(paste("There were",cnt,"communities in the input graph"))
+      }  
+
+
+The function
 findcommunities() uses the function spinglass.community() from the
 "igraph" package to identify communities in a graph or subgraph. As
 its arguments (inputs), the findcommunities() function takes the
@@ -580,7 +612,6 @@ to the third connected component of the litG graph, we can type:
 
 ::
 
-    > source("Rfunctions.R")
     > mysubgraph <- subGraph(component3, litG)
     > findcommunities(mysubgraph, 1) 
     [1] "Community 1 : YML104C YOR191W YDL030W YDR485C YDL013W"
