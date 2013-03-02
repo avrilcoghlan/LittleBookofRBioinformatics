@@ -12,12 +12,12 @@ will use R for analysing protein-protein interaction data. However,
 first we will discuss some features of R that will be useful in
 this practical.
 
-One thing that is useful to know about R is that many R libraries
+One thing that is useful to know about R is that many R packages 
 come with example data sets, which can be used to familiarise
-yourself with the functions in the particular library. To list the
-data sets that come with a particular library, you can use the
+yourself with the functions in the particular package. To list the
+data sets that come with a particular package, you can use the
 data() function in R. For example, to find the data sets that come
-with the "graph" library, type:
+with the "graph" package, type:
 
 ::
 
@@ -75,47 +75,47 @@ value of 20, we can type:
 This tells us that five elements of vector *y* have values of 20.
 
 In this practical you will be using functions from several
-different libraries. It's important to remember that sometimes
-functions in different libraries have the same name. For example,
+different packages. It's important to remember that sometimes
+functions in different packages have the same name. For example,
 there is a function called degree() in both the "igraph" and
-"graph" libraries. Therefore, you need to specify which degree()
-function you want to use, by putting the library name, followed by
+"graph" packages. Therefore, you need to specify which degree()
+function you want to use, by putting the package name, followed by
 ":", before the name of the function. For example, to use the
-degree() function from the "graph" library, you can type
+degree() function from the "graph" package, you can type
 graph::degree(), while to use the degree() function from the
-"igraph" library, you can type igraph::degree().
+"igraph" package, you can type igraph::degree().
 
 Graphs for protein-protein interaction data in R
 ------------------------------------------------
 
 Protein-protein interaction data can be described in terms of
 graphs. In this practical, we will explore a curated data set of
-protein-protein interactions, by using R libraries for analysing
+protein-protein interactions, by using R packages for analysing
 and visualising graphs.
 
-We will use three main R libraries that have been written for
-handling biological graphs: the "graph" library, the "RBGL"
-library, and the "Rgraphviz" library. The Rgraphviz library is part
-of the Bioconductor set of R libraries, so needs to be installed as
-part of that set of libraries (see the Bioconductor webpage at
+We will use three main R packages that have been written for
+handling biological graphs: the "graph" package, the "RBGL"
+package, and the "Rgraphviz" package. The Rgraphviz package is part
+of the Bioconductor set of R packages, so needs to be installed as
+part of that set of package (see the Bioconductor webpage at
 `www.bioconductor.org/docs/install/ <http://www.bioconductor.org/docs/install/>`_
 for details).
 
 We will first analyse a curated data set of protein-protein
 interactions in the yeast *Saccharomyces cerevisiae* extracted from
-published papers. This data set comes from with an R library called
+published papers. This data set comes from with an R package called
 "yeastExpData", which calls the data set "litG". This data was
 first described in a paper by Ge *et al* (2001) in
 *Nature Genetics*
 (`http://www.nature.com/ng/journal/v29/n4/full/ng776.html <http://www.nature.com/ng/journal/v29/n4/full/ng776.html>`_).
 
 To read the litG data set into R, we first need to load the
-yeastExpData library, and then we can use the R data() function to
+yeastExpData package, and then we can use the R data() function to
 read in the litG data set:
 
 ::
 
-    > library("yeastExpData") # Load the yeastExpData library
+    > library("yeastExpData") # Load the yeastExpData package
     > data("litG")            # Read the litG data set 
 
 When you read in the litG data set using the data() function, it is
@@ -141,15 +141,15 @@ interactions between 315 pairs of proteins.
 Finding the names of vertices in graphs for protein-protein interaction data in R
 ---------------------------------------------------------------------------------
 
-The "graph" R library contains many functions for analysing graph
-data in R. For example, the nodes() function from the graph library
+The "graph" R package contains many functions for analysing graph
+data in R. For example, the nodes() function from the graph package 
 can be used to retrieve the names of the vertices (nodes) in the
 graph. For example, we can retrive the names of the vertices in the
 litG graph, and store them in a vector "mynodes", by typing:
 
 ::
 
-    > library("graph")        # Load the graph library
+    > library("graph")        # Load the graph package 
     > mynodes <- nodes(litG)  # Retrieve the names of the vertices in the litG graph
 
 We can then print the names of the first 10 vertices in the litG
@@ -183,7 +183,7 @@ Finding the names of proteins that a particular protein interacts with
 If you are particularly interested in a particular protein in a
 protein-protein interaction graph, you may want to print out the
 list of the proteins that that protein interacts with. To do this,
-you can use the adj() function in the R "graph" library. For
+you can use the adj() function in the R "graph" package. For
 example, to print out the proteins that yeast protein YBR009C
 interacts with in the litG graph, you can type:
 
@@ -212,12 +212,12 @@ is the number of interactions that that protein has with other
 proteins.
 
 You can calculate the degrees of all the vertices in a graph by
-using the degree() function in the R "graph" library. The degree()
+using the degree() function in the R "graph" package. The degree()
 function returns a vector containing the degrees of each of the
 vertices in the graph. Remember that there is a degree() function
-in both the "graph" and "igraph" libraries, so if you have loaded
-both libraries, you will need to specify that you want to use the
-degree() function in the "graph" library, by writing
+in both the "graph" and "igraph" packages, so if you have loaded
+both packages, you will need to specify that you want to use the
+degree() function in the "graph" package, by writing
 graph::degree().
 
 For example, to calculate the degrees of vertices in the litG
@@ -308,7 +308,7 @@ Image source:
 `http://en.wikipedia.org/wiki/Connected\_component\_(graph\_theory) <http://en.wikipedia.org/wiki/Connected_component_(graph_theory)>`_
 
 You can find connected components of a graph in R, by using the
-connectedComp function in the "RBGL" library. For example, to find
+connectedComp function in the "RBGL" package. For example, to find
 connected components in the litG graph, we type:
 
 ::
@@ -418,10 +418,35 @@ components that contain just 1 protein each. These proteins
 presumably do not have any known interactions with with any other
 protein in the litG data set.
 
-To find the connected component that a particular protein belongs
-to, we can use the findcomponent() in the file Rfunctions.R (which
-you can download from the web at
-`www.ucc.ie/microbio/MB6300/Rfunctions.R <http://www.ucc.ie/microbio/MB6300/Rfunctions.R>`_).
+To find the connected component that a particular protein belongs to,
+you can use the findcomponent function:
+
+::
+
+    > findcomponent <- function(graph,vertex)
+      {
+         # Function to find the connected component that contains a particular vertex
+         require("RBGL")
+         found <- 0
+         myconnectedcomponents <- connectedComp(graph)
+         numconnectedcomponents <- length(myconnectedcomponents)
+         for (i in 1:numconnectedcomponents)
+         {
+            componenti <- myconnectedcomponents[[i]] 
+            numvertices <- length(componenti)
+            for (j in 1:numvertices)
+            {
+               vertexj <- componenti[j]
+               if (vertexj == vertex) 
+               {
+                  found <- 1
+                  return(componenti)
+               }   
+            }
+         }
+         print("ERROR: did not find vertex in the graph")
+      }  
+
 The function findcompontent() returns a vector containing the names
 of the proteins in the connected component. For example, to find
 the connected component containing the protein YBR009C, you can
@@ -443,7 +468,7 @@ Extracting a subgraph from a graph in R
 
 If you want to extract a particular subgraph of a graph (that is,
 part of a graph), you can use the subGraph function in the "graph"
-library. As its arguments (inputs), the subGraph function contains
+package. As its arguments (inputs), the subGraph function contains
 a vector containing the vertices (nodes) in the subgraph that we're
 interested in, and the graph that the subgraph belongs to.
 
@@ -475,10 +500,10 @@ edges.
 Plotting graphs for protein-protein interaction data in R
 ---------------------------------------------------------
 
-The "Rgraphviz" R library contains useful functions for plotting
+The "Rgraphviz" R package contains useful functions for plotting
 graphs, or plotting parts of graphs ("subgraphs").
 
-The layoutGraph and renderGraph functions in the Rgraphviz library
+The layoutGraph and renderGraph functions in the Rgraphviz package
 can be used to make a nice plot of a subgraph. There are lots of
 options for the colours to use for plotting vertices and edges.
 
@@ -515,6 +540,7 @@ subgraphs; these could be said to be three different *communities*
 within the graph:
 
 |image3|
+
 Image source:
 `http://en.wikipedia.org/wiki/Community\_structure <http://en.wikipedia.org/wiki/Community_structure>`_
 
@@ -544,7 +570,7 @@ The file Rfunctions.R (which you can download from the web at
 contains one function findcommunities() that identifies communities
 within a graph (or subgraph of a graph). The function
 findcommunities() uses the function spinglass.community() from the
-"igraph" library to identify communities in a graph or subgraph. As
+"igraph" package to identify communities in a graph or subgraph. As
 its arguments (inputs), the findcommunities() function takes the
 graph/subgraph that we want to find communities in, and the minimum
 number of vertices that a community must have to be reported.
@@ -604,7 +630,7 @@ Reading in protein-protein interaction data in R
 
 In the above example, you looked at the litG data set of
 protein-protein interactions, which is a data set that comes with
-the "yeastExpData" R library. But what if you want to look at a
+the "yeastExpData" R package. But what if you want to look at a
 data set of protein-protein interactions that does not come from
 R?
 
@@ -696,7 +722,7 @@ In this practical, you will have learnt to use the following R
 functions:
 
 
-#. data() to load a data set that comes with a library into R
+#. data() to load a data set that comes with a package into R
 #. table() for making a table of the data in a vector, or finding
    out how many elements in a vector have a particular value
 #. sort() for sorting a vector
@@ -704,20 +730,20 @@ functions:
 All of these functions belong to the standard installation of R.
 
 You have also learnt the following R functions that belong to the
-additional R libraries:
+additional R packages:
 
 
-#. nodes() from the "graph" library for getting a list of the names
+#. nodes() from the "graph" package for getting a list of the names
    of vertices in a graph
-#. adj() from the "graph" library for getting a list of the
+#. adj() from the "graph" package for getting a list of the
    vertices that a particular vertex is connected to in a graph
-#. degree() from the "graph" library for calculating the degree of
+#. degree() from the "graph" package for calculating the degree of
    each of the vertices in a graph
-#. connectedComp() from the "RBGL" library for identifying
+#. connectedComp() from the "RBGL" package for identifying
    connected components in a graph
-#. subGraph() from the "graph" library for extracting a subgraph
+#. subGraph() from the "graph" package for extracting a subgraph
    from a graph
-#. layoutGraph() and renderGraph() from the "Rgraphviz" library for
+#. layoutGraph() and renderGraph() from the "Rgraphviz" package for
    plotting a graph or subgraph
 
 Links and Further Reading
@@ -747,19 +773,19 @@ available on the "Introduction to R" website,
 `cran.r-project.org/doc/manuals/R-intro.html <http://cran.r-project.org/doc/manuals/R-intro.html>`_.
 
 For more in-depth information and more examples on using the
-"graph" library for analysing graphs, look at the "graph" library
+"graph" package for analysing graphs, look at the "graph" package
 documentation,
 `www.cran.r-project.org/web/packages/graph/index.html <http://www.cran.r-project.org/web/packages/graph/index.html>`_.
 
-More information and examples on using the "RBGL" library is
+More information and examples on using the "RBGL" package is
 available in the RBGL documentation at
 `www.cran.r-project.org/web/packages/RBGL/index.html <http://www.cran.r-project.org/web/packages/RBGL/index.html>`_.
 
-More information and examples on using the "Rgraphviz" library is
+More information and examples on using the "Rgraphviz" package is
 available in the Rgraphviz documentation at
 `www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html <http://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html>`_.
 
-More information and examples on using the "igraph" library is
+More information and examples on using the "igraph" package is
 available in the "igraph" documentation at
 `www.cran.r-project.org/web/packages/igraph/index.html <http://www.cran.r-project.org/web/packages/igraph/index.html>`_.
 
