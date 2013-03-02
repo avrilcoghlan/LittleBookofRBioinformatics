@@ -1,5 +1,5 @@
-Practical 1 for 2009/2010 - Protein-Protein Interaction Graphs
-==============================================================
+Protein-Protein Interaction Graphs
+==================================
 
 .. highlight:: r
 
@@ -777,6 +777,18 @@ were inspired by the book
 *Principles of Computational Cell Biology: from protein complexes to cellular networks*
 by Volkhard Helms (Wiley-VCH;
 `http://www.wiley-vch.de/publish/en/books/bySubjectLS00/ISBN3-527-31555-1 <http://www.wiley-vch.de/publish/en/books/bySubjectLS00/ISBN3-527-31555-1>`_).
+
+Contact
+-------
+
+I will be grateful if you will send me (`Avril Coghlan <http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_) corrections or suggestions for improvements to
+my email address alc@sanger.ac.uk
+
+License
+-------
+
+The content in this book is licensed under a `Creative Commons Attribution 3.0 License
+<http://creativecommons.org/licenses/by/3.0/>`_.
 
 Exercises
 ---------
