@@ -264,8 +264,8 @@ The Rho value for GAC is given as 1.0662370, in agreement with our calculation a
 Contact
 -------
 
-I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
-my email address a.coghlan@ucc.ie 
+I will be grateful if you will send me (`Avril Coghlan <http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_) corrections or suggestions for improvements to
+my email address alc@sanger.ac.uk
 
 License
 -------
