@@ -861,14 +861,14 @@ indiciate the pairs of proteins that interact:
       }
 
 For example, the example file
-`https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt <https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt>`_
+`http://www.maths.tcd.ie/~avrillee/littlebookofr/ExampleInteractionData <http://www.maths.tcd.ie/~avrillee/littlebookofr/ExampleInteractionData>`_
 contains the five pairs of interacting proteins listed above. You
 can read it in and make a graph for these interacting proteins by
 typing:
 
 ::
 
-    > thegraph <- makeproteingraph("https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt")
+    > thegraph <- makeproteingraph("http://www.maths.tcd.ie/~avrillee/littlebookofr/ExampleInteractionData")
 
 You can then make a plot of this graph as before:
 
