@@ -896,15 +896,28 @@ the average.
 It is often useful and interesting to compare the properties of
 biological graphs to random graphs. In order to do this, you need
 to be able to generate some random graphs. The function
-makerandomgraph() in file Rfunctions.R makes a random graph with a
-certain number of eges. This function takes as its argument (input)
+makerandomgraph() in R makes a random graph with a
+certain number of edges:
+
+::
+
+    > makerandomgraph <- function(numvertices,numedges)
+      {
+         # Function to make a random graph
+         require("graph")
+         # Make a vector with the names of the vertices
+         mynames <- sapply(seq(1,numvertices),toString) 
+         myrandomgraph <- randomEGraph(mynames, edges = numedges)
+         return(myrandomgraph)
+      }
+
+This function takes as its argument (input)
 the number of vertices and edges that you want the random graph to
 have to have. For example, to create a random graph that has 15
 vertices and 43 edges, we type:
 
 ::
 
-    > source("Rfunctions.R")
     > myrandomgraph <- makerandomgraph(15, 43)
     > myrandomgraph # Print out the number of vertices and edges in the graph
     A graphNEL graph with undirected edges
