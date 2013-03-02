@@ -833,22 +833,42 @@ between protein YKL166C and protein YIL033C, between YCR002C and
 YHR107C, between YCR002C and YJR076C, between YCR002C and YLR314C,
 and between YJR076C and YHR107C.
 
-The file Rfunctions.R (which you can download from the web at
-`www.ucc.ie/microbio/MB6300/Rfunctions.R <http://www.ucc.ie/microbio/MB6300/Rfunctions.R>`_)
-contains a function makeproteingraph() to make a graph based on an
-input file of protein-protein interaction, where the first two
-columns of the input file indicate the pairs of proteins that
-interact.
+The function makeproteingraph() makes a graph based on an input file of
+protein-protein interactions, where the first two columns of the input file
+indiciate the pairs of proteins that interact:
+
+::
+
+    > makeproteingraph <- function(myfile)
+      {
+         # Function to make a graph based on protein-protein interaction data in an input file
+         require("graph")
+         mytable <- read.table(file(myfile)) # Store the data in a data frame
+         proteins1 <- mytable$V1
+         proteins2 <- mytable$V2
+         protnames <- c(levels(proteins1),levels(proteins2))
+         # Find out how many pairs of proteins there are
+         numpairs <- length(proteins1)
+         # Find the unique protein names:
+         uniquenames <-  unique(protnames)
+         # Make a graph for these proteins with no edges:
+         mygraph <- new("graphNEL", nodes = uniquenames)
+         # Add edges to the graph:
+         # See http://rss.acs.unt.edu/Rdoc/library/graph/doc/graph.pdf for more examples
+         weights <- rep(1,numpairs)
+         mygraph2 <- addEdge(as.vector(proteins1),as.vector(proteins2),mygraph,weights)
+         return(mygraph2)      
+      }
 
 For example, the example file
-`www.ucc.ie/microbio/MB6300/ExampleInteractionData.txt <http://www.ucc.ie/microbio/MB6300/ExampleInteractionData.txt>`_
+`https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt <https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt>`_
 contains the five pairs of interacting proteins listed above. You
 can read it in and make a graph for these interacting proteins by
 typing:
 
 ::
 
-    > thegraph <- makeproteingraph("http://www.ucc.ie/microbio/MB6300/ExampleInteractionData.txt")
+    > thegraph <- makeproteingraph("https://gist.github.com/avrilcoghlan/5073332#file-exampleinteractiondata-txt")
 
 You can then make a plot of this graph as before:
 
