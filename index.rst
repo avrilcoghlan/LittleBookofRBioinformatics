@@ -41,6 +41,7 @@ Chapters in this Book
    src/chapter10.rst
    src/chapter_answers.rst
    src/revisionexercises_answers.rst
+   src/chapter11.rst
 
 Acknowledgements
 ----------------
