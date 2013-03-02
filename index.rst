@@ -1,9 +1,9 @@
 Welcome to a Little Book of R for Bioinformatics!
 =================================================
 
-By `Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_,
-University College Cork, Cork, Ireland. 
-Email: a.coghlan@ucc.ie
+By `Avril Coghlan <http://http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_,
+Wellcome Trust Sanger Institute, Cambridge, U.K. 
+Email: alc@sanger.ac.uk
 
 This is a simple introduction to bioinformatics, with a focus on genome analysis, using the R statistics software.
 
@@ -53,8 +53,8 @@ this document.
 Contact
 -------
 
-I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
-my email address a.coghlan@ucc.ie 
+I will be grateful if you will send me (`Avril Coghlan <http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_) corrections or suggestions for improvements to
+my email address alc@sanger.ac.uk
 
 License
 -------
