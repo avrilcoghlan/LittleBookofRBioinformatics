@@ -640,7 +640,8 @@ findcommunities2(), which is also below:
                   neighbour <- neighbours[j]
                   # Get the vertex number
                   neighbourindex <- myvector[neighbour]
-                  # Add a node in the new graph "newgraph" between vertices (i-1) and (neighbourindex-1)
+                  neighbourindex <- neighbourindex[[1]]
+                  # Add a node in the new graph "newgraph" between vertices i and neighbourindex
                   # In graph "newgraph", the vertices are counted from 0 upwards.
                   indexi <- i
                   indexj <- neighbourindex
@@ -650,7 +651,7 @@ findcommunities2(), which is also below:
                      mymatrix[indexi,indexj] <- 1
                      mymatrix[indexj,indexi] <- 1 
                      # Add edges to the graph "newgraph"
-                     newgraph <- add.edges(newgraph, c(i-1, neighbourindex-1))
+                     newgraph <- add.edges(newgraph, c(i, neighbourindex))
                   }
                }   
             }
