@@ -968,9 +968,7 @@ additional R packages:
 Links and Further Reading
 -------------------------
 
-Some links are included here for further reading, which will be
-especially useful if you need to use the R package for your project
-or assignments.
+Some links are included here for further reading. 
 
 For background reading on graphs and protein-protein interaction
 graphs, it is recommended to read Chapters 1, 2 and 4 of
@@ -1017,7 +1015,7 @@ Robert Gentleman and Seth Falcon
 Acknowledgements
 ----------------
 
-Many of the ideas for the examples and exercies for this practical
+Many of the ideas for the examples and exercises for this practical
 were inspired by the book
 *Principles of Computational Cell Biology: from protein complexes to cellular networks*
 by Volkhard Helms (Wiley-VCH;
@@ -1047,7 +1045,7 @@ Q1. de Lichtenberg *et al* identified protein-protein complexes in the yeast *Sa
     Is this the same as the number of vertices in the graph of de
     Lichtenberg *et al*'s data? If not, can you explain why?
     Note: the full paper by de Lichtenberg *et al* is available at
-    `http://www.sciencemag.org/cgi/content/full/sci;307/5710/724 <http://www.sciencemag.org/cgi/content/full/sci;307/5710/724>`_
+    `http://www.sciencemag.org/content/307/5710/724.abstract <http://www.sciencemag.org/content/307/5710/724.abstract>`_
 Q2. What is the minimum, maximum and mean number of interactions for the proteins in the graph of de Lichtenberg *et al*'s data? 
     Can you find an example of a *hub protein*?
     Make a histogram plot of the number of interactions for the
@@ -1076,7 +1074,7 @@ Q5. What proteins does yeast protein YPR119W interact with, in de Lichtenberg *e
     (`www.yeastgenome.org/ <http://www.yeastgenome.org/>`_). It may
     also be useful to look at Figure 3 in de Lichtenberg *et al*'s
     paper
-    (`http://www.sciencemag.org/cgi/content/full/sci;307/5710/724 <http://www.sciencemag.org/cgi/content/full/sci;307/5710/724>`_).
+    (`http://www.sciencemag.org/content/307/5710/724.abstract <http://www.sciencemag.org/content/307/5710/724.abstract>`_).
     Can you identify the complex(es) that YPR119W belongs to in Figure
     1 of de Lichtenberg *et al*'s paper?
 
