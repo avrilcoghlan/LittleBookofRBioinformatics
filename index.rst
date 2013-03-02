@@ -1,7 +1,7 @@
 Welcome to a Little Book of R for Bioinformatics!
 =================================================
 
-By `Avril Coghlan <http://http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_,
+By `Avril Coghlan <http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_,
 Wellcome Trust Sanger Institute, Cambridge, U.K. 
 Email: alc@sanger.ac.uk
 
