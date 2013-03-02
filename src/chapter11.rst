@@ -670,13 +670,12 @@ findcommunities2(), which is also below:
          # Print out the vertices belonging to each community:
          for (i in 1:numcommunities)
          {
-            if (plot == TRUE) { cnt <- cnt + 1 } 
+            cnt <- cnt + 1  
             nummembers <- 0
             printout <- paste("Community",cnt,":") 
             for (j in 1:length(membership))
             {
                community <- membership[j]
-               community <- community + 1
                if (community == i) # If vertex j belongs to the ith community
                {
                   vertexname <- vertexnames[j]
@@ -695,7 +694,6 @@ findcommunities2(), which is also below:
              }
              if (plot == FALSE && nummembers >= minsize) 
              { 
-                cnt <- cnt + 1
                 print(printout) 
              } 
           }
