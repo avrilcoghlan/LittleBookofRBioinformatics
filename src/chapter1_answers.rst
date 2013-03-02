@@ -39,7 +39,7 @@ To answer this question, you first need to retrieve the *Mycobacterium leprae* T
 sequence from the NCBI database. You can use this by going to the NCBI website and searching
 for it via the NCBI website, or alternatively by using the getncbiseq() function in R.
 
-To get the *Mycobacterium leprae* TN genome via the NCBI website, it’s necessary to first go to the NCBI website (www.ncbi.nlm.nih.gov) and search for NC\_002677 and download it as a fasta format file (eg. "leprae.fasta") and save it in the "My Documents" folder. You can then read the sequence into
+To get the *Mycobacterium leprae* TN genome via the NCBI website, itï¿½s necessary to first go to the NCBI website (www.ncbi.nlm.nih.gov) and search for NC\_002677 and download it as a fasta format file (eg. "leprae.fasta") and save it in the "My Documents" folder. You can then read the sequence into
 R from the file by typing:
 
 Then in R type:
@@ -201,8 +201,8 @@ To check that the subsequences that you looked at are 1000 nucleotides long, you
 Contact
 -------
 
-I will be grateful if you will send me (`Avril Coghlan <http://www.ucc.ie/microbio/avrilcoghlan/>`_) corrections or suggestions for improvements to
-my email address a.coghlan@ucc.ie 
+I will be grateful if you will send me (`Avril Coghlan <http://www.sanger.ac.uk/research/projects/parasitegenomics/>`_) corrections or suggestions for improvements to
+my email address alc@sanger.ac.uk
 
 License
 -------
